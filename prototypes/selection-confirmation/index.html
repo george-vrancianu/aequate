@@ -1,0 +1,790 @@
+<!doctype html>
+<!--
+  PROTOTYPE, throwaway. Never merge.
+  Ticket: "Prototype the selection and confirmation flow" (map: "Wayfinder map: assist loop").
+  Three structurally different variants of select -> split into lines -> confirm transcription
+  -> append to the worked solution, on the student tablet board (1180x820), switchable via ?variant=A|B|C.
+  The recognizer and the CAS check are stubs. Open this file in a browser, no build step.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>PROTOTYPE: selection and confirmation flow</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#F4F3EE; --surface:#FFFFFF; --border:#DEDCD3; --text:#1B1B1A; --text2:#52514C;
+  --board:#1F3A33; --chalk:#F3EFE4; --hl:#F2C94C; --pen2:#7FB8F0;
+  --action:#2F6FED; --action-h:#1F4FB3; --good:#3E8E5A; --warn:#C98A1B; --bad:#D1513E;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:#d9d7cf;font-family:"IBM Plex Sans",system-ui,sans-serif;color:var(--text);overflow:hidden}
+button{font:inherit;cursor:pointer}
+#stage{position:fixed;left:0;top:0;bottom:0;right:320px}
+#frame{position:absolute;width:1180px;height:820px;transform-origin:0 0;background:var(--ground);border-radius:18px;
+  box-shadow:0 20px 60px rgba(0,0,0,.25),0 0 0 10px #1b1b1a;overflow:hidden;display:flex;flex-direction:column}
+.tex .katex{font-size:1.12em}
+.mono{font-family:"IBM Plex Mono",monospace}
+
+/* shared chrome */
+.top{height:52px;flex:none;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:14px;padding:0 16px}
+.top .logo{font-weight:600;letter-spacing:.02em}
+.top .sess{color:var(--text2);font-size:14px}
+.top .sp{flex:1}
+.top .me{font-size:13px;color:var(--text2);border:1px solid var(--border);border-radius:999px;padding:4px 10px}
+.top .vid{width:64px;height:40px;border-radius:8px;background:#2b2b29;color:#aaa;font-size:10px;display:grid;place-items:center}
+.board{position:relative;background:var(--board);overflow:hidden;flex:1;min-width:0}
+canvas.ink{position:absolute;inset:0;touch-action:none}
+.ov{position:absolute;inset:0;pointer-events:none}
+.ov>*{pointer-events:auto}
+.btn{min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--border);background:var(--surface);color:var(--text);display:inline-flex;align-items:center;gap:6px}
+.btn.primary{background:var(--action);border-color:var(--action);color:#fff}
+.btn.primary:hover{background:var(--action-h)}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--text2)}
+.ib{width:44px;height:44px;border-radius:10px;border:1px solid var(--border);background:var(--surface);display:grid;place-items:center;font-size:18px;flex:none}
+.ib.ok{color:var(--good)} .ib.no{color:var(--bad)}
+.vd{font-size:12px;border-radius:999px;padding:2px 8px;white-space:nowrap}
+.vd-good{color:var(--good);background:#e6f2ea} .vd-bad{color:var(--bad);background:#f8e5e1}
+.vd-warn{color:var(--warn);background:#f7efdc} .vd-muted{color:var(--text2);background:#eeede7}
+.vd-dot{padding:0;width:20px;height:20px;display:inline-grid;place-items:center;font-weight:600}
+.ed{display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}
+.ed-in{font-family:"IBM Plex Mono",monospace;font-size:15px;padding:8px 10px;border:1.5px solid var(--action);border-radius:8px;min-height:44px;width:100%}
+.ed-prev{min-height:28px;color:var(--text)}
+.reading{color:var(--text2);font-size:14px;animation:pulse 1s infinite alternate}
+@keyframes pulse{from{opacity:.4}to{opacity:1}}
+.tutor-tag{font-size:11px;font-weight:600;color:#1f5fa8;background:#e3f0fc;border-radius:6px;padding:2px 6px}
+.was{font-size:12px;color:var(--text2)} .was .tex{text-decoration:line-through;opacity:.8}
+.notice{font-size:12px;background:#fdf6e3;border:1px solid #efd9a0;border-radius:8px;padding:6px 8px;color:#6b5312}
+
+/* ---------- A: margin notebook ---------- */
+.A{display:flex;flex-direction:column;height:100%}
+.A-body{display:flex;flex:1;min-height:0}
+.A-tools{width:68px;background:var(--surface);border-right:1px solid var(--border);display:flex;flex-direction:column;align-items:center;gap:8px;padding:12px 0}
+.A-tools .ib.on{background:#e8effd;border-color:var(--action);color:var(--action)}
+.A-tools small{font-size:10px;color:var(--text2);margin-top:-6px}
+.A-panel{width:350px;flex:none;background:var(--surface);border-left:1px solid var(--border);overflow:auto;padding:16px}
+.A-panel h2{font-size:16px;margin:0 0 2px}
+.A-panel .sub{font-size:12px;color:var(--text2);margin-bottom:14px}
+.A-step{display:flex;gap:10px;align-items:flex-start;padding:10px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:#fff}
+.A-step.hl{border-color:var(--hl);box-shadow:0 0 0 2px #f2c94c55}
+.A-step.tutor{border-left:4px solid var(--pen2)}
+.A-step .n{width:24px;height:24px;border-radius:50%;background:#eeede7;font-size:12px;display:grid;place-items:center;flex:none;margin-top:2px}
+.A-step .body{flex:1;min-width:0;display:flex;flex-direction:column;gap:4px}
+.A-step .acts{display:flex;gap:4px}
+.A-step .acts .ib{width:36px;height:36px;font-size:15px;border-color:transparent}
+.A-empty{color:var(--text2);font-size:14px;border:1px dashed var(--border);border-radius:10px;padding:18px;text-align:center}
+.A-pop{position:absolute;width:380px;background:var(--surface);border-radius:12px;box-shadow:0 12px 40px rgba(0,0,0,.35);padding:12px}
+.A-pop h3{margin:0 0 8px;font-size:13px;color:var(--text2);font-weight:500}
+.A-row{display:flex;gap:8px;align-items:flex-start;padding:8px 0;border-top:1px solid #eeede7}
+.A-row .n{width:22px;height:22px;border-radius:6px;background:var(--hl);font-size:12px;display:grid;place-items:center;flex:none;margin-top:10px;font-weight:600}
+.A-row .mid{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px;padding-top:8px}
+.A-row.done{opacity:.45}
+.alts{display:flex;gap:6px;flex-wrap:wrap;align-items:center;font-size:12px;color:var(--text2)}
+.alt{border:1px solid var(--border);border-radius:8px;background:#fff;padding:4px 8px;min-height:32px}
+.alt.on{border-color:var(--action);background:#e8effd}
+.link{background:none;border:none;color:var(--action);padding:0;font-size:12px}
+.A-foot{display:flex;justify-content:flex-end;gap:8px;padding-top:10px;border-top:1px solid #eeede7}
+
+/* ---------- B: ink-anchored layer ---------- */
+.B{display:flex;flex-direction:column;height:100%}
+.B-tools{position:absolute;left:50%;top:14px;transform:translateX(-50%);display:flex;gap:6px;background:rgba(255,255,255,.95);padding:6px;border-radius:14px;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.B-tools .ib{border-color:transparent}
+.B-tools .ib.on{background:#e8effd;color:var(--action)}
+.B-chip{position:absolute;display:flex;flex-direction:column;gap:6px;max-width:460px}
+.B-card{display:flex;align-items:center;gap:8px;background:rgba(255,255,255,.96);border-radius:10px;padding:4px 6px 4px 8px;min-height:44px;border:2px solid transparent;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.B-card.pending{border:2px dashed var(--hl);background:#fffdf5}
+.B-card.tutor{border-color:var(--pen2)}
+.B-card.new{animation:bpulse 1.2s infinite}
+@keyframes bpulse{50%{box-shadow:0 0 0 6px #7fb8f055}}
+.B-card .n{width:22px;height:22px;border-radius:50%;background:var(--board);color:var(--chalk);font-size:12px;display:grid;place-items:center;flex:none}
+.B-card .ib{width:36px;height:36px;font-size:15px;border-color:transparent;background:transparent}
+.B-alts{display:flex;gap:6px;align-items:center;font-size:12px;color:var(--chalk)}
+.B-alts .alt{min-height:36px}
+.B-more{display:flex;gap:6px;align-items:center;background:rgba(255,255,255,.96);border-radius:10px;padding:6px 8px;font-size:12px}
+.B-all{position:absolute}
+.B-stepsbtn{min-height:36px;border-radius:999px;border:1px solid var(--border);background:#fff;padding:0 12px;font-size:13px}
+.B-drawer{position:absolute;right:12px;top:12px;width:300px;background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.3);padding:12px;font-size:14px}
+.B-drawer ol{margin:6px 0 0;padding-left:22px} .B-drawer li{padding:4px 0}
+
+/* ---------- C: review sheet ---------- */
+.C{display:flex;flex-direction:column;height:100%}
+.C-ribbon{flex:none;background:var(--surface);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;padding:6px 14px;min-height:56px;overflow-x:auto;position:relative;z-index:3}
+.C-ribbon .lbl{font-size:12px;color:var(--text2);white-space:nowrap;margin-right:4px}
+.C-sc{display:flex;align-items:center;gap:6px;border:1.5px solid var(--border);border-radius:10px;padding:4px 10px;min-height:40px;background:#fff;white-space:nowrap}
+.C-sc.tutor{border-color:var(--pen2);background:#f1f7fe}
+.C-sc.open{border-color:var(--action)}
+.C-arrow{color:var(--text2)}
+.C-stepmenu{position:absolute;top:6px;width:320px;background:#fff;border-radius:12px;box-shadow:0 10px 30px rgba(0,0,0,.3);padding:12px;display:flex;flex-direction:column;gap:8px;z-index:4}
+.C-fab{position:absolute;right:20px;bottom:20px;height:56px;border-radius:999px;padding:0 22px;border:none;background:var(--surface);font-weight:600;box-shadow:0 6px 18px rgba(0,0,0,.35);display:flex;align-items:center;gap:8px}
+.C-fab.on{background:var(--action);color:#fff}
+.C-pen{position:absolute;left:20px;top:20px;display:flex;gap:6px}
+.C-pickbar{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);display:flex;gap:8px;align-items:center;background:#fff;border-radius:14px;padding:8px 8px 8px 16px;box-shadow:0 6px 18px rgba(0,0,0,.35);font-size:14px}
+.C-modehint{position:absolute;left:50%;top:16px;transform:translateX(-50%);background:rgba(0,0,0,.45);color:var(--chalk);font-size:13px;border-radius:999px;padding:6px 14px}
+.C-sheet{position:absolute;left:0;right:0;bottom:0;height:370px;background:var(--surface);border-radius:18px 18px 0 0;box-shadow:0 -10px 30px rgba(0,0,0,.3);padding:16px 22px;display:flex;flex-direction:column;gap:12px}
+.C-sheet .hd{display:flex;align-items:center;gap:10px}
+.C-dots{display:flex;gap:5px} .C-dots i{width:9px;height:9px;border-radius:50%;background:var(--border)}
+.C-dots i.cur{background:var(--action)} .C-dots i.ok{background:var(--good)} .C-dots i.x{background:var(--bad)}
+.C-main{display:flex;gap:20px;align-items:center}
+.C-crop{border-radius:10px;background:var(--board);flex:none}
+.C-big{font-size:26px;flex:1;min-width:0}
+.C-cards{display:flex;gap:10px}
+.C-card{flex:1;border:1.5px solid var(--border);border-radius:12px;background:#fff;padding:10px 12px;min-height:64px;text-align:left;display:flex;flex-direction:column;gap:4px}
+.C-card small{font-size:11px;color:var(--text2)}
+.C-card.on{border-color:var(--action);background:#eef3fe}
+.C-acts{display:flex;gap:10px;margin-top:auto}
+.C-acts .sp{flex:1}
+.C-toast{position:absolute;left:50%;top:14px;transform:translateX(-50%);background:#fff;border-left:5px solid var(--pen2);border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.35);padding:10px 10px 10px 14px;display:flex;align-items:center;gap:12px;font-size:14px;z-index:2;max-width:640px}
+
+/* ---------- prototype chrome (not part of the design) ---------- */
+#proto{position:fixed;right:0;top:0;bottom:0;width:320px;background:#111;color:#ddd;font:12px/1.45 "IBM Plex Mono",monospace;padding:12px;overflow:auto}
+#proto h3{margin:0 0 8px;color:#ff8;font-size:12px;letter-spacing:.08em}
+#proto button{display:block;width:100%;margin:6px 0;background:#2a2a2a;color:#eee;border:1px solid #444;border-radius:6px;padding:8px;text-align:left}
+#proto label{display:block;margin:6px 0}
+#proto p{color:#999;margin:8px 0}
+#proto pre{white-space:pre-wrap;word-break:break-all;color:#9fd;background:#000;padding:8px;border-radius:6px;font-size:11px}
+#flash{color:#fc8;min-height:16px}
+#switcher{position:fixed;left:calc((100% - 320px)/2);bottom:10px;transform:translateX(-50%);display:flex;align-items:center;gap:4px;background:#111;color:#fff;border-radius:999px;padding:4px;box-shadow:0 4px 16px rgba(0,0,0,.5);z-index:10;font-size:13px}
+#switcher button{background:#333;color:#fff;border:none;border-radius:999px;width:34px;height:34px}
+#switcher span{padding:0 12px;min-width:220px;text-align:center}
+</style>
+</head>
+<body>
+<div id="stage"><div id="frame"></div></div>
+<aside id="proto">
+  <h3>PROTOTYPE CONTROLS</h3>
+  <label><input type="checkbox" id="cv" checked> check visible (assist permission)</label>
+  <button id="te">Simulate: tutor edits a step</button>
+  <button id="rs">Reset board</button>
+  <div id="flash"></div>
+  <p>Seeded ink: three lines. The recognizer is a stub: “2x = 8” is deliberately ambiguous (its top reading is 2x = 6). Draw with the pen to add your own ink, which gets canned readings. The check is a stub that compares solution sets.</p>
+  <p>Try: select all three lines at once, accept the wrong 2x = 6, then simulate the tutor edit. Also try simulating while you are editing that step.</p>
+  <h3>STATE</h3>
+  <pre id="state"></pre>
+</aside>
+<div id="switcher"><button id="prev">‹</button><span id="vlabel"></span><button id="next">›</button></div>
+
+<script>
+// ===== helpers =====
+const $ = s => document.querySelector(s);
+function h(tag, attrs = {}, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (v === false || v == null) continue;
+    if (k === 'class') el.className = v;
+    else if (k === 'style') el.style.cssText = v;
+    else if (k === 'value') el.value = v;
+    else if (k.startsWith('on')) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? '' : v);
+  }
+  for (const k of kids.flat()) if (k != null && k !== false) el.append(k.nodeType ? k : document.createTextNode(k));
+  return el;
+}
+function tex(latex, cls = '') {
+  const el = h('span', { class: 'tex ' + cls });
+  try { katex.render(latex || '\\;', el, { throwOnError: false }); } catch { el.textContent = latex; el.classList.add('mono'); }
+  return el;
+}
+
+// ===== seeded ink and stub recognizer =====
+const SEED = [
+  { text: '2x + 3 = 11', truth: '2x+3=11', readings: [['2x+3=11', -0.05], ['2x+3=17', -1.9], ['2x+8=11', -2.4]], x: 70, y: 150 },
+  { text: '2x = 8',      truth: '2x=8',    readings: [['2x=6', -0.62], ['2x=8', -0.81], ['2x=b', -2.6]],         x: 70, y: 240 },
+  { text: 'x = 4',       truth: 'x=4',     readings: [['x=4', -0.03], ['x=9', -2.1], ['x=u', -3.0]],             x: 70, y: 330 },
+];
+const FREEHAND = [
+  [['x^2-5x+6=0', -0.3], ['x^2-5x+8=0', -0.6], ['x^2-5x+6=6', -1.9]],
+  [['(x-2)(x-3)=0', -0.2], ['(x-2)(x-5)=0', -1.5], ['(x-z)(x-3)=0', -2.2]],
+  [['x=2', -0.1], ['x=z', -1.0], ['x=7', -2.5]],
+];
+let uid = 1;
+const S = { ink: [], steps: [], pending: null, checkVisible: true, tool: 'pen', highlight: null, focus: null, fh: 0 };
+function seedInk() { S.ink = SEED.map(s => ({ id: 'i' + uid++, kind: 'text', ...s })); S.steps = []; S.pending = null; }
+
+function recognize(ids) {
+  const items = ids.map(id => S.ink.find(i => i.id === id));
+  const seed = items.find(i => i && i.kind === 'text');
+  const rs = seed ? seed.readings : FREEHAND[S.fh++ % FREEHAND.length];
+  const result = { readings: rs.map(([latex, score]) => ({ latex, score })), scoreKind: 'logprob', recognizer: 'stub' };
+  return new Promise(res => setTimeout(() => res(result), 450 + Math.random() * 500));
+}
+// scores decide whether alternatives are pushed at the student; they are never shown as a confidence
+const ambiguous = r => r && r.readings.length > 1 && r.readings[0].score - r.readings[1].score < 0.5;
+
+// ===== geometry =====
+const mctx = document.createElement('canvas').getContext('2d');
+const INK_FONT = '500 48px Caveat, "Segoe Print", cursive';
+function bbox(it) {
+  if (it.kind === 'text') { mctx.font = INK_FONT; return { x: it.x - 4, y: it.y - 38, w: mctx.measureText(it.text).width + 8, h: 50 }; }
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  for (const [x, y] of it.pts) { x0 = Math.min(x0, x); y0 = Math.min(y0, y); x1 = Math.max(x1, x); y1 = Math.max(y1, y); }
+  return { x: x0 - 4, y: y0 - 4, w: x1 - x0 + 8, h: y1 - y0 + 8 };
+}
+function union(bs) {
+  const x0 = Math.min(...bs.map(b => b.x)), y0 = Math.min(...bs.map(b => b.y));
+  const x1 = Math.max(...bs.map(b => b.x + b.w)), y1 = Math.max(...bs.map(b => b.y + b.h));
+  return { x: x0, y: y0, w: x1 - x0, h: y1 - y0 };
+}
+const center = b => [b.x + b.w / 2, b.y + b.h / 2];
+function pip([x, y], poly) {
+  let inside = false;
+  for (let i = 0, j = poly.length - 1; i < poly.length; j = i++) {
+    const [xi, yi] = poly[i], [xj, yj] = poly[j];
+    if ((yi > y) !== (yj > y) && x < (xj - xi) * (y - yi) / (yj - yi) + xi) inside = !inside;
+  }
+  return inside;
+}
+function itemInside(it, test) {
+  if (it.kind === 'text') return test(center(bbox(it)));
+  return it.pts.filter(test).length >= it.pts.length / 2;
+}
+// split a selection into lines by vertical overlap of stroke boxes
+function splitLines(items) {
+  const arr = items.map(it => ({ it, b: bbox(it) })).sort((a, b) => (a.b.y + a.b.h / 2) - (b.b.y + b.b.h / 2));
+  const lines = [];
+  for (const e of arr) {
+    const L = lines[lines.length - 1];
+    if (L) {
+      const ov = Math.min(L.b.y + L.b.h, e.b.y + e.b.h) - Math.max(L.b.y, e.b.y);
+      if (ov > 0.35 * Math.min(L.b.h, e.b.h)) { L.items.push(e.it); L.b = union([L.b, e.b]); continue; }
+    }
+    lines.push({ items: [e.it], b: e.b });
+  }
+  lines.forEach(L => L.items.sort((a, b) => bbox(a).x - bbox(b).x));
+  return lines;
+}
+function usedIds() {
+  const u = new Set(S.steps.flatMap(s => s.sourceIds));
+  if (S.pending) S.pending.lines.filter(l => l.status !== 'discarded').forEach(l => l.ids.forEach(i => u.add(i)));
+  return u;
+}
+const availableInk = () => { const u = usedIds(); return S.ink.filter(i => !u.has(i.id)); };
+
+// ===== stub CAS check: does a step have the same solution set as the step before it? =====
+function fn(s) {
+  let j = s.replace(/\\cdot|\\times/g, '*').replace(/\\left|\\right/g, '')
+    .replace(/\\frac\{([^{}]*)\}\{([^{}]*)\}/g, '(($1)/($2))').replace(/\{/g, '(').replace(/\}/g, ')')
+    .replace(/\s+/g, '').replace(/\\[,;!]/g, '').replace(/\^/g, '**');
+  j = j.replace(/(\d|\)|x)(?=[x(])/g, '$1*').replace(/(x|\))(?=\d)/g, '$1*');
+  if (!/^[0-9x+\-*/().]+$/.test(j)) throw new Error('unparseable');
+  return new Function('x', 'return ' + j);
+}
+function solSet(latex) {
+  try {
+    const parts = latex.split('=');
+    if (parts.length !== 2) return null;
+    const fl = fn(parts[0]), fr = fn(parts[1]), f = x => fl(x) - fr(x);
+    const roots = []; let pv = f(-50);
+    for (let x = -50 + 0.125; x <= 50; x += 0.125) {
+      const v = f(x);
+      if (Math.abs(v) < 1e-9) roots.push(x);
+      else if (pv * v < 0 && Math.abs(pv) > 1e-9) {
+        let a = x - 0.125, b = x;
+        for (let k = 0; k < 60; k++) { const m = (a + b) / 2; if (f(a) * f(m) <= 0) b = m; else a = m; }
+        roots.push((a + b) / 2);
+      }
+      pv = v;
+    }
+    if (roots.length > 300) return 'all';
+    return [...new Set(roots.map(r => r.toFixed(4)))].join(',') || 'none';
+  } catch { return null; }
+}
+function recheck() {
+  S.steps.forEach((s, i) => {
+    if (i === 0) { s.verdict = 'first'; return; }
+    const a = solSet(S.steps[i - 1].latex), b = solSet(s.latex);
+    s.verdict = a == null || b == null ? 'unknown' : a === b ? 'good' : 'bad';
+  });
+}
+
+// ===== actions =====
+function startSelection(items) {
+  if (!items.length) { flash('Nothing untranscribed in that selection.'); render(); return; }
+  const lines = splitLines(items).map(L => ({ id: 'L' + uid++, ids: L.items.map(i => i.id), b: L.b, result: null, chosen: 0, status: 'reading', editing: false, draft: '', showAlts: false }));
+  S.pending = { lines, cur: 0 };
+  S.tool = 'pen';
+  lines.forEach(L => recognize(L.ids).then(r => { L.result = r; if (L.status === 'reading') L.status = 'pending'; render(); }));
+  render();
+}
+function acceptLine(L, latex) {
+  latex = latex ?? L.result.readings[L.chosen].latex;
+  S.steps.push({ id: 's' + uid++, latex, sourceIds: L.ids, b: L.b, result: L.result, by: 'student', original: null, tutorNew: false, verdict: null, editing: false, draft: '', interruptedDraft: null });
+  L.status = 'accepted'; L.editing = false;
+  afterLine();
+}
+function discardLine(L) { L.status = 'discarded'; L.editing = false; afterLine(); }
+function afterLine() {
+  recheck();
+  const p = S.pending;
+  if (p) {
+    if (p.lines.every(l => l.status === 'accepted' || l.status === 'discarded')) S.pending = null;
+    else { const n = p.lines.findIndex(l => l.status === 'pending' || l.status === 'reading'); if (n >= 0) p.cur = n; }
+  }
+  render();
+}
+function acceptAll() { S.pending.lines.filter(l => l.status === 'pending').forEach(l => acceptLine(l, l.editing ? l.draft : undefined)); }
+function discardAll() { S.pending = null; render(); }
+function startEditLine(L) { L.editing = true; L.draft = L.result.readings[L.chosen].latex; render(); }
+function startEditStep(st) { S.steps.forEach(s => s.editing = false); st.editing = true; st.draft = st.latex; st.interruptedDraft = null; render(); }
+function saveStep(st, latex) { st.latex = latex; st.editing = false; recheck(); render(); }
+function deleteStep(st) { S.steps = S.steps.filter(s => s !== st); recheck(); render(); }
+const truthOf = s => s.sourceIds.map(id => S.ink.find(i => i.id === id)).find(i => i && i.kind === 'text')?.truth;
+function tutorEdit() {
+  if (!S.steps.length) { flash('No steps yet. Confirm a transcription first.'); return; }
+  let st = S.steps.find(s => { const t = truthOf(s); return t && t !== s.latex; }), latex;
+  if (st) latex = truthOf(st);
+  else { st = S.steps[S.steps.length - 1]; const alt = st.result.readings.find(r => r.latex !== st.latex); latex = alt ? alt.latex : st.latex + '\\,'; }
+  st.interruptedDraft = st.editing ? st.draft : null;
+  st.original = st.original ?? st.latex;
+  st.latex = latex; st.by = 'tutor'; st.tutorNew = true; st.editing = false;
+  recheck(); render();
+}
+const ack = st => { st.tutorNew = false; st.interruptedDraft = null; render(); };
+let flashT;
+function flash(msg) { $('#flash').textContent = msg; clearTimeout(flashT); flashT = setTimeout(() => $('#flash').textContent = '', 2500); }
+
+// shared bits of UI vocabulary (not layout)
+function editor(obj, key, onSave, onCancel) {
+  const prev = h('div', { class: 'ed-prev' }, tex(obj.draft));
+  const inp = h('input', {
+    class: 'ed-in', value: obj.draft, 'data-focus': key, spellcheck: 'false', autocomplete: 'off',
+    oninput: e => { obj.draft = e.target.value; prev.replaceChildren(tex(obj.draft)); },
+    onkeydown: e => { e.stopPropagation(); if (e.key === 'Enter') onSave(obj.draft); if (e.key === 'Escape') onCancel(); },
+  });
+  S.focus = key;
+  return h('div', { class: 'ed' }, inp, prev);
+}
+const VD = { first: ['·', 'first step', 'muted'], good: ['✓', 'follows', 'good'], bad: ['✗', "doesn't follow", 'bad'], unknown: ['?', "can't check", 'warn'] };
+function verdictEl(st, style = 'pill') {
+  if (!S.checkVisible || !st.verdict) return null;
+  const [icon, label, cls] = VD[st.verdict];
+  return h('span', { class: `vd vd-${cls} ${style === 'dot' ? 'vd-dot' : ''}`, title: label }, style === 'dot' ? icon : `${icon} ${label}`);
+}
+const topbar = (...extra) => h('div', { class: 'top' }, h('span', { class: 'logo' }, 'Aequate'), h('span', { class: 'sess' }, 'Algebra · with Ms. Ionescu'), h('span', { class: 'sp' }), ...extra, h('span', { class: 'me' }, 'Ana · student'), h('div', { class: 'vid' }, 'tutor video'));
+
+// ===== board: ink canvas shared by all variants =====
+class Board {
+  constructor(host, v) {
+    this.v = v; this.host = host; this.active = false;
+    this.cv = h('canvas', { class: 'ink' }); host.prepend(this.cv);
+    this.ctx = this.cv.getContext('2d');
+    new ResizeObserver(() => this.resize()).observe(host);
+    this.cv.addEventListener('pointerdown', e => this.down(e));
+    this.cv.addEventListener('pointermove', e => this.move(e));
+    this.cv.addEventListener('pointerup', e => this.up(e));
+  }
+  get w() { return this.host.clientWidth; }
+  get hgt() { return this.host.clientHeight; }
+  resize() {
+    const d = devicePixelRatio || 1;
+    this.cv.width = this.w * d; this.cv.height = this.hgt * d;
+    this.cv.style.width = this.w + 'px'; this.cv.style.height = this.hgt + 'px';
+    this.ctx.setTransform(d, 0, 0, d, 0, 0); this.d = d;
+    render();
+  }
+  pt(e) { const r = this.cv.getBoundingClientRect(), k = this.cv.offsetWidth / r.width; return [(e.clientX - r.left) * k, (e.clientY - r.top) * k]; }
+  down(e) {
+    this.cv.setPointerCapture(e.pointerId); this.active = true;
+    const p = this.pt(e);
+    if (S.tool === 'pen') { this.stroke = { id: 'i' + uid++, kind: 'stroke', pts: [p] }; S.ink.push(this.stroke); }
+    else this.v.gesture.down(p);
+    this.draw();
+  }
+  move(e) {
+    if (!this.active) return;
+    const p = this.pt(e);
+    if (S.tool === 'pen') this.stroke.pts.push(p); else this.v.gesture.move(p);
+    this.draw();
+  }
+  up(e) {
+    if (!this.active) return; this.active = false;
+    if (S.tool === 'pen') { this.stroke = null; render(); } else this.v.gesture.up(this.pt(e));
+  }
+  draw() {
+    const c = this.ctx; c.clearRect(0, 0, this.w, this.hgt);
+    for (const it of S.ink) {
+      c.globalAlpha = this.v.inkAlpha ? this.v.inkAlpha(it) : 1;
+      c.fillStyle = c.strokeStyle = '#F3EFE4';
+      if (it.kind === 'text') { c.font = INK_FONT; c.fillText(it.text, it.x, it.y); }
+      else {
+        c.lineWidth = 3; c.lineCap = c.lineJoin = 'round'; c.beginPath();
+        it.pts.forEach(([x, y], k) => k ? c.lineTo(x, y) : c.moveTo(x, y)); c.stroke();
+      }
+    }
+    c.globalAlpha = 1;
+    this.v.decorate && this.v.decorate(c);
+  }
+}
+function dashedRect(c, b, color, pad = 6, dash = [6, 5]) {
+  c.save(); c.strokeStyle = color; c.lineWidth = 2; c.setLineDash(dash);
+  c.strokeRect(b.x - pad, b.y - pad, b.w + pad * 2, b.h + pad * 2); c.restore();
+}
+function badge(c, x, y, label, bg, fg) {
+  c.save(); c.fillStyle = bg; c.beginPath(); c.arc(x, y, 11, 0, Math.PI * 2); c.fill();
+  c.fillStyle = fg; c.font = '600 12px "IBM Plex Sans"'; c.textAlign = 'center'; c.textBaseline = 'middle'; c.fillText(label, x, y + 1); c.restore();
+}
+const stepIdxOfInk = id => S.steps.findIndex(s => s.sourceIds.includes(id));
+
+// =====================================================================
+// Variant A: margin notebook. Lasso tool; a popover anchored to the selection
+// confirms every line at once; the worked solution is a fixed column right of the ink.
+// =====================================================================
+const A = {
+  key: 'A', name: 'Margin notebook',
+  mount(root) {
+    root.append(h('div', { class: 'A' }, topbar(),
+      h('div', { class: 'A-body' },
+        this.tools = h('nav', { class: 'A-tools' }),
+        this.host = h('div', { class: 'board' }, this.ov = h('div', { class: 'ov' })),
+        this.panel = h('aside', { class: 'A-panel' }))));
+    this.board = new Board(this.host, this);
+  },
+  gesture: {
+    down(p) { A.lasso = [p]; }, move(p) { A.lasso.push(p); },
+    up() { const poly = A.lasso; A.lasso = null; if (poly.length < 3) { render(); return; } startSelection(availableInk().filter(it => itemInside(it, q => pip(q, poly)))); },
+  },
+  inkAlpha(it) { return stepIdxOfInk(it.id) >= 0 && S.highlight == null ? 0.8 : 1; },
+  decorate(c) {
+    if (this.lasso) {
+      c.save(); c.strokeStyle = '#F2C94C'; c.lineWidth = 2; c.setLineDash([5, 5]); c.fillStyle = 'rgba(242,201,76,.08)';
+      c.beginPath(); this.lasso.forEach(([x, y], k) => k ? c.lineTo(x, y) : c.moveTo(x, y)); c.closePath(); c.fill(); c.stroke(); c.restore();
+    }
+    S.pending?.lines.forEach((L, k) => {
+      if (L.status === 'discarded') return;
+      dashedRect(c, L.b, L.status === 'accepted' ? '#3E8E5A' : '#F2C94C');
+      badge(c, L.b.x - 18, L.b.y + L.b.h / 2, String(k + 1), '#F2C94C', '#1B1B1A');
+    });
+    S.steps.forEach((s, k) => {
+      const b = union(s.sourceIds.map(id => S.ink.find(i => i.id === id)).filter(Boolean).map(bbox));
+      if (S.highlight === s.id) { c.save(); c.fillStyle = 'rgba(242,201,76,.18)'; c.fillRect(b.x - 6, b.y - 6, b.w + 12, b.h + 12); c.restore(); }
+      badge(c, b.x - 18, b.y + b.h / 2, String(k + 1), s.by === 'tutor' ? '#7FB8F0' : 'rgba(243,239,228,.25)', s.by === 'tutor' ? '#1B1B1A' : '#F3EFE4');
+    });
+  },
+  render() {
+    this.tools.replaceChildren(
+      h('button', { class: 'ib' + (S.tool === 'pen' ? ' on' : ''), onclick: () => { S.tool = 'pen'; render(); } }, '✎'), h('small', {}, 'Pen'),
+      h('button', { class: 'ib' + (S.tool === 'select' ? ' on' : ''), onclick: () => { S.tool = 'select'; render(); } }, '◌'), h('small', {}, 'Transcribe'),
+    );
+    this.host.style.cursor = S.tool === 'select' ? 'crosshair' : 'default';
+    // worked solution column
+    const steps = S.steps.map((s, k) => h('div', {
+      class: 'A-step' + (S.highlight === s.id ? ' hl' : '') + (s.by === 'tutor' ? ' tutor' : ''),
+      onpointerenter: () => { S.highlight = s.id; this.board.draw(); this.panel.querySelectorAll('.A-step')[k]?.classList.add('hl'); },
+      onpointerleave: () => { S.highlight = null; this.board.draw(); this.panel.querySelectorAll('.A-step')[k]?.classList.remove('hl'); },
+    },
+      h('span', { class: 'n' }, k + 1),
+      h('div', { class: 'body' },
+        s.editing ? editor(s, s.id, v => saveStep(s, v), () => { s.editing = false; render(); }) : tex(s.latex),
+        s.by === 'tutor' && h('div', { style: 'display:flex;gap:6px;align-items:center;flex-wrap:wrap' },
+          h('span', { class: 'tutor-tag' }, 'Corrected by your tutor'),
+          s.tutorNew && h('button', { class: 'link', onclick: () => ack(s) }, 'OK')),
+        s.by === 'tutor' && h('div', { class: 'was' }, 'You had: ', tex(s.original)),
+        s.interruptedDraft != null && h('div', { class: 'notice' }, 'Your tutor changed this step while you were editing it. Your draft was: ', h('span', { class: 'mono' }, s.interruptedDraft)),
+        verdictEl(s) && h('div', {}, verdictEl(s))),
+      !s.editing && h('div', { class: 'acts' },
+        h('button', { class: 'ib', title: 'Edit', onclick: () => startEditStep(s) }, '✎'),
+        h('button', { class: 'ib', title: 'Delete step', onclick: () => deleteStep(s) }, '⌫'))));
+    this.panel.replaceChildren(h('h2', {}, 'Worked solution'), h('div', { class: 'sub' }, 'Confirmed steps are added at the end.'),
+      ...(steps.length ? steps : [h('div', { class: 'A-empty' }, 'Choose Transcribe, then draw a loop around some ink.')]));
+    // confirmation popover
+    this.ov.replaceChildren();
+    const p = S.pending;
+    if (!p) return;
+    const live = p.lines.filter(l => l.status !== 'discarded');
+    const ub = union(live.length ? live.map(l => l.b) : p.lines.map(l => l.b));
+    const left = Math.min(ub.x + ub.w + 24, this.board.w - 392), top = Math.max(10, Math.min(ub.y - 10, this.board.hgt - 60 - 110 * p.lines.length));
+    const open = p.lines.filter(l => l.status === 'pending' || l.status === 'reading').length;
+    this.ov.append(h('div', { class: 'A-pop', style: `left:${Math.max(10, left)}px;top:${top}px` },
+      h('h3', {}, p.lines.length > 1 ? `${p.lines.length} lines found. Check each one.` : 'Check the transcription.'),
+      p.lines.map((L, k) => this.row(L, k)),
+      h('div', { class: 'A-foot' },
+        h('button', { class: 'btn ghost', onclick: discardAll }, 'Discard all'),
+        open > 1 && h('button', { class: 'btn primary', onclick: acceptAll, disabled: p.lines.some(l => l.status === 'reading') }, `Add all ${open} steps`))));
+  },
+  row(L, k) {
+    const done = L.status === 'accepted' || L.status === 'discarded';
+    let mid;
+    if (L.status === 'reading') mid = h('span', { class: 'reading' }, 'Reading…');
+    else if (done) mid = h('span', { style: 'font-size:13px;color:var(--text2)' }, L.status === 'accepted' ? '✓ Added to solution' : 'Discarded');
+    else if (L.editing) mid = editor(L, L.id, v => acceptLine(L, v), () => { L.editing = false; render(); });
+    else {
+      const amb = ambiguous(L.result), others = L.result.readings.map((r, i) => i).filter(i => i !== L.chosen);
+      mid = h('div', { style: 'display:flex;flex-direction:column;gap:6px' }, tex(L.result.readings[L.chosen].latex),
+        amb || L.showAlts
+          ? h('div', { class: 'alts' }, amb ? 'Or did you mean' : 'Or', others.map(i => h('button', { class: 'alt', onclick: () => { L.chosen = i; render(); } }, tex(L.result.readings[i].latex))))
+          : h('button', { class: 'link', style: 'align-self:flex-start', onclick: () => { L.showAlts = true; render(); } }, `Other readings (${others.length})`));
+    }
+    return h('div', { class: 'A-row' + (done ? ' done' : '') }, h('span', { class: 'n' }, k + 1), h('div', { class: 'mid' }, mid),
+      !done && L.status !== 'reading' && h('div', { style: 'display:flex;gap:4px' },
+        L.editing
+          ? h('button', { class: 'ib ok', title: 'Add', onclick: () => acceptLine(L, L.draft) }, '✓')
+          : [h('button', { class: 'ib ok', title: 'Add to solution', onclick: () => acceptLine(L) }, '✓'),
+             h('button', { class: 'ib', title: 'Edit LaTeX', onclick: () => startEditLine(L) }, '✎')],
+        h('button', { class: 'ib no', title: 'Discard', onclick: () => discardLine(L) }, '✕')));
+  },
+};
+
+// =====================================================================
+// Variant B: ink-anchored layer. Box-select; each line's transcription appears as a chip
+// beside its own ink and stays there once confirmed. No separate solution panel:
+// step numbers give the order, and a drawer lists the steps.
+// =====================================================================
+const B = {
+  key: 'B', name: 'Ink-anchored layer', open: null, drawer: false,
+  mount(root) {
+    root.append(h('div', { class: 'B' },
+      topbar(this.stepsBtn = h('button', { class: 'B-stepsbtn', onclick: () => { B.drawer = !B.drawer; render(); } })),
+      this.host = h('div', { class: 'board' }, this.ov = h('div', { class: 'ov' }))));
+    this.board = new Board(this.host, this);
+  },
+  gesture: {
+    down(p) { B.rect = [p, p]; }, move(p) { B.rect[1] = p; },
+    up() {
+      const [[x0, y0], [x1, y1]] = B.rect; B.rect = null;
+      const r = { x: Math.min(x0, x1), y: Math.min(y0, y1), w: Math.abs(x1 - x0), h: Math.abs(y1 - y0) };
+      if (r.w < 8 || r.h < 8) { render(); return; }
+      startSelection(availableInk().filter(it => itemInside(it, ([x, y]) => x >= r.x && x <= r.x + r.w && y >= r.y && y <= r.y + r.h)));
+    },
+  },
+  anchor(b) {
+    const left = b.x + b.w + 30;
+    return left + 300 < this.board.w ? { left, top: b.y + b.h / 2 - 24, side: 'right' } : { left: b.x, top: b.y + b.h + 8, side: 'below' };
+  },
+  inkB(s) { return union(s.sourceIds.map(id => S.ink.find(i => i.id === id)).filter(Boolean).map(bbox)); },
+  decorate(c) {
+    if (this.rect) {
+      const [[x0, y0], [x1, y1]] = this.rect;
+      c.save(); c.fillStyle = 'rgba(127,184,240,.12)'; c.fillRect(x0, y0, x1 - x0, y1 - y0); c.restore();
+      dashedRect(c, { x: Math.min(x0, x1), y: Math.min(y0, y1), w: Math.abs(x1 - x0), h: Math.abs(y1 - y0) }, '#7FB8F0', 0);
+    }
+    const connect = (b, color) => {
+      const a = this.anchor(b); if (a.side !== 'right') return;
+      c.save(); c.strokeStyle = color; c.setLineDash([2, 4]); c.lineWidth = 2;
+      c.beginPath(); c.moveTo(b.x + b.w + 4, b.y + b.h / 2); c.lineTo(a.left, b.y + b.h / 2); c.stroke(); c.restore();
+    };
+    S.pending?.lines.forEach(L => {
+      if (L.status !== 'pending' && L.status !== 'reading') return;
+      c.save(); c.strokeStyle = '#F2C94C'; c.lineWidth = 3; c.setLineDash([8, 5]);
+      c.beginPath(); c.moveTo(L.b.x, L.b.y + L.b.h + 4); c.lineTo(L.b.x + L.b.w, L.b.y + L.b.h + 4); c.stroke(); c.restore();
+      connect(L.b, '#F2C94C');
+    });
+    S.steps.forEach(s => connect(this.inkB(s), s.by === 'tutor' ? '#7FB8F0' : 'rgba(243,239,228,.4)'));
+  },
+  render() {
+    this.stepsBtn.textContent = `Steps (${S.steps.length}) ▾`;
+    this.host.style.cursor = S.tool === 'select' ? 'crosshair' : 'default';
+    this.ov.replaceChildren(h('div', { class: 'B-tools' },
+      h('button', { class: 'ib' + (S.tool === 'pen' ? ' on' : ''), title: 'Pen', onclick: () => { S.tool = 'pen'; render(); } }, '✎'),
+      h('button', { class: 'ib' + (S.tool === 'select' ? ' on' : ''), title: 'Transcribe: drag a box over ink', onclick: () => { S.tool = 'select'; render(); } }, '⬚')));
+    S.steps.forEach((s, k) => {
+      const a = this.anchor(this.inkB(s)), isOpen = this.open === s.id;
+      this.ov.append(h('div', { class: 'B-chip', style: `left:${a.left}px;top:${a.top}px` },
+        h('div', { class: 'B-card' + (s.by === 'tutor' ? ' tutor' : '') + (s.tutorNew ? ' new' : ''),
+          onclick: e => { if (e.target.closest('input,button')) return; if (s.tutorNew) ack(s); B.open = isOpen ? null : s.id; render(); } },
+          h('span', { class: 'n' }, k + 1),
+          s.editing ? editor(s, s.id, v => saveStep(s, v), () => { s.editing = false; render(); }) : tex(s.latex),
+          s.by === 'tutor' && h('span', { class: 'tutor-tag' }, 'tutor'),
+          verdictEl(s, 'dot')),
+        isOpen && !s.editing && h('div', { class: 'B-more' },
+          s.by === 'tutor' && h('span', { class: 'was' }, 'You had ', tex(s.original)),
+          h('span', { style: 'flex:1' }),
+          h('button', { class: 'btn', onclick: () => startEditStep(s) }, 'Edit'),
+          h('button', { class: 'btn', onclick: () => { B.open = null; deleteStep(s); } }, 'Delete')),
+        s.interruptedDraft != null && h('div', { class: 'notice' }, 'Your tutor changed this while you were editing. Your draft: ', h('span', { class: 'mono' }, s.interruptedDraft))));
+    });
+    const p = S.pending;
+    if (p) {
+      const open = p.lines.filter(l => l.status === 'pending' || l.status === 'reading');
+      open.forEach(L => {
+        const a = this.anchor(L.b);
+        let body;
+        if (L.status === 'reading') body = [h('span', { class: 'reading', style: 'padding:0 8px' }, 'Reading…')];
+        else if (L.editing) body = [editor(L, L.id, v => acceptLine(L, v), () => { L.editing = false; render(); }),
+          h('button', { class: 'ib ok', onclick: () => acceptLine(L, L.draft) }, '✓')];
+        else body = [tex(L.result.readings[L.chosen].latex),
+          h('button', { class: 'ib ok', title: 'Confirm', onclick: () => acceptLine(L) }, '✓'),
+          h('button', { class: 'ib', title: 'Edit LaTeX', onclick: () => startEditLine(L) }, '✎')];
+        const others = L.result ? L.result.readings.map((r, i) => i).filter(i => i !== L.chosen) : [];
+        this.ov.append(h('div', { class: 'B-chip', style: `left:${a.left}px;top:${a.top}px` },
+          h('div', { class: 'B-card pending' }, ...body, h('button', { class: 'ib no', title: 'Discard', onclick: () => discardLine(L) }, '✕')),
+          L.result && !L.editing && (ambiguous(L.result) || L.showAlts) && h('div', { class: 'B-alts' }, 'or', others.map(i => h('button', { class: 'alt', onclick: () => { L.chosen = i; render(); } }, tex(L.result.readings[i].latex)))),
+          L.result && !L.editing && !ambiguous(L.result) && !L.showAlts && h('button', { class: 'link', style: 'color:var(--chalk);opacity:.7;align-self:flex-start', onclick: () => { L.showAlts = true; render(); } }, 'other readings')));
+      });
+      if (open.length > 1) {
+        const ub = union(open.map(l => l.b));
+        this.ov.append(h('div', { class: 'B-all', style: `left:${ub.x}px;top:${ub.y + ub.h + 70}px;display:flex;gap:8px` },
+          h('button', { class: 'btn primary', disabled: open.some(l => l.status === 'reading'), onclick: acceptAll }, `Confirm all ${open.length}`),
+          h('button', { class: 'btn', onclick: discardAll }, 'Discard all')));
+      }
+    }
+    if (this.drawer) this.ov.append(h('div', { class: 'B-drawer' },
+      h('div', { style: 'display:flex;justify-content:space-between;align-items:center' }, h('b', {}, 'Worked solution'), h('button', { class: 'link', onclick: () => { B.drawer = false; render(); } }, 'Close')),
+      S.steps.length ? h('ol', {}, S.steps.map(s => h('li', {}, tex(s.latex), ' ', s.by === 'tutor' && h('span', { class: 'tutor-tag' }, 'tutor'), ' ', verdictEl(s, 'dot'))))
+        : h('p', { style: 'color:var(--text2)' }, 'No steps yet.')));
+  },
+};
+
+// =====================================================================
+// Variant C: review sheet. Transcribe mode snaps to whole detected lines (tap or sweep);
+// a bottom sheet then reviews one line at a time with a crop of the ink beside the reading.
+// The worked solution is a ribbon under the top bar.
+// =====================================================================
+const C = {
+  key: 'C', name: 'Review sheet', picked: [], openStep: null,
+  mount(root) {
+    root.append(h('div', { class: 'C' }, topbar(),
+      this.ribbon = h('div', { class: 'C-ribbon' }),
+      this.host = h('div', { class: 'board' }, this.ov = h('div', { class: 'ov' }))));
+    this.board = new Board(this.host, this);
+  },
+  candidateLines() { return splitLines(availableInk()); },
+  gesture: {
+    down(p) { C.sweep = [p[1], p[1]]; }, move(p) { C.sweep[1] = p[1]; },
+    up() {
+      const y0 = Math.min(...C.sweep) - 4, y1 = Math.max(...C.sweep) + 4; C.sweep = null;
+      const hit = C.candidateLines().filter(L => L.b.y <= y1 && L.b.y + L.b.h >= y0);
+      for (const L of hit) {
+        const key = L.items.map(i => i.id).join();
+        const at = C.picked.findIndex(P => P.items.map(i => i.id).join() === key);
+        if (at >= 0 && hit.length === 1) C.picked.splice(at, 1); else if (at < 0) C.picked.push(L);
+      }
+      render();
+    },
+  },
+  inkAlpha(it) {
+    const p = S.pending; if (!p) return 1;
+    const L = p.lines[p.cur]; return L && L.ids.includes(it.id) ? 1 : 0.35;
+  },
+  decorate(c) {
+    if (S.tool === 'select') {
+      for (const L of this.candidateLines()) {
+        const on = this.picked.some(P => P.items.map(i => i.id).join() === L.items.map(i => i.id).join());
+        if (on) { c.save(); c.fillStyle = 'rgba(127,184,240,.22)'; c.fillRect(L.b.x - 8, L.b.y - 6, L.b.w + 16, L.b.h + 12); c.restore(); }
+        dashedRect(c, L.b, on ? '#7FB8F0' : 'rgba(243,239,228,.3)', 7);
+      }
+      if (this.sweep) { c.save(); c.fillStyle = 'rgba(127,184,240,.15)'; c.fillRect(0, Math.min(...this.sweep), this.board.w, Math.abs(this.sweep[1] - this.sweep[0]) || 2); c.restore(); }
+    }
+    const p = S.pending;
+    if (p && p.lines[p.cur]) dashedRect(c, p.lines[p.cur].b, '#F2C94C', 8, []);
+  },
+  render() {
+    // ribbon: the worked solution
+    const tutorNew = S.steps.find(s => s.tutorNew);
+    this.ribbon.replaceChildren(h('span', { class: 'lbl' }, 'Worked solution'),
+      ...(S.steps.length ? S.steps.flatMap((s, k) => [...(k ? [h('span', { class: 'C-arrow' }, '→')] : []),
+        h('button', { class: 'C-sc' + (s.by === 'tutor' ? ' tutor' : '') + (C.openStep === s.id ? ' open' : ''), onclick: () => { C.openStep = C.openStep === s.id ? null : s.id; render(); } },
+          tex(s.latex), verdictEl(s, 'dot'))])
+        : [h('span', { class: 'lbl', style: 'font-style:italic' }, 'empty. Use Transcribe to add your first step.')]));
+    this.host.style.cursor = S.tool === 'select' ? 'row-resize' : 'default';
+    this.ov.replaceChildren();
+    const os = S.steps.find(s => s.id === C.openStep);
+    if (os) {
+      const idx = S.steps.indexOf(os), chip = this.ribbon.querySelectorAll('.C-sc')[idx];
+      const left = chip ? Math.min(chip.offsetLeft - this.ribbon.scrollLeft, this.board.w - 330) : 10;
+      this.ov.append(h('div', { class: 'C-stepmenu', style: `left:${Math.max(10, left)}px` },
+        h('b', {}, `Step ${idx + 1}`),
+        os.editing ? editor(os, os.id, v => saveStep(os, v), () => { os.editing = false; render(); }) : tex(os.latex),
+        verdictEl(os) && h('div', {}, verdictEl(os)),
+        os.by === 'tutor' && h('div', { class: 'was' }, h('span', { class: 'tutor-tag' }, 'Corrected by your tutor'), ' You had ', tex(os.original)),
+        os.interruptedDraft != null && h('div', { class: 'notice' }, 'Your tutor changed this while you were editing. Your draft: ', h('span', { class: 'mono' }, os.interruptedDraft)),
+        !os.editing && h('div', { style: 'display:flex;gap:8px' },
+          h('button', { class: 'btn', onclick: () => startEditStep(os) }, 'Edit'),
+          h('button', { class: 'btn', onclick: () => { C.openStep = null; deleteStep(os); } }, 'Delete'),
+          h('span', { style: 'flex:1' }), h('button', { class: 'btn ghost', onclick: () => { C.openStep = null; render(); } }, 'Close'))));
+    }
+    if (tutorNew) {
+      const k = S.steps.indexOf(tutorNew);
+      this.ov.append(h('div', { class: 'C-toast' },
+        h('span', {}, h('b', {}, 'Your tutor corrected step ' + (k + 1) + ': '), tex(tutorNew.original), '  →  ', tex(tutorNew.latex)),
+        tutorNew.interruptedDraft != null && h('span', { class: 'notice' }, 'Your draft was discarded: ', h('span', { class: 'mono' }, tutorNew.interruptedDraft)),
+        h('button', { class: 'btn primary', onclick: () => ack(tutorNew) }, 'Got it')));
+    }
+    const p = S.pending;
+    if (!p) {
+      this.ov.append(h('div', { class: 'C-pen' }, h('button', { class: 'ib', style: S.tool === 'pen' ? 'outline:2px solid var(--action)' : '', title: 'Pen', onclick: () => { S.tool = 'pen'; C.picked = []; render(); } }, '✎')));
+      this.ov.append(h('button', { class: 'C-fab' + (S.tool === 'select' ? ' on' : ''), onclick: () => { S.tool = S.tool === 'select' ? 'pen' : 'select'; C.picked = []; render(); } }, S.tool === 'select' ? '✕ Cancel' : '≡ Transcribe'));
+      if (S.tool === 'select') {
+        this.ov.append(h('div', { class: 'C-modehint' }, 'Tap a line, or sweep down across several'));
+        if (this.picked.length) this.ov.append(h('div', { class: 'C-pickbar' },
+          `${this.picked.length} line${this.picked.length > 1 ? 's' : ''} selected`,
+          h('button', { class: 'btn primary', onclick: () => { const items = C.picked.flatMap(P => P.items); C.picked = []; startSelection(items); } }, 'Review →')));
+      }
+      this.board.draw();
+      return;
+    }
+    // the review sheet, one line at a time
+    const L = p.lines[p.cur];
+    const dots = h('div', { class: 'C-dots' }, p.lines.map((l, i) => h('i', { class: i === p.cur ? 'cur' : l.status === 'accepted' ? 'ok' : l.status === 'discarded' ? 'x' : '' })));
+    const crop = h('canvas', { class: 'C-crop', width: 300, height: 110, style: 'width:300px;height:110px' });
+    let big, cards = null;
+    if (L.status === 'reading') big = h('span', { class: 'reading' }, 'Reading…');
+    else if (L.editing) big = editor(L, L.id, v => acceptLine(L, v), () => { L.editing = false; render(); });
+    else {
+      big = tex(L.result.readings[L.chosen].latex);
+      cards = h('div', { class: 'C-cards' }, L.result.readings.map((r, i) => h('button', { class: 'C-card' + (i === L.chosen ? ' on' : ''), onclick: () => { L.chosen = i; render(); } },
+        h('small', {}, i === 0 ? 'Best guess' : `Alternative ${i}`), tex(r.latex))));
+    }
+    this.ov.append(h('div', { class: 'C-sheet' },
+      h('div', { class: 'hd' }, h('b', {}, `Line ${p.cur + 1} of ${p.lines.length}`), dots, h('span', { style: 'flex:1' }),
+        ambiguous(L.result) && h('span', { class: 'vd vd-warn' }, 'Hard to read. Check the alternatives'),
+        h('button', { class: 'btn ghost', onclick: discardAll }, 'Stop reviewing')),
+      h('div', { class: 'C-main' }, crop, h('div', { class: 'C-big' }, big)),
+      cards,
+      h('div', { class: 'C-acts' },
+        h('button', { class: 'btn', onclick: () => discardLine(L), disabled: L.status === 'reading' }, '✕ Not math, skip'),
+        !L.editing && h('button', { class: 'btn', onclick: () => startEditLine(L), disabled: L.status === 'reading' }, '✎ Edit LaTeX'),
+        h('span', { class: 'sp' }),
+        h('button', { class: 'btn primary', style: 'min-width:200px', disabled: L.status === 'reading', onclick: () => acceptLine(L, L.editing ? L.draft : undefined) },
+          p.cur < p.lines.length - 1 ? 'Add step, next line →' : 'Add step'))));
+    this.board.draw();
+    const d = this.board.d, pad = 14, b = L.b, cx = crop.getContext('2d');
+    const sw = b.w + pad * 2, sh = b.h + pad * 2, k = Math.min(300 / sw, 110 / sh);
+    cx.drawImage(this.board.cv, (b.x - pad) * d, (b.y - pad) * d, sw * d, sh * d, (300 - sw * k) / 2, (110 - sh * k) / 2, sw * k, sh * k);
+  },
+};
+
+// ===== wiring: variants, switcher, state panel =====
+const VARIANTS = [A, B, C];
+let V = null;
+function mountVariant(key) {
+  V = VARIANTS.find(v => v.key === key) || A;
+  S.pending = null; S.tool = 'pen'; S.highlight = null; S.steps.forEach(s => s.editing = false);
+  $('#frame').replaceChildren(); V.mount($('#frame'));
+  const u = new URL(location); u.searchParams.set('variant', V.key); history.replaceState(null, '', u);
+  $('#vlabel').textContent = `${V.key} · ${V.name}`;
+  render();
+}
+function render() {
+  if (!V || !V.board) return;
+  S.focus = null;
+  V.render();
+  V.board.draw();
+  if (S.focus) { const el = document.querySelector(`[data-focus="${S.focus}"]`); if (el && document.activeElement !== el) { el.focus(); el.setSelectionRange(el.value.length, el.value.length); } }
+  $('#state').textContent = JSON.stringify({
+    variant: V.key, tool: S.tool, checkVisible: S.checkVisible,
+    pending: S.pending && S.pending.lines.map(l => ({ status: l.status, ink: l.ids.length, chosen: l.result?.readings[l.chosen]?.latex, readings: l.result?.readings.map(r => `${r.latex} (${r.score})`), editing: l.editing || undefined })),
+    steps: S.steps.map((s, k) => ({ n: k + 1, latex: s.latex, by: s.by, verdict: s.verdict, original: s.original || undefined, tutorNew: s.tutorNew || undefined, editing: s.editing || undefined })),
+  }, null, 1);
+}
+function fit() {
+  const st = $('#stage'), k = Math.min((st.clientWidth - 40) / 1180, (st.clientHeight - 80) / 820, 1);
+  const f = $('#frame'); f.style.transform = `scale(${k})`;
+  f.style.left = (st.clientWidth - 1180 * k) / 2 + 'px'; f.style.top = Math.max(16, (st.clientHeight - 60 - 820 * k) / 2) + 'px';
+}
+const cycle = dir => { const i = VARIANTS.indexOf(V); mountVariant(VARIANTS[(i + dir + VARIANTS.length) % VARIANTS.length].key); };
+$('#prev').onclick = () => cycle(-1); $('#next').onclick = () => cycle(1);
+addEventListener('keydown', e => {
+  if (e.target.closest('input,textarea,[contenteditable]')) return;
+  if (e.key === 'ArrowLeft') cycle(-1); if (e.key === 'ArrowRight') cycle(1);
+});
+$('#cv').onchange = e => { S.checkVisible = e.target.checked; render(); };
+$('#te').onclick = tutorEdit;
+$('#rs').onclick = () => { seedInk(); mountVariant(V.key); };
+addEventListener('resize', fit);
+seedInk(); fit();
+mountVariant(new URLSearchParams(location.search).get('variant') || 'A');
+document.fonts.ready.then(render);
+</script>
+</body>
+</html>
