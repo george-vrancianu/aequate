@@ -45,7 +45,11 @@ A nudge toward the next step, drawn from a hint ladder. It never contains a verd
 _Avoid_: Tip, suggestion, help
 
 **Hint ladder**:
-The ordered rungs of hints for a step, from vaguest to most explicit. The last rung is the next step itself.
+The ordered rungs of hints toward the step after the latest one, from vaguest to most explicit. The last rung is the next step itself.
+
+**Rung**:
+One level of a hint ladder: a single hint at a fixed level of detail. The four rungs are goal status, method, operation and next step.
+_Avoid_: Level, tier, hint level
 
 **Assist permissions**:
 The per-student, per-session toggles a tutor sets for check visible, hints allowed, and solve allowed.
