@@ -78,6 +78,8 @@ On Modal, only the recognizer and LLM classes request a GPU. The SymPy function 
 3. **Parse key**
    `pk = sha256(sympy_version ‖ parser_backend ‖ normalized_latex)` → `srepr(expr)` or a parse error.
    Pin the parser backend. With ANTLR, `parse_latex(r'x -')` silently returns `x`. Lark raises an error instead, and `strict=True` exists only on ANTLR ([SymPy parsing docs](https://docs.sympy.org/latest/modules/parsing.html)). The parser is labeled "experimental" and the API may change ([same](https://docs.sympy.org/latest/modules/parsing.html)), so the SymPy version belongs in the key.
+
+   > **Superseded (parser choice).** A later test of 200+ inputs on SymPy 1.14.0 found that Lark rejects or garbles too much school math (`\pi`, `x_{12}`, `\sin x + 1`). It now recommends ANTLR with `strict=True` behind a normalizer and post-parse guards, with Lark as a cross-check. See [sympy-latex-parser-coverage.md](sympy-latex-parser-coverage.md). The cache key above is unchanged.
 4. **Step-check key**
    `ck = sha256(cas_version ‖ check_mode ‖ assumptions/locale ‖ srepr(prev) ‖ srepr(curr))` → `{verdict: equivalent | not | unknown, detail}`.
    SymPy also has an in-process `lru_cache` (`SYMPY_CACHE_SIZE`, default 1000, `0` disables it, `None` makes it unbounded) ([cache.py](https://github.com/sympy/sympy/blob/master/sympy/core/cache.py)). That cache is per container, so it disappears when Modal scales to zero. The persistent cache has to live elsewhere.
@@ -131,7 +133,7 @@ import modal
 app = modal.App("aequate-dev")
 weights = modal.Volume.from_name("aequate-weights", create_if_missing=True)
 rec_image = modal.Image.debian_slim().uv_pip_install("texteller")  # pin versions in practice
-cas_image = modal.Image.debian_slim().uv_pip_install("sympy", "pint", "lark")
+cas_image = modal.Image.debian_slim().uv_pip_install("sympy", "pint", "lark", "antlr4-python3-runtime==4.11")
 
 @app.cls(gpu="L4", image=rec_image, volumes={"/weights": weights},
          scaledown_window=600, enable_memory_snapshot=True)
@@ -154,7 +156,7 @@ class Recognizer:
 
 @app.function(image=cas_image, enable_memory_snapshot=True, scaledown_window=600)
 def check_step(prev_latex: str, curr_latex: str) -> dict:
-    ...  # parse_latex(..., backend="lark"); Expr.equals -> True/False/None
+    ...  # normalize; parse_latex(..., backend="antlr", strict=True), cross-check with Lark; Expr.equals -> True/False/None
 ```
 
 The caller (app server) checks the Postgres cache by `rk` / `ck`, sends only the misses to `Recognizer().recognize.remote(...)` / `check_step.remote(...)`, and stores the results. `load_model(model_dir=...)` / `load_tokenizer(tokenizer_dir=...)` take a local directory, and passing `None` pulls the default HF repo ([load.py](https://github.com/OleehyO/TexTeller/blob/main/texteller/api/load.py), [models/texteller.py](https://github.com/OleehyO/TexTeller/blob/main/texteller/models/texteller.py)). Note that the docstring example in `inference.py` uses `model_path=` / `tokenizer_path=`, which do not match the real signatures. Use the signatures.
@@ -173,7 +175,7 @@ The caller (app server) checks the Postgres cache by `rk` / `ck`, sends only the
 
 **Experiments, tied to the handoff's next steps ([§10](../handoff.md))**
 - **Spike 2 (browser stroke ONNX, 50 samples):** collect samples *as lines with stroke ids*. Measure ExpRate per line for (a) the browser ONNX model, (b) TexTeller on rendered crops (T4 vs L4 on Modal, warm and cold latency), and (c) Qwen2.5-VL-7B zero-shot as the "pro" baseline. Replay the sessions to measure the cache hit rate when lines are appended or edited, and how often segmentation errors break lines.
-- **Spike 4 (SymPy equivalence, 20 steps):** compare the ANTLR, ANTLR `strict=True`, and Lark backends for parse failures. Measure the `equals` True/False/None distribution and time per check, with and without memory snapshot on Modal. Settle the `ck` key fields (assumptions, factored vs expanded mode, [handoff §9](../handoff.md)).
+- **Spike 4 (SymPy equivalence, 20 steps):** compare the ANTLR, ANTLR `strict=True`, and Lark backends for parse failures (done: see [sympy-latex-parser-coverage.md](sympy-latex-parser-coverage.md)). Measure the `equals` True/False/None distribution and time per check, with and without memory snapshot on Modal. Settle the `ck` key fields (assumptions, factored vs expanded mode, [handoff §9](../handoff.md)).
 - **Step 10 (LLM shortlist, 50 student errors):** feed only LaTeX plus the CAS verdict. Track the rate at which the LLM's explanation *contradicts* the verdict, and treat that as a hard failure metric. Benchmark on L4/A10 with `scaledown_window` tuned for burst sessions.
 
 ---
