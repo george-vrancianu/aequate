@@ -7,6 +7,8 @@ import sympy
 from sympy import (Symbol, Rational, Float, I, S, nan, zoo, oo, pi, simplify, expand, cancel, together, factor,
                    trigsimp, exp, Eq, solveset, ConditionSet)
 
+SEED = 0
+
 # ---------- helpers ----------
 def resid(e):
     return e.lhs - e.rhs
@@ -73,23 +75,21 @@ def numeric(A, B, domain, n=10, rtol=1e-9, atol=1e-12, seed=0):
         return "UND", f"only {used} usable points"
     return "EQ", f"{ok}/{used} points agree (rtol {rtol})"
 
-PROBE = [Rational(k) for k in range(-3, 4)] + [Rational(1, 2), Rational(-1, 2), pi / 2, pi, -pi / 2, 3 * pi / 2]
-
-def finite_at(e, pt):
-    try:
-        v = e.subs(pt)
-        v = v.doit() if hasattr(v, "doit") else v
-        return not v.has(nan, zoo, oo, -oo)
-    except Exception:
-        return False
-
 # ---------- strategies ----------
-def s0(a, b, step):
+def s0e(a, b, step):
+    """Structural == on the evaluated trees (what parsing._fix() returns)."""
     if a == b:
-        return "EQ", "identical after parse"
+        return "EQ", "identical after parse (evaluated)"
     if a.doit() == b.doit():
-        return "EQ", "identical after doit()"
-    return "NEQ", "structure differs (note: ANTLR output is already auto-evaluated and reordered)"
+        return "EQ", "identical after doit() (evaluated)"
+    return "NEQ", "structure differs (evaluated trees)"
+
+def s0u(a, b, step):
+    """Structural == on the unevaluated ANTLR trees (parsed and fixed under sympy.evaluate(False))."""
+    ra, rb = step["raw"]
+    if ra == rb:
+        return "EQ", "identical unevaluated trees"
+    return "NEQ", f"unevaluated trees differ: {ra} vs {rb}"
 
 def _s1(a, b, step, mode="complex"):
     A, B = pair(a, b, step)
@@ -100,6 +100,7 @@ def _s1(a, b, step, mode="complex"):
 def _s2(a, b, step, mode="complex"):
     A, B = pair(a, b, step)
     A, B = assume(A, mode), assume(B, mode)
+    sympy.core.random.seed(SEED); random.seed(SEED)   # Expr.equals samples with SymPy's RNG: seed it so S2 is repeatable
     r = A.equals(B)
     return {True: ("EQ", "equals=True"), False: ("NEQ", "equals=False"), None: ("UND", "equals=None")}[r]
 
@@ -154,22 +155,59 @@ def s5(domain):
         return "NEQ", det
     return f
 
+def _conds(e, excl, req):
+    """Walk the UNEVALUATED tree. excl: expressions that must be != 0. req: (expr, strict) that must be >0 / >=0 (real policy)."""
+    for n in sympy.preorder_traversal(e):
+        if isinstance(n, sympy.Pow):
+            base, ex = n.args
+            if ex.is_number and ex.is_negative and not base.is_number:
+                excl.append(base)
+            if ex.is_Rational and ex.q % 2 == 0 and not base.is_number:
+                req.append((base, bool(ex.is_negative)))      # even root: base >= 0 (> 0 if also a denominator)
+        elif isinstance(n, (sympy.tan, sympy.sec)):
+            excl.append(sympy.cos(n.args[0]))
+        elif isinstance(n, (sympy.cot, sympy.csc)):
+            excl.append(sympy.sin(n.args[0]))
+        elif isinstance(n, sympy.log) and not n.args[0].is_number:
+            req.append((n.args[0], True))
+
+def natural_domain(e, var):
+    """Real natural domain of e (a single variable) as a SymPy set, from singularities found symbolically."""
+    excl, req = [], []
+    _conds(e, excl, req)
+    dom = S.Reals
+    for d in excl:
+        dom = dom - solveset(d, var, S.Reals)
+    for x, strict in req:
+        dom = dom & solveset(x > 0 if strict else x >= 0, var, S.Reals)
+    return dom
+
 def s7(a, b, step):
-    """Numeric real check, then probe special points for one side defined, the other not."""
+    """Domain tracking (research S7): numeric real check first; if it says equal, compute each side's natural real domain
+    symbolically from the unevaluated trees and compare. Equations: domain of both sides together."""
     A, B = pair(a, b, step)
     v, d = numeric(A, B, "real")
     if v != "EQ":
         return v, "numeric(real): " + d
-    syms = sorted(A.free_symbols | B.free_symbols, key=str)
-    for p in PROBE:
-        pt = {s: p for s in syms}
-        fa, fb = finite_at(A, pt), finite_at(B, pt)
-        if fa != fb:
-            return "EQ_DOM", f"equal at samples, but at {syms[0] if syms else ''}={p} one side is undefined"
-    return "EQ", "equal at samples, no special-point difference"
+    ra, rb = step["raw"]
+    parts = lambda e: [e.lhs, e.rhs] if step["kind"] == "eq" else [e]
+    syms = sorted(set().union(*(p.free_symbols for p in parts(ra) + parts(rb))), key=str)
+    if len(syms) != 1:
+        return "UND", f"domain tracking implemented for one variable, got {syms}"
+    x = syms[0]
+    da = sympy.Intersection(*[natural_domain(p, x) for p in parts(ra)])
+    db = sympy.Intersection(*[natural_domain(p, x) for p in parts(rb)])
+    if da == db:
+        return "EQ", f"equal at samples; same natural domain {da}"
+    only_a, only_b = da - db, db - da
+    side = []
+    if only_a != S.EmptySet: side.append(f"{only_a} defined before only")
+    if only_b != S.EmptySet: side.append(f"{only_b} defined after only")
+    return "EQ_DOM", f"equal at samples; domain before {da}, after {db} ({'; '.join(side) or 'sets differ'})"
 
 STRATEGIES = [
-    ("S0", "structural ==", s0),
+    ("S0e", "structural ==, evaluated trees", s0e),
+    ("S0u", "structural ==, unevaluated trees", s0u),
     ("S1", "simplify(A-B)==0", _s1),
     ("S2", "A.equals(B)", _s2),
     ("S3r", "numeric, real pts", s3("real")),
@@ -183,7 +221,7 @@ STRATEGIES = [
     ("S6-S2p", "S2, positive symbols", lambda a, b, st: _s2(a, b, st, "pos")),
     ("S6-S4r", "S4, real symbols", lambda a, b, st: _s4(a, b, st, "real")),
     ("S6-S4p", "S4, positive symbols", lambda a, b, st: _s4(a, b, st, "pos")),
-    ("S7", "domain probe over numeric", s7),
+    ("S7", "domain tracking (symbolic) over numeric", s7),
 ]
 
 def score(expected, v):
@@ -195,7 +233,7 @@ def score(expected, v):
         return "ok" if v == "EQ" else "wrong"
     if expected == "NOT_EQUIV":
         return "wrong" if v in ("EQ", "EQ_DOM") else "ok"
-    if expected == "DOMAIN":
-        return "wrong" if v == "EQ" else "ok"
-    if expected == "ONEWAY":
-        return "ok" if v in ("WIDER", "NARROW") else ("partial" if v == "NEQ" else "wrong")
+    if expected == "DOMAIN":      # must flag the domain change: EQ_DOM, or a solution-set difference; plain NEQ is partial
+        return "wrong" if v == "EQ" else ("ok" if v in ("EQ_DOM", "NARROW", "WIDER") else "partial")
+    if expected == "ONEWAY":      # after follows from before: only WIDER names it
+        return "ok" if v == "WIDER" else ("partial" if v in ("NEQ", "NARROW") else "wrong")
