@@ -1,0 +1,2183 @@
+[
+ {
+  "step": {
+   "id": 1,
+   "topic": "expand",
+   "before": "(x+3)^2",
+   "after": "x^2+6x+9",
+   "kind": "expr",
+   "expected": "EQUIV",
+   "why": "(x+3)^2 = x^2+2*3x+9. Polynomial identity."
+  },
+  "parse": "ok",
+  "parse_ms": 79.08355607651174,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 3.0252800788730383,
+    "score": "wrong"
+   },
+   "S1": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 11.355775175616145,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 11.71853393316269,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 4.575003171339631,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 10.094505967572331,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "EQ",
+    "detail": "stage: expand",
+    "ms": 10.49354998394847,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 2.034098142758012,
+    "score": "na"
+   },
+   "S5c": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 1.836573937907815,
+    "score": "na"
+   },
+   "S6-S1r": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 11.614195071160793,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 15.976845053955913,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 11.825394816696644,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 15.598390018567443,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "EQ",
+    "detail": "stage: expand",
+    "ms": 5.056569119915366,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "EQ",
+    "detail": "stage: expand",
+    "ms": 5.066354060545564,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "EQ",
+    "detail": "equal at samples, no special-point difference",
+    "ms": 9.079931071028113,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "(x + 3)**2",
+   "x**2 + 6*x + 9"
+  ]
+ },
+ {
+  "step": {
+   "id": 2,
+   "topic": "expand, mistake: dropped cross term",
+   "before": "(x-2)^2",
+   "after": "x^2-4",
+   "kind": "expr",
+   "expected": "NOT_EQUIV",
+   "why": "(x-2)^2 = x^2-4x+4. At x=0 the sides are 4 and -4."
+  },
+  "parse": "ok",
+  "parse_ms": 62.70592100918293,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 2.661874983459711,
+    "score": "ok"
+   },
+   "S1": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=8 - 4*x (non-zero is not a proof of NEQ)",
+    "ms": 14.339701971039176,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 15.892553143203259,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
+    "ms": 3.148130839690566,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. -2.39103+0.205944j vs -2.12491+6.39685j",
+    "ms": 4.30721789598465,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. -2.39103+0.205944j vs -2.12491+6.39685j",
+    "ms": 4.0436009876430035,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 1.8972198013216257,
+    "score": "na"
+   },
+   "S5c": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 1.8979909364134073,
+    "score": "na"
+   },
+   "S6-S1r": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=8 - 4*x (non-zero is not a proof of NEQ)",
+    "ms": 14.333636034280062,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=8 - 4*x (non-zero is not a proof of NEQ)",
+    "ms": 19.778050016611814,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 15.236048959195614,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 25.37784492596984,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
+    "ms": 3.7944051437079906,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. 5.00715+0j vs 13.9578+0j",
+    "ms": 3.5554589703679085,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "NEQ",
+    "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
+    "ms": 3.377761924639344,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "(x - 2)**2",
+   "x**2 - 4"
+  ]
+ },
+ {
+  "step": {
+   "id": 3,
+   "topic": "expand, mistake: wrong sign",
+   "before": "(x-2)(x+5)",
+   "after": "x^2-3x-10",
+   "kind": "expr",
+   "expected": "NOT_EQUIV",
+   "why": "(x-2)(x+5) = x^2+5x-2x-10 = x^2+3x-10. Student has -3x. At x=0 both give -10 but at x=1: -6 vs -12."
+  },
+  "parse": "ok",
+  "parse_ms": 105.04648392088711,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 3.4186909906566143,
+    "score": "ok"
+   },
+   "S1": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=6*x (non-zero is not a proof of NEQ)",
+    "ms": 14.604632975533605,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 14.122617896646261,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
+    "ms": 3.3615429420024157,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. -1.92531+11.04j vs -14.3245+1.75367j",
+    "ms": 4.740844946354628,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. -1.92531+11.04j vs -14.3245+1.75367j",
+    "ms": 5.119659937918186,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 1.9131200388073921,
+    "score": "na"
+   },
+   "S5c": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 2.065015956759453,
+    "score": "na"
+   },
+   "S6-S1r": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=6*x (non-zero is not a proof of NEQ)",
+    "ms": 14.411312993615866,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=6*x (non-zero is not a proof of NEQ)",
+    "ms": 22.151456912979484,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 13.931095832958817,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 20.765897817909718,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
+    "ms": 3.9332970045506954,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. 20.6708+0j vs -4.75518+0j",
+    "ms": 3.936989000067115,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "NEQ",
+    "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
+    "ms": 3.3342621754854918,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "(x - 2)*(x + 5)",
+   "x**2 - 3*x - 10"
+  ]
+ },
+ {
+  "step": {
+   "id": 4,
+   "topic": "factor",
+   "before": "x^2-5x+6",
+   "after": "(x-2)(x-3)",
+   "kind": "expr",
+   "expected": "EQUIV",
+   "why": "(x-2)(x-3) = x^2-5x+6. Polynomial identity."
+  },
+  "parse": "ok",
+  "parse_ms": 115.29227113351226,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 3.5660790745168924,
+    "score": "wrong"
+   },
+   "S1": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 14.031665865331888,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 13.73229082673788,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 5.28796692378819,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 12.529150815680623,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "EQ",
+    "detail": "stage: expand",
+    "ms": 13.49022495560348,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 2.6799309998750687,
+    "score": "na"
+   },
+   "S5c": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 2.269923221319914,
+    "score": "na"
+   },
+   "S6-S1r": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 12.973289005458355,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 19.5108859334141,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 12.799510965123773,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 19.943751860409975,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "EQ",
+    "detail": "stage: expand",
+    "ms": 5.916833877563477,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "EQ",
+    "detail": "stage: expand",
+    "ms": 5.455770064145327,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "EQ",
+    "detail": "equal at samples, no special-point difference",
+    "ms": 9.628376923501492,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "x**2 - 5*x + 6",
+   "(x - 3)*(x - 2)"
+  ]
+ },
+ {
+  "step": {
+   "id": 5,
+   "topic": "simplify fraction",
+   "before": "\\frac{2x+4}{6}",
+   "after": "\\frac{x+2}{3}",
+   "kind": "expr",
+   "expected": "EQUIV",
+   "why": "Divide numerator and the constant denominator by 2. Constant divisor, so no domain change."
+  },
+  "parse": "ok",
+  "parse_ms": 86.45077515393496,
+  "cells": {
+   "S0": {
+    "verdict": "EQ",
+    "detail": "identical after parse",
+    "ms": 2.2268909960985184,
+    "score": "ok"
+   },
+   "S1": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 2.659559017047286,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 2.008749870583415,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 3.6847428418695927,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 9.189057862386107,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 2.014008816331625,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 1.7876632045954466,
+    "score": "na"
+   },
+   "S5c": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 1.8075911793857813,
+    "score": "na"
+   },
+   "S6-S1r": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 2.990542910993099,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 3.4771719947457314,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 3.052199026569724,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 2.5692679919302464,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 2.362106926739216,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 2.6908169966191053,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "EQ",
+    "detail": "equal at samples, no special-point difference",
+    "ms": 6.259300978854299,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "x/3 + 2/3",
+   "x/3 + 2/3"
+  ]
+ },
+ {
+  "step": {
+   "id": 6,
+   "topic": "add fractions",
+   "before": "\\frac{x}{2}+\\frac{x}{3}",
+   "after": "\\frac{5x}{6}",
+   "kind": "expr",
+   "expected": "EQUIV",
+   "why": "x/2+x/3 = (3x+2x)/6 = 5x/6. Constant denominators, no domain change."
+  },
+  "parse": "ok",
+  "parse_ms": 139.04633605852723,
+  "cells": {
+   "S0": {
+    "verdict": "EQ",
+    "detail": "identical after parse",
+    "ms": 2.421329030767083,
+    "score": "ok"
+   },
+   "S1": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 2.540484070777893,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 1.9408520311117172,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 3.636872861534357,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 9.153421968221664,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 1.8841149285435677,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 2.113162074238062,
+    "score": "na"
+   },
+   "S5c": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 1.7670239321887493,
+    "score": "na"
+   },
+   "S6-S1r": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 2.7526940684765577,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 2.686658874154091,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 2.486923011019826,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 2.58620991371572,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 2.2900309413671494,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 2.5079420302063227,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "EQ",
+    "detail": "equal at samples, no special-point difference",
+    "ms": 5.520696984604001,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "5*x/6",
+   "5*x/6"
+  ]
+ },
+ {
+  "step": {
+   "id": 7,
+   "topic": "division-by-zero trap",
+   "before": "\\frac{x^2-1}{x-1}",
+   "after": "x+1",
+   "kind": "expr",
+   "expected": "DOMAIN",
+   "why": "Equal for every x != 1. At x=1 the left side is undefined (0/0) and the right side is 2. Valid only with x != 1."
+  },
+  "parse": "ok",
+  "parse_ms": 80.55134117603302,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 2.7326259296387434,
+    "score": "ok"
+   },
+   "S1": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 14.860711060464382,
+    "score": "wrong"
+   },
+   "S2": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 15.17305988818407,
+    "score": "wrong"
+   },
+   "S3r": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 4.22870903275907,
+    "score": "wrong"
+   },
+   "S3c": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 9.029447101056576,
+    "score": "wrong"
+   },
+   "S4": {
+    "verdict": "EQ",
+    "detail": "stage: cancel",
+    "ms": 13.541291002184153,
+    "score": "wrong"
+   },
+   "S5r": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 2.04408704303205,
+    "score": "na"
+   },
+   "S5c": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 1.8456128891557455,
+    "score": "na"
+   },
+   "S6-S1r": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 15.276005025953054,
+    "score": "wrong"
+   },
+   "S6-S1p": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 22.696205182000995,
+    "score": "wrong"
+   },
+   "S6-S2r": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 15.286114066839218,
+    "score": "wrong"
+   },
+   "S6-S2p": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 22.446504095569253,
+    "score": "wrong"
+   },
+   "S6-S4r": {
+    "verdict": "EQ",
+    "detail": "stage: cancel",
+    "ms": 9.002767037600279,
+    "score": "wrong"
+   },
+   "S6-S4p": {
+    "verdict": "EQ",
+    "detail": "stage: cancel",
+    "ms": 8.61846306361258,
+    "score": "wrong"
+   },
+   "S7": {
+    "verdict": "EQ_DOM",
+    "detail": "equal at samples, but at x=1 one side is undefined",
+    "ms": 6.729993037879467,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "(x**2 - 1)/(x - 1)",
+   "x + 1"
+  ]
+ },
+ {
+  "step": {
+   "id": 8,
+   "topic": "trig identity",
+   "before": "\\cos^2 x-\\sin^2 x",
+   "after": "2\\cos^2 x-1",
+   "kind": "expr",
+   "expected": "EQUIV",
+   "why": "cos 2x = cos^2 x - sin^2 x = 2cos^2 x - 1 (use sin^2 = 1 - cos^2). True for all x."
+  },
+  "parse": "ok",
+  "parse_ms": 409.67444493435323,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 3.0749919824302197,
+    "score": "wrong"
+   },
+   "S1": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 25.697879027575254,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 26.862537022680044,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 4.986628890037537,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 37.98314114101231,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "EQ",
+    "detail": "stage: trigsimp",
+    "ms": 55.638974998146296,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 2.5616129860281944,
+    "score": "na"
+   },
+   "S5c": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 2.082690130919218,
+    "score": "na"
+   },
+   "S6-S1r": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 24.733523838222027,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 25.303420145064592,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 25.1224038656801,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 25.796295143663883,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "EQ",
+    "detail": "stage: trigsimp",
+    "ms": 23.061304818838835,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "EQ",
+    "detail": "stage: trigsimp",
+    "ms": 22.857889998704195,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "EQ",
+    "detail": "equal at samples, no special-point difference",
+    "ms": 11.653027962893248,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "-sin(x)**2 + cos(x)**2",
+   "2*cos(x)**2 - 1"
+  ]
+ },
+ {
+  "step": {
+   "id": 9,
+   "topic": "solve linear",
+   "before": "2x+3=7",
+   "after": "x=2",
+   "kind": "eq",
+   "expected": "EQUIV",
+   "why": "Both have solution set {2}. Residuals 2x-4 and x-2 are proportional (factor 2)."
+  },
+  "parse": "ok",
+  "parse_ms": 70.38918696343899,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 4.31186705827713,
+    "score": "wrong"
+   },
+   "S1": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 3.293534042313695,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 3.6462501157075167,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 4.917659098282456,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 10.002283146604896,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 3.231798065826297,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "EQ",
+    "detail": "{2} vs {2}",
+    "ms": 10.790480067953467,
+    "score": "ok"
+   },
+   "S5c": {
+    "verdict": "EQ",
+    "detail": "{2} vs {2}",
+    "ms": 11.474221013486385,
+    "score": "ok"
+   },
+   "S6-S1r": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 3.5894629545509815,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 3.5935158375650644,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 3.5328969825059175,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 3.569014137610793,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 3.1434218399226665,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 3.3856381196528673,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "EQ",
+    "detail": "equal at samples, no special-point difference",
+    "ms": 6.119427038356662,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "Eq(2*x + 3, 7)",
+   "Eq(x, 2)"
+  ]
+ },
+ {
+  "step": {
+   "id": 10,
+   "topic": "solve linear, mistake: wrong sign",
+   "before": "2x+3=7",
+   "after": "2x=10",
+   "kind": "eq",
+   "expected": "NOT_EQUIV",
+   "why": "Student added 3 instead of subtracting it. {2} vs {5}."
+  },
+  "parse": "ok",
+  "parse_ms": 77.98009109683335,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 3.8509368896484375,
+    "score": "ok"
+   },
+   "S1": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=21*x/16 - 9/16 (non-zero is not a proof of NEQ)",
+    "ms": 13.917951146140695,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 15.173872001469135,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
+    "ms": 6.17559184320271,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. 0.133062+3.09545j vs -2.01676+1.06406j",
+    "ms": 6.963690044358373,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. 0.133062+3.09545j vs -2.01676+1.06406j",
+    "ms": 6.9129138719290495,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "NEQ",
+    "detail": "{2} vs {5}",
+    "ms": 10.927068069577217,
+    "score": "ok"
+   },
+   "S5c": {
+    "verdict": "NEQ",
+    "detail": "{2} vs {5}",
+    "ms": 12.549469014629722,
+    "score": "ok"
+   },
+   "S6-S1r": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=21*x/16 - 9/16 (non-zero is not a proof of NEQ)",
+    "ms": 13.704830082133412,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=21*x/16 - 9/16 (non-zero is not a proof of NEQ)",
+    "ms": 15.207445016130805,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 14.903752133250237,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 18.352810060605407,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
+    "ms": 6.545820971950889,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. 4.47533+0j vs -0.524104+0j",
+    "ms": 6.517142057418823,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "NEQ",
+    "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
+    "ms": 6.435202201828361,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "Eq(2*x + 3, 7)",
+   "Eq(2*x, 10)"
+  ]
+ },
+ {
+  "step": {
+   "id": 11,
+   "topic": "solve quadratic, mistake: dropped root",
+   "before": "x^2-5x+6=0",
+   "after": "x=2",
+   "kind": "eq",
+   "expected": "NOT_EQUIV",
+   "why": "Solutions of the first are {2,3}; the student kept only 2. The step loses a root, so it is not an equivalence (it is implied backwards only)."
+  },
+  "parse": "ok",
+  "parse_ms": 85.93013091012836,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 3.743815002962947,
+    "score": "ok"
+   },
+   "S1": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=x**2 - 17*x/7 + 6/7 (non-zero is not a proof of NEQ)",
+    "ms": 15.632456867024302,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 16.79336791858077,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
+    "ms": 6.678942125290632,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. -2.45756-1.34178j vs -0.17108-3.97987j",
+    "ms": 7.176751969382167,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. -2.45756-1.34178j vs -0.17108-3.97987j",
+    "ms": 7.261611986905336,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "NARROW",
+    "detail": "{2, 3} vs {2} (after is a proper subset: roots lost)",
+    "ms": 15.402673045173287,
+    "score": "ok"
+   },
+   "S5c": {
+    "verdict": "NARROW",
+    "detail": "{2, 3} vs {2} (after is a proper subset: roots lost)",
+    "ms": 16.520201927050948,
+    "score": "ok"
+   },
+   "S6-S1r": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=x**2 - 17*x/7 + 6/7 (non-zero is not a proof of NEQ)",
+    "ms": 16.454278025776148,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=x**2 - 17*x/7 + 6/7 (non-zero is not a proof of NEQ)",
+    "ms": 22.317419992759824,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 17.92071503587067,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 23.730461951345205,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
+    "ms": 7.405478972941637,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. 2.76949+0j vs -5.754+0j",
+    "ms": 6.751359207555652,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "NEQ",
+    "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
+    "ms": 6.546572782099247,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "Eq(x**2 - 5*x + 6, 0)",
+   "Eq(x, 2)"
+  ]
+ },
+ {
+  "step": {
+   "id": 12,
+   "topic": "solve quadratic (factored form)",
+   "before": "x^2-5x+6=0",
+   "after": "(x-2)(x-3)=0",
+   "kind": "eq",
+   "expected": "EQUIV",
+   "why": "Same polynomial, same roots {2,3}; residuals are identical."
+  },
+  "parse": "ok",
+  "parse_ms": 160.27648490853608,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 4.226305056363344,
+    "score": "wrong"
+   },
+   "S1": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 10.605992982164025,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 10.61279489658773,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 6.272454978898168,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 11.2552170176059,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "EQ",
+    "detail": "stage: expand",
+    "ms": 11.586392065510154,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "EQ",
+    "detail": "{2, 3} vs {2, 3}",
+    "ms": 17.798513872548938,
+    "score": "ok"
+   },
+   "S5c": {
+    "verdict": "EQ",
+    "detail": "{2, 3} vs {2, 3}",
+    "ms": 19.52748605981469,
+    "score": "ok"
+   },
+   "S6-S1r": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 13.425847981125116,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 19.323582062497735,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 13.211147859692574,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 19.595725927501917,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "EQ",
+    "detail": "stage: expand",
+    "ms": 6.827523000538349,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "EQ",
+    "detail": "stage: expand",
+    "ms": 6.3413160387426615,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "EQ",
+    "detail": "equal at samples, no special-point difference",
+    "ms": 10.503178928047419,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "Eq(x**2 - 5*x + 6, 0)",
+   "Eq((x - 3)*(x - 2), 0)"
+  ]
+ },
+ {
+  "step": {
+   "id": 13,
+   "topic": "rearrange formula",
+   "before": "y=2x+3",
+   "after": "x=\\frac{y-3}{2}",
+   "kind": "eq",
+   "expected": "EQUIV",
+   "solve_for": "x",
+   "why": "Subtract 3, divide by 2: x=(y-3)/2. Same relation between x and y. Residuals y-2x-3 and x-(y-3)/2 are proportional (factor -2)."
+  },
+  "parse": "ok",
+  "parse_ms": 105.83640215918422,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 5.054017063230276,
+    "score": "wrong"
+   },
+   "S1": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 3.923633135855198,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 3.9936411194503307,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 5.365423858165741,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 12.86346185952425,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 3.662541974335909,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "EQ",
+    "detail": "Intersection({y/2 - 3/2}, Reals) vs Intersection({y/2 - 3/2}, Reals)",
+    "ms": 14.918840024620295,
+    "score": "ok"
+   },
+   "S5c": {
+    "verdict": "EQ",
+    "detail": "{y/2 - 3/2} vs {y/2 - 3/2}",
+    "ms": 15.414125053212047,
+    "score": "ok"
+   },
+   "S6-S1r": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 4.157955991104245,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 4.201838979497552,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 4.078881815075874,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 4.099956946447492,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 3.895118832588196,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 3.9282329380512238,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "EQ",
+    "detail": "equal at samples, no special-point difference",
+    "ms": 8.212706074118614,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "Eq(y, 2*x + 3)",
+   "Eq(x, y/2 - 3/2)"
+  ]
+ },
+ {
+  "step": {
+   "id": 14,
+   "topic": "squaring both sides (one-way)",
+   "before": "\\sqrt{x+1}=x-1",
+   "after": "x+1=(x-1)^2",
+   "kind": "eq",
+   "expected": "ONEWAY",
+   "why": "Squaring gives x^2-3x=0, roots {0,3}. Only x=3 satisfies the original (x=0 gives 1=-1), so after follows from before but not conversely."
+  },
+  "parse": "ok",
+  "parse_ms": 111.6589589510113,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 3.5464921966195107,
+    "score": "partial"
+   },
+   "S1": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=-x + sqrt(x + 1) - 7*(4 + sqrt(70))*(x - (x - 1)**2 + 1)/54 + 1 (non-zero is not a proof of NEQ)",
+    "ms": 41.74470808357,
+    "score": "partial"
+   },
+   "S2": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 51.01685714907944,
+    "score": "partial"
+   },
+   "S3r": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
+    "ms": 9.827258996665478,
+    "score": "partial"
+   },
+   "S3c": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. 0.736454-1.11851j vs 6.93251-2.81127j",
+    "ms": 10.621838038787246,
+    "score": "partial"
+   },
+   "S4": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. 0.736454-1.11851j vs 6.93251-2.81127j",
+    "ms": 10.422030929476023,
+    "score": "partial"
+   },
+   "S5r": {
+    "verdict": "WIDER",
+    "detail": "{3} vs {0, 3} (after is a proper superset: extra roots)",
+    "ms": 28.89395016245544,
+    "score": "ok"
+   },
+   "S5c": {
+    "verdict": "WIDER",
+    "detail": "{3} vs {0, 3} (after is a proper superset: extra roots)",
+    "ms": 31.988583970814943,
+    "score": "ok"
+   },
+   "S6-S1r": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=-x + sqrt(x + 1) - 7*(4 + sqrt(70))*(x - (x - 1)**2 + 1)/54 + 1 (non-zero is not a proof of NEQ)",
+    "ms": 41.392632061615586,
+    "score": "partial"
+   },
+   "S6-S1p": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=-x + sqrt(x + 1) - 7*(4 + sqrt(70))*(x - (x - 1)**2 + 1)/54 + 1 (non-zero is not a proof of NEQ)",
+    "ms": 52.65182303264737,
+    "score": "partial"
+   },
+   "S6-S2r": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 53.26144816353917,
+    "score": "partial"
+   },
+   "S6-S2p": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 64.84362296760082,
+    "score": "partial"
+   },
+   "S6-S4r": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
+    "ms": 10.447744047269225,
+    "score": "partial"
+   },
+   "S6-S4p": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. -0.949072+0j vs -8.40786+0j",
+    "ms": 9.564507054165006,
+    "score": "partial"
+   },
+   "S7": {
+    "verdict": "NEQ",
+    "detail": "numeric(real): differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
+    "ms": 9.41922701895237,
+    "score": "partial"
+   }
+  },
+  "parsed": [
+   "Eq(sqrt(x + 1), x - 1)",
+   "Eq(x + 1, (x - 1)**2)"
+  ]
+ },
+ {
+  "step": {
+   "id": 15,
+   "topic": "squaring both sides (one-way), simple",
+   "before": "x=2",
+   "after": "x^2=4",
+   "kind": "eq",
+   "expected": "ONEWAY",
+   "why": "{2} is a subset of {-2,2}: implied forwards, not backwards."
+  },
+  "parse": "ok",
+  "parse_ms": 59.526495169848204,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 3.093860810622573,
+    "score": "partial"
+   },
+   "S1": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=-7*x**2/17 + x - 6/17 (non-zero is not a proof of NEQ)",
+    "ms": 16.651149140670896,
+    "score": "partial"
+   },
+   "S2": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 17.717391019687057,
+    "score": "partial"
+   },
+   "S3r": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
+    "ms": 6.801533978432417,
+    "score": "partial"
+   },
+   "S3c": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. 0.0665311+1.54773j vs -0.874961+2.634j",
+    "ms": 7.699475856497884,
+    "score": "partial"
+   },
+   "S4": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. 0.0665311+1.54773j vs -0.874961+2.634j",
+    "ms": 7.730285869911313,
+    "score": "partial"
+   },
+   "S5r": {
+    "verdict": "WIDER",
+    "detail": "{2} vs {-2, 2} (after is a proper superset: extra roots)",
+    "ms": 11.506261071190238,
+    "score": "ok"
+   },
+   "S5c": {
+    "verdict": "WIDER",
+    "detail": "{2} vs {-2, 2} (after is a proper superset: extra roots)",
+    "ms": 14.45945305749774,
+    "score": "ok"
+   },
+   "S6-S1r": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=-7*x**2/17 + x - 6/17 (non-zero is not a proof of NEQ)",
+    "ms": 17.30204699561,
+    "score": "partial"
+   },
+   "S6-S1p": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=-7*x**2/17 + x - 6/17 (non-zero is not a proof of NEQ)",
+    "ms": 24.45743908174336,
+    "score": "partial"
+   },
+   "S6-S2r": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 20.83544502966106,
+    "score": "partial"
+   },
+   "S6-S2p": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 25.496227899566293,
+    "score": "partial"
+   },
+   "S6-S4r": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
+    "ms": 7.516158977523446,
+    "score": "partial"
+   },
+   "S6-S4p": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. 2.23767+0j vs 5.74734+0j",
+    "ms": 7.17849493958056,
+    "score": "partial"
+   },
+   "S7": {
+    "verdict": "NEQ",
+    "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
+    "ms": 6.543817929923534,
+    "score": "partial"
+   }
+  },
+  "parsed": [
+   "Eq(x, 2)",
+   "Eq(x**2, 4)"
+  ]
+ },
+ {
+  "step": {
+   "id": 16,
+   "topic": "mistake: divide by x, lost root",
+   "before": "x^2=3x",
+   "after": "x=3",
+   "kind": "eq",
+   "expected": "NOT_EQUIV",
+   "why": "x^2=3x has roots {0,3}. Dividing by x silently drops x=0 (division by zero)."
+  },
+  "parse": "ok",
+  "parse_ms": 65.41163311339915,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 3.126664087176323,
+    "score": "ok"
+   },
+   "S1": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=x**2 - 24*x/7 + 9/7 (non-zero is not a proof of NEQ)",
+    "ms": 16.002287855371833,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 16.210414934903383,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
+    "ms": 6.704834057018161,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "NEQ",
+    "detail": "differs at 1 of 1 points tried, e.g. -4.3245+1.75367j vs -0.400058+0.663311j",
+    "ms": 8.017234969884157,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. -4.3245+1.75367j vs -0.400058+0.663311j",
+    "ms": 7.64993391931057,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "NARROW",
+    "detail": "{0, 3} vs {3} (after is a proper subset: roots lost)",
+    "ms": 15.312538016587496,
+    "score": "ok"
+   },
+   "S5c": {
+    "verdict": "NARROW",
+    "detail": "{0, 3} vs {3} (after is a proper subset: roots lost)",
+    "ms": 16.1162291187793,
+    "score": "ok"
+   },
+   "S6-S1r": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=x**2 - 24*x/7 + 9/7 (non-zero is not a proof of NEQ)",
+    "ms": 17.093450063839555,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=x**2 - 24*x/7 + 9/7 (non-zero is not a proof of NEQ)",
+    "ms": 21.764551056548953,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 17.874700017273426,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "NEQ",
+    "detail": "equals=False",
+    "ms": 24.01639590971172,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
+    "ms": 7.671718019992113,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. 5.24482+0j vs 0.530429+0j",
+    "ms": 7.129235891625285,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "NEQ",
+    "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
+    "ms": 6.6310940310359,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "Eq(x**2, 3*x)",
+   "Eq(x, 3)"
+  ]
+ },
+ {
+  "step": {
+   "id": 17,
+   "topic": "division-by-zero trap in an equation",
+   "before": "\\frac{x^2-1}{x-1}=2",
+   "after": "x+1=2",
+   "kind": "eq",
+   "expected": "DOMAIN",
+   "why": "Left has no solution (x=1 is excluded, any other x gives x+1=2 -> x=1). Right has {1}. The step is valid only if x != 1 is assumed, and then it shows no solution."
+  },
+  "parse": "ok",
+  "parse_ms": 104.03713001869619,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 4.297607112675905,
+    "score": "ok"
+   },
+   "S1": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 13.364159036427736,
+    "score": "wrong"
+   },
+   "S2": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 12.720349943265319,
+    "score": "wrong"
+   },
+   "S3r": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 5.936841946095228,
+    "score": "wrong"
+   },
+   "S3c": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 11.167471995577216,
+    "score": "wrong"
+   },
+   "S4": {
+    "verdict": "EQ",
+    "detail": "stage: cancel",
+    "ms": 14.373613987118006,
+    "score": "wrong"
+   },
+   "S5r": {
+    "verdict": "WIDER",
+    "detail": "EmptySet vs {1} (after is a proper superset: extra roots)",
+    "ms": 21.557976957410574,
+    "score": "ok"
+   },
+   "S5c": {
+    "verdict": "WIDER",
+    "detail": "EmptySet vs {1} (after is a proper superset: extra roots)",
+    "ms": 21.698263008147478,
+    "score": "ok"
+   },
+   "S6-S1r": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 15.43125999160111,
+    "score": "wrong"
+   },
+   "S6-S1p": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 23.095067124813795,
+    "score": "wrong"
+   },
+   "S6-S2r": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 15.589697053655982,
+    "score": "wrong"
+   },
+   "S6-S2p": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 22.52061292529106,
+    "score": "wrong"
+   },
+   "S6-S4r": {
+    "verdict": "EQ",
+    "detail": "stage: cancel",
+    "ms": 9.720362024381757,
+    "score": "wrong"
+   },
+   "S6-S4p": {
+    "verdict": "EQ",
+    "detail": "stage: cancel",
+    "ms": 9.647963102906942,
+    "score": "wrong"
+   },
+   "S7": {
+    "verdict": "EQ_DOM",
+    "detail": "equal at samples, but at x=1 one side is undefined",
+    "ms": 7.69409816712141,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "Eq((x**2 - 1)/(x - 1), 2)",
+   "Eq(x + 1, 2)"
+  ]
+ },
+ {
+  "step": {
+   "id": 18,
+   "topic": "Romanian ':' division",
+   "before": "(4x+8):4",
+   "after": "x+2",
+   "kind": "expr",
+   "expected": "EQUIV",
+   "why": "(4x+8)/4 = x+2. Tests ':' -> \\div in the normalizer."
+  },
+  "parse": "ok",
+  "parse_ms": 67.8961300291121,
+  "cells": {
+   "S0": {
+    "verdict": "EQ",
+    "detail": "identical after parse",
+    "ms": 2.42649600841105,
+    "score": "ok"
+   },
+   "S1": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 2.4518670979887247,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 2.0774779841303825,
+    "score": "ok"
+   },
+   "S3r": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 3.5714590921998024,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 8.01165890879929,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 1.9440490286797285,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 1.885907957330346,
+    "score": "na"
+   },
+   "S5c": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 1.9589210860431194,
+    "score": "na"
+   },
+   "S6-S1r": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 2.4660490453243256,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 2.4015819653868675,
+    "score": "ok"
+   },
+   "S6-S2r": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 2.429722808301449,
+    "score": "ok"
+   },
+   "S6-S2p": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 2.4110290687531233,
+    "score": "ok"
+   },
+   "S6-S4r": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 2.4983021430671215,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 2.346917986869812,
+    "score": "ok"
+   },
+   "S7": {
+    "verdict": "EQ",
+    "detail": "equal at samples, no special-point difference",
+    "ms": 5.134220002219081,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "x + 2",
+   "x + 2"
+  ]
+ },
+ {
+  "step": {
+   "id": 19,
+   "topic": "Romanian tg",
+   "before": "\\tg(x)\\cdot\\cos(x)",
+   "after": "\\sin(x)",
+   "kind": "expr",
+   "expected": "DOMAIN",
+   "why": "tan x = sin x / cos x, so tan x cos x = sin x where cos x != 0. At x = pi/2 the left side is undefined and the right side is 1. Tests tg -> \\tan."
+  },
+  "parse": "ok",
+  "parse_ms": 177.31139599345624,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 3.1459780875593424,
+    "score": "ok"
+   },
+   "S1": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 16.343568917363882,
+    "score": "wrong"
+   },
+   "S2": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 16.410053009167314,
+    "score": "wrong"
+   },
+   "S3r": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 4.748329985886812,
+    "score": "wrong"
+   },
+   "S3c": {
+    "verdict": "EQ",
+    "detail": "10/10 points agree (rtol 1e-09)",
+    "ms": 43.785569025203586,
+    "score": "wrong"
+   },
+   "S4": {
+    "verdict": "EQ",
+    "detail": "stage: trigsimp",
+    "ms": 53.59367607161403,
+    "score": "wrong"
+   },
+   "S5r": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 2.436188980937004,
+    "score": "na"
+   },
+   "S5c": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 2.0172768272459507,
+    "score": "na"
+   },
+   "S6-S1r": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 17.82141695730388,
+    "score": "wrong"
+   },
+   "S6-S1p": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 18.786475993692875,
+    "score": "wrong"
+   },
+   "S6-S2r": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 17.22513302229345,
+    "score": "wrong"
+   },
+   "S6-S2p": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 19.156837137416005,
+    "score": "wrong"
+   },
+   "S6-S4r": {
+    "verdict": "EQ",
+    "detail": "stage: trigsimp",
+    "ms": 16.844427911564708,
+    "score": "wrong"
+   },
+   "S6-S4p": {
+    "verdict": "EQ",
+    "detail": "stage: trigsimp",
+    "ms": 16.31026202812791,
+    "score": "wrong"
+   },
+   "S7": {
+    "verdict": "EQ_DOM",
+    "detail": "equal at samples, but at x=pi/2 one side is undefined",
+    "ms": 9.976230096071959,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "cos(x)*tan(x)",
+   "sin(x)"
+  ]
+ },
+ {
+  "step": {
+   "id": 20,
+   "topic": "sqrt of a square",
+   "before": "\\sqrt{x^2}",
+   "after": "x",
+   "kind": "expr",
+   "expected": "DOMAIN",
+   "why": "sqrt(x^2) = |x|, equal to x only for x >= 0. Equivalent under the restriction x >= 0 (real domain question)."
+  },
+  "parse": "ok",
+  "parse_ms": 56.30555283278227,
+  "cells": {
+   "S0": {
+    "verdict": "NEQ",
+    "detail": "structure differs (note: ANTLR output is already auto-evaluated and reordered)",
+    "ms": 2.435570117086172,
+    "score": "ok"
+   },
+   "S1": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=-x + sqrt(x**2) (non-zero is not a proof of NEQ)",
+    "ms": 11.226675007492304,
+    "score": "ok"
+   },
+   "S2": {
+    "verdict": "UND",
+    "detail": "equals=None",
+    "ms": 77.43622502312064,
+    "score": "und"
+   },
+   "S3r": {
+    "verdict": "NEQ",
+    "detail": "differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
+    "ms": 3.537605982273817,
+    "score": "ok"
+   },
+   "S3c": {
+    "verdict": "NEQ",
+    "detail": "differs at 2 of 2 points tried, e.g. 0.476571+1.4465j vs -0.476571-1.4465j",
+    "ms": 5.263532046228647,
+    "score": "ok"
+   },
+   "S4": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (complex). differs at 2 of 2 points tried, e.g. 0.476571+1.4465j vs -0.476571-1.4465j",
+    "ms": 5.20091294310987,
+    "score": "ok"
+   },
+   "S5r": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 2.152771921828389,
+    "score": "na"
+   },
+   "S5c": {
+    "verdict": "NA",
+    "detail": "no solution set for an expression",
+    "ms": 1.849018968641758,
+    "score": "na"
+   },
+   "S6-S1r": {
+    "verdict": "NEQ",
+    "detail": "simplify(A-B)=-x + Abs(x) (non-zero is not a proof of NEQ)",
+    "ms": 10.525810066610575,
+    "score": "ok"
+   },
+   "S6-S1p": {
+    "verdict": "EQ",
+    "detail": "simplify(A-B)=0",
+    "ms": 3.392681945115328,
+    "score": "wrong"
+   },
+   "S6-S2r": {
+    "verdict": "UND",
+    "detail": "equals=None",
+    "ms": 49.3089659139514,
+    "score": "und"
+   },
+   "S6-S2p": {
+    "verdict": "EQ",
+    "detail": "equals=True",
+    "ms": 3.1699510291218758,
+    "score": "wrong"
+   },
+   "S6-S4r": {
+    "verdict": "NEQ",
+    "detail": "stage: numeric reject (real). differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
+    "ms": 3.8481811061501503,
+    "score": "ok"
+   },
+   "S6-S4p": {
+    "verdict": "EQ",
+    "detail": "stage: structural",
+    "ms": 3.82593902759254,
+    "score": "wrong"
+   },
+   "S7": {
+    "verdict": "NEQ",
+    "detail": "numeric(real): differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
+    "ms": 3.2630418427288532,
+    "score": "ok"
+   }
+  },
+  "parsed": [
+   "sqrt(x**2)",
+   "x"
+  ]
+ }
+]
