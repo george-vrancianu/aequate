@@ -34,7 +34,7 @@ for (const N of SIZES) for (const P of PAGES) for (const L of LAYOUTS) {
   const b = child('measure.js', ['build', L, N, P])
   const full = child('measure.js', ['memfull', L, N, P])
   const page = child('measure.js', ['mempage', L, N, P])
-  results.pure.push({ layout: L, N, P, ...b, mem: { fullHeap: full.heapDelta, pageHeap: page.heapDelta } })
+  results.pure.push({ layout: L, N, P, ...b, mem: { fullHeap: full.heapDelta, pageHeap: page.heapDelta, fullExt: full.extDelta, pageExt: page.extDelta } })
   console.error(`pure ${L} N=${N} P=${P} done (${((Date.now() - t0) / 1000).toFixed(0)}s)`)
 }
 
@@ -73,8 +73,8 @@ md += '### Cold load, whole board (ms, median of 7 fresh docs; apply = decode + 
 md += '### Open a single page (ms, median; A must load the whole board, B = root doc + that subdoc, C = that doc only)\n\n'
 { const rows = []; for (const N of SIZES) for (const P of PAGES) rows.push([N, P, ...LAYOUTS.flatMap((L) => { const m = get(L, N, P).ms; return [ms(m.openPageApply), ms(m.openPageRead)] })]); table(['strokes', 'pages', ...H3(['apply', 'read page'])], rows) }
 
-md += '### Memory (heap used delta after gc, fresh child process; MB)\n\n'
-{ const rows = []; for (const N of SIZES) for (const P of PAGES) rows.push([N, P, ...LAYOUTS.flatMap((L) => [mb(get(L, N, P).mem.fullHeap), mb(get(L, N, P).mem.pageHeap)])]); table(['strokes', 'pages', ...H3(['whole board', 'one page'])], rows) }
+md += '### Memory (MB held after gc in a fresh child process: V8 heap / off-heap ArrayBuffers (stroke payload copies) / total; baseline taken before the update files were read, files freed before measuring)\n\n'
+{ const rows = []; for (const N of SIZES) for (const P of PAGES) rows.push([N, P, ...LAYOUTS.flatMap((L) => [`${mb(get(L, N, P).mem.fullHeap)} / ${mb(get(L, N, P).mem.fullExt)} / **${mb(get(L, N, P).mem.fullHeap + get(L, N, P).mem.fullExt)}**`, `${mb(get(L, N, P).mem.pageHeap)} / ${mb(get(L, N, P).mem.pageExt)} / **${mb(get(L, N, P).mem.pageHeap + get(L, N, P).mem.pageExt)}**`])]); table(['strokes', 'pages', ...H3(['whole board', 'one page'])], rows) }
 
 md += '### Hocuspocus over local WebSocket: fresh client sync\n\nTime from constructing the provider to the first `synced`, server loading the doc from SQLite each rep (median of 7). Board of A uses 5 page maps; C uses separate documents.\n\n'
 table(['strokes', 'layout', 'pages', 'what is synced', 'client sync ms', 'of which server load ms', 'strokes received'], results.hocuspocus.sync.map((s) => [s.N, s.layout, s.P, s.what, ms(s.ms), ms(s.serverLoadMs), s.strokesReceived]))

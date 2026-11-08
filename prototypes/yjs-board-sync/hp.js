@@ -103,11 +103,11 @@ export async function runHocuspocus(sizes = [1000, 3000, 5000, 10000]) {
       await sleep(150)
       const doc = new Y.Doc(); const prov = await connect(r.name, doc)
       await sleep(100)
-      const rng = mulberry32(N + 7), recs = [], e2e = [], upd = []
+      const extra = genStrokes(N + 12).slice(N, N + 12), recs = [], e2e = [], upd = []
       doc.on('update', (u, o) => { if (o === 'mine') upd.push(u.length) })
       for (let i = 0; i < 11; i++) {
         const sp = nextStore(r.name), t = performance.now()
-        doc.transact(() => r.map(doc).set('new' + i, pack(genStroke(rng))), 'mine')
+        doc.transact(() => r.map(doc).set('new' + i, extra[i].packed), 'mine')
         const rec = await sp
         recs.push(rec); e2e.push(performance.now() - t)
       }
@@ -156,8 +156,8 @@ export async function shutdown() {
 }
 
 if (import.meta.url === `file://${process.argv[1]}`) {
-  const r = await runHocuspocus(process.argv[2] ? process.argv.slice(2).map(Number) : [1000])
-  await shutdown()
+  let r
+  try { r = await runHocuspocus(process.argv[2] ? process.argv.slice(2).map(Number) : [1000]) } finally { await shutdown() }
   console.log(JSON.stringify(r, null, 1))
   process.exit(0)
 }

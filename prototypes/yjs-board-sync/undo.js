@@ -131,8 +131,9 @@ export function runUndoChecks(layout) {
     const k = A.keys()
     const removed = []; for (let i = 1; i <= 12; i++) if (!k.includes('0:a' + i)) removed.push('a' + i)
     check('cap drops the oldest: only a8..a12 undoable, a1..a7 stay; B strokes untouched', eq([...removed].sort(), ['a10', 'a11', 'a12', 'a8', 'a9']) && ['b1', 'b2', 'b3'].every((b) => k.includes('0:' + b)), 'removed=' + [...removed].sort().join(','))
+    check(`redo stack holds exactly the ${cap} capped entries after 12 undo attempts (redo entries come from the capped undo stack, so the redo trim cannot trigger separately)`, A.redoLen() <= cap && A.redoLen() === cap, 'redoLen=' + A.redoLen())
     for (let i = 0; i < 12; i++) A.redo()
-    check('redo stack also capped; full redo restores the 5 undone strokes', ['a8', 'a9', 'a10', 'a11', 'a12'].every((a) => A.keys().includes('0:' + a)), 'redoLen=' + A.redoLen())
+    check('full redo restores the 5 undone strokes', ['a8', 'a9', 'a10', 'a11', 'a12'].every((a) => A.keys().includes('0:' + a)), '')
   }
   // 5: undo of a stroke already erased by the other user
   {

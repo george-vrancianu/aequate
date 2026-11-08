@@ -9,15 +9,15 @@ Throwaway spike; see README.md. Terms follow GLOSSARY.md (board, page, stroke). 
 - Numbers are relative, not absolute: a fast desktop CPU, loopback network, no other clients. A school tablet or Chromebook will be several times slower on CPU, and real Wi-Fi dominates transfer time.
 - Strokes are synthetic (seeded RNG, 42): 50-300 points each (random-walk curve), x/y at 0.1 px and pressure packed as delta zigzag varints into one Uint8Array per stroke (about 540 bytes on average). Stored as `strokes: Y.Map<id, Uint8Array>`, ids 10 characters, one transaction per stroke (written once at pen-up). Strokes are spread evenly over pages in drawing order.
 - Layout A uses one root Y.Map per page (`strokes:0`, `strokes:1`, ...). B uses `pages: Y.Map<pageId, Y.Doc>`; for B and C "size" and "load" are summed over all documents, "open one page" for B is root doc + that subdoc.
-- Timings are the median of 7 repetitions after one discarded warm-up, each on a fresh Y.Doc, with a gc before every repetition. Memory is the heap-used delta after gc in a fresh child process (`--expose-gc`, heap capped at 4 GB). The whole run took about 66 s, host memory used peaked at about 15 GB (baseline 14 GB at start).
-- Not measured: erase/tombstone growth, awareness, real network, more than one Hocuspocus client per doc, devices slower than this machine. Update sizes in the Hocuspocus tables are from different random strokes than the pure-Yjs table, so they differ by tens of bytes.
+- Timings are the median of 7 repetitions after one discarded warm-up, each on a fresh Y.Doc, with a gc before every repetition. Memory is the delta of V8 heapUsed plus off-heap ArrayBuffers (Yjs copies each binary stroke into its own Uint8Array, which lives off-heap) after gc in a fresh child process (`--expose-gc`, heap capped at 4 GB); the baseline is taken before the update files are read and the files are freed before measuring. The whole run took about 66 s, host memory used peaked at about 15 GB (baseline 14 GB at start).
+- Not measured: erase/tombstone growth, awareness, real network, more than one Hocuspocus client per doc, devices slower than this machine. The Hocuspocus per-save tables add 10 extra strokes from the same generator and take the median of their update sizes; stroke length varies from 50 to 300 points, so that median differs from the pure-Yjs median over all strokes (for example 737 vs 571 bytes at 10k) and the write amplification ratios are approximate. The tables are from the final run; a second full run varied by up to about 15% on timings, and not at all on byte counts.
 
 ## Headline facts
 
 - A 10,000-stroke board is 5.6 MB as a Yjs update (v1); the packed payload alone is 5.4 MB, so Yjs overhead is about 4.5%. The v2 encoding saves only about 0.4% on this data (strokes are opaque binary).
 - One pen-up stroke is a roughly 570 byte update at any board size (about 30 bytes over the packed stroke). Update size does not grow with the board.
-- Decoding the whole 10k board: about 16 ms apply (v1) plus about 12 ms to unpack every stroke; heap about 5 MB. CPU and memory are not the constraint at this scale on this machine; the 5.6 MB transfer and the 5.6 MB whole-doc rewrite per Hocuspocus save are.
-- Hocuspocus rewrites the whole document on every save: 5.6 MB written (about 8,000 times the 694 byte stroke update) and about 14 ms of server time per save at 10k strokes in one doc. With 20 separate page documents it is 275 KB and 0.8 ms.
+- Decoding the whole 10k board: about 15 ms apply (v1) plus about 12 ms to unpack every stroke; memory held about 10 MB (5 MB V8 heap plus 5 MB off-heap stroke payloads). CPU and memory are not the constraint at this scale on this machine; the 5.6 MB transfer and the 5.6 MB whole-doc rewrite per Hocuspocus save are.
+- The stock Hocuspocus Database-extension pattern (which this prototype reproduces in its `onStoreDocument`) rewrites the whole document on every save: 5.6 MB written (about 7,700 times the 737 byte stroke update) and about 13 ms of server time per save at 10k strokes in one doc. With 20 separate page documents it is 276 KB and 0.7 ms.
 - Layout B cannot be served by Hocuspocus: subdocument contents never reach the server or other clients (concrete test below).
 - Per-user undo passes every check in A, B and C. A has one UndoManager across all pages; B and C need one UndoManager per page document plus an app-level stack for cross-page order.
 
@@ -35,7 +35,8 @@ Throwaway spike; see README.md. Terms follow GLOSSARY.md (board, page, stroke). 
 | new stroke after undo clears A redo stack | PASS | PASS | PASS |
 | undo stack capped at 5 after 12 strokes (stack length) | PASS | PASS | PASS |
 | cap drops the oldest: only a8..a12 undoable, a1..a7 stay; B strokes untouched | PASS | PASS | PASS |
-| redo stack also capped; full redo restores the 5 undone strokes | PASS | PASS | PASS |
+| redo stack holds exactly the 5 capped entries after 12 undo attempts (redo entries come from the capped undo stack, so the redo trim cannot trigger separately) | PASS | PASS | PASS |
+| full redo restores the 5 undone strokes | PASS | PASS | PASS |
 | A undo of a stroke B already erased does not throw, does not resurrect it, docs converge | PASS | PASS | PASS |
 | B undo of its erase restores A stroke a2 in both docs | PASS | PASS | PASS |
 | random run (25 seeds x 300 ops: draw/erase own/erase other's/undo/redo, delayed delivery, cap 8): undo never removed the other user's strokes | PASS | PASS | PASS |
@@ -85,52 +86,52 @@ Throwaway spike; see README.md. Terms follow GLOSSARY.md (board, page, stroke). 
 
 | strokes | pages | A apply v1 | A apply v2 | A read | B apply v1 | B apply v2 | B read | C apply v1 | C apply v2 | C read |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1000 | 1 | 2.73 | 1.85 | 1.36 | 2.64 | 2.02 | 1.19 | 3.02 | 2.33 | 1.19 |
-| 1000 | 5 | 2.62 | 1.76 | 1.21 | 2.69 | 1.92 | 1.15 | 3.37 | 2.69 | 1.22 |
-| 1000 | 20 | 2.61 | 1.81 | 1.20 | 2.98 | 2.35 | 1.22 | 4.55 | 4.18 | 1.27 |
-| 3000 | 1 | 6.88 | 5.02 | 3.87 | 6.13 | 4.25 | 3.70 | 7.53 | 6.04 | 4.08 |
-| 3000 | 5 | 6.19 | 4.32 | 3.69 | 6.18 | 4.11 | 3.77 | 7.71 | 5.72 | 3.66 |
-| 3000 | 20 | 6.32 | 4.50 | 3.67 | 6.89 | 4.68 | 3.65 | 9.33 | 7.55 | 3.95 |
-| 5000 | 1 | 9.88 | 6.25 | 6.15 | 10.0 | 6.09 | 6.32 | 11.3 | 7.96 | 5.97 |
-| 5000 | 5 | 9.48 | 6.16 | 6.30 | 8.53 | 5.91 | 6.25 | 11.5 | 8.15 | 6.24 |
-| 5000 | 20 | 9.69 | 5.84 | 6.65 | 9.26 | 6.11 | 6.23 | 11.1 | 9.39 | 7.00 |
-| 10000 | 1 | 16.3 | 9.74 | 12.0 | 16.2 | 9.02 | 11.9 | 18.4 | 9.67 | 12.1 |
-| 10000 | 5 | 15.2 | 9.05 | 12.2 | 14.3 | 10.1 | 12.3 | 16.9 | 10.5 | 12.9 |
-| 10000 | 20 | 15.3 | 8.17 | 12.0 | 14.3 | 8.24 | 12.4 | 17.9 | 13.5 | 12.4 |
+| 1000 | 1 | 2.74 | 1.90 | 1.18 | 2.81 | 2.01 | 1.20 | 3.31 | 2.42 | 1.26 |
+| 1000 | 5 | 2.74 | 1.91 | 1.34 | 3.09 | 2.20 | 1.42 | 3.93 | 2.81 | 1.29 |
+| 1000 | 20 | 2.88 | 1.90 | 1.17 | 3.00 | 2.25 | 1.20 | 4.46 | 3.97 | 1.27 |
+| 3000 | 1 | 6.47 | 4.50 | 3.55 | 6.22 | 4.43 | 3.61 | 7.69 | 4.95 | 3.56 |
+| 3000 | 5 | 6.27 | 4.36 | 3.71 | 6.29 | 4.48 | 3.67 | 7.88 | 5.83 | 3.63 |
+| 3000 | 20 | 6.34 | 4.82 | 3.70 | 7.02 | 4.48 | 3.66 | 9.12 | 7.56 | 4.17 |
+| 5000 | 1 | 9.32 | 5.94 | 6.34 | 10.5 | 6.57 | 6.30 | 11.7 | 6.79 | 6.31 |
+| 5000 | 5 | 9.37 | 6.10 | 6.21 | 8.85 | 6.04 | 6.41 | 11.2 | 8.30 | 6.30 |
+| 5000 | 20 | 9.79 | 6.04 | 6.33 | 9.18 | 6.14 | 6.24 | 11.9 | 10.6 | 6.63 |
+| 10000 | 1 | 15.7 | 9.66 | 12.0 | 17.1 | 9.87 | 12.1 | 17.1 | 11.9 | 12.2 |
+| 10000 | 5 | 15.8 | 8.78 | 12.1 | 14.6 | 11.0 | 12.4 | 19.4 | 12.5 | 12.8 |
+| 10000 | 20 | 15.0 | 8.03 | 12.1 | 13.7 | 8.74 | 12.2 | 18.0 | 14.0 | 12.3 |
 
 ### Open a single page (ms, median; A must load the whole board, B = root doc + that subdoc, C = that doc only)
 
 | strokes | pages | A apply | A read page | B apply | B read page | C apply | C read page |
 |---|---|---|---|---|---|---|---|
-| 1000 | 1 | 2.46 | 1.16 | 2.77 | 1.18 | 2.52 | 1.24 |
-| 1000 | 5 | 2.55 | 0.25 | 0.71 | 0.23 | 0.61 | 0.26 |
-| 1000 | 20 | 2.51 | 0.07 | 0.55 | 0.07 | 0.28 | 0.09 |
-| 3000 | 1 | 6.07 | 3.64 | 6.29 | 3.65 | 6.06 | 3.79 |
-| 3000 | 5 | 5.87 | 0.72 | 1.75 | 0.69 | 1.73 | 0.73 |
-| 3000 | 20 | 6.39 | 0.19 | 0.75 | 0.23 | 0.56 | 0.20 |
-| 5000 | 1 | 9.16 | 5.88 | 8.91 | 5.79 | 9.19 | 6.02 |
-| 5000 | 5 | 9.09 | 1.25 | 2.50 | 1.18 | 2.31 | 1.22 |
-| 5000 | 20 | 8.23 | 0.32 | 1.04 | 0.34 | 0.79 | 0.31 |
-| 10000 | 1 | 16.8 | 11.5 | 16.3 | 11.5 | 17.4 | 11.7 |
-| 10000 | 5 | 15.2 | 2.46 | 4.33 | 2.51 | 4.14 | 2.51 |
-| 10000 | 20 | 14.7 | 0.66 | 1.67 | 0.67 | 1.14 | 0.64 |
+| 1000 | 1 | 2.64 | 1.22 | 2.54 | 1.21 | 2.53 | 1.23 |
+| 1000 | 5 | 2.71 | 0.24 | 0.88 | 0.33 | 0.70 | 0.28 |
+| 1000 | 20 | 2.49 | 0.07 | 0.47 | 0.07 | 0.27 | 0.10 |
+| 3000 | 1 | 5.56 | 3.54 | 6.15 | 3.53 | 5.83 | 3.57 |
+| 3000 | 5 | 5.64 | 0.72 | 1.62 | 0.71 | 1.51 | 0.69 |
+| 3000 | 20 | 5.56 | 0.19 | 0.70 | 0.19 | 0.57 | 0.23 |
+| 5000 | 1 | 9.03 | 5.85 | 10.2 | 5.83 | 9.23 | 6.17 |
+| 5000 | 5 | 7.80 | 1.20 | 2.39 | 1.24 | 2.28 | 1.18 |
+| 5000 | 20 | 9.02 | 0.33 | 0.96 | 0.38 | 0.78 | 0.36 |
+| 10000 | 1 | 16.5 | 12.0 | 16.5 | 12.0 | 17.4 | 11.7 |
+| 10000 | 5 | 15.1 | 2.46 | 4.05 | 2.48 | 4.27 | 2.51 |
+| 10000 | 20 | 15.6 | 0.70 | 1.64 | 0.63 | 1.06 | 0.63 |
 
-### Memory (heap used delta after gc, fresh child process; MB)
+### Memory (MB held after gc in a fresh child process: V8 heap / off-heap ArrayBuffers (stroke payload copies) / total; baseline taken before the update files were read, files freed before measuring)
 
 | strokes | pages | A whole board | A one page | B whole board | B one page | C whole board | C one page |
 |---|---|---|---|---|---|---|---|
-| 1000 | 1 | 0.7 | 0.7 | 0.7 | 0.7 | 0.7 | 0.7 |
-| 1000 | 5 | 0.7 | 0.7 | 0.7 | 0.3 | 0.7 | 0.3 |
-| 1000 | 20 | 0.7 | 0.7 | 0.8 | 0.3 | 0.8 | 0.2 |
-| 3000 | 1 | 1.7 | 1.7 | 1.6 | 1.7 | 1.6 | 1.6 |
-| 3000 | 5 | 1.6 | 1.8 | 1.7 | 0.5 | 1.7 | 0.7 |
-| 3000 | 20 | 1.7 | 1.8 | 1.7 | 0.3 | 1.7 | 0.3 |
-| 5000 | 1 | 2.6 | 2.6 | 2.7 | 2.7 | 2.6 | 2.6 |
-| 5000 | 5 | 2.5 | 2.5 | 2.4 | 0.7 | 2.4 | 0.7 |
-| 5000 | 20 | 2.5 | 2.5 | 2.6 | 0.4 | 2.6 | 0.3 |
-| 10000 | 1 | 5.0 | 5.0 | 5.0 | 5.0 | 5.0 | 5.0 |
-| 10000 | 5 | 4.8 | 4.8 | 4.6 | 1.2 | 4.6 | 1.2 |
-| 10000 | 20 | 4.8 | 4.8 | 4.7 | 0.5 | 4.7 | 0.4 |
+| 1000 | 1 | 0.7 / 0.5 / **1.2** | 0.7 / 0.5 / **1.2** | 0.7 / 0.5 / **1.2** | 0.7 / 0.5 / **1.2** | 0.7 / 0.5 / **1.2** | 0.7 / 0.5 / **1.2** |
+| 1000 | 5 | 0.7 / 0.5 / **1.2** | 0.7 / 0.5 / **1.2** | 0.7 / 0.5 / **1.2** | 0.3 / 0.1 / **0.4** | 0.7 / 0.5 / **1.2** | 0.3 / 0.1 / **0.4** |
+| 1000 | 20 | 0.7 / 0.5 / **1.2** | 0.7 / 0.5 / **1.2** | 0.8 / 0.5 / **1.3** | 0.3 / 0.0 / **0.3** | 0.8 / 0.5 / **1.3** | 0.2 / 0.0 / **0.2** |
+| 3000 | 1 | 1.6 / 1.5 / **3.1** | 1.7 / 1.5 / **3.3** | 1.7 / 1.5 / **3.3** | 1.7 / 1.5 / **3.3** | 1.7 / 1.5 / **3.3** | 1.7 / 1.5 / **3.2** |
+| 3000 | 5 | 1.7 / 1.5 / **3.2** | 1.8 / 1.5 / **3.3** | 1.7 / 1.5 / **3.2** | 0.5 / 0.3 / **0.8** | 1.7 / 1.5 / **3.2** | 0.5 / 0.3 / **0.8** |
+| 3000 | 20 | 1.8 / 1.5 / **3.3** | 1.8 / 1.5 / **3.3** | 1.8 / 1.5 / **3.3** | 0.3 / 0.1 / **0.4** | 1.7 / 1.5 / **3.3** | 0.3 / 0.1 / **0.3** |
+| 5000 | 1 | 2.6 / 2.6 / **5.2** | 2.6 / 2.6 / **5.2** | 2.7 / 2.6 / **5.2** | 2.7 / 2.6 / **5.2** | 2.6 / 2.6 / **5.2** | 2.6 / 2.6 / **5.2** |
+| 5000 | 5 | 2.5 / 2.6 / **5.1** | 2.5 / 2.6 / **5.1** | 2.4 / 2.6 / **5.0** | 0.7 / 0.5 / **1.2** | 2.4 / 2.6 / **5.0** | 0.7 / 0.5 / **1.2** |
+| 5000 | 20 | 2.4 / 2.6 / **5.0** | 2.4 / 2.6 / **5.0** | 2.6 / 2.6 / **5.1** | 0.4 / 0.1 / **0.5** | 2.6 / 2.6 / **5.1** | 0.3 / 0.1 / **0.4** |
+| 10000 | 1 | 5.0 / 5.1 / **10.2** | 5.0 / 5.1 / **10.2** | 5.1 / 5.1 / **10.2** | 5.0 / 5.1 / **10.2** | 5.0 / 5.1 / **10.2** | 5.0 / 5.1 / **10.2** |
+| 10000 | 5 | 4.8 / 5.1 / **9.9** | 4.8 / 5.1 / **9.9** | 4.6 / 5.1 / **9.8** | 1.2 / 1.0 / **2.2** | 4.6 / 5.1 / **9.8** | 1.2 / 1.0 / **2.2** |
+| 10000 | 20 | 4.8 / 5.1 / **9.9** | 4.8 / 5.1 / **9.9** | 4.7 / 5.1 / **9.9** | 0.5 / 0.2 / **0.7** | 4.7 / 5.1 / **9.8** | 0.4 / 0.2 / **0.7** |
 
 ### Hocuspocus over local WebSocket: fresh client sync
 
@@ -138,22 +139,22 @@ Time from constructing the provider to the first `synced`, server loading the do
 
 | strokes | layout | pages | what is synced | client sync ms | of which server load ms | strokes received |
 |---|---|---|---|---|---|---|
-| 1000 | A | 5 | whole board (one doc) | 12.4 | 2.04 | 1000 |
-| 1000 | C | 5 | one page of 5 (one doc) | 4.97 | 0.51 | 200 |
-| 1000 | C | 20 | one page of 20 (one doc) | 3.74 | 0.21 | 50 |
-| 1000 | C | 20 | all 20 pages (20 docs, one socket) | 20.2 | 2.77 | 1000 |
-| 3000 | A | 5 | whole board (one doc) | 19.0 | 5.36 | 3000 |
-| 3000 | C | 5 | one page of 5 (one doc) | 6.89 | 1.22 | 600 |
-| 3000 | C | 20 | one page of 20 (one doc) | 4.44 | 0.39 | 150 |
-| 3000 | C | 20 | all 20 pages (20 docs, one socket) | 36.6 | 5.72 | 3000 |
-| 5000 | A | 5 | whole board (one doc) | 32.9 | 9.28 | 5000 |
-| 5000 | C | 5 | one page of 5 (one doc) | 9.64 | 2.09 | 1000 |
-| 5000 | C | 20 | one page of 20 (one doc) | 4.91 | 0.62 | 250 |
-| 5000 | C | 20 | all 20 pages (20 docs, one socket) | 39.7 | 8.78 | 5000 |
-| 10000 | A | 5 | whole board (one doc) | 71.3 | 19.0 | 10000 |
-| 10000 | C | 5 | one page of 5 (one doc) | 12.9 | 3.25 | 2000 |
-| 10000 | C | 20 | one page of 20 (one doc) | 6.27 | 1.05 | 500 |
-| 10000 | C | 20 | all 20 pages (20 docs, one socket) | 98.9 | 16.2 | 10000 |
+| 1000 | A | 5 | whole board (one doc) | 11.7 | 2.53 | 1000 |
+| 1000 | C | 5 | one page of 5 (one doc) | 5.13 | 0.49 | 200 |
+| 1000 | C | 20 | one page of 20 (one doc) | 3.58 | 0.22 | 50 |
+| 1000 | C | 20 | all 20 pages (20 docs, one socket) | 19.4 | 2.69 | 1000 |
+| 3000 | A | 5 | whole board (one doc) | 24.4 | 6.24 | 3000 |
+| 3000 | C | 5 | one page of 5 (one doc) | 7.26 | 1.22 | 600 |
+| 3000 | C | 20 | one page of 20 (one doc) | 4.35 | 0.41 | 150 |
+| 3000 | C | 20 | all 20 pages (20 docs, one socket) | 30.1 | 5.43 | 3000 |
+| 5000 | A | 5 | whole board (one doc) | 33.2 | 9.34 | 5000 |
+| 5000 | C | 5 | one page of 5 (one doc) | 10.2 | 2.20 | 1000 |
+| 5000 | C | 20 | one page of 20 (one doc) | 5.05 | 0.69 | 250 |
+| 5000 | C | 20 | all 20 pages (20 docs, one socket) | 54.7 | 8.33 | 5000 |
+| 10000 | A | 5 | whole board (one doc) | 73.8 | 19.8 | 10000 |
+| 10000 | C | 5 | one page of 5 (one doc) | 14.4 | 3.80 | 2000 |
+| 10000 | C | 20 | one page of 20 (one doc) | 7.09 | 1.04 | 500 |
+| 10000 | C | 20 | all 20 pages (20 docs, one socket) | 96.2 | 16.0 | 10000 |
 
 ### Hocuspocus: per-save cost after adding one stroke (SQLite whole-doc upsert)
 
@@ -161,18 +162,18 @@ onStoreDocument = `encodeStateAsUpdate` of the whole doc + write. "Stroke to sto
 
 | strokes | layout | pages | doc | bytes written per save | bytes of the stroke update | write amplification | encode ms | sqlite write ms | onStoreDocument ms | stroke to stored ms |
 |---|---|---|---|---|---|---|---|---|---|---|
-| 1000 | A | 5 | whole board (one doc) | 559478 | 704.5 | 794x | 0.72 | 0.71 | 1.44 | 22.6 |
-| 1000 | C | 5 | one page of 5 | 111759 | 702.5 | 159x | 0.20 | 0.23 | 0.44 | 21.5 |
-| 1000 | C | 20 | one page of 20 | 31921 | 702.5 | 45x | 0.09 | 0.17 | 0.26 | 20.8 |
-| 3000 | A | 5 | whole board (one doc) | 1701318.5 | 622 | 2735x | 1.53 | 1.73 | 3.24 | 24.1 |
-| 3000 | C | 5 | one page of 5 | 332993.5 | 621 | 536x | 0.49 | 0.41 | 0.92 | 21.9 |
-| 3000 | C | 20 | one page of 20 | 83572.5 | 621 | 135x | 0.15 | 0.21 | 0.37 | 21.3 |
-| 5000 | A | 5 | whole board (one doc) | 2811029.5 | 665.5 | 4224x | 4.07 | 4.12 | 8.17 | 28.5 |
-| 5000 | C | 5 | one page of 5 | 557816.5 | 663.5 | 841x | 0.69 | 0.59 | 1.29 | 22.2 |
-| 5000 | C | 20 | one page of 20 | 140748.5 | 663.5 | 212x | 0.17 | 0.27 | 0.45 | 21.5 |
-| 10000 | A | 5 | whole board (one doc) | 5645920 | 694.5 | 8129x | 4.34 | 9.42 | 13.8 | 34.5 |
-| 10000 | C | 5 | one page of 5 | 1126397 | 692.5 | 1627x | 1.08 | 1.11 | 2.15 | 22.8 |
-| 10000 | C | 20 | one page of 20 | 275168 | 692.5 | 397x | 0.39 | 0.39 | 0.79 | 21.7 |
+| 1000 | A | 5 | whole board (one doc) | 559053 | 526 | 1063x | 0.70 | 0.66 | 1.60 | 22.7 |
+| 1000 | C | 5 | one page of 5 | 111334 | 524 | 212x | 0.21 | 0.23 | 0.44 | 20.8 |
+| 1000 | C | 20 | one page of 20 | 31496 | 524 | 60x | 0.10 | 0.16 | 0.26 | 21.2 |
+| 3000 | A | 5 | whole board (one doc) | 1701921 | 668.5 | 2546x | 1.82 | 2.51 | 4.31 | 24.8 |
+| 3000 | C | 5 | one page of 5 | 333595 | 666.5 | 501x | 0.44 | 0.39 | 0.84 | 21.3 |
+| 3000 | C | 20 | one page of 20 | 84174 | 666.5 | 126x | 0.16 | 0.20 | 0.37 | 21.4 |
+| 5000 | A | 5 | whole board (one doc) | 2810137 | 603.5 | 4656x | 3.49 | 4.86 | 8.53 | 29.2 |
+| 5000 | C | 5 | one page of 5 | 556924 | 601.5 | 926x | 0.70 | 0.57 | 1.30 | 22.4 |
+| 5000 | C | 20 | one page of 20 | 139856 | 601.5 | 233x | 0.23 | 0.27 | 0.50 | 21.4 |
+| 10000 | A | 5 | whole board (one doc) | 5646957 | 737.5 | 7657x | 5.55 | 7.01 | 12.7 | 34.3 |
+| 10000 | C | 5 | one page of 5 | 1127433 | 734.5 | 1535x | 1.20 | 1.12 | 2.35 | 22.8 |
+| 10000 | C | 20 | one page of 20 | 276205 | 735.5 | 376x | 0.39 | 0.34 | 0.74 | 21.7 |
 
 ### Hocuspocus: layout B (subdocuments)
 
@@ -192,7 +193,7 @@ Notes on the tables:
 
 - Hocuspocus layout B test: a client wrote 100 strokes into a subdocument inside the board document and the server stored a 33 byte root document. A second client sees the subdocument entry (the guid) but 0 strokes, also after `subdoc.load()`. The 57,053 bytes of subdocument content never left the first client. Only when each subdocument gets its own `HocuspocusProvider` with its own document name (the guid) do the 100 strokes arrive, and that is layout C with an extra index document.
 - Hocuspocus "of which server load ms" is the extension's SQLite read plus `applyUpdate` into the server-side document. The rest of the client sync time is transfer, decode on the client and the sync protocol round trips.
-- Sync of "all 20 pages" in C (20 documents multiplexed on one socket) is slower than one A document of the same strokes (99 ms vs 71 ms at 10k): per-document protocol and server-load overhead adds up. C wins only when pages are opened on demand.
+- Sync of "all 20 pages" in C (20 documents multiplexed on one socket) is slower than one A document of the same strokes (96 ms vs 74 ms at 10k): per-document protocol and server-load overhead adds up. C wins only when pages are opened on demand.
 - Stroke to stored includes the 20 ms debounce configured on the server; the real production debounce would be longer.
 
 ## Recommendation
@@ -200,8 +201,8 @@ Notes on the tables:
 Input for the grilling "Decide sync server, board document structure, and API/auth stack". This follows from the numbers above; the numbers are relative to a fast machine.
 
 1. Rule out B (subdocument per page) for Hocuspocus. Hocuspocus does not sync subdocuments, so the only working form is one provider per subdocument, which is layout C plus an index document and more lifecycle to manage. At the pure-Yjs level B performs the same as C (size, load, memory all within noise), so it has no advantage to justify the extra moving parts. Also, a root-doc UndoManager does not see subdocument edits.
-2. Layout A (one Y.Doc per board) is sufficient on size, load and memory up to 10k strokes. A 10k board is 5.6 MB, 16 ms to apply, 5 MB of heap; 3k strokes is 1.7 MB. Per-user undo across pages comes for free with one UndoManager over all page maps, and one document means one auth check, one permission/read-only decision (the glossary's shared board and per-student private board each map to one document), one persistence unit, and atomic multi-page operations (for example moving a selection between pages in one transaction).
-3. The cost of A is not CPU, it is bytes: opening any page transfers the whole board (5.6 MB at 10k strokes, about 2 s at 20 Mbit/s, not measured), and Hocuspocus rewrites the whole document on every save (5.6 MB, 14 ms per save at 10k). Mitigations that keep A: a long `debounce`/`maxDebounce` on onStoreDocument; a custom store that appends the incremental `update` from `onChange` (the payload carries it) and compacts periodically instead of rewriting; capping stroke size. The incremental-log idea was not tested in this spike.
-4. Layout C (one Hocuspocus document per page) is the escape hatch if boards routinely pass roughly 5k-10k strokes or weak devices/Wi-Fi make a whole-board first load too slow. It cuts open-a-page sync from 71 ms to 6 ms and per-save writes from 5.6 MB to 275 KB at 10k strokes over 20 pages (about 20x less, in proportion to the page count), and it gives page-level load on demand. Its costs: undo needs an app-level stack of page ids over one UndoManager per page (tested and works, but the cap and the global order are then app code, and an undo cannot span pages that are not loaded), no atomic cross-page operations (moving ink between pages is two transactions in two documents), one authorization and one read-only decision per page document, N websocket documents to open when a student views all pages (99 ms vs 71 ms for 10k strokes), and a board-level index (page list and order) that has to live somewhere, in the database or an index document.
-5. Suggested path: start with A, with each page as its own root map and strokes as `id -> packed bytes` so a later split into C is a mechanical copy per page and the stroke format stays the same. Treat the typical stroke count per board as the open question for the grill: if a lesson board is typically under about 3k strokes (under 2 MB), A has no real downside; if boards of 10k strokes are normal, choose C up front, because migrating live boards later is the expensive part.
+2. Layout A (one Y.Doc per board) is sufficient on size, load and memory up to 10k strokes. A 10k board is 5.6 MB, about 15 ms to apply, about 10 MB held in memory (heap plus off-heap payloads); 3k strokes is 1.7 MB. Per-user undo across pages comes for free with one UndoManager over all page maps, and one document means one auth check, one permission/read-only decision (the glossary's shared board and per-student private board each map to one document), one persistence unit, and atomic multi-page operations (for example moving a selection between pages in one transaction).
+3. The cost of A is not CPU, it is bytes: opening any page transfers the whole board (5.6 MB at 10k strokes, about 2 s at 20 Mbit/s, not measured), and the stock Database-extension pattern rewrites the whole document on every save (5.6 MB, about 13 ms per save at 10k). Mitigations that keep A: a long `debounce`/`maxDebounce` on onStoreDocument; a custom store that appends the incremental `update` from `onChange` (the payload carries it) and compacts periodically instead of rewriting; capping stroke size. The incremental-log idea was not tested in this spike.
+4. Layout C (one Hocuspocus document per page) is the escape hatch if boards routinely pass roughly 5k-10k strokes or weak devices/Wi-Fi make a whole-board first load too slow. It cuts open-a-page sync from 74 ms to 7 ms and per-save writes from 5.6 MB to 276 KB at 10k strokes over 20 pages (about 20x less, in proportion to the page count), and it gives page-level load on demand. Its costs: undo needs an app-level stack of page ids over one UndoManager per page (tested and works, but the cap and the global order are then app code, and an undo cannot span pages that are not loaded), no atomic cross-page operations (moving ink between pages is two transactions in two documents), one authorization and one read-only decision per page document, N websocket documents to open when a student views all pages (96 ms vs 74 ms for 10k strokes), and a board-level index (page list and order) that has to live somewhere, in the database or an index document.
+5. Suggested path (default: A unless the grill establishes that 10k-stroke boards are normal): start with A, with each page as its own root map and strokes as `id -> packed bytes` so a later split into C is a mechanical copy per page and the stroke format stays the same. Treat the typical stroke count per board as the open question for the grill: if a lesson board is typically under about 3k strokes (under 2 MB), A has no real downside; if boards of 10k strokes are normal, choose C up front, because migrating live boards later is the expensive part.
 6. Independent of layout: write each stroke once at pen-up as one packed value (about 570 bytes per update, 4.5% overhead), keep live preview out of the document (awareness), and keep the UndoManager `trackedOrigins` per user with a stack cap (implemented here by trimming `undoStack`/`redoStack` on `stack-item-added`; the cap check passes). Note that the cap drops the oldest entry silently; the UI should treat undo depth as limited.

@@ -92,9 +92,9 @@ if (mode === 'build') {
   out.ms = t
   console.log(JSON.stringify(out))
 } else {
-  // memory: heap used delta of holding freshly loaded docs
-  let files = readFiles()
+  // memory: delta of heapUsed and arrayBuffers (stroke payloads live off-heap) versus a baseline taken BEFORE the files are read
   gc(); const m0 = process.memoryUsage()
+  let files = readFiles()
   const held = mode === 'memfull' ? loadFull(files) : loadPage0(files)
   files = null
   gc(); const m1 = process.memoryUsage()
