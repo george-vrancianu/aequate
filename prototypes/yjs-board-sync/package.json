@@ -1,0 +1,17 @@
+{
+  "name": "yjs-board-sync-prototype",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "start": "node --max-old-space-size=4096 --expose-gc run.js",
+    "undo": "node undo.js",
+    "hocuspocus": "node --max-old-space-size=4096 hp.js 1000"
+  },
+  "dependencies": {
+    "@hocuspocus/provider": "^4.0.0",
+    "@hocuspocus/server": "^4.0.0",
+    "ws": "^8.18.0",
+    "yjs": "~13.6.33"
+  }
+}

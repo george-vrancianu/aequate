@@ -1,0 +1,1733 @@
+{
+ "machine": {
+  "cpu": "AMD Ryzen 9 5950X 16-Core Processor",
+  "cores": 32,
+  "node": "v24.21.0",
+  "kernel": "6.18.33.2-microsoft-standard-WSL2",
+  "totalMemGB": 31.3
+ },
+ "undo": {
+  "A": {
+   "checks": [
+    {
+     "name": "A undo x2 removes only A last two strokes (a4,a3), before sync",
+     "pass": true,
+     "detail": "0:a1,0:b1,0:b3,0:b4,1:a2,1:b2"
+    },
+    {
+     "name": "after sync B still has all of B strokes; B view equals A view",
+     "pass": true,
+     "detail": "0:a1,0:b1,0:b3,0:b4,1:a2,1:b2"
+    },
+    {
+     "name": "B undo removes only b4, all A strokes remain",
+     "pass": true,
+     "detail": "0:a1,0:b1,0:b3,1:a2,1:b2"
+    },
+    {
+     "name": "A redo brings back a3 (not a4) in both docs",
+     "pass": true,
+     "detail": "0:a1,0:a3,0:b1,0:b3,1:a2,1:b2"
+    },
+    {
+     "name": "A second redo brings back a4; B stroke b4 stays undone",
+     "pass": true,
+     "detail": "0:a1,0:a3,0:b1,0:b3,1:a2,1:b2,2:a4"
+    },
+    {
+     "name": "new stroke after undo clears A redo stack",
+     "pass": true,
+     "detail": "redoLen=0"
+    },
+    {
+     "name": "undo stack capped at 5 after 12 strokes (stack length)",
+     "pass": true,
+     "detail": "undoLen=5 pageUndoLen=5"
+    },
+    {
+     "name": "cap drops the oldest: only a8..a12 undoable, a1..a7 stay; B strokes untouched",
+     "pass": true,
+     "detail": "removed=a10,a11,a12,a8,a9"
+    },
+    {
+     "name": "redo stack also capped; full redo restores the 5 undone strokes",
+     "pass": true,
+     "detail": "redoLen=0"
+    },
+    {
+     "name": "A undo of a stroke B already erased does not throw, does not resurrect it, docs converge",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "B undo of its erase restores A stroke a2 in both docs",
+     "pass": true,
+     "detail": "0:a2"
+    },
+    {
+     "name": "random run (25 seeds x 300 ops: draw/erase own/erase other's/undo/redo, delayed delivery, cap 8): undo never removed the other user's strokes",
+     "pass": true,
+     "detail": "violations=0 over 7500 ops"
+    },
+    {
+     "name": "random run: both clients converge (identical state vectors and stroke bytes) after final exchange",
+     "pass": true,
+     "detail": "non-converged=0"
+    }
+   ],
+   "notes": [
+    "One UndoManager spans all pages natively; undo order across pages is automatic."
+   ]
+  },
+  "B": {
+   "checks": [
+    {
+     "name": "A undo x2 removes only A last two strokes (a4,a3), before sync",
+     "pass": true,
+     "detail": "0:a1,0:b1,0:b3,0:b4,1:a2,1:b2"
+    },
+    {
+     "name": "after sync B still has all of B strokes; B view equals A view",
+     "pass": true,
+     "detail": "0:a1,0:b1,0:b3,0:b4,1:a2,1:b2"
+    },
+    {
+     "name": "B undo removes only b4, all A strokes remain",
+     "pass": true,
+     "detail": "0:a1,0:b1,0:b3,1:a2,1:b2"
+    },
+    {
+     "name": "A redo brings back a3 (not a4) in both docs",
+     "pass": true,
+     "detail": "0:a1,0:a3,0:b1,0:b3,1:a2,1:b2"
+    },
+    {
+     "name": "A second redo brings back a4; B stroke b4 stays undone",
+     "pass": true,
+     "detail": "0:a1,0:a3,0:b1,0:b3,1:a2,1:b2,2:a4"
+    },
+    {
+     "name": "new stroke after undo clears A redo stack",
+     "pass": true,
+     "detail": "redoLen=0"
+    },
+    {
+     "name": "undo stack capped at 5 after 12 strokes (stack length)",
+     "pass": true,
+     "detail": "undoLen=5 pageUndoLen=5"
+    },
+    {
+     "name": "cap drops the oldest: only a8..a12 undoable, a1..a7 stay; B strokes untouched",
+     "pass": true,
+     "detail": "removed=a10,a11,a12,a8,a9"
+    },
+    {
+     "name": "redo stack also capped; full redo restores the 5 undone strokes",
+     "pass": true,
+     "detail": "redoLen=0"
+    },
+    {
+     "name": "A undo of a stroke B already erased does not throw, does not resurrect it, docs converge",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "B undo of its erase restores A stroke a2 in both docs",
+     "pass": true,
+     "detail": "0:a2"
+    },
+    {
+     "name": "random run (25 seeds x 300 ops: draw/erase own/erase other's/undo/redo, delayed delivery, cap 8): undo never removed the other user's strokes",
+     "pass": true,
+     "detail": "violations=0 over 7500 ops"
+    },
+    {
+     "name": "random run: both clients converge (identical state vectors and stroke bytes) after final exchange",
+     "pass": true,
+     "detail": "non-converged=0"
+    },
+    {
+     "name": "B: UndoManager on the ROOT doc scope does not see subdoc edits (undoStack stays 0); needs one UndoManager per subdoc",
+     "pass": true,
+     "detail": "rootUM undoStack=0"
+    },
+    {
+     "name": "B: UndoManager scoped to the subdoc map works for that page",
+     "pass": true,
+     "detail": ""
+    }
+   ],
+   "notes": [
+    "No single UndoManager spans several Y.Docs (an UndoManager binds to one doc: typeScope[0].doc). Cross-page undo order needs an app-level stack of page ids on top of one UndoManager per page (done in this test; global ordering and the cap are then app responsibilities)."
+   ]
+  },
+  "C": {
+   "checks": [
+    {
+     "name": "A undo x2 removes only A last two strokes (a4,a3), before sync",
+     "pass": true,
+     "detail": "0:a1,0:b1,0:b3,0:b4,1:a2,1:b2"
+    },
+    {
+     "name": "after sync B still has all of B strokes; B view equals A view",
+     "pass": true,
+     "detail": "0:a1,0:b1,0:b3,0:b4,1:a2,1:b2"
+    },
+    {
+     "name": "B undo removes only b4, all A strokes remain",
+     "pass": true,
+     "detail": "0:a1,0:b1,0:b3,1:a2,1:b2"
+    },
+    {
+     "name": "A redo brings back a3 (not a4) in both docs",
+     "pass": true,
+     "detail": "0:a1,0:a3,0:b1,0:b3,1:a2,1:b2"
+    },
+    {
+     "name": "A second redo brings back a4; B stroke b4 stays undone",
+     "pass": true,
+     "detail": "0:a1,0:a3,0:b1,0:b3,1:a2,1:b2,2:a4"
+    },
+    {
+     "name": "new stroke after undo clears A redo stack",
+     "pass": true,
+     "detail": "redoLen=0"
+    },
+    {
+     "name": "undo stack capped at 5 after 12 strokes (stack length)",
+     "pass": true,
+     "detail": "undoLen=5 pageUndoLen=5"
+    },
+    {
+     "name": "cap drops the oldest: only a8..a12 undoable, a1..a7 stay; B strokes untouched",
+     "pass": true,
+     "detail": "removed=a10,a11,a12,a8,a9"
+    },
+    {
+     "name": "redo stack also capped; full redo restores the 5 undone strokes",
+     "pass": true,
+     "detail": "redoLen=0"
+    },
+    {
+     "name": "A undo of a stroke B already erased does not throw, does not resurrect it, docs converge",
+     "pass": true,
+     "detail": ""
+    },
+    {
+     "name": "B undo of its erase restores A stroke a2 in both docs",
+     "pass": true,
+     "detail": "0:a2"
+    },
+    {
+     "name": "random run (25 seeds x 300 ops: draw/erase own/erase other's/undo/redo, delayed delivery, cap 8): undo never removed the other user's strokes",
+     "pass": true,
+     "detail": "violations=0 over 7500 ops"
+    },
+    {
+     "name": "random run: both clients converge (identical state vectors and stroke bytes) after final exchange",
+     "pass": true,
+     "detail": "non-converged=0"
+    }
+   ],
+   "notes": [
+    "No single UndoManager spans several Y.Docs (an UndoManager binds to one doc: typeScope[0].doc). Cross-page undo order needs an app-level stack of page ids on top of one UndoManager per page (done in this test; global ordering and the cap are then app responsibilities)."
+   ]
+  }
+ },
+ "pure": [
+  {
+   "layout": "A",
+   "N": 1000,
+   "P": 1,
+   "rawPayloadBytes": 530912,
+   "sizes": {
+    "v1": 555919,
+    "v2": 553936,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": null,
+    "pageV2": null
+   },
+   "buildMs": 21.955568999999997,
+   "update": {
+    "mean": 562.784,
+    "median": 554.5,
+    "p95": 922,
+    "n": 1000,
+    "avgStrokeBytes": 530.912
+   },
+   "ms": {
+    "applyFullV1": 2.725463000000019,
+    "applyFullV2": 1.8518139999999903,
+    "readFull": 1.3611680000000206,
+    "openPageApply": 2.463207999999952,
+    "openPageRead": 1.162193000000002
+   },
+   "mem": {
+    "fullHeap": 761984,
+    "pageHeap": 741672
+   }
+  },
+  {
+   "layout": "B",
+   "N": 1000,
+   "P": 1,
+   "rawPayloadBytes": 530912,
+   "sizes": {
+    "v1": 553949,
+    "v2": 551977,
+    "rootV1": 30,
+    "rootV2": 41,
+    "pageV1": 553919,
+    "pageV2": 551936
+   },
+   "buildMs": 20.631881000000007,
+   "update": {
+    "mean": 560.784,
+    "median": 552.5,
+    "p95": 920,
+    "n": 1000,
+    "avgStrokeBytes": 530.912
+   },
+   "ms": {
+    "applyFullV1": 2.6350020000000143,
+    "applyFullV2": 2.0161239999999907,
+    "readFull": 1.188333,
+    "openPageApply": 2.7719599999999787,
+    "openPageRead": 1.1836930000000052
+   },
+   "mem": {
+    "fullHeap": 743176,
+    "pageHeap": 703392
+   }
+  },
+  {
+   "layout": "C",
+   "N": 1000,
+   "P": 1,
+   "rawPayloadBytes": 530912,
+   "sizes": {
+    "v1": 553919,
+    "v2": 551936,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": 553919,
+    "pageV2": 551936
+   },
+   "buildMs": 19.884049999999988,
+   "update": {
+    "mean": 560.784,
+    "median": 552.5,
+    "p95": 920,
+    "n": 1000,
+    "avgStrokeBytes": 530.912
+   },
+   "ms": {
+    "applyFullV1": 3.016100999999992,
+    "applyFullV2": 2.329135000000008,
+    "readFull": 1.1936719999999923,
+    "openPageApply": 2.517905999999982,
+    "openPageRead": 1.2400299999999902
+   },
+   "mem": {
+    "fullHeap": 691720,
+    "pageHeap": 740928
+   }
+  },
+  {
+   "layout": "A",
+   "N": 1000,
+   "P": 5,
+   "rawPayloadBytes": 530912,
+   "sizes": {
+    "v1": 555919,
+    "v2": 553936,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": null,
+    "pageV2": null
+   },
+   "buildMs": 21.037898,
+   "update": {
+    "mean": 562.784,
+    "median": 554.5,
+    "p95": 922,
+    "n": 1000,
+    "avgStrokeBytes": 530.912
+   },
+   "ms": {
+    "applyFullV1": 2.621516999999983,
+    "applyFullV2": 1.7629770000000065,
+    "readFull": 1.205775000000017,
+    "openPageApply": 2.5520759999999996,
+    "openPageRead": 0.2536479999999983
+   },
+   "mem": {
+    "fullHeap": 701056,
+    "pageHeap": 749352
+   }
+  },
+  {
+   "layout": "B",
+   "N": 1000,
+   "P": 5,
+   "rawPayloadBytes": 530912,
+   "sizes": {
+    "v1": 554073,
+    "v2": 552151,
+    "rootV1": 126,
+    "rootV2": 129,
+    "pageV1": 110924,
+    "pageV2": 110539
+   },
+   "buildMs": 22.241237999999996,
+   "update": {
+    "mean": 560.272,
+    "median": 551.5,
+    "p95": 919,
+    "n": 1000,
+    "avgStrokeBytes": 530.912
+   },
+   "ms": {
+    "applyFullV1": 2.689275000000009,
+    "applyFullV2": 1.9182639999999935,
+    "readFull": 1.1463530000000048,
+    "openPageApply": 0.7093279999999709,
+    "openPageRead": 0.2308959999999729
+   },
+   "mem": {
+    "fullHeap": 756888,
+    "pageHeap": 315280
+   }
+  },
+  {
+   "layout": "C",
+   "N": 1000,
+   "P": 5,
+   "rawPayloadBytes": 530912,
+   "sizes": {
+    "v1": 553947,
+    "v2": 552022,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": 110924,
+    "pageV2": 110539
+   },
+   "buildMs": 21.700277,
+   "update": {
+    "mean": 560.272,
+    "median": 551.5,
+    "p95": 919,
+    "n": 1000,
+    "avgStrokeBytes": 530.912
+   },
+   "ms": {
+    "applyFullV1": 3.3739960000000053,
+    "applyFullV2": 2.6853969999999947,
+    "readFull": 1.2227069999999571,
+    "openPageApply": 0.6063040000000228,
+    "openPageRead": 0.26424800000000914
+   },
+   "mem": {
+    "fullHeap": 752768,
+    "pageHeap": 290720
+   }
+  },
+  {
+   "layout": "A",
+   "N": 1000,
+   "P": 20,
+   "rawPayloadBytes": 530912,
+   "sizes": {
+    "v1": 556419,
+    "v2": 553438,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": null,
+    "pageV2": null
+   },
+   "buildMs": 20.660235,
+   "update": {
+    "mean": 563.284,
+    "median": 554.5,
+    "p95": 922,
+    "n": 1000,
+    "avgStrokeBytes": 530.912
+   },
+   "ms": {
+    "applyFullV1": 2.610775999999987,
+    "applyFullV2": 1.8147519999999986,
+    "readFull": 1.1985520000000065,
+    "openPageApply": 2.5093749999999773,
+    "openPageRead": 0.07321799999999712
+   },
+   "mem": {
+    "fullHeap": 709896,
+    "pageHeap": 766984
+   }
+  },
+  {
+   "layout": "B",
+   "N": 1000,
+   "P": 20,
+   "rawPayloadBytes": 530912,
+   "sizes": {
+    "v1": 554538,
+    "v2": 552813,
+    "rootV1": 506,
+    "rootV2": 481,
+    "pageV1": 27580,
+    "pageV2": 27495
+   },
+   "buildMs": 22.939996000000008,
+   "update": {
+    "mean": 559.912,
+    "median": 551.5,
+    "p95": 919,
+    "n": 1000,
+    "avgStrokeBytes": 530.912
+   },
+   "ms": {
+    "applyFullV1": 2.9752440000000036,
+    "applyFullV2": 2.3519780000000026,
+    "readFull": 1.217608000000041,
+    "openPageApply": 0.5522220000000289,
+    "openPageRead": 0.06854000000004135
+   },
+   "mem": {
+    "fullHeap": 888792,
+    "pageHeap": 279648
+   }
+  },
+  {
+   "layout": "C",
+   "N": 1000,
+   "P": 20,
+   "rawPayloadBytes": 530912,
+   "sizes": {
+    "v1": 554032,
+    "v2": 552332,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": 27580,
+    "pageV2": 27495
+   },
+   "buildMs": 21.545354000000003,
+   "update": {
+    "mean": 559.912,
+    "median": 551.5,
+    "p95": 919,
+    "n": 1000,
+    "avgStrokeBytes": 530.912
+   },
+   "ms": {
+    "applyFullV1": 4.554865000000007,
+    "applyFullV2": 4.182090999999986,
+    "readFull": 1.273702999999955,
+    "openPageApply": 0.27840500000002066,
+    "openPageRead": 0.08592199999998229
+   },
+   "mem": {
+    "fullHeap": 881616,
+    "pageHeap": 209640
+   }
+  },
+  {
+   "layout": "A",
+   "N": 3000,
+   "P": 1,
+   "rawPayloadBytes": 1622708,
+   "sizes": {
+    "v1": 1697715,
+    "v2": 1691732,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": null,
+    "pageV2": null
+   },
+   "buildMs": 35.354220999999995,
+   "update": {
+    "mean": 572.86,
+    "median": 572,
+    "p95": 920,
+    "n": 3000,
+    "avgStrokeBytes": 540.9026666666666
+   },
+   "ms": {
+    "applyFullV1": 6.878169000000014,
+    "applyFullV2": 5.0232579999999984,
+    "readFull": 3.8718960000000493,
+    "openPageApply": 6.066582999999923,
+    "openPageRead": 3.6365910000000667
+   },
+   "mem": {
+    "fullHeap": 1793360,
+    "pageHeap": 1793088
+   }
+  },
+  {
+   "layout": "B",
+   "N": 3000,
+   "P": 1,
+   "rawPayloadBytes": 1622708,
+   "sizes": {
+    "v1": 1691745,
+    "v2": 1685773,
+    "rootV1": 30,
+    "rootV2": 41,
+    "pageV1": 1691715,
+    "pageV2": 1685732
+   },
+   "buildMs": 37.616911000000016,
+   "update": {
+    "mean": 570.86,
+    "median": 570,
+    "p95": 918,
+    "n": 3000,
+    "avgStrokeBytes": 540.9026666666666
+   },
+   "ms": {
+    "applyFullV1": 6.131318999999991,
+    "applyFullV2": 4.252445000000023,
+    "readFull": 3.6951219999999694,
+    "openPageApply": 6.294366999999966,
+    "openPageRead": 3.650869000000057
+   },
+   "mem": {
+    "fullHeap": 1708560,
+    "pageHeap": 1811960
+   }
+  },
+  {
+   "layout": "C",
+   "N": 3000,
+   "P": 1,
+   "rawPayloadBytes": 1622708,
+   "sizes": {
+    "v1": 1691715,
+    "v2": 1685732,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": 1691715,
+    "pageV2": 1685732
+   },
+   "buildMs": 37.15820600000001,
+   "update": {
+    "mean": 570.86,
+    "median": 570,
+    "p95": 918,
+    "n": 3000,
+    "avgStrokeBytes": 540.9026666666666
+   },
+   "ms": {
+    "applyFullV1": 7.531812000000002,
+    "applyFullV2": 6.03923599999996,
+    "readFull": 4.081312000000025,
+    "openPageApply": 6.0554160000000365,
+    "openPageRead": 3.7876420000000053
+   },
+   "mem": {
+    "fullHeap": 1637184,
+    "pageHeap": 1636760
+   }
+  },
+  {
+   "layout": "A",
+   "N": 3000,
+   "P": 5,
+   "rawPayloadBytes": 1622708,
+   "sizes": {
+    "v1": 1697715,
+    "v2": 1691732,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": null,
+    "pageV2": null
+   },
+   "buildMs": 35.290385,
+   "update": {
+    "mean": 572.86,
+    "median": 572,
+    "p95": 920,
+    "n": 3000,
+    "avgStrokeBytes": 540.9026666666666
+   },
+   "ms": {
+    "applyFullV1": 6.188938000000007,
+    "applyFullV2": 4.318479000000025,
+    "readFull": 3.692758000000026,
+    "openPageApply": 5.868975000000091,
+    "openPageRead": 0.7213509999999133
+   },
+   "mem": {
+    "fullHeap": 1675088,
+    "pageHeap": 1843832
+   }
+  },
+  {
+   "layout": "B",
+   "N": 3000,
+   "P": 5,
+   "rawPayloadBytes": 1622708,
+   "sizes": {
+    "v1": 1691869,
+    "v2": 1685947,
+    "rootV1": 126,
+    "rootV2": 129,
+    "pageV1": 336356,
+    "pageV2": 335171
+   },
+   "buildMs": 34.77381700000001,
+   "update": {
+    "mean": 570.6893333333334,
+    "median": 570,
+    "p95": 918,
+    "n": 3000,
+    "avgStrokeBytes": 540.9026666666666
+   },
+   "ms": {
+    "applyFullV1": 6.179821000000004,
+    "applyFullV2": 4.113862999999981,
+    "readFull": 3.7660059999999476,
+    "openPageApply": 1.7504940000000033,
+    "openPageRead": 0.6858239999999114
+   },
+   "mem": {
+    "fullHeap": 1761800,
+    "pageHeap": 564480
+   }
+  },
+  {
+   "layout": "C",
+   "N": 3000,
+   "P": 5,
+   "rawPayloadBytes": 1622708,
+   "sizes": {
+    "v1": 1691743,
+    "v2": 1685818,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": 336356,
+    "pageV2": 335171
+   },
+   "buildMs": 34.135943,
+   "update": {
+    "mean": 570.6893333333334,
+    "median": 570,
+    "p95": 918,
+    "n": 3000,
+    "avgStrokeBytes": 540.9026666666666
+   },
+   "ms": {
+    "applyFullV1": 7.713253999999978,
+    "applyFullV2": 5.722006999999962,
+    "readFull": 3.6602059999999597,
+    "openPageApply": 1.7309109999999919,
+    "openPageRead": 0.7307279999999992
+   },
+   "mem": {
+    "fullHeap": 1745984,
+    "pageHeap": 767072
+   }
+  },
+  {
+   "layout": "A",
+   "N": 3000,
+   "P": 20,
+   "rawPayloadBytes": 1622708,
+   "sizes": {
+    "v1": 1699215,
+    "v2": 1690234,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": null,
+    "pageV2": null
+   },
+   "buildMs": 33.84217799999999,
+   "update": {
+    "mean": 573.36,
+    "median": 572,
+    "p95": 921,
+    "n": 3000,
+    "avgStrokeBytes": 540.9026666666666
+   },
+   "ms": {
+    "applyFullV1": 6.319585000000018,
+    "applyFullV2": 4.498759000000007,
+    "readFull": 3.6694140000000175,
+    "openPageApply": 6.3850980000000845,
+    "openPageRead": 0.19462799999996605
+   },
+   "mem": {
+    "fullHeap": 1737264,
+    "pageHeap": 1855976
+   }
+  },
+  {
+   "layout": "B",
+   "N": 3000,
+   "P": 20,
+   "rawPayloadBytes": 1622708,
+   "sizes": {
+    "v1": 1692354,
+    "v2": 1686629,
+    "rootV1": 506,
+    "rootV2": 481,
+    "pageV1": 84899.5,
+    "pageV2": 84614.5
+   },
+   "buildMs": 37.691934,
+   "update": {
+    "mean": 570.0493333333334,
+    "median": 569,
+    "p95": 918,
+    "n": 3000,
+    "avgStrokeBytes": 540.9026666666666
+   },
+   "ms": {
+    "applyFullV1": 6.887701000000021,
+    "applyFullV2": 4.677415999999994,
+    "readFull": 3.6466310000000135,
+    "openPageApply": 0.7460280000000239,
+    "openPageRead": 0.22509500000001026
+   },
+   "mem": {
+    "fullHeap": 1821152,
+    "pageHeap": 334384
+   }
+  },
+  {
+   "layout": "C",
+   "N": 3000,
+   "P": 20,
+   "rawPayloadBytes": 1622708,
+   "sizes": {
+    "v1": 1691848,
+    "v2": 1686148,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": 84899.5,
+    "pageV2": 84614.5
+   },
+   "buildMs": 35.555473000000006,
+   "update": {
+    "mean": 570.0493333333334,
+    "median": 569,
+    "p95": 918,
+    "n": 3000,
+    "avgStrokeBytes": 540.9026666666666
+   },
+   "ms": {
+    "applyFullV1": 9.326478999999978,
+    "applyFullV2": 7.549104999999997,
+    "readFull": 3.948761000000104,
+    "openPageApply": 0.5581630000000359,
+    "openPageRead": 0.19844399999999496
+   },
+   "mem": {
+    "fullHeap": 1831512,
+    "pageHeap": 263072
+   }
+  },
+  {
+   "layout": "A",
+   "N": 5000,
+   "P": 1,
+   "rawPayloadBytes": 2682112,
+   "sizes": {
+    "v1": 2807119,
+    "v2": 2797136,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": null,
+    "pageV2": null
+   },
+   "buildMs": 48.295424,
+   "update": {
+    "mean": 568.3968,
+    "median": 564,
+    "p95": 918,
+    "n": 5000,
+    "avgStrokeBytes": 536.4224
+   },
+   "ms": {
+    "applyFullV1": 9.882407999999998,
+    "applyFullV2": 6.251005000000021,
+    "readFull": 6.152590000000032,
+    "openPageApply": 9.162338999999974,
+    "openPageRead": 5.884908999999993
+   },
+   "mem": {
+    "fullHeap": 2776344,
+    "pageHeap": 2775544
+   }
+  },
+  {
+   "layout": "B",
+   "N": 5000,
+   "P": 1,
+   "rawPayloadBytes": 2682112,
+   "sizes": {
+    "v1": 2797149,
+    "v2": 2787177,
+    "rootV1": 30,
+    "rootV2": 41,
+    "pageV1": 2797119,
+    "pageV2": 2787136
+   },
+   "buildMs": 51.40405999999999,
+   "update": {
+    "mean": 566.3968,
+    "median": 562,
+    "p95": 916,
+    "n": 5000,
+    "avgStrokeBytes": 536.4224
+   },
+   "ms": {
+    "applyFullV1": 10.044884000000025,
+    "applyFullV2": 6.085041999999987,
+    "readFull": 6.322671000000014,
+    "openPageApply": 8.914120000000025,
+    "openPageRead": 5.7918560000000525
+   },
+   "mem": {
+    "fullHeap": 2790368,
+    "pageHeap": 2789120
+   }
+  },
+  {
+   "layout": "C",
+   "N": 5000,
+   "P": 1,
+   "rawPayloadBytes": 2682112,
+   "sizes": {
+    "v1": 2797119,
+    "v2": 2787136,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": 2797119,
+    "pageV2": 2787136
+   },
+   "buildMs": 48.19239399999998,
+   "update": {
+    "mean": 566.3968,
+    "median": 562,
+    "p95": 916,
+    "n": 5000,
+    "avgStrokeBytes": 536.4224
+   },
+   "ms": {
+    "applyFullV1": 11.267551000000026,
+    "applyFullV2": 7.964615999999978,
+    "readFull": 5.966377999999963,
+    "openPageApply": 9.187956999999983,
+    "openPageRead": 6.017605000000003
+   },
+   "mem": {
+    "fullHeap": 2776120,
+    "pageHeap": 2776040
+   }
+  },
+  {
+   "layout": "A",
+   "N": 5000,
+   "P": 5,
+   "rawPayloadBytes": 2682112,
+   "sizes": {
+    "v1": 2807119,
+    "v2": 2797136,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": null,
+    "pageV2": null
+   },
+   "buildMs": 49.931579,
+   "update": {
+    "mean": 568.3968,
+    "median": 564,
+    "p95": 918,
+    "n": 5000,
+    "avgStrokeBytes": 536.4224
+   },
+   "ms": {
+    "applyFullV1": 9.482462999999996,
+    "applyFullV2": 6.161399999999958,
+    "readFull": 6.2969209999999975,
+    "openPageApply": 9.089640999999915,
+    "openPageRead": 1.2477949999999964
+   },
+   "mem": {
+    "fullHeap": 2631968,
+    "pageHeap": 2631680
+   }
+  },
+  {
+   "layout": "B",
+   "N": 5000,
+   "P": 5,
+   "rawPayloadBytes": 2682112,
+   "sizes": {
+    "v1": 2797273,
+    "v2": 2787361,
+    "rootV1": 126,
+    "rootV2": 129,
+    "pageV1": 560224,
+    "pageV2": 558241
+   },
+   "buildMs": 51.272221,
+   "update": {
+    "mean": 566.2944,
+    "median": 562,
+    "p95": 916,
+    "n": 5000,
+    "avgStrokeBytes": 536.4224
+   },
+   "ms": {
+    "applyFullV1": 8.526810000000012,
+    "applyFullV2": 5.910922999999968,
+    "readFull": 6.24568899999997,
+    "openPageApply": 2.504094999999893,
+    "openPageRead": 1.1841949999999315
+   },
+   "mem": {
+    "fullHeap": 2559464,
+    "pageHeap": 742032
+   }
+  },
+  {
+   "layout": "C",
+   "N": 5000,
+   "P": 5,
+   "rawPayloadBytes": 2682112,
+   "sizes": {
+    "v1": 2797147,
+    "v2": 2787232,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": 560224,
+    "pageV2": 558241
+   },
+   "buildMs": 49.31253799999999,
+   "update": {
+    "mean": 566.2944,
+    "median": 562,
+    "p95": 916,
+    "n": 5000,
+    "avgStrokeBytes": 536.4224
+   },
+   "ms": {
+    "applyFullV1": 11.512883999999985,
+    "applyFullV2": 8.149818000000039,
+    "readFull": 6.236838000000034,
+    "openPageApply": 2.314636999999948,
+    "openPageRead": 1.2205329999999321
+   },
+   "mem": {
+    "fullHeap": 2545488,
+    "pageHeap": 689976
+   }
+  },
+  {
+   "layout": "A",
+   "N": 5000,
+   "P": 20,
+   "rawPayloadBytes": 2682112,
+   "sizes": {
+    "v1": 2809619,
+    "v2": 2794638,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": null,
+    "pageV2": null
+   },
+   "buildMs": 47.976056,
+   "update": {
+    "mean": 568.8968,
+    "median": 564.5,
+    "p95": 918,
+    "n": 5000,
+    "avgStrokeBytes": 536.4224
+   },
+   "ms": {
+    "applyFullV1": 9.685285000000022,
+    "applyFullV2": 5.843415999999991,
+    "readFull": 6.653042000000028,
+    "openPageApply": 8.22995800000001,
+    "openPageRead": 0.3210960000000114
+   },
+   "mem": {
+    "fullHeap": 2647344,
+    "pageHeap": 2647088
+   }
+  },
+  {
+   "layout": "B",
+   "N": 5000,
+   "P": 20,
+   "rawPayloadBytes": 2682112,
+   "sizes": {
+    "v1": 2797758,
+    "v2": 2788033,
+    "rootV1": 506,
+    "rootV2": 481,
+    "pageV1": 139687.5,
+    "pageV2": 139202.5
+   },
+   "buildMs": 48.869201000000004,
+   "update": {
+    "mean": 565.9104,
+    "median": 562,
+    "p95": 915,
+    "n": 5000,
+    "avgStrokeBytes": 536.4224
+   },
+   "ms": {
+    "applyFullV1": 9.259030999999993,
+    "applyFullV2": 6.10539,
+    "readFull": 6.226197999999954,
+    "openPageApply": 1.0393209999999726,
+    "openPageRead": 0.338628999999969
+   },
+   "mem": {
+    "fullHeap": 2674528,
+    "pageHeap": 398648
+   }
+  },
+  {
+   "layout": "C",
+   "N": 5000,
+   "P": 20,
+   "rawPayloadBytes": 2682112,
+   "sizes": {
+    "v1": 2797252,
+    "v2": 2787552,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": 139687.5,
+    "pageV2": 139202.5
+   },
+   "buildMs": 50.55156600000001,
+   "update": {
+    "mean": 565.9104,
+    "median": 562,
+    "p95": 915,
+    "n": 5000,
+    "avgStrokeBytes": 536.4224
+   },
+   "ms": {
+    "applyFullV1": 11.139890000000037,
+    "applyFullV2": 9.392953999999975,
+    "readFull": 6.998454999999922,
+    "openPageApply": 0.7898400000000265,
+    "openPageRead": 0.3132819999999583
+   },
+   "mem": {
+    "fullHeap": 2679672,
+    "pageHeap": 310656
+   }
+  },
+  {
+   "layout": "A",
+   "N": 10000,
+   "P": 1,
+   "rawPayloadBytes": 5392456,
+   "sizes": {
+    "v1": 5642463,
+    "v2": 5622480,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": null,
+    "pageV2": null
+   },
+   "buildMs": 97.244167,
+   "update": {
+    "mean": 571.2328,
+    "median": 570,
+    "p95": 917,
+    "n": 10000,
+    "avgStrokeBytes": 539.2456
+   },
+   "ms": {
+    "applyFullV1": 16.270629999999983,
+    "applyFullV2": 9.740999999999985,
+    "readFull": 12.015442000000007,
+    "openPageApply": 16.814157000000023,
+    "openPageRead": 11.50355599999989
+   },
+   "mem": {
+    "fullHeap": 5281520,
+    "pageHeap": 5281232
+   }
+  },
+  {
+   "layout": "B",
+   "N": 10000,
+   "P": 1,
+   "rawPayloadBytes": 5392456,
+   "sizes": {
+    "v1": 5622493,
+    "v2": 5602521,
+    "rootV1": 30,
+    "rootV2": 41,
+    "pageV1": 5622463,
+    "pageV2": 5602480
+   },
+   "buildMs": 94.059383,
+   "update": {
+    "mean": 569.2328,
+    "median": 568,
+    "p95": 915,
+    "n": 10000,
+    "avgStrokeBytes": 539.2456
+   },
+   "ms": {
+    "applyFullV1": 16.172915999999987,
+    "applyFullV2": 9.02448400000003,
+    "readFull": 11.874304999999936,
+    "openPageApply": 16.303945000000112,
+    "openPageRead": 11.482946999999967
+   },
+   "mem": {
+    "fullHeap": 5295000,
+    "pageHeap": 5294640
+   }
+  },
+  {
+   "layout": "C",
+   "N": 10000,
+   "P": 1,
+   "rawPayloadBytes": 5392456,
+   "sizes": {
+    "v1": 5622463,
+    "v2": 5602480,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": 5622463,
+    "pageV2": 5602480
+   },
+   "buildMs": 93.208339,
+   "update": {
+    "mean": 569.2328,
+    "median": 568,
+    "p95": 915,
+    "n": 10000,
+    "avgStrokeBytes": 539.2456
+   },
+   "ms": {
+    "applyFullV1": 18.448139999999967,
+    "applyFullV2": 9.665527999999995,
+    "readFull": 12.110783000000083,
+    "openPageApply": 17.360478000000057,
+    "openPageRead": 11.679638999999952
+   },
+   "mem": {
+    "fullHeap": 5281624,
+    "pageHeap": 5281200
+   }
+  },
+  {
+   "layout": "A",
+   "N": 10000,
+   "P": 5,
+   "rawPayloadBytes": 5392456,
+   "sizes": {
+    "v1": 5642463,
+    "v2": 5622480,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": null,
+    "pageV2": null
+   },
+   "buildMs": 93.91688400000001,
+   "update": {
+    "mean": 571.2328,
+    "median": 570,
+    "p95": 917,
+    "n": 10000,
+    "avgStrokeBytes": 539.2456
+   },
+   "ms": {
+    "applyFullV1": 15.221551999999974,
+    "applyFullV2": 9.054955999999947,
+    "readFull": 12.217523999999912,
+    "openPageApply": 15.199078999999983,
+    "openPageRead": 2.4629580000000715
+   },
+   "mem": {
+    "fullHeap": 4989432,
+    "pageHeap": 4989160
+   }
+  },
+  {
+   "layout": "B",
+   "N": 10000,
+   "P": 5,
+   "rawPayloadBytes": 5392456,
+   "sizes": {
+    "v1": 5622617,
+    "v2": 5602705,
+    "rootV1": 126,
+    "rootV2": 129,
+    "pageV1": 1122953,
+    "pageV2": 1118970
+   },
+   "buildMs": 96.110062,
+   "update": {
+    "mean": 569.1816,
+    "median": 568,
+    "p95": 915,
+    "n": 10000,
+    "avgStrokeBytes": 539.2456
+   },
+   "ms": {
+    "applyFullV1": 14.30324799999994,
+    "applyFullV2": 10.12330200000008,
+    "readFull": 12.29125799999997,
+    "openPageApply": 4.326714999999922,
+    "openPageRead": 2.508544000000029
+   },
+   "mem": {
+    "fullHeap": 4850960,
+    "pageHeap": 1261928
+   }
+  },
+  {
+   "layout": "C",
+   "N": 10000,
+   "P": 5,
+   "rawPayloadBytes": 5392456,
+   "sizes": {
+    "v1": 5622491,
+    "v2": 5602576,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": 1122953,
+    "pageV2": 1118970
+   },
+   "buildMs": 95.48991099999998,
+   "update": {
+    "mean": 569.1816,
+    "median": 568,
+    "p95": 915,
+    "n": 10000,
+    "avgStrokeBytes": 539.2456
+   },
+   "ms": {
+    "applyFullV1": 16.86702600000001,
+    "applyFullV2": 10.524650000000065,
+    "readFull": 12.852692000000047,
+    "openPageApply": 4.140942999999879,
+    "openPageRead": 2.507622000000083
+   },
+   "mem": {
+    "fullHeap": 4835728,
+    "pageHeap": 1262072
+   }
+  },
+  {
+   "layout": "A",
+   "N": 10000,
+   "P": 20,
+   "rawPayloadBytes": 5392456,
+   "sizes": {
+    "v1": 5647463,
+    "v2": 5617482,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": null,
+    "pageV2": null
+   },
+   "buildMs": 94.84479400000001,
+   "update": {
+    "mean": 571.7328,
+    "median": 571,
+    "p95": 918,
+    "n": 10000,
+    "avgStrokeBytes": 539.2456
+   },
+   "ms": {
+    "applyFullV1": 15.273439999999994,
+    "applyFullV2": 8.165557000000035,
+    "readFull": 12.019350000000031,
+    "openPageApply": 14.681953000000021,
+    "openPageRead": 0.663923000000068
+   },
+   "mem": {
+    "fullHeap": 5001864,
+    "pageHeap": 5001656
+   }
+  },
+  {
+   "layout": "B",
+   "N": 10000,
+   "P": 20,
+   "rawPayloadBytes": 5392456,
+   "sizes": {
+    "v1": 5623102,
+    "v2": 5603377,
+    "rootV1": 506,
+    "rootV2": 481,
+    "pageV1": 283275,
+    "pageV2": 282290
+   },
+   "buildMs": 95.80816099999998,
+   "update": {
+    "mean": 568.9896,
+    "median": 568,
+    "p95": 915,
+    "n": 10000,
+    "avgStrokeBytes": 539.2456
+   },
+   "ms": {
+    "applyFullV1": 14.282099000000017,
+    "applyFullV2": 8.244295999999963,
+    "readFull": 12.429673999999977,
+    "openPageApply": 1.670221999999967,
+    "openPageRead": 0.6669979999999214
+   },
+   "mem": {
+    "fullHeap": 4929536,
+    "pageHeap": 518336
+   }
+  },
+  {
+   "layout": "C",
+   "N": 10000,
+   "P": 20,
+   "rawPayloadBytes": 5392456,
+   "sizes": {
+    "v1": 5622596,
+    "v2": 5602896,
+    "rootV1": 0,
+    "rootV2": 0,
+    "pageV1": 283275,
+    "pageV2": 282290
+   },
+   "buildMs": 96.45259400000003,
+   "update": {
+    "mean": 568.9896,
+    "median": 568,
+    "p95": 915,
+    "n": 10000,
+    "avgStrokeBytes": 539.2456
+   },
+   "ms": {
+    "applyFullV1": 17.889613999999995,
+    "applyFullV2": 13.500964999999951,
+    "readFull": 12.39089100000001,
+    "openPageApply": 1.1366850000001705,
+    "openPageRead": 0.6393870000001698
+   },
+   "mem": {
+    "fullHeap": 4922128,
+    "pageHeap": 431336
+   }
+  }
+ ],
+ "hocuspocus": {
+  "sync": [
+   {
+    "N": 1000,
+    "layout": "A",
+    "P": 5,
+    "what": "whole board (one doc)",
+    "ms": 12.36393600000008,
+    "serverLoadMs": 2.041276000000039,
+    "strokesReceived": 1000
+   },
+   {
+    "N": 1000,
+    "layout": "C",
+    "P": 5,
+    "what": "one page of 5 (one doc)",
+    "ms": 4.967102000000068,
+    "serverLoadMs": 0.5143699999998717,
+    "strokesReceived": 200
+   },
+   {
+    "N": 1000,
+    "layout": "C",
+    "P": 20,
+    "what": "one page of 20 (one doc)",
+    "ms": 3.743934000000081,
+    "serverLoadMs": 0.21189999999978681,
+    "strokesReceived": 50
+   },
+   {
+    "N": 1000,
+    "layout": "C",
+    "P": 20,
+    "what": "all 20 pages (20 docs, one socket)",
+    "ms": 20.163978000000043,
+    "serverLoadMs": 2.7669410000003154,
+    "strokesReceived": 1000
+   },
+   {
+    "N": 3000,
+    "layout": "A",
+    "P": 5,
+    "what": "whole board (one doc)",
+    "ms": 19.01043699999991,
+    "serverLoadMs": 5.3629090000004,
+    "strokesReceived": 3000
+   },
+   {
+    "N": 3000,
+    "layout": "C",
+    "P": 5,
+    "what": "one page of 5 (one doc)",
+    "ms": 6.890110999999706,
+    "serverLoadMs": 1.2203630000003614,
+    "strokesReceived": 600
+   },
+   {
+    "N": 3000,
+    "layout": "C",
+    "P": 20,
+    "what": "one page of 20 (one doc)",
+    "ms": 4.439988000000085,
+    "serverLoadMs": 0.3894349999991391,
+    "strokesReceived": 150
+   },
+   {
+    "N": 3000,
+    "layout": "C",
+    "P": 20,
+    "what": "all 20 pages (20 docs, one socket)",
+    "ms": 36.62090100000023,
+    "serverLoadMs": 5.721238000000085,
+    "strokesReceived": 3000
+   },
+   {
+    "N": 5000,
+    "layout": "A",
+    "P": 5,
+    "what": "whole board (one doc)",
+    "ms": 32.920718999999735,
+    "serverLoadMs": 9.283155999999508,
+    "strokesReceived": 5000
+   },
+   {
+    "N": 5000,
+    "layout": "C",
+    "P": 5,
+    "what": "one page of 5 (one doc)",
+    "ms": 9.64150300000074,
+    "serverLoadMs": 2.088159999999334,
+    "strokesReceived": 1000
+   },
+   {
+    "N": 5000,
+    "layout": "C",
+    "P": 20,
+    "what": "one page of 20 (one doc)",
+    "ms": 4.913561999999729,
+    "serverLoadMs": 0.6200099999987287,
+    "strokesReceived": 250
+   },
+   {
+    "N": 5000,
+    "layout": "C",
+    "P": 20,
+    "what": "all 20 pages (20 docs, one socket)",
+    "ms": 39.689580999998725,
+    "serverLoadMs": 8.77641100000983,
+    "strokesReceived": 5000
+   },
+   {
+    "N": 10000,
+    "layout": "A",
+    "P": 5,
+    "what": "whole board (one doc)",
+    "ms": 71.25903999999719,
+    "serverLoadMs": 19.02391699999862,
+    "strokesReceived": 10000
+   },
+   {
+    "N": 10000,
+    "layout": "C",
+    "P": 5,
+    "what": "one page of 5 (one doc)",
+    "ms": 12.878219999998691,
+    "serverLoadMs": 3.245423000000301,
+    "strokesReceived": 2000
+   },
+   {
+    "N": 10000,
+    "layout": "C",
+    "P": 20,
+    "what": "one page of 20 (one doc)",
+    "ms": 6.265805000002729,
+    "serverLoadMs": 1.0526859999990847,
+    "strokesReceived": 500
+   },
+   {
+    "N": 10000,
+    "layout": "C",
+    "P": 20,
+    "what": "all 20 pages (20 docs, one socket)",
+    "ms": 98.89821200000006,
+    "serverLoadMs": 16.15539299999,
+    "strokesReceived": 10000
+   }
+  ],
+  "save": [
+   {
+    "N": 1000,
+    "layout": "A",
+    "P": 5,
+    "what": "whole board (one doc)",
+    "docBytesWritten": 559478,
+    "updateBytes": 704.5,
+    "encodeMs": 0.7161560000004101,
+    "writeMs": 0.7115524999994705,
+    "onStoreMs": 1.437973000000511,
+    "strokeToStoredMs": 22.56210299999975
+   },
+   {
+    "N": 1000,
+    "layout": "C",
+    "P": 5,
+    "what": "one page of 5",
+    "docBytesWritten": 111759,
+    "updateBytes": 702.5,
+    "encodeMs": 0.1992309999995996,
+    "writeMs": 0.2330395000003591,
+    "onStoreMs": 0.4392939999997907,
+    "strokeToStoredMs": 21.496201499999643
+   },
+   {
+    "N": 1000,
+    "layout": "C",
+    "P": 20,
+    "what": "one page of 20",
+    "docBytesWritten": 31921,
+    "updateBytes": 702.5,
+    "encodeMs": 0.09174299999995128,
+    "writeMs": 0.16693499999973938,
+    "onStoreMs": 0.2627399999996669,
+    "strokeToStoredMs": 20.83650699999953
+   },
+   {
+    "N": 3000,
+    "layout": "A",
+    "P": 5,
+    "what": "whole board (one doc)",
+    "docBytesWritten": 1701318.5,
+    "updateBytes": 622,
+    "encodeMs": 1.532210500000474,
+    "writeMs": 1.7338214999990669,
+    "onStoreMs": 3.2443014999998923,
+    "strokeToStoredMs": 24.07663549999961
+   },
+   {
+    "N": 3000,
+    "layout": "C",
+    "P": 5,
+    "what": "one page of 5",
+    "docBytesWritten": 332993.5,
+    "updateBytes": 621,
+    "encodeMs": 0.48753000000033353,
+    "writeMs": 0.41401150000092457,
+    "onStoreMs": 0.9191395000007105,
+    "strokeToStoredMs": 21.931099999999788
+   },
+   {
+    "N": 3000,
+    "layout": "C",
+    "P": 20,
+    "what": "one page of 20",
+    "docBytesWritten": 83572.5,
+    "updateBytes": 621,
+    "encodeMs": 0.14985750000050757,
+    "writeMs": 0.21332249999977648,
+    "onStoreMs": 0.3694214999995893,
+    "strokeToStoredMs": 21.311964499999704
+   },
+   {
+    "N": 5000,
+    "layout": "A",
+    "P": 5,
+    "what": "whole board (one doc)",
+    "docBytesWritten": 2811029.5,
+    "updateBytes": 665.5,
+    "encodeMs": 4.068927500000427,
+    "writeMs": 4.119137499998033,
+    "onStoreMs": 8.166654500000732,
+    "strokeToStoredMs": 28.516898500000025
+   },
+   {
+    "N": 5000,
+    "layout": "C",
+    "P": 5,
+    "what": "one page of 5",
+    "docBytesWritten": 557816.5,
+    "updateBytes": 663.5,
+    "encodeMs": 0.6904280000017025,
+    "writeMs": 0.586686999999074,
+    "onStoreMs": 1.2891075000006822,
+    "strokeToStoredMs": 22.228643499998725
+   },
+   {
+    "N": 5000,
+    "layout": "C",
+    "P": 20,
+    "what": "one page of 20",
+    "docBytesWritten": 140748.5,
+    "updateBytes": 663.5,
+    "encodeMs": 0.1711879999984376,
+    "writeMs": 0.2747834999991028,
+    "onStoreMs": 0.4470435000002908,
+    "strokeToStoredMs": 21.466254999999364
+   },
+   {
+    "N": 10000,
+    "layout": "A",
+    "P": 5,
+    "what": "whole board (one doc)",
+    "docBytesWritten": 5645920,
+    "updateBytes": 694.5,
+    "encodeMs": 4.336152000001675,
+    "writeMs": 9.419637999997576,
+    "onStoreMs": 13.816469999999754,
+    "strokeToStoredMs": 34.47615299999961
+   },
+   {
+    "N": 10000,
+    "layout": "C",
+    "P": 5,
+    "what": "one page of 5",
+    "docBytesWritten": 1126397,
+    "updateBytes": 692.5,
+    "encodeMs": 1.0761805000001914,
+    "writeMs": 1.1092629999984638,
+    "onStoreMs": 2.1542950000002747,
+    "strokeToStoredMs": 22.826885000000402
+   },
+   {
+    "N": 10000,
+    "layout": "C",
+    "P": 20,
+    "what": "one page of 20",
+    "docBytesWritten": 275168,
+    "updateBytes": 692.5,
+    "encodeMs": 0.39109300000018266,
+    "writeMs": 0.38971999999921536,
+    "onStoreMs": 0.7912230000001728,
+    "strokeToStoredMs": 21.693218000000343
+   }
+  ],
+  "subdoc": {
+   "strokesWrittenToSubdoc": 100,
+   "client2SeesSubdocInRootMap": true,
+   "client2SubdocStrokes": 0,
+   "client2SubdocStrokesAfterLoad": 0,
+   "serverStoredRootDocBytes": 33,
+   "subdocBytesNeverSentToServer": 57053,
+   "client2SubdocStrokesWithItsOwnProviderPerSubdoc": 100
+  },
+  "url": "ws://127.0.0.1:<ephemeral>"
+ },
+ "runSeconds": 66,
+ "peakUsedGB": 15
+}
