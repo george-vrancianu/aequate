@@ -10,102 +10,102 @@
    "why": "(x+3)^2 = x^2+2*3x+9. Polynomial identity."
   },
   "parse": "ok",
-  "parse_ms": 92.26238611154258,
+  "parse_ms": 89.18788097798824,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 4.748199135065079,
+    "ms": 5.15739107504487,
     "score": "wrong"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: (x + 3)**2 vs (x**2 + 6*x) + 9",
-    "ms": 4.292309051379561,
+    "ms": 4.411933943629265,
     "score": "wrong"
    },
    "S1": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 13.034275965765119,
+    "ms": 14.51496803201735,
     "score": "ok"
    },
    "S2": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 14.39281995408237,
+    "ms": 19.266173010692,
     "score": "ok"
    },
    "S3r": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 5.328063853085041,
+    "ms": 4.812340019270778,
     "score": "ok"
    },
    "S3c": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 12.429632944986224,
+    "ms": 10.701423045247793,
     "score": "ok"
    },
    "S4": {
     "verdict": "EQ",
     "detail": "stage: expand",
-    "ms": 12.577591929584742,
+    "ms": 11.08260196633637,
     "score": "ok"
    },
    "S5r": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 3.2934651244431734,
+    "ms": 2.7174968272447586,
     "score": "na"
    },
    "S5c": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.982374979183078,
+    "ms": 2.7776809874922037,
     "score": "na"
    },
    "S6-S1r": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 12.867429060861468,
+    "ms": 12.543049873784184,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 19.47483909316361,
+    "ms": 21.762194111943245,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 13.82939494214952,
+    "ms": 17.293931916356087,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 17.02295895665884,
+    "ms": 17.520800000056624,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "EQ",
     "detail": "stage: expand",
-    "ms": 6.386460037901998,
+    "ms": 7.141374051570892,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "EQ",
     "detail": "stage: expand",
-    "ms": 6.220737937837839,
+    "ms": 6.982305087149143,
     "score": "ok"
    },
    "S7": {
     "verdict": "EQ",
     "detail": "equal at samples; same natural domain Reals",
-    "ms": 5.542945116758347,
+    "ms": 5.2899110596627,
     "score": "ok"
    }
   },
@@ -129,102 +129,102 @@
    "why": "(x-2)^2 = x^2-4x+4. At x=0 the sides are 4 and -4."
   },
   "parse": "ok",
-  "parse_ms": 72.59057089686394,
+  "parse_ms": 79.49504791758955,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 4.234098829329014,
+    "ms": 3.4622831735759974,
     "score": "ok"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: (x + 2*(-1))**2 vs x**2 + 4*(-1)",
-    "ms": 3.8836179301142693,
+    "ms": 3.6110340151935816,
     "score": "ok"
    },
    "S1": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=8 - 4*x (non-zero is not a proof of NEQ)",
-    "ms": 15.649629989638925,
+    "ms": 15.922203892841935,
     "score": "ok"
    },
    "S2": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 16.946766059845686,
+    "ms": 16.631021164357662,
     "score": "ok"
    },
    "S3r": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
-    "ms": 3.932520980015397,
+    "ms": 4.208300029858947,
     "score": "ok"
    },
    "S3c": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. -2.39103+0.205944j vs -2.12491+6.39685j",
-    "ms": 5.298677831888199,
+    "ms": 5.043345969170332,
     "score": "ok"
    },
    "S4": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. -2.39103+0.205944j vs -2.12491+6.39685j",
-    "ms": 5.2778460085392,
+    "ms": 5.101405084133148,
     "score": "ok"
    },
    "S5r": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.546906005591154,
+    "ms": 2.628959948197007,
     "score": "na"
    },
    "S5c": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.746111946180463,
+    "ms": 2.456333953887224,
     "score": "na"
    },
    "S6-S1r": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=8 - 4*x (non-zero is not a proof of NEQ)",
-    "ms": 14.612482162192464,
+    "ms": 14.523813035339117,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=8 - 4*x (non-zero is not a proof of NEQ)",
-    "ms": 22.15204806998372,
+    "ms": 35.46605305746198,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 16.563554061576724,
+    "ms": 22.75180001743138,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 25.613449048250914,
+    "ms": 25.0987580511719,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
-    "ms": 4.448964959010482,
+    "ms": 4.364795982837677,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. 5.00715+0j vs 13.9578+0j",
-    "ms": 4.3684199918061495,
+    "ms": 3.7215750198811293,
     "score": "ok"
    },
    "S7": {
     "verdict": "NEQ",
     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
-    "ms": 3.8395491428673267,
+    "ms": 3.1309868209064007,
     "score": "ok"
    }
   },
@@ -248,102 +248,102 @@
    "why": "(x-2)(x+5) = x^2+5x-2x-10 = x^2+3x-10. Student has -3x. At x=0 both give -10 but at x=1: -6 vs -12."
   },
   "parse": "ok",
-  "parse_ms": 123.68836300447583,
+  "parse_ms": 119.78726810775697,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 4.735887981951237,
+    "ms": 4.459945019334555,
     "score": "ok"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: (x + 5)*(x + 2*(-1)) vs (x**2 - 3*x) + 10*(-1)",
-    "ms": 4.94656409136951,
+    "ms": 6.2778061255812645,
     "score": "ok"
    },
    "S1": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=6*x (non-zero is not a proof of NEQ)",
-    "ms": 16.262945951893926,
+    "ms": 15.808437019586563,
     "score": "ok"
    },
    "S2": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 16.059993067756295,
+    "ms": 15.02836705185473,
     "score": "ok"
    },
    "S3r": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
-    "ms": 4.027979914098978,
+    "ms": 3.790362039580941,
     "score": "ok"
    },
    "S3c": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. -1.92531+11.04j vs -14.3245+1.75367j",
-    "ms": 5.164585076272488,
+    "ms": 4.922379972413182,
     "score": "ok"
    },
    "S4": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. -1.92531+11.04j vs -14.3245+1.75367j",
-    "ms": 4.766273079439998,
+    "ms": 4.7335100825876,
     "score": "ok"
    },
    "S5r": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.6032819878309965,
+    "ms": 2.4663838557899,
     "score": "na"
    },
    "S5c": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.533822087571025,
+    "ms": 2.245156094431877,
     "score": "na"
    },
    "S6-S1r": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=6*x (non-zero is not a proof of NEQ)",
-    "ms": 14.6344939712435,
+    "ms": 13.901966158300638,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=6*x (non-zero is not a proof of NEQ)",
-    "ms": 21.239817840978503,
+    "ms": 20.224957028403878,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 15.702479053288698,
+    "ms": 14.410900883376598,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 22.630612133070827,
+    "ms": 20.47610585577786,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
-    "ms": 5.769255105406046,
+    "ms": 4.485282814130187,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. 20.6708+0j vs -4.75518+0j",
-    "ms": 5.988429998978972,
+    "ms": 4.469142993912101,
     "score": "ok"
    },
    "S7": {
     "verdict": "NEQ",
     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
-    "ms": 4.1366880759596825,
+    "ms": 3.5497969947755337,
     "score": "ok"
    }
   },
@@ -367,102 +367,102 @@
    "why": "(x-2)(x-3) = x^2-5x+6. Polynomial identity."
   },
   "parse": "ok",
-  "parse_ms": 113.35689900442958,
+  "parse_ms": 112.29687184095383,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 4.540443886071444,
+    "ms": 4.091763868927956,
     "score": "wrong"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: (x**2 - 5*x) + 6 vs (x + 2*(-1))*(x + 3*(-1))",
-    "ms": 4.808863857761025,
+    "ms": 4.258387954905629,
     "score": "wrong"
    },
    "S1": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 14.70888894982636,
+    "ms": 14.790943125262856,
     "score": "ok"
    },
    "S2": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 15.013214200735092,
+    "ms": 14.625452924519777,
     "score": "ok"
    },
    "S3r": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 5.46380621381104,
+    "ms": 5.7068688329309225,
     "score": "ok"
    },
    "S3c": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 11.885210173204541,
+    "ms": 10.850504040718079,
     "score": "ok"
    },
    "S4": {
     "verdict": "EQ",
     "detail": "stage: expand",
-    "ms": 12.349545955657959,
+    "ms": 11.747177923098207,
     "score": "ok"
    },
    "S5r": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.782160881906748,
+    "ms": 2.8214328922331333,
     "score": "na"
    },
    "S5c": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.8208729345351458,
+    "ms": 2.587670926004648,
     "score": "na"
    },
    "S6-S1r": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 13.561858795583248,
+    "ms": 13.71052605099976,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 22.985527059063315,
+    "ms": 23.02776090800762,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 13.98854493163526,
+    "ms": 13.05108587257564,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 21.435246104374528,
+    "ms": 21.78537705913186,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "EQ",
     "detail": "stage: expand",
-    "ms": 7.02990498393774,
+    "ms": 6.345598958432674,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "EQ",
     "detail": "stage: expand",
-    "ms": 6.595164071768522,
+    "ms": 6.466842954978347,
     "score": "ok"
    },
    "S7": {
     "verdict": "EQ",
     "detail": "equal at samples; same natural domain Reals",
-    "ms": 6.2456929590553045,
+    "ms": 5.565121071413159,
     "score": "ok"
    }
   },
@@ -486,102 +486,102 @@
    "why": "Divide numerator and the constant denominator by 2. Constant divisor, so no domain change."
   },
   "parse": "ok",
-  "parse_ms": 93.09741691686213,
+  "parse_ms": 95.16565105877817,
   "cells": {
    "S0e": {
     "verdict": "EQ",
     "detail": "identical after parse (evaluated)",
-    "ms": 3.4064699430018663,
+    "ms": 2.8815579134970903,
     "score": "ok"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: (2*x + 4)/6 vs (x + 2)/3",
-    "ms": 3.9476261008530855,
+    "ms": 3.5259430296719074,
     "score": "wrong"
    },
    "S1": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 3.2128021121025085,
+    "ms": 3.1652620527893305,
     "score": "ok"
    },
    "S2": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 2.874193014577031,
+    "ms": 3.15415789373219,
     "score": "ok"
    },
    "S3r": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 4.403097089380026,
+    "ms": 4.948710091412067,
     "score": "ok"
    },
    "S3c": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 10.454637929797173,
+    "ms": 10.330192046239972,
     "score": "ok"
    },
    "S4": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 3.4039828460663557,
+    "ms": 2.7296801563352346,
     "score": "ok"
    },
    "S5r": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.6539878454059362,
+    "ms": 2.4970821104943752,
     "score": "na"
    },
    "S5c": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.795121865347028,
+    "ms": 2.4883148726075888,
     "score": "na"
    },
    "S6-S1r": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 3.6750060971826315,
+    "ms": 3.8215969689190388,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 3.9606329519301653,
+    "ms": 4.39988193102181,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 3.4564719535410404,
+    "ms": 4.10482008010149,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 3.305469173938036,
+    "ms": 3.436343977227807,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 3.2490110024809837,
+    "ms": 3.268547123298049,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 3.0665360391139984,
+    "ms": 3.295878879725933,
     "score": "ok"
    },
    "S7": {
     "verdict": "EQ",
     "detail": "equal at samples; same natural domain Reals",
-    "ms": 4.964296938851476,
+    "ms": 5.133621860295534,
     "score": "ok"
    }
   },
@@ -605,102 +605,102 @@
    "why": "x/2+x/3 = (3x+2x)/6 = 5x/6. Constant denominators, no domain change."
   },
   "parse": "ok",
-  "parse_ms": 118.26909193769097,
+  "parse_ms": 119.70387795008719,
   "cells": {
    "S0e": {
     "verdict": "EQ",
     "detail": "identical after parse (evaluated)",
-    "ms": 3.28634399920702,
+    "ms": 3.196306060999632,
     "score": "ok"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: x/3 + x/2 vs (5*x)/6",
-    "ms": 3.86147596873343,
+    "ms": 3.622394986450672,
     "score": "wrong"
    },
    "S1": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 3.201921936124563,
+    "ms": 2.8828701470047235,
     "score": "ok"
    },
    "S2": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 2.610706025734544,
+    "ms": 2.575970022007823,
     "score": "ok"
    },
    "S3r": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 4.426441853865981,
+    "ms": 4.231534898281097,
     "score": "ok"
    },
    "S3c": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 10.061611188575625,
+    "ms": 10.809332830831409,
     "score": "ok"
    },
    "S4": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 2.823181916028261,
+    "ms": 2.965145045891404,
     "score": "ok"
    },
    "S5r": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.5741111021488905,
+    "ms": 2.5297540705651045,
     "score": "na"
    },
    "S5c": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.6169479824602604,
+    "ms": 2.4039060808718204,
     "score": "na"
    },
    "S6-S1r": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 3.217552090063691,
+    "ms": 3.8938589859753847,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 3.538993885740638,
+    "ms": 3.628083970397711,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 3.4895839635282755,
+    "ms": 4.613114055246115,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 3.358627902343869,
+    "ms": 4.466313170269132,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 3.0920428689569235,
+    "ms": 3.7554828450083733,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 3.1229148153215647,
+    "ms": 3.198113990947604,
     "score": "ok"
    },
    "S7": {
     "verdict": "EQ",
     "detail": "equal at samples; same natural domain Reals",
-    "ms": 4.915595054626465,
+    "ms": 4.924191161990166,
     "score": "ok"
    }
   },
@@ -724,102 +724,102 @@
    "why": "Equal for every x != 1. At x=1 the left side is undefined (0/0) and the right side is 2. Valid only with x != 1."
   },
   "parse": "ok",
-  "parse_ms": 86.96312108077109,
+  "parse_ms": 87.2765660751611,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 4.400734091177583,
+    "ms": 4.376282915472984,
     "score": "partial"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: (x**2 + 1*(-1))/(x + 1*(-1)) vs x + 1",
-    "ms": 4.316084086894989,
+    "ms": 4.924587206915021,
     "score": "partial"
    },
    "S1": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 17.59050111286342,
+    "ms": 19.392410991713405,
     "score": "wrong"
    },
    "S2": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 18.073271960020065,
+    "ms": 19.238881999626756,
     "score": "wrong"
    },
    "S3r": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 5.446562077850103,
+    "ms": 5.326880142092705,
     "score": "wrong"
    },
    "S3c": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 10.026776930317283,
+    "ms": 10.216417023912072,
     "score": "wrong"
    },
    "S4": {
     "verdict": "EQ",
     "detail": "stage: cancel",
-    "ms": 14.96044103987515,
+    "ms": 15.717389062047005,
     "score": "wrong"
    },
    "S5r": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.764205913990736,
+    "ms": 2.89725698530674,
     "score": "na"
    },
    "S5c": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.5973098818212748,
+    "ms": 2.496009925380349,
     "score": "na"
    },
    "S6-S1r": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 16.313572181388736,
+    "ms": 16.375308157876134,
     "score": "wrong"
    },
    "S6-S1p": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 25.460060918703675,
+    "ms": 23.76526314765215,
     "score": "wrong"
    },
    "S6-S2r": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 17.120194155722857,
+    "ms": 16.438758000731468,
     "score": "wrong"
    },
    "S6-S2p": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 24.710817029699683,
+    "ms": 24.503475055098534,
     "score": "wrong"
    },
    "S6-S4r": {
     "verdict": "EQ",
     "detail": "stage: cancel",
-    "ms": 10.436162119731307,
+    "ms": 10.221336036920547,
     "score": "wrong"
    },
    "S6-S4p": {
     "verdict": "EQ",
     "detail": "stage: cancel",
-    "ms": 9.492130018770695,
+    "ms": 12.044065864756703,
     "score": "wrong"
    },
    "S7": {
     "verdict": "EQ_DOM",
-    "detail": "equal at samples; domain before Union(Interval.open(-oo, 1), Interval.open(1, oo)), after Reals ({1} defined after only)",
-    "ms": 16.354430932551622,
+    "detail": "equal at samples; excluded points before: {1}; after: EmptySet",
+    "ms": 16.715801088139415,
     "score": "ok"
    }
   },
@@ -843,102 +843,102 @@
    "why": "cos 2x = cos^2 x - sin^2 x = 2cos^2 x - 1 (use sin^2 = 1 - cos^2). True for all x."
   },
   "parse": "ok",
-  "parse_ms": 420.20372301340103,
+  "parse_ms": 412.36159997060895,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 6.161469966173172,
+    "ms": 5.470976000651717,
     "score": "wrong"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: -sin(x)**2 + cos(x)**2 vs 2*cos(x)**2 + 1*(-1)",
-    "ms": 4.846955183893442,
+    "ms": 4.05165390111506,
     "score": "wrong"
    },
    "S1": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 29.60275299847126,
+    "ms": 28.364812955260277,
     "score": "ok"
    },
    "S2": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 30.807950999587774,
+    "ms": 27.97932387329638,
     "score": "ok"
    },
    "S3r": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 6.557478103786707,
+    "ms": 5.705035058781505,
     "score": "ok"
    },
    "S3c": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 39.70795008353889,
+    "ms": 39.952805964276195,
     "score": "ok"
    },
    "S4": {
     "verdict": "EQ",
     "detail": "stage: trigsimp",
-    "ms": 58.836159063503146,
+    "ms": 58.49564494565129,
     "score": "ok"
    },
    "S5r": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 3.50782903842628,
+    "ms": 3.3946961630135775,
     "score": "na"
    },
    "S5c": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 3.003536956384778,
+    "ms": 2.9188550543040037,
     "score": "na"
    },
    "S6-S1r": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 29.533147113397717,
+    "ms": 28.62158603966236,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 30.117619084194303,
+    "ms": 27.306613977998495,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 28.886424843221903,
+    "ms": 29.34083412401378,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 29.2073511518538,
+    "ms": 26.691213017329574,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "EQ",
     "detail": "stage: trigsimp",
-    "ms": 26.30788809619844,
+    "ms": 25.02432814799249,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "EQ",
     "detail": "stage: trigsimp",
-    "ms": 26.93567704409361,
+    "ms": 24.839808931574225,
     "score": "ok"
    },
    "S7": {
     "verdict": "EQ",
     "detail": "equal at samples; same natural domain Reals",
-    "ms": 6.978078046813607,
+    "ms": 6.352666998282075,
     "score": "ok"
    }
   },
@@ -962,102 +962,102 @@
    "why": "Both have solution set {2}. Residuals 2x-4 and x-2 are proportional (factor 2)."
   },
   "parse": "ok",
-  "parse_ms": 75.2899800427258,
+  "parse_ms": 74.98875516466796,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 7.324335863813758,
+    "ms": 6.8800910376012325,
     "score": "wrong"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: Eq(2*x + 3, 7) vs Eq(x, 2)",
-    "ms": 3.7925448268651962,
+    "ms": 3.567691892385483,
     "score": "wrong"
    },
    "S1": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 4.264144925400615,
+    "ms": 4.192982101812959,
     "score": "ok"
    },
    "S2": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 5.067221121862531,
+    "ms": 4.369291942566633,
     "score": "ok"
    },
    "S3r": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 5.936086876317859,
+    "ms": 5.267349071800709,
     "score": "ok"
    },
    "S3c": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 11.357882060110569,
+    "ms": 11.470482917502522,
     "score": "ok"
    },
    "S4": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 4.359985934570432,
+    "ms": 3.9871339686214924,
     "score": "ok"
    },
    "S5r": {
     "verdict": "EQ",
     "detail": "{2} vs {2}",
-    "ms": 12.130860006436706,
+    "ms": 12.310357997193933,
     "score": "ok"
    },
    "S5c": {
     "verdict": "EQ",
     "detail": "{2} vs {2}",
-    "ms": 13.264268171042204,
+    "ms": 13.217927888035774,
     "score": "ok"
    },
    "S6-S1r": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 4.812420113012195,
+    "ms": 4.321614047512412,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 4.624524153769016,
+    "ms": 4.324198933318257,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 4.716961877420545,
+    "ms": 4.138228949159384,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 4.551087040454149,
+    "ms": 4.155640956014395,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 4.538924898952246,
+    "ms": 4.022259963676333,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 4.758738912642002,
+    "ms": 4.254847997799516,
     "score": "ok"
    },
    "S7": {
     "verdict": "EQ",
     "detail": "equal at samples; same natural domain Reals",
-    "ms": 6.9230839144438505,
+    "ms": 6.636482197791338,
     "score": "ok"
    }
   },
@@ -1081,102 +1081,102 @@
    "why": "Student added 3 instead of subtracting it. {2} vs {5}."
   },
   "parse": "ok",
-  "parse_ms": 90.85617493838072,
+  "parse_ms": 88.92128407023847,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 7.203319109976292,
+    "ms": 6.67234999127686,
     "score": "ok"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: Eq(2*x + 3, 7) vs Eq(2*x, 10)",
-    "ms": 3.9120919536799192,
+    "ms": 4.040332976728678,
     "score": "ok"
    },
    "S1": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=21*x/16 - 9/16 (non-zero is not a proof of NEQ)",
-    "ms": 15.541815897449851,
+    "ms": 17.364224884659052,
     "score": "ok"
    },
    "S2": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 18.007171107456088,
+    "ms": 19.434021785855293,
     "score": "ok"
    },
    "S3r": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
-    "ms": 7.927949074655771,
+    "ms": 7.868026848882437,
     "score": "ok"
    },
    "S3c": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. 0.133062+3.09545j vs -2.01676+1.06406j",
-    "ms": 8.213463006541133,
+    "ms": 8.46028421074152,
     "score": "ok"
    },
    "S4": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. 0.133062+3.09545j vs -2.01676+1.06406j",
-    "ms": 8.47621401771903,
+    "ms": 8.258372079581022,
     "score": "ok"
    },
    "S5r": {
     "verdict": "NEQ",
     "detail": "{2} vs {5}",
-    "ms": 13.5557830799371,
+    "ms": 14.739000936970115,
     "score": "ok"
    },
    "S5c": {
     "verdict": "NEQ",
     "detail": "{2} vs {5}",
-    "ms": 15.2479219250381,
+    "ms": 15.552244847640395,
     "score": "ok"
    },
    "S6-S1r": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=21*x/16 - 9/16 (non-zero is not a proof of NEQ)",
-    "ms": 15.980774071067572,
+    "ms": 15.819479012861848,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=21*x/16 - 9/16 (non-zero is not a proof of NEQ)",
-    "ms": 17.816193168982863,
+    "ms": 17.29958294890821,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 17.89630902931094,
+    "ms": 18.192628864198923,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 21.709830034524202,
+    "ms": 21.588155068457127,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
-    "ms": 8.13647685572505,
+    "ms": 9.3253159429878,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. 4.47533+0j vs -0.524104+0j",
-    "ms": 7.315052906051278,
+    "ms": 9.215349098667502,
     "score": "ok"
    },
    "S7": {
     "verdict": "NEQ",
     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
-    "ms": 7.0810208562761545,
+    "ms": 8.541506947949529,
     "score": "ok"
    }
   },
@@ -1200,102 +1200,102 @@
    "why": "Solutions of the first are {2,3}; the student kept only 2. The step loses a root, so it is not an equivalence (it is implied backwards only)."
   },
   "parse": "ok",
-  "parse_ms": 94.69700301997364,
+  "parse_ms": 98.0209638364613,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 8.4734580013901,
+    "ms": 8.080075960606337,
     "score": "ok"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: Eq((x**2 - 5*x) + 6, 0) vs Eq(x, 2)",
-    "ms": 4.500810988247395,
+    "ms": 3.8330629467964172,
     "score": "ok"
    },
    "S1": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=x**2 - 17*x/7 + 6/7 (non-zero is not a proof of NEQ)",
-    "ms": 17.804665956646204,
+    "ms": 17.786782002076507,
     "score": "ok"
    },
    "S2": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 19.754294073209167,
+    "ms": 19.572261022403836,
     "score": "ok"
    },
    "S3r": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
-    "ms": 8.029120974242687,
+    "ms": 7.916016969829798,
     "score": "ok"
    },
    "S3c": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. -2.45756-1.34178j vs -0.17108-3.97987j",
-    "ms": 9.273648960515857,
+    "ms": 9.704861091449857,
     "score": "ok"
    },
    "S4": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. -2.45756-1.34178j vs -0.17108-3.97987j",
-    "ms": 9.249955881386995,
+    "ms": 10.185768827795982,
     "score": "ok"
    },
    "S5r": {
     "verdict": "NARROW",
     "detail": "{2, 3} vs {2} (after is a proper subset: roots lost)",
-    "ms": 18.93908390775323,
+    "ms": 19.39929905347526,
     "score": "ok"
    },
    "S5c": {
     "verdict": "NARROW",
     "detail": "{2, 3} vs {2} (after is a proper subset: roots lost)",
-    "ms": 19.97324707917869,
+    "ms": 19.973146030679345,
     "score": "ok"
    },
    "S6-S1r": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=x**2 - 17*x/7 + 6/7 (non-zero is not a proof of NEQ)",
-    "ms": 18.721255008131266,
+    "ms": 17.391926143318415,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=x**2 - 17*x/7 + 6/7 (non-zero is not a proof of NEQ)",
-    "ms": 24.4816648773849,
+    "ms": 22.59763889014721,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 19.482953008264303,
+    "ms": 18.622749019414186,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 27.224181918427348,
+    "ms": 24.223085958510637,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
-    "ms": 9.344920050352812,
+    "ms": 7.9876030795276165,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. 2.76949+0j vs -5.754+0j",
-    "ms": 8.698803139850497,
+    "ms": 8.02668510004878,
     "score": "ok"
    },
    "S7": {
     "verdict": "NEQ",
     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
-    "ms": 7.53407902084291,
+    "ms": 6.718566874042153,
     "score": "ok"
    }
   },
@@ -1319,102 +1319,102 @@
    "why": "Same polynomial, same roots {2,3}; residuals are identical."
   },
   "parse": "ok",
-  "parse_ms": 140.93908807262778,
+  "parse_ms": 141.76539494656026,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 9.058794006705284,
+    "ms": 8.408586028963327,
     "score": "wrong"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: Eq((x**2 - 5*x) + 6, 0) vs Eq((x + 2*(-1))*(x + 3*(-1)), 0)",
-    "ms": 4.737155046314001,
+    "ms": 4.779066890478134,
     "score": "wrong"
    },
    "S1": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 14.788169879466295,
+    "ms": 13.8180130161345,
     "score": "ok"
    },
    "S2": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 14.669650001451373,
+    "ms": 15.121161937713623,
     "score": "ok"
    },
    "S3r": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 6.400938145816326,
+    "ms": 6.425573956221342,
     "score": "ok"
    },
    "S3c": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 11.938652023673058,
+    "ms": 13.089478947222233,
     "score": "ok"
    },
    "S4": {
     "verdict": "EQ",
     "detail": "stage: expand",
-    "ms": 13.336108066141605,
+    "ms": 15.504675917327404,
     "score": "ok"
    },
    "S5r": {
     "verdict": "EQ",
     "detail": "{2, 3} vs {2, 3}",
-    "ms": 21.837451960891485,
+    "ms": 21.551535930484533,
     "score": "ok"
    },
    "S5c": {
     "verdict": "EQ",
     "detail": "{2, 3} vs {2, 3}",
-    "ms": 22.455408005043864,
+    "ms": 23.35145603865385,
     "score": "ok"
    },
    "S6-S1r": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 14.95463796891272,
+    "ms": 14.685534173622727,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 22.516381926834583,
+    "ms": 21.3004220277071,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 15.349152032285929,
+    "ms": 13.848470989614725,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 21.497521083801985,
+    "ms": 20.792623981833458,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "EQ",
     "detail": "stage: expand",
-    "ms": 7.616000948473811,
+    "ms": 7.288523018360138,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "EQ",
     "detail": "stage: expand",
-    "ms": 7.64935789629817,
+    "ms": 7.853087969124317,
     "score": "ok"
    },
    "S7": {
     "verdict": "EQ",
     "detail": "equal at samples; same natural domain Reals",
-    "ms": 6.97633414529264,
+    "ms": 6.28514913842082,
     "score": "ok"
    }
   },
@@ -1439,102 +1439,102 @@
    "why": "Subtract 3, divide by 2: x=(y-3)/2. Same relation between x and y. Residuals y-2x-3 and x-(y-3)/2 are proportional (factor -2)."
   },
   "parse": "ok",
-  "parse_ms": 108.68104896508157,
+  "parse_ms": 111.65494099259377,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 10.028068907558918,
+    "ms": 9.476612089201808,
     "score": "wrong"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: Eq(y, 2*x + 3) vs Eq(x, (y + 3*(-1))/2)",
-    "ms": 4.187239101156592,
+    "ms": 3.8294249679893255,
     "score": "wrong"
    },
    "S1": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 4.639396909624338,
+    "ms": 4.8015599604696035,
     "score": "ok"
    },
    "S2": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 4.700951976701617,
+    "ms": 4.587825853377581,
     "score": "ok"
    },
    "S3r": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 6.356284022331238,
+    "ms": 6.248510908335447,
     "score": "ok"
    },
    "S3c": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 12.873488944023848,
+    "ms": 12.939620995894074,
     "score": "ok"
    },
    "S4": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 4.656657110899687,
+    "ms": 5.005826009437442,
     "score": "ok"
    },
    "S5r": {
     "verdict": "EQ",
     "detail": "Intersection({y/2 - 3/2}, Reals) vs Intersection({y/2 - 3/2}, Reals)",
-    "ms": 19.46617988869548,
+    "ms": 20.5589821562171,
     "score": "ok"
    },
    "S5c": {
     "verdict": "EQ",
     "detail": "{y/2 - 3/2} vs {y/2 - 3/2}",
-    "ms": 19.234454026445746,
+    "ms": 19.0071240067482,
     "score": "ok"
    },
    "S6-S1r": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 5.317433038726449,
+    "ms": 5.307860905304551,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 4.897069185972214,
+    "ms": 5.4133739322423935,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 4.914493067190051,
+    "ms": 5.403125891461968,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 4.984285915270448,
+    "ms": 5.5399329867213964,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 4.853247897699475,
+    "ms": 6.212718086317182,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 4.8397749196738005,
+    "ms": 5.447118077427149,
     "score": "ok"
    },
    "S7": {
     "verdict": "UND",
     "detail": "domain tracking implemented for one variable, got [x, y]",
-    "ms": 6.3397870399057865,
+    "ms": 6.503421114757657,
     "score": "und"
    }
   },
@@ -1558,102 +1558,102 @@
    "why": "Squaring gives x^2-3x=0, roots {0,3}. Only x=3 satisfies the original (x=0 gives 1=-1), so after follows from before but not conversely."
   },
   "parse": "ok",
-  "parse_ms": 123.14396514557302,
+  "parse_ms": 119.2910938989371,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 10.044591967016459,
+    "ms": 9.263808839023113,
     "score": "partial"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: Eq(sqrt(x + 1), x + 1*(-1)) vs Eq(x + 1, (x + 1*(-1))**2)",
-    "ms": 4.966059001162648,
+    "ms": 3.8389561232179403,
     "score": "partial"
    },
    "S1": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=-x + sqrt(x + 1) - 7*(4 + sqrt(70))*(x - (x - 1)**2 + 1)/54 + 1 (non-zero is not a proof of NEQ)",
-    "ms": 46.14198300987482,
+    "ms": 47.11690405383706,
     "score": "partial"
    },
    "S2": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 58.7201570160687,
+    "ms": 57.258248096331954,
     "score": "partial"
    },
    "S3r": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
-    "ms": 10.405133944004774,
+    "ms": 9.865304920822382,
     "score": "partial"
    },
    "S3c": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. 0.736454-1.11851j vs 6.93251-2.81127j",
-    "ms": 10.757028823718429,
+    "ms": 10.213881963863969,
     "score": "partial"
    },
    "S4": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. 0.736454-1.11851j vs 6.93251-2.81127j",
-    "ms": 12.82052299939096,
+    "ms": 10.344486916437745,
     "score": "partial"
    },
    "S5r": {
     "verdict": "WIDER",
     "detail": "{3} vs {0, 3} (after is a proper superset: extra roots)",
-    "ms": 31.356395920738578,
+    "ms": 28.27971102669835,
     "score": "ok"
    },
    "S5c": {
     "verdict": "WIDER",
     "detail": "{3} vs {0, 3} (after is a proper superset: extra roots)",
-    "ms": 32.99601515755057,
+    "ms": 30.235954094678164,
     "score": "ok"
    },
    "S6-S1r": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=-x + sqrt(x + 1) - 7*(4 + sqrt(70))*(x - (x - 1)**2 + 1)/54 + 1 (non-zero is not a proof of NEQ)",
-    "ms": 44.4074769038707,
+    "ms": 43.959165923297405,
     "score": "partial"
    },
    "S6-S1p": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=-x + sqrt(x + 1) - 7*(4 + sqrt(70))*(x - (x - 1)**2 + 1)/54 + 1 (non-zero is not a proof of NEQ)",
-    "ms": 54.44180499762297,
+    "ms": 53.989732870832086,
     "score": "partial"
    },
    "S6-S2r": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 54.66898297891021,
+    "ms": 52.9916319064796,
     "score": "partial"
    },
    "S6-S2p": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 64.68058517202735,
+    "ms": 65.38766901940107,
     "score": "partial"
    },
    "S6-S4r": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
-    "ms": 10.957134887576103,
+    "ms": 11.086890008300543,
     "score": "partial"
    },
    "S6-S4p": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. -0.949072+0j vs -8.40786+0j",
-    "ms": 10.426144115626812,
+    "ms": 9.949062950909138,
     "score": "partial"
    },
    "S7": {
     "verdict": "NEQ",
     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
-    "ms": 9.991828119382262,
+    "ms": 10.427695931866765,
     "score": "partial"
    }
   },
@@ -1677,102 +1677,102 @@
    "why": "{2} is a subset of {-2,2}: implied forwards, not backwards."
   },
   "parse": "ok",
-  "parse_ms": 66.51150179095566,
+  "parse_ms": 60.30604103580117,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 7.296140072867274,
+    "ms": 7.342394907027483,
     "score": "partial"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: Eq(x, 2) vs Eq(x**2, 4)",
-    "ms": 3.4458721056580544,
+    "ms": 3.0799410305917263,
     "score": "partial"
    },
    "S1": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=-7*x**2/17 + x - 6/17 (non-zero is not a proof of NEQ)",
-    "ms": 19.15690489113331,
+    "ms": 17.237124033272266,
     "score": "partial"
    },
    "S2": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 22.297503193840384,
+    "ms": 18.06070818565786,
     "score": "partial"
    },
    "S3r": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
-    "ms": 9.428089950233698,
+    "ms": 6.9146971218287945,
     "score": "partial"
    },
    "S3c": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. 0.0665311+1.54773j vs -0.874961+2.634j",
-    "ms": 10.243864031508565,
+    "ms": 7.849200861528516,
     "score": "partial"
    },
    "S4": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. 0.0665311+1.54773j vs -0.874961+2.634j",
-    "ms": 10.699192993342876,
+    "ms": 7.908252067863941,
     "score": "partial"
    },
    "S5r": {
     "verdict": "WIDER",
     "detail": "{2} vs {-2, 2} (after is a proper superset: extra roots)",
-    "ms": 16.267294995486736,
+    "ms": 12.092146091163158,
     "score": "ok"
    },
    "S5c": {
     "verdict": "WIDER",
     "detail": "{2} vs {-2, 2} (after is a proper superset: extra roots)",
-    "ms": 19.219284877181053,
+    "ms": 15.845318092033267,
     "score": "ok"
    },
    "S6-S1r": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=-7*x**2/17 + x - 6/17 (non-zero is not a proof of NEQ)",
-    "ms": 19.72385705448687,
+    "ms": 16.874850960448384,
     "score": "partial"
    },
    "S6-S1p": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=-7*x**2/17 + x - 6/17 (non-zero is not a proof of NEQ)",
-    "ms": 26.094006141647696,
+    "ms": 24.80358094908297,
     "score": "partial"
    },
    "S6-S2r": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 20.633514039218426,
+    "ms": 19.657591823488474,
     "score": "partial"
    },
    "S6-S2p": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 31.405021902173758,
+    "ms": 25.340012973174453,
     "score": "partial"
    },
    "S6-S4r": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
-    "ms": 8.804603945463896,
+    "ms": 7.367090089246631,
     "score": "partial"
    },
    "S6-S4p": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. 2.23767+0j vs 5.74734+0j",
-    "ms": 8.366505848243833,
+    "ms": 7.1210048627108335,
     "score": "partial"
    },
    "S7": {
     "verdict": "NEQ",
     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
-    "ms": 7.921417010948062,
+    "ms": 7.336434908211231,
     "score": "partial"
    }
   },
@@ -1796,102 +1796,102 @@
    "why": "x^2=3x has roots {0,3}. Dividing by x silently drops x=0 (division by zero)."
   },
   "parse": "ok",
-  "parse_ms": 74.31775098666549,
+  "parse_ms": 71.04549510404468,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 7.6247830875217915,
+    "ms": 6.320548010990024,
     "score": "ok"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: Eq(x**2, 3*x) vs Eq(x, 3)",
-    "ms": 4.381027072668076,
+    "ms": 3.4414830151945353,
     "score": "ok"
    },
    "S1": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=x**2 - 24*x/7 + 9/7 (non-zero is not a proof of NEQ)",
-    "ms": 19.30834399536252,
+    "ms": 18.74025585129857,
     "score": "ok"
    },
    "S2": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 20.909354090690613,
+    "ms": 22.165474016219378,
     "score": "ok"
    },
    "S3r": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
-    "ms": 8.280243957415223,
+    "ms": 8.049848955124617,
     "score": "ok"
    },
    "S3c": {
     "verdict": "NEQ",
     "detail": "differs at 1 of 1 points tried, e.g. -4.3245+1.75367j vs -0.400058+0.663311j",
-    "ms": 8.767231833189726,
+    "ms": 8.088462054729462,
     "score": "ok"
    },
    "S4": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (complex). differs at 1 of 1 points tried, e.g. -4.3245+1.75367j vs -0.400058+0.663311j",
-    "ms": 9.012575028464198,
+    "ms": 8.53317091241479,
     "score": "ok"
    },
    "S5r": {
     "verdict": "NARROW",
     "detail": "{0, 3} vs {3} (after is a proper subset: roots lost)",
-    "ms": 17.359805991873145,
+    "ms": 15.844608191400766,
     "score": "ok"
    },
    "S5c": {
     "verdict": "NARROW",
     "detail": "{0, 3} vs {3} (after is a proper subset: roots lost)",
-    "ms": 18.212113995105028,
+    "ms": 17.394406022503972,
     "score": "ok"
    },
    "S6-S1r": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=x**2 - 24*x/7 + 9/7 (non-zero is not a proof of NEQ)",
-    "ms": 19.328159978613257,
+    "ms": 18.492473987862468,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=x**2 - 24*x/7 + 9/7 (non-zero is not a proof of NEQ)",
-    "ms": 24.60177196189761,
+    "ms": 22.835556883364916,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 19.93933808989823,
+    "ms": 19.363401923328638,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "NEQ",
     "detail": "equals=False",
-    "ms": 27.75219501927495,
+    "ms": 25.394652038812637,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (real). differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
-    "ms": 8.294501109048724,
+    "ms": 7.852231152355671,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (pos). differs at 1 of 1 points tried, e.g. 5.24482+0j vs 0.530429+0j",
-    "ms": 7.626740029081702,
+    "ms": 7.334057940170169,
     "score": "ok"
    },
    "S7": {
     "verdict": "NEQ",
     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
-    "ms": 7.241284009069204,
+    "ms": 7.543765008449554,
     "score": "ok"
    }
   },
@@ -1915,102 +1915,102 @@
    "why": "Left has no solution (x=1 is excluded, any other x gives x+1=2 -> x=1). Right has {1}. The step is valid only if x != 1 is assumed, and then it shows no solution. Also one-way in solution-set terms (empty set implies {1} vacuously), so S5 reports WIDER here; that is not a mislabel."
   },
   "parse": "ok",
-  "parse_ms": 115.49932393245399,
+  "parse_ms": 110.57315301150084,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 9.531074203550816,
+    "ms": 8.630303898826241,
     "score": "partial"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: Eq((x**2 + 1*(-1))/(x + 1*(-1)), 2) vs Eq(x + 1, 2)",
-    "ms": 4.9059169832617044,
+    "ms": 4.072073148563504,
     "score": "partial"
    },
    "S1": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 17.827008152380586,
+    "ms": 17.065861960873008,
     "score": "wrong"
    },
    "S2": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 17.883643973618746,
+    "ms": 18.25992902740836,
     "score": "wrong"
    },
    "S3r": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 6.68772985227406,
+    "ms": 6.629308918491006,
     "score": "wrong"
    },
    "S3c": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 11.524294968694448,
+    "ms": 10.784939862787724,
     "score": "wrong"
    },
    "S4": {
     "verdict": "EQ",
     "detail": "stage: cancel",
-    "ms": 16.33061491884291,
+    "ms": 15.107515966519713,
     "score": "wrong"
    },
    "S5r": {
     "verdict": "WIDER",
     "detail": "EmptySet vs {1} (after is a proper superset: extra roots)",
-    "ms": 25.019638938829303,
+    "ms": 23.87947798706591,
     "score": "ok"
    },
    "S5c": {
     "verdict": "WIDER",
     "detail": "EmptySet vs {1} (after is a proper superset: extra roots)",
-    "ms": 25.088780093938112,
+    "ms": 23.86180404573679,
     "score": "ok"
    },
    "S6-S1r": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 18.11689999885857,
+    "ms": 16.843209974467754,
     "score": "wrong"
    },
    "S6-S1p": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 25.776669150218368,
+    "ms": 25.359735125675797,
     "score": "wrong"
    },
    "S6-S2r": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 18.279791809618473,
+    "ms": 17.571725882589817,
     "score": "wrong"
    },
    "S6-S2p": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 26.242295978590846,
+    "ms": 24.502793792635202,
     "score": "wrong"
    },
    "S6-S4r": {
     "verdict": "EQ",
     "detail": "stage: cancel",
-    "ms": 11.821925872936845,
+    "ms": 10.522755095735192,
     "score": "wrong"
    },
    "S6-S4p": {
     "verdict": "EQ",
     "detail": "stage: cancel",
-    "ms": 11.499978136271238,
+    "ms": 10.135444113984704,
     "score": "wrong"
    },
    "S7": {
     "verdict": "EQ_DOM",
-    "detail": "equal at samples; domain before Union(Interval.open(-oo, 1), Interval.open(1, oo)), after Reals ({1} defined after only)",
-    "ms": 17.316364916041493,
+    "detail": "equal at samples; excluded points before: {1}; after: EmptySet",
+    "ms": 16.954030143097043,
     "score": "ok"
    }
   },
@@ -2034,102 +2034,102 @@
    "why": "(4x+8)/4 = x+2. Tests ':' -> \\div in the normalizer."
   },
   "parse": "ok",
-  "parse_ms": 73.76857311464846,
+  "parse_ms": 72.75626203045249,
   "cells": {
    "S0e": {
     "verdict": "EQ",
     "detail": "identical after parse (evaluated)",
-    "ms": 3.5076390486210585,
+    "ms": 2.7950138319283724,
     "score": "ok"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: (4*x + 8)/4 vs x + 2",
-    "ms": 4.035223973914981,
+    "ms": 3.720459993928671,
     "score": "wrong"
    },
    "S1": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 3.706529038026929,
+    "ms": 2.9661168809980154,
     "score": "ok"
    },
    "S2": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 3.0420911498367786,
+    "ms": 2.5390509981662035,
     "score": "ok"
    },
    "S3r": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 4.36365301720798,
+    "ms": 4.003718961030245,
     "score": "ok"
    },
    "S3c": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 9.079683106392622,
+    "ms": 8.630665950477123,
     "score": "ok"
    },
    "S4": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 3.058160189539194,
+    "ms": 2.6754289865493774,
     "score": "ok"
    },
    "S5r": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.682361053302884,
+    "ms": 2.7383870910853148,
     "score": "na"
    },
    "S5c": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.56557110697031,
+    "ms": 3.2039759680628777,
     "score": "na"
    },
    "S6-S1r": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 3.4413428511470556,
+    "ms": 3.4297259990125895,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 3.4918191377073526,
+    "ms": 3.264850936830044,
     "score": "ok"
    },
    "S6-S2r": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 3.6100810393691063,
+    "ms": 3.107408992946148,
     "score": "ok"
    },
    "S6-S2p": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 3.2680160365998745,
+    "ms": 3.3333690371364355,
     "score": "ok"
    },
    "S6-S4r": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 3.3413348719477654,
+    "ms": 3.710696939378977,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 3.28621082007885,
+    "ms": 3.4328980837017298,
     "score": "ok"
    },
    "S7": {
     "verdict": "EQ",
     "detail": "equal at samples; same natural domain Reals",
-    "ms": 4.8540078569203615,
+    "ms": 5.0518319476395845,
     "score": "ok"
    }
   },
@@ -2153,102 +2153,102 @@
    "why": "tan x = sin x / cos x, so tan x cos x = sin x where cos x != 0. At x = pi/2 the left side is undefined and the right side is 1. Tests tg -> \\tan."
   },
   "parse": "ok",
-  "parse_ms": 205.02942497842014,
+  "parse_ms": 193.1518840137869,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 6.209748098626733,
+    "ms": 4.976961063221097,
     "score": "partial"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: cos(x)*tan(x) vs sin(x)",
-    "ms": 3.995958948507905,
+    "ms": 3.063259879127145,
     "score": "partial"
    },
    "S1": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 19.812474958598614,
+    "ms": 18.812938127666712,
     "score": "wrong"
    },
    "S2": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 21.270455792546272,
+    "ms": 19.291658885776997,
     "score": "wrong"
    },
    "S3r": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 5.350040039047599,
+    "ms": 4.789097001776099,
     "score": "wrong"
    },
    "S3c": {
     "verdict": "EQ",
     "detail": "10/10 points agree (rtol 1e-09)",
-    "ms": 47.03459911979735,
+    "ms": 43.47760905511677,
     "score": "wrong"
    },
    "S4": {
     "verdict": "EQ",
     "detail": "stage: trigsimp",
-    "ms": 63.824160024523735,
+    "ms": 53.990052081644535,
     "score": "wrong"
    },
    "S5r": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 3.5851241555064917,
+    "ms": 2.6588470209389925,
     "score": "na"
    },
    "S5c": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 3.7306349258869886,
+    "ms": 2.490307902917266,
     "score": "na"
    },
    "S6-S1r": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 21.2124849203974,
+    "ms": 18.98898114450276,
     "score": "wrong"
    },
    "S6-S1p": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 22.931249113753438,
+    "ms": 20.60156501829624,
     "score": "wrong"
    },
    "S6-S2r": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 23.422711063176394,
+    "ms": 18.88502389192581,
     "score": "wrong"
    },
    "S6-S2p": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 23.9822119474411,
+    "ms": 20.297789946198463,
     "score": "wrong"
    },
    "S6-S4r": {
     "verdict": "EQ",
     "detail": "stage: trigsimp",
-    "ms": 18.50507198832929,
+    "ms": 16.868829960003495,
     "score": "wrong"
    },
    "S6-S4p": {
     "verdict": "EQ",
     "detail": "stage: trigsimp",
-    "ms": 17.904443899169564,
+    "ms": 16.750165028497577,
     "score": "wrong"
    },
    "S7": {
     "verdict": "EQ_DOM",
-    "detail": "equal at samples; domain before Complement(Reals, Union(ImageSet(Lambda(_n, 2*_n*pi + pi/2), Integers), ImageSet(Lambda(_n, 2*_n*pi + 3*pi/2), Integers))), after Reals (Complement(Reals, Complement(Reals, Union(ImageSet(Lambda(_n, 2*_n*pi + pi/2), Integers), ImageSet(Lambda(_n, 2*_n*pi + 3*pi/2), Integers)))) defined after only)",
-    "ms": 68.77546198666096,
+    "detail": "equal at samples; excluded points before: Union(ImageSet(Lambda(n_, 2*pi*n_ + pi/2), Integers), ImageSet(Lambda(n_, 2*pi*n_ + 3*pi/2), Integers)); after: EmptySet",
+    "ms": 56.51037790812552,
     "score": "ok"
    }
   },
@@ -2272,102 +2272,102 @@
    "why": "sqrt(x^2) = |x|, equal to x only for x >= 0. A classic student mistake: wrong for every x < 0 where both sides are defined. True only under the assumption x >= 0, which is not a removable singularity like #7, #17, #19."
   },
   "parse": "ok",
-  "parse_ms": 55.44494604691863,
+  "parse_ms": 53.41793200932443,
   "cells": {
    "S0e": {
     "verdict": "NEQ",
     "detail": "structure differs (evaluated trees)",
-    "ms": 13.608661945909262,
+    "ms": 12.400119099766016,
     "score": "ok"
    },
    "S0u": {
     "verdict": "NEQ",
     "detail": "unevaluated trees differ: sqrt(x**2) vs x",
-    "ms": 3.472146112471819,
+    "ms": 3.2314080744981766,
     "score": "ok"
    },
    "S1": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=-x + sqrt(x**2) (non-zero is not a proof of NEQ)",
-    "ms": 20.42177296243608,
+    "ms": 19.01474199257791,
     "score": "ok"
    },
    "S2": {
     "verdict": "UND",
     "detail": "equals=None",
-    "ms": 63.72727290727198,
+    "ms": 60.83810515701771,
     "score": "und"
    },
    "S3r": {
     "verdict": "NEQ",
     "detail": "differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
-    "ms": 4.504949087277055,
+    "ms": 4.281505011022091,
     "score": "ok"
    },
    "S3c": {
     "verdict": "NEQ",
     "detail": "differs at 2 of 2 points tried, e.g. 0.476571+1.4465j vs -0.476571-1.4465j",
-    "ms": 5.803499836474657,
+    "ms": 5.11062890291214,
     "score": "ok"
    },
    "S4": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (complex). differs at 2 of 2 points tried, e.g. 0.476571+1.4465j vs -0.476571-1.4465j",
-    "ms": 5.512673174962401,
+    "ms": 5.120414076372981,
     "score": "ok"
    },
    "S5r": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.767090918496251,
+    "ms": 2.909300150349736,
     "score": "na"
    },
    "S5c": {
     "verdict": "NA",
     "detail": "no solution set for an expression",
-    "ms": 2.9461239464581013,
+    "ms": 2.4215090088546276,
     "score": "na"
    },
    "S6-S1r": {
     "verdict": "NEQ",
     "detail": "simplify(A-B)=-x + Abs(x) (non-zero is not a proof of NEQ)",
-    "ms": 12.027282966300845,
+    "ms": 10.334230028092861,
     "score": "ok"
    },
    "S6-S1p": {
     "verdict": "EQ",
     "detail": "simplify(A-B)=0",
-    "ms": 4.455432994291186,
+    "ms": 3.723466070368886,
     "score": "wrong"
    },
    "S6-S2r": {
     "verdict": "UND",
     "detail": "equals=None",
-    "ms": 50.4323928616941,
+    "ms": 49.257149919867516,
     "score": "und"
    },
    "S6-S2p": {
     "verdict": "EQ",
     "detail": "equals=True",
-    "ms": 4.635005025193095,
+    "ms": 3.9464060682803392,
     "score": "wrong"
    },
    "S6-S4r": {
     "verdict": "NEQ",
     "detail": "stage: numeric reject (real). differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
-    "ms": 5.028027109801769,
+    "ms": 4.663324914872646,
     "score": "ok"
    },
    "S6-S4p": {
     "verdict": "EQ",
     "detail": "stage: structural",
-    "ms": 3.9744400419294834,
+    "ms": 3.650777041912079,
     "score": "wrong"
    },
    "S7": {
     "verdict": "NEQ",
     "detail": "numeric(real): differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
-    "ms": 3.7323269061744213,
+    "ms": 3.774413838982582,
     "score": "ok"
    }
   },

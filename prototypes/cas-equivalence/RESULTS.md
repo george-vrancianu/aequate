@@ -34,7 +34,7 @@ Labels: EQUIV = equivalent; NOT_EQUIV = student mistake; DOMAIN = equal only und
 | 20 | sqrt of a square | `\sqrt{x^2}` | `x` | expr | NOT_EQUIV | `sqrt(x**2)` ; `x` | `sqrt(x**2)` ; `x` | sqrt(x^2) = /x/, equal to x only for x >= 0. A classic student mistake: wrong for every x < 0 where both sides are defined. True only under the assumption x >= 0, which is not a removable singularity like #7, #17, #19. |
 
 Parse stack (ANTLR strict + normalizer + whitelist + Lark cross-check): 20/20 steps accepted.
- Median parse time 94 ms (includes worker spawn, ANTLR, Lark cross-check).
+ Median parse time 97 ms (includes worker spawn, ANTLR, Lark cross-check).
 
 ## 1. Step x strategy: verdict and time
 
@@ -44,26 +44,26 @@ Equations: S0 compares the Eq objects; S1-S4, S6, S7 test whether the residuals 
 
 | # | expected | S0e | S0u | S1 | S2 | S3r | S3c | S4 | S5r | S5c | S6-S1r | S6-S1p | S6-S2r | S6-S2p | S6-S4r | S6-S4p | S7 |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| 1 | EQUIV | NEQ ! 5ms | NEQ ! 4ms | EQ 13ms | EQ 14ms | EQ 5ms | EQ 12ms | EQ 13ms | NA 3ms | NA 3ms | EQ 13ms | EQ 19ms | EQ 14ms | EQ 17ms | EQ 6ms | EQ 6ms | EQ 6ms |
-| 2 | NOT_EQUIV | NEQ 4ms | NEQ 4ms | NEQ 16ms | NEQ 17ms | NEQ 4ms | NEQ 5ms | NEQ 5ms | NA 3ms | NA 3ms | NEQ 15ms | NEQ 22ms | NEQ 17ms | NEQ 26ms | NEQ 4ms | NEQ 4ms | NEQ 4ms |
-| 3 | NOT_EQUIV | NEQ 5ms | NEQ 5ms | NEQ 16ms | NEQ 16ms | NEQ 4ms | NEQ 5ms | NEQ 5ms | NA 3ms | NA 3ms | NEQ 15ms | NEQ 21ms | NEQ 16ms | NEQ 23ms | NEQ 6ms | NEQ 6ms | NEQ 4ms |
-| 4 | EQUIV | NEQ ! 5ms | NEQ ! 5ms | EQ 15ms | EQ 15ms | EQ 5ms | EQ 12ms | EQ 12ms | NA 3ms | NA 3ms | EQ 14ms | EQ 23ms | EQ 14ms | EQ 21ms | EQ 7ms | EQ 7ms | EQ 6ms |
-| 5 | EQUIV | EQ 3ms | NEQ ! 4ms | EQ 3ms | EQ 3ms | EQ 4ms | EQ 10ms | EQ 3ms | NA 3ms | NA 3ms | EQ 4ms | EQ 4ms | EQ 3ms | EQ 3ms | EQ 3ms | EQ 3ms | EQ 5ms |
-| 6 | EQUIV | EQ 3ms | NEQ ! 4ms | EQ 3ms | EQ 3ms | EQ 4ms | EQ 10ms | EQ 3ms | NA 3ms | NA 3ms | EQ 3ms | EQ 4ms | EQ 3ms | EQ 3ms | EQ 3ms | EQ 3ms | EQ 5ms |
-| 7 | DOMAIN | NEQ ~ 4ms | NEQ ~ 4ms | EQ ! 18ms | EQ ! 18ms | EQ ! 5ms | EQ ! 10ms | EQ ! 15ms | NA 3ms | NA 3ms | EQ ! 16ms | EQ ! 25ms | EQ ! 17ms | EQ ! 25ms | EQ ! 10ms | EQ ! 9ms | EQ_DOM 16ms |
-| 8 | EQUIV | NEQ ! 6ms | NEQ ! 5ms | EQ 30ms | EQ 31ms | EQ 7ms | EQ 40ms | EQ 59ms | NA 4ms | NA 3ms | EQ 30ms | EQ 30ms | EQ 29ms | EQ 29ms | EQ 26ms | EQ 27ms | EQ 7ms |
-| 9 | EQUIV | NEQ ! 7ms | NEQ ! 4ms | EQ 4ms | EQ 5ms | EQ 6ms | EQ 11ms | EQ 4ms | EQ 12ms | EQ 13ms | EQ 5ms | EQ 5ms | EQ 5ms | EQ 5ms | EQ 5ms | EQ 5ms | EQ 7ms |
-| 10 | NOT_EQUIV | NEQ 7ms | NEQ 4ms | NEQ 16ms | NEQ 18ms | NEQ 8ms | NEQ 8ms | NEQ 8ms | NEQ 14ms | NEQ 15ms | NEQ 16ms | NEQ 18ms | NEQ 18ms | NEQ 22ms | NEQ 8ms | NEQ 7ms | NEQ 7ms |
-| 11 | NOT_EQUIV | NEQ 8ms | NEQ 5ms | NEQ 18ms | NEQ 20ms | NEQ 8ms | NEQ 9ms | NEQ 9ms | NARROW 19ms | NARROW 20ms | NEQ 19ms | NEQ 24ms | NEQ 19ms | NEQ 27ms | NEQ 9ms | NEQ 9ms | NEQ 8ms |
-| 12 | EQUIV | NEQ ! 9ms | NEQ ! 5ms | EQ 15ms | EQ 15ms | EQ 6ms | EQ 12ms | EQ 13ms | EQ 22ms | EQ 22ms | EQ 15ms | EQ 23ms | EQ 15ms | EQ 21ms | EQ 8ms | EQ 8ms | EQ 7ms |
-| 13 | EQUIV | NEQ ! 10ms | NEQ ! 4ms | EQ 5ms | EQ 5ms | EQ 6ms | EQ 13ms | EQ 5ms | EQ 19ms | EQ 19ms | EQ 5ms | EQ 5ms | EQ 5ms | EQ 5ms | EQ 5ms | EQ 5ms | UND 6ms |
-| 14 | ONEWAY | NEQ ~ 10ms | NEQ ~ 5ms | NEQ ~ 46ms | NEQ ~ 59ms | NEQ ~ 10ms | NEQ ~ 11ms | NEQ ~ 13ms | WIDER 31ms | WIDER 33ms | NEQ ~ 44ms | NEQ ~ 54ms | NEQ ~ 55ms | NEQ ~ 65ms | NEQ ~ 11ms | NEQ ~ 10ms | NEQ ~ 10ms |
-| 15 | ONEWAY | NEQ ~ 7ms | NEQ ~ 3ms | NEQ ~ 19ms | NEQ ~ 22ms | NEQ ~ 9ms | NEQ ~ 10ms | NEQ ~ 11ms | WIDER 16ms | WIDER 19ms | NEQ ~ 20ms | NEQ ~ 26ms | NEQ ~ 21ms | NEQ ~ 31ms | NEQ ~ 9ms | NEQ ~ 8ms | NEQ ~ 8ms |
-| 16 | NOT_EQUIV | NEQ 8ms | NEQ 4ms | NEQ 19ms | NEQ 21ms | NEQ 8ms | NEQ 9ms | NEQ 9ms | NARROW 17ms | NARROW 18ms | NEQ 19ms | NEQ 25ms | NEQ 20ms | NEQ 28ms | NEQ 8ms | NEQ 8ms | NEQ 7ms |
-| 17 | DOMAIN | NEQ ~ 10ms | NEQ ~ 5ms | EQ ! 18ms | EQ ! 18ms | EQ ! 7ms | EQ ! 12ms | EQ ! 16ms | WIDER 25ms | WIDER 25ms | EQ ! 18ms | EQ ! 26ms | EQ ! 18ms | EQ ! 26ms | EQ ! 12ms | EQ ! 11ms | EQ_DOM 17ms |
-| 18 | EQUIV | EQ 4ms | NEQ ! 4ms | EQ 4ms | EQ 3ms | EQ 4ms | EQ 9ms | EQ 3ms | NA 3ms | NA 3ms | EQ 3ms | EQ 3ms | EQ 4ms | EQ 3ms | EQ 3ms | EQ 3ms | EQ 5ms |
-| 19 | DOMAIN | NEQ ~ 6ms | NEQ ~ 4ms | EQ ! 20ms | EQ ! 21ms | EQ ! 5ms | EQ ! 47ms | EQ ! 64ms | NA 4ms | NA 4ms | EQ ! 21ms | EQ ! 23ms | EQ ! 23ms | EQ ! 24ms | EQ ! 19ms | EQ ! 18ms | EQ_DOM 69ms |
-| 20 | NOT_EQUIV | NEQ 14ms | NEQ 3ms | NEQ 20ms | UND 64ms | NEQ 5ms | NEQ 6ms | NEQ 6ms | NA 3ms | NA 3ms | NEQ 12ms | EQ ! 4ms | UND 50ms | EQ ! 5ms | NEQ 5ms | EQ ! 4ms | NEQ 4ms |
+| 1 | EQUIV | NEQ ! 5ms | NEQ ! 4ms | EQ 15ms | EQ 19ms | EQ 5ms | EQ 11ms | EQ 11ms | NA 3ms | NA 3ms | EQ 13ms | EQ 22ms | EQ 17ms | EQ 18ms | EQ 7ms | EQ 7ms | EQ 5ms |
+| 2 | NOT_EQUIV | NEQ 3ms | NEQ 4ms | NEQ 16ms | NEQ 17ms | NEQ 4ms | NEQ 5ms | NEQ 5ms | NA 3ms | NA 2ms | NEQ 15ms | NEQ 35ms | NEQ 23ms | NEQ 25ms | NEQ 4ms | NEQ 4ms | NEQ 3ms |
+| 3 | NOT_EQUIV | NEQ 4ms | NEQ 6ms | NEQ 16ms | NEQ 15ms | NEQ 4ms | NEQ 5ms | NEQ 5ms | NA 2ms | NA 2ms | NEQ 14ms | NEQ 20ms | NEQ 14ms | NEQ 20ms | NEQ 4ms | NEQ 4ms | NEQ 4ms |
+| 4 | EQUIV | NEQ ! 4ms | NEQ ! 4ms | EQ 15ms | EQ 15ms | EQ 6ms | EQ 11ms | EQ 12ms | NA 3ms | NA 3ms | EQ 14ms | EQ 23ms | EQ 13ms | EQ 22ms | EQ 6ms | EQ 6ms | EQ 6ms |
+| 5 | EQUIV | EQ 3ms | NEQ ! 4ms | EQ 3ms | EQ 3ms | EQ 5ms | EQ 10ms | EQ 3ms | NA 2ms | NA 2ms | EQ 4ms | EQ 4ms | EQ 4ms | EQ 3ms | EQ 3ms | EQ 3ms | EQ 5ms |
+| 6 | EQUIV | EQ 3ms | NEQ ! 4ms | EQ 3ms | EQ 3ms | EQ 4ms | EQ 11ms | EQ 3ms | NA 3ms | NA 2ms | EQ 4ms | EQ 4ms | EQ 5ms | EQ 4ms | EQ 4ms | EQ 3ms | EQ 5ms |
+| 7 | DOMAIN | NEQ ~ 4ms | NEQ ~ 5ms | EQ ! 19ms | EQ ! 19ms | EQ ! 5ms | EQ ! 10ms | EQ ! 16ms | NA 3ms | NA 2ms | EQ ! 16ms | EQ ! 24ms | EQ ! 16ms | EQ ! 25ms | EQ ! 10ms | EQ ! 12ms | EQ_DOM 17ms |
+| 8 | EQUIV | NEQ ! 5ms | NEQ ! 4ms | EQ 28ms | EQ 28ms | EQ 6ms | EQ 40ms | EQ 58ms | NA 3ms | NA 3ms | EQ 29ms | EQ 27ms | EQ 29ms | EQ 27ms | EQ 25ms | EQ 25ms | EQ 6ms |
+| 9 | EQUIV | NEQ ! 7ms | NEQ ! 4ms | EQ 4ms | EQ 4ms | EQ 5ms | EQ 11ms | EQ 4ms | EQ 12ms | EQ 13ms | EQ 4ms | EQ 4ms | EQ 4ms | EQ 4ms | EQ 4ms | EQ 4ms | EQ 7ms |
+| 10 | NOT_EQUIV | NEQ 7ms | NEQ 4ms | NEQ 17ms | NEQ 19ms | NEQ 8ms | NEQ 8ms | NEQ 8ms | NEQ 15ms | NEQ 16ms | NEQ 16ms | NEQ 17ms | NEQ 18ms | NEQ 22ms | NEQ 9ms | NEQ 9ms | NEQ 9ms |
+| 11 | NOT_EQUIV | NEQ 8ms | NEQ 4ms | NEQ 18ms | NEQ 20ms | NEQ 8ms | NEQ 10ms | NEQ 10ms | NARROW 19ms | NARROW 20ms | NEQ 17ms | NEQ 23ms | NEQ 19ms | NEQ 24ms | NEQ 8ms | NEQ 8ms | NEQ 7ms |
+| 12 | EQUIV | NEQ ! 8ms | NEQ ! 5ms | EQ 14ms | EQ 15ms | EQ 6ms | EQ 13ms | EQ 16ms | EQ 22ms | EQ 23ms | EQ 15ms | EQ 21ms | EQ 14ms | EQ 21ms | EQ 7ms | EQ 8ms | EQ 6ms |
+| 13 | EQUIV | NEQ ! 9ms | NEQ ! 4ms | EQ 5ms | EQ 5ms | EQ 6ms | EQ 13ms | EQ 5ms | EQ 21ms | EQ 19ms | EQ 5ms | EQ 5ms | EQ 5ms | EQ 6ms | EQ 6ms | EQ 5ms | UND 7ms |
+| 14 | ONEWAY | NEQ ~ 9ms | NEQ ~ 4ms | NEQ ~ 47ms | NEQ ~ 57ms | NEQ ~ 10ms | NEQ ~ 10ms | NEQ ~ 10ms | WIDER 28ms | WIDER 30ms | NEQ ~ 44ms | NEQ ~ 54ms | NEQ ~ 53ms | NEQ ~ 65ms | NEQ ~ 11ms | NEQ ~ 10ms | NEQ ~ 10ms |
+| 15 | ONEWAY | NEQ ~ 7ms | NEQ ~ 3ms | NEQ ~ 17ms | NEQ ~ 18ms | NEQ ~ 7ms | NEQ ~ 8ms | NEQ ~ 8ms | WIDER 12ms | WIDER 16ms | NEQ ~ 17ms | NEQ ~ 25ms | NEQ ~ 20ms | NEQ ~ 25ms | NEQ ~ 7ms | NEQ ~ 7ms | NEQ ~ 7ms |
+| 16 | NOT_EQUIV | NEQ 6ms | NEQ 3ms | NEQ 19ms | NEQ 22ms | NEQ 8ms | NEQ 8ms | NEQ 9ms | NARROW 16ms | NARROW 17ms | NEQ 18ms | NEQ 23ms | NEQ 19ms | NEQ 25ms | NEQ 8ms | NEQ 7ms | NEQ 8ms |
+| 17 | DOMAIN | NEQ ~ 9ms | NEQ ~ 4ms | EQ ! 17ms | EQ ! 18ms | EQ ! 7ms | EQ ! 11ms | EQ ! 15ms | WIDER 24ms | WIDER 24ms | EQ ! 17ms | EQ ! 25ms | EQ ! 18ms | EQ ! 25ms | EQ ! 11ms | EQ ! 10ms | EQ_DOM 17ms |
+| 18 | EQUIV | EQ 3ms | NEQ ! 4ms | EQ 3ms | EQ 3ms | EQ 4ms | EQ 9ms | EQ 3ms | NA 3ms | NA 3ms | EQ 3ms | EQ 3ms | EQ 3ms | EQ 3ms | EQ 4ms | EQ 3ms | EQ 5ms |
+| 19 | DOMAIN | NEQ ~ 5ms | NEQ ~ 3ms | EQ ! 19ms | EQ ! 19ms | EQ ! 5ms | EQ ! 43ms | EQ ! 54ms | NA 3ms | NA 2ms | EQ ! 19ms | EQ ! 21ms | EQ ! 19ms | EQ ! 20ms | EQ ! 17ms | EQ ! 17ms | EQ_DOM 57ms |
+| 20 | NOT_EQUIV | NEQ 12ms | NEQ 3ms | NEQ 19ms | UND 61ms | NEQ 4ms | NEQ 5ms | NEQ 5ms | NA 3ms | NA 2ms | NEQ 10ms | EQ ! 4ms | UND 49ms | EQ ! 4ms | NEQ 5ms | EQ ! 4ms | NEQ 4ms |
 
 Strategy key: S0e = structural ==, evaluated trees; S0u = structural ==, unevaluated trees; S1 = simplify(A-B)==0; S2 = A.equals(B); S3r = numeric, real pts; S3c = numeric, complex pts; S4 = layered (STACK-style); S5r = solveset over R; S5c = solveset over C; S6-S1r = S1, real symbols; S6-S1p = S1, positive symbols; S6-S2r = S2, real symbols; S6-S2p = S2, positive symbols; S6-S4r = S4, real symbols; S6-S4p = S4, positive symbols; S7 = domain tracking (symbolic) over numeric.
 
@@ -73,38 +73,41 @@ Accuracy = correct / (correct + partial + wrong) over decided, applicable steps.
 
 | strategy | correct | partial | wrong | undecided | timeouts | errors | N/A | accuracy | median ms | max ms |
 |---|---|---|---|---|---|---|---|---|---|---|
-| S0e structural ==, evaluated trees | 9 | 5 | 6 | 0 | 0 | 0 | 0 | 45% (9/20) | 7 | 14 |
-| S0u structural ==, unevaluated trees | 6 | 5 | 9 | 0 | 0 | 0 | 0 | 30% (6/20) | 4 | 5 |
-| S1 simplify(A-B)==0 | 15 | 2 | 3 | 0 | 0 | 0 | 0 | 75% (15/20) | 16 | 46 |
-| S2 A.equals(B) | 14 | 2 | 3 | 1 | 0 | 0 | 0 | 74% (14/19) | 17 | 64 |
+| S0e structural ==, evaluated trees | 9 | 5 | 6 | 0 | 0 | 0 | 0 | 45% (9/20) | 6 | 12 |
+| S0u structural ==, unevaluated trees | 6 | 5 | 9 | 0 | 0 | 0 | 0 | 30% (6/20) | 4 | 6 |
+| S1 simplify(A-B)==0 | 15 | 2 | 3 | 0 | 0 | 0 | 0 | 75% (15/20) | 16 | 47 |
+| S2 A.equals(B) | 14 | 2 | 3 | 1 | 0 | 0 | 0 | 74% (14/19) | 18 | 61 |
 | S3r numeric, real pts | 15 | 2 | 3 | 0 | 0 | 0 | 0 | 75% (15/20) | 6 | 10 |
-| S3c numeric, complex pts | 15 | 2 | 3 | 0 | 0 | 0 | 0 | 75% (15/20) | 10 | 47 |
-| S4 layered (STACK-style) | 15 | 2 | 3 | 0 | 0 | 0 | 0 | 75% (15/20) | 9 | 64 |
-| S5r solveset over R | 9 | 0 | 0 | 0 | 0 | 0 | 11 | 100% (9/9) | 4 | 31 |
-| S5c solveset over C | 9 | 0 | 0 | 0 | 0 | 0 | 11 | 100% (9/9) | 3 | 33 |
+| S3c numeric, complex pts | 15 | 2 | 3 | 0 | 0 | 0 | 0 | 75% (15/20) | 10 | 43 |
+| S4 layered (STACK-style) | 15 | 2 | 3 | 0 | 0 | 0 | 0 | 75% (15/20) | 8 | 58 |
+| S5r solveset over R | 9 | 0 | 0 | 0 | 0 | 0 | 11 | 100% (9/9) | 3 | 28 |
+| S5c solveset over C | 9 | 0 | 0 | 0 | 0 | 0 | 11 | 100% (9/9) | 3 | 30 |
 | S6-S1r S1, real symbols | 15 | 2 | 3 | 0 | 0 | 0 | 0 | 75% (15/20) | 15 | 44 |
 | S6-S1p S1, positive symbols | 14 | 2 | 4 | 0 | 0 | 0 | 0 | 70% (14/20) | 22 | 54 |
-| S6-S2r S2, real symbols | 14 | 2 | 3 | 1 | 0 | 0 | 0 | 74% (14/19) | 17 | 55 |
-| S6-S2p S2, positive symbols | 14 | 2 | 4 | 0 | 0 | 0 | 0 | 70% (14/20) | 22 | 65 |
-| S6-S4r S4, real symbols | 15 | 2 | 3 | 0 | 0 | 0 | 0 | 75% (15/20) | 7 | 26 |
-| S6-S4p S4, positive symbols | 14 | 2 | 4 | 0 | 0 | 0 | 0 | 70% (14/20) | 7 | 27 |
-| S7 domain tracking (symbolic) over numeric | 17 | 2 | 0 | 1 | 0 | 0 | 0 | 89% (17/19) | 7 | 69 |
+| S6-S2r S2, real symbols | 14 | 2 | 3 | 1 | 0 | 0 | 0 | 74% (14/19) | 17 | 53 |
+| S6-S2p S2, positive symbols | 14 | 2 | 4 | 0 | 0 | 0 | 0 | 70% (14/20) | 21 | 65 |
+| S6-S4r S4, real symbols | 15 | 2 | 3 | 0 | 0 | 0 | 0 | 75% (15/20) | 7 | 25 |
+| S6-S4p S4, positive symbols | 14 | 2 | 4 | 0 | 0 | 0 | 0 | 70% (14/20) | 7 | 25 |
+| S7 domain tracking (symbolic) over numeric | 17 | 2 | 0 | 1 | 0 | 0 | 0 | 89% (17/19) | 6 | 57 |
 
-Timeout sensitivity: all 20 parsed steps re-run per strategy with a tight 0.05s budget. Timeouts / calls: S0e 0/20, S0u 0/20, S1 0/20, S2 2/20, S3r 0/20, S3c 0/20, S4 2/20, S5r 0/20, S5c 0/20, S6-S1r 0/20, S6-S1p 1/20, S6-S2r 2/20, S6-S2p 1/20, S6-S4r 0/20, S6-S4p 0/20, S7 1/20.
+Timeout sensitivity: all 20 parsed steps re-run per strategy with a tight 0.05s budget. Timeouts / calls: S0e 0/20, S0u 0/20, S1 0/20, S2 2/20, S3r 0/20, S3c 0/20, S4 2/20, S5r 0/20, S5c 0/20, S6-S1r 0/20, S6-S1p 1/20, S6-S2r 1/20, S6-S2p 1/20, S6-S4r 0/20, S6-S4p 0/20, S7 1/20.
 These counts are noise around a 50 ms threshold that includes fork overhead; they changed between runs of the same code (do not read them as per-strategy cost).
 
-Kill check: deliberate 60 s sleeper with a 0.2 s timeout: status=timeout, returned after 0.20s. Fork/IPC floor: no-op through isolated(): median 2.7 ms, min 2.5, max 3.2 (20 calls).
+Kill check: deliberate 60 s sleeper with a 0.2 s timeout: status=timeout, returned after 0.20s. Fork/IPC floor: no-op through isolated(): median 2.6 ms, min 2.4, max 2.9 (20 calls).
 
 `Expr.equals` seed spread (S2, complex symbols, seeds 0-9 via `sympy.core.random.seed`; the main table uses seed 0): #7: {'EQ': 10}; #20: {'UND': 4, 'NEQ': 6}.
 
-Off-grid / evaluation-sensitive extras (NOT part of the 20; labelled DOMAIN except x4 EQUIV-as-solution-set), verdicts S0e / S0u / S1 / S5r / S7:
+Off-grid / evaluation-sensitive extras (NOT part of the 20; expected label in the last column; x5-x7 check that S7 does not false-flag equal trig domains, x4 is EQUIV as a solution set only), verdicts S0e / S0u / S1 / S5r / S7:
 
-| extra | before | after | S0e | S0u | S1 | S5r | S7 |
-|---|---|---|---|---|---|---|---|
-| x1 | `\frac{x^2-25}{x-5}` | `x+5` | NEQ | NEQ | EQ | NA | EQ_DOM |
-| x2 | `\sqrt{x}\cdot\sqrt{x}` | `x` | EQ | NEQ | EQ | NA | EQ_DOM |
-| x3 | `\frac{x}{x}` | `1` | EQ | NEQ | EQ | NA | EQ_DOM |
-| x4 | `(x-3)^2=0` | `x=3` | NEQ | NEQ | NEQ | EQ | NEQ |
+| extra | before | after | S0e | S0u | S1 | S5r | S7 | expected |
+|---|---|---|---|---|---|---|---|---|
+| x1 | `\frac{x^2-25}{x-5}` | `x+5` | NEQ | NEQ | EQ | NA | EQ_DOM | DOMAIN |
+| x2 | `\sqrt{x}\cdot\sqrt{x}` | `x` | EQ | NEQ | EQ | NA | EQ_DOM | DOMAIN |
+| x3 | `\frac{x}{x}` | `1` | EQ | NEQ | EQ | NA | EQ_DOM | DOMAIN |
+| x4 | `(x-3)^2=0` | `x=3` | NEQ | NEQ | NEQ | EQ | NEQ | EQUIV (solution set) |
+| x5 | `\tg(x)` | `\tg(x)` | EQ | EQ | EQ | NA | EQ | EQUIV |
+| x6 | `\frac{\sin x}{\cos x}` | `\tg x` | NEQ | NEQ | EQ | NA | EQ | EQUIV |
+| x7 | `\tg(x)\cdot\cos(x)` | `\frac{\sin(x)\cos(x)}{\cos(x)}` | NEQ | NEQ | EQ | NA | EQ | EQUIV |
 
 
 ## 3. Where strategies disagree
@@ -118,7 +121,7 @@ Steps where the decided verdicts of S1-S7 (S0e/S0u excluded: they disagree with 
   - S2: EQ - equals=True
   - S3r: EQ - 10/10 points agree (rtol 1e-09)
   - S3c: EQ - 10/10 points agree (rtol 1e-09)
-  - S7: EQ_DOM - equal at samples; domain before Union(Interval.open(-oo, 1), Interval.open(1, oo)), after Reals ({1} defined after only)
+  - S7: EQ_DOM - equal at samples; excluded points before: {1}; after: EmptySet
 
 **#11 solve quadratic, mistake: dropped root**: `x^2-5x+6=0` -> `x=2` (expected NOT_EQUIV)
 
@@ -168,7 +171,7 @@ Steps where the decided verdicts of S1-S7 (S0e/S0u excluded: they disagree with 
   - S3r: EQ - 10/10 points agree (rtol 1e-09)
   - S3c: EQ - 10/10 points agree (rtol 1e-09)
   - S5r: WIDER - EmptySet vs {1} (after is a proper superset: extra roots)
-  - S7: EQ_DOM - equal at samples; domain before Union(Interval.open(-oo, 1), Interval.open(1, oo)), after Reals ({1} defined after only)
+  - S7: EQ_DOM - equal at samples; excluded points before: {1}; after: EmptySet
 
 **#19 Romanian tg**: `\tg(x)\cdot\cos(x)` -> `\sin(x)` (expected DOMAIN)
 
@@ -177,7 +180,7 @@ Steps where the decided verdicts of S1-S7 (S0e/S0u excluded: they disagree with 
   - S2: EQ - equals=True
   - S3r: EQ - 10/10 points agree (rtol 1e-09)
   - S3c: EQ - 10/10 points agree (rtol 1e-09)
-  - S7: EQ_DOM - equal at samples; domain before Complement(Reals, Union(ImageSet(Lambda(_n, 2*_n*pi + pi/2), Integers), ImageSet(Lambda(_n, 2*_n*pi + 3*pi/2), Integers))), after Reals (Complement(Reals, Complement(Reals, Union(ImageSet(Lambda(_n, 2*_n*pi + pi/2), Integers), ImageSet(Lambda(_n, 2*_n*pi + 3*pi/2), Integers)))) defined after only)
+  - S7: EQ_DOM - equal at samples; excluded points before: Union(ImageSet(Lambda(n_, 2*pi*n_ + pi/2), Integers), ImageSet(Lambda(n_, 2*pi*n_ + 3*pi/2), Integers)); after: EmptySet
 
 **#20 sqrt of a square**: `\sqrt{x^2}` -> `x` (expected NOT_EQUIV)
 
@@ -197,10 +200,10 @@ Steps where the decided verdicts of S1-S7 (S0e/S0u excluded: they disagree with 
 - The ANTLR backend of SymPy 1.14 already builds unevaluated trees. The evaluation happens in `parsing._fix()` (its `xreplace` rebuilds the tree with evaluation on). `rawparse.py` re-runs the same steps under `sympy.evaluate(False)` (parsing.py stays verbatim), so every step has two parses, both shown in section 0. Evaluation at parse time erases domain information (`x/x` -> 1, `\sqrt{x}\cdot\sqrt{x}` -> x, `(4x+8)/4` -> x+2), so the S7 domain tracking runs on the unevaluated trees; the numeric and simplify strategies run on the evaluated ones.
 - No strategy hit the 2 s timeout, and none raised. Everything on these 20 easy steps finished in tens of milliseconds, so the table says little about hard inputs. The tight-budget pass (sensitivity section above) shows timeouts appear once the budget is cut to 50 ms, which is the only evidence about timeout handling here. The kill check shows the worker is really killed at the deadline. Undecided only appeared as `UND` from `Expr.equals` (see below) and never from timeouts.
 - The three expression-level "equal" strategies and numerics all agree on every non-domain step: S1 (simplify), S2 (equals), S3r/S3c (numeric sampling) and S4 (layered) gave identical verdicts on 19 of 20 steps in the default (complex symbols) setting. They all missed the same three domain traps (#7, #17, #19) and said EQ (3 wrong each).
-- The three domain traps (#7, #17, #19) are caught by S7 (symbolic domain tracking: EQ_DOM, with the differing set named, e.g. "x = 1 defined after only") and, for the equation trap #17, by S5 (solveset: empty set vs {1}, reported as WIDER). S5 is NA on the two expression traps (#7, #19), because an expression has no solution set. S7 is no longer tied to a point grid: on the extras (not part of the 20, section 2) it also flags the off-grid `\frac{x^2-25}{x-5} -> x+5` (x = 5), and the evaluation-sensitive `\sqrt{x}\cdot\sqrt{x} -> x` (x >= 0 only) and `\frac{x}{x} -> 1` (x = 0). S1 says EQ on all three. S7 scores 17 correct / 2 partial / 0 wrong / 1 undecided on the 20 steps. The 0 wrong is evidence on 3 traps plus 3 extras that I picked, not a general guarantee. The 2 partial are the one-way steps (#14, #15), which S7 (residual meaning) reports as NEQ; the undecided one is #13: S7 handles one variable only (x, y here), a limitation.
-- S7's domain rules are minimal: denominators of negative powers, tan/cot/sec/csc via cos/sin, even roots (>= 0, or > 0 if also in a denominator), log arguments (> 0), each solved with `solveset(..., S.Reals)` and compared as sets. The comparison of two `ImageSet` expressions (#19) works because both sides share the same `cos(x)` term; it would not recognise two differently-written equal sets. `continuous_domain` was not used (the reviewer found it returns Reals for `cos(x)*tan(x)`).
+- The three domain traps (#7, #17, #19) are caught by S7 (symbolic domain tracking: EQ_DOM, with the excluded points of each side printed, e.g. "excluded points before: {1}; after: EmptySet") and, for the equation trap #17, by S5 (solveset: empty set vs {1}, reported as WIDER). S5 is NA on the two expression traps (#7, #19), because an expression has no solution set. S7 is no longer tied to a point grid: on the extras (not part of the 20, section 2) it also flags the off-grid `\frac{x^2-25}{x-5} -> x+5` (x = 5), and the evaluation-sensitive `\sqrt{x}\cdot\sqrt{x} -> x` (x >= 0 only) and `\frac{x}{x} -> 1` (x = 0). S1 says EQ on all three. S7 scores 17 correct / 2 partial / 0 wrong / 1 undecided on the 20 steps. The 0 wrong is evidence on 3 traps plus 7 extras (3 domain, 3 trig identities, 1 solution-set) that I picked, not a general guarantee. The 2 partial are the one-way steps (#14, #15), which S7 (residual meaning) reports as NEQ; the undecided one is #13: S7 handles one variable only (x, y here), a limitation.
+- S7's domain rules are minimal: denominators of negative powers, tan/cot/sec/csc via cos/sin, even roots (>= 0, or > 0 if also in a denominator), log arguments (> 0), each solved with `solveset(..., S.Reals)` and compared as sets. Trig exclusions are `ImageSet`s, and every `solveset` call builds its `ImageSet` with a fresh `Dummy` (`_n`), so two identical sets are never structurally `==`. The first version of S7 therefore flagged EQ_DOM on any step with a trig domain on both sides, even `\tg(x) -> \tg(x)`. Fixed by renaming all Dummies to one fixed symbol before comparing; extras x5-x7 (trig on both sides, EQUIV) now give EQ. Remaining limit: equal sets that are written differently (e.g. `pi/2 + k*pi` as one `ImageSet` vs two) would still compare unequal and be flagged; no such step was tested. `continuous_domain` was not used (the reviewer found it returns Reals for `cos(x)*tan(x)`).
 - Dropped-root and squaring steps (#11, #14, #15, #16) are told apart only by S5: NARROW (roots lost, a mistake) vs WIDER (extra roots, one-way squaring). The residual-proportionality meaning used by S0-S4/S6/S7 gives plain NEQ for both, so the ONEWAY steps score "partial" (rejected, but not recognised as one-way).
-- Real vs complex: on the 19 steps other than #20, S3r and S3c agree, and S5r and S5c agree. The semantics only bites on #20 (`sqrt(x^2)` -> `x`). Under default (complex) symbols S1/S3/S4 say NEQ. With `real=True` symbols they still say NEQ. With `positive=True` symbols S1/S2/S4 say EQ. So "equal" for #20 exists only under an x >= 0 assumption, which is exactly the DOMAIN label.
+- Real vs complex: on the 19 steps other than #20, S3r and S3c agree, and S5r and S5c agree. The semantics only bites on #20 (`sqrt(x^2)` -> `x`). Under default (complex) symbols S1/S3/S4 say NEQ. With `real=True` symbols they still say NEQ. With `positive=True` symbols S1/S2/S4 say EQ. So "equal" for #20 exists only under an x >= 0 assumption, which is why it is labelled a mistake (NOT_EQUIV) in the default real/complex reading.
 - `Expr.equals` is randomised through SymPy's own RNG (not the hash seed). It is now seeded (`sympy.core.random.seed(0)`, `random.seed(0)`) in S2, so the main table is repeatable. Over seeds 0-9, `sqrt(x**2).equals(x)` (#20) gave NEQ 6 times and UND 4 times (#7 gave EQ 10 of 10), so the verdict on #20 depends on the seed (S2 is UND at seed 0). Undecided is a real outcome of S2. A cache keyed by (before, after, policy) should include the seed, or avoid S2 as a verdict source.
 - Scoring was tightened after review: a plain NEQ on a DOMAIN step is now "partial" (it rejects a step that is valid under a restriction, rather than flagging the domain), and ONEWAY needs WIDER (NARROW is partial). #20 `\sqrt{x^2} -> x` is relabelled NOT_EQUIV (it is wrong for every x < 0 where both sides are defined; it is a different kind of step from the removable singularities). #17 is also one-way as solution sets (empty set implies {1}), so S5's WIDER there is not a mislabel.
 - S1 never proves non-equivalence: a non-zero `simplify(A-B)` was recorded as NEQ here (that is what a naive checker would do), and in this set it was always right, but the detail strings (e.g. `-x + sqrt(x**2)`) show it is only "not shown equal".

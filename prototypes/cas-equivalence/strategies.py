@@ -182,6 +182,12 @@ def natural_domain(e, var):
         dom = dom & solveset(x > 0 if strict else x >= 0, var, S.Reals)
     return dom
 
+def _canon(s):
+    """Each solveset call makes its ImageSet a fresh Dummy (_n), so equal trig sets are never structurally ==. Rename all Dummies to one fixed Symbol."""
+    n0 = sympy.Symbol("n_")
+    ds = s.atoms(sympy.Dummy)
+    return s.xreplace({d: n0 for d in ds}) if ds else s
+
 def s7(a, b, step):
     """Domain tracking (research S7): numeric real check first; if it says equal, compute each side's natural real domain
     symbolically from the unevaluated trees and compare. Equations: domain of both sides together."""
@@ -195,15 +201,14 @@ def s7(a, b, step):
     if len(syms) != 1:
         return "UND", f"domain tracking implemented for one variable, got {syms}"
     x = syms[0]
-    da = sympy.Intersection(*[natural_domain(p, x) for p in parts(ra)])
-    db = sympy.Intersection(*[natural_domain(p, x) for p in parts(rb)])
+    da = _canon(sympy.Intersection(*[natural_domain(p, x) for p in parts(ra)]))
+    db = _canon(sympy.Intersection(*[natural_domain(p, x) for p in parts(rb)]))
     if da == db:
         return "EQ", f"equal at samples; same natural domain {da}"
-    only_a, only_b = da - db, db - da
-    side = []
-    if only_a != S.EmptySet: side.append(f"{only_a} defined before only")
-    if only_b != S.EmptySet: side.append(f"{only_b} defined after only")
-    return "EQ_DOM", f"equal at samples; domain before {da}, after {db} ({'; '.join(side) or 'sets differ'})"
+    def excl(d):    # excluded points; unwrap Complement(Reals, X) so trig sets print as X, not a double complement
+        return d.args[1] if isinstance(d, sympy.Complement) and d.args[0] == S.Reals else S.Reals - d
+    ea, eb = excl(da), excl(db)
+    return "EQ_DOM", f"equal at samples; excluded points before: {ea}; after: {eb}"
 
 STRATEGIES = [
     ("S0e", "structural ==, evaluated trees", s0e),

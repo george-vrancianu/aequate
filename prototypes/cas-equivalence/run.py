@@ -61,7 +61,10 @@ EXTRAS = [
  dict(id="x1", before=r"\frac{x^2-25}{x-5}", after=r"x+5", kind="expr", expected="DOMAIN"),
  dict(id="x2", before=r"\sqrt{x}\cdot\sqrt{x}", after=r"x", kind="expr", expected="DOMAIN"),
  dict(id="x3", before=r"\frac{x}{x}", after=r"1", kind="expr", expected="DOMAIN"),
- dict(id="x4", before=r"(x-3)^2=0", after=r"x=3", kind="eq", expected="EQUIV"),
+ dict(id="x4", before=r"(x-3)^2=0", after=r"x=3", kind="eq", expected="EQUIV (solution set)"),
+ dict(id="x5", before=r"\tg(x)", after=r"\tg(x)", kind="expr", expected="EQUIV"),
+ dict(id="x6", before=r"\frac{\sin x}{\cos x}", after=r"\tg x", kind="expr", expected="EQUIV"),
+ dict(id="x7", before=r"\tg(x)\cdot\cos(x)", after=r"\frac{\sin(x)\cos(x)}{\cos(x)}", kind="expr", expected="EQUIV"),
 ]
 
 def _sleeper():
@@ -198,10 +201,10 @@ def write_md(rows, a, meta):
     L.append("These counts are noise around a 50 ms threshold that includes fork overhead; they changed between runs of the same code (do not read them as per-strategy cost).")
     L.append(f"\nKill check: {meta['kill']}. Fork/IPC floor: {meta['floor']}.\n")
     L.append("`Expr.equals` seed spread (S2, complex symbols, seeds 0-9 via `sympy.core.random.seed`; the main table uses seed 0): " + "; ".join(f"#{k}: {v}" for k, v in meta["spread"].items()) + ".\n")
-    L.append("Off-grid / evaluation-sensitive extras (NOT part of the 20; labelled DOMAIN except x4 EQUIV-as-solution-set), verdicts S0e / S0u / S1 / S5r / S7:\n")
-    L.append("| extra | before | after | S0e | S0u | S1 | S5r | S7 |\n|---|---|---|---|---|---|---|---|")
+    L.append("Off-grid / evaluation-sensitive extras (NOT part of the 20; expected label in the last column; x5-x7 check that S7 does not false-flag equal trig domains, x4 is EQUIV as a solution set only), verdicts S0e / S0u / S1 / S5r / S7:\n")
+    L.append("| extra | before | after | S0e | S0u | S1 | S5r | S7 | expected |\n|---|---|---|---|---|---|---|---|---|")
     for ex, cs, st_ in meta["extras"]:
-        L.append(f"| {ex['id']} | `{ex['before']}` | `{ex['after']}` | " + (" | ".join(cs.get(k, '-') for k in ("S0e","S0u","S1","S5r","S7")) if cs else st_ + " |"*4) + " |")
+        L.append(f"| {ex['id']} | `{ex['before']}` | `{ex['after']}` | " + (" | ".join(cs.get(k, '-') for k in ("S0e","S0u","S1","S5r","S7")) if cs else st_ + " |"*4) + f" | {ex['expected']} |")
     L.append("")
     L.append("\n## 3. Where strategies disagree\n")
     L.append("Steps where the decided verdicts of S1-S7 (S0e/S0u excluded: they disagree with everything on any non-trivial rewrite by design; ignoring UND/NA/TO/ERR) are not all the same; detail strings from the run.\n")
