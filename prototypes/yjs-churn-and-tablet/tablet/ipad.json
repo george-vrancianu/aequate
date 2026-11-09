@@ -1,0 +1,469 @@
+{
+ "prototype": "yjs-churn-and-tablet",
+ "device": {
+  "userAgent": "Mozilla/5.0 (iPad; CPU OS 26_5_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) CriOS/156.0.8078.54 Mobile/15E148 Safari/604.1",
+  "platform": "iPad",
+  "hardwareConcurrency": 4,
+  "deviceMemoryGB": null,
+  "screen": "810x1080",
+  "devicePixelRatio": 2,
+  "connection": null,
+  "performanceMemoryAvailable": false,
+  "preciseMemory": false,
+  "secureContext": false,
+  "serverHost": "192.168.1.128:8787",
+  "when": "2026-11-09T14:09:19.534Z",
+  "model": "iPad 9th generation (human-reported)",
+  "wifiBand": "5 GHz (human-reported, not verified)"
+ },
+ "results": [
+  {
+   "size": 1000,
+   "layout": "board",
+   "docs": 1,
+   "reps": 3,
+   "httpRttMs": 4,
+   "syncWholeBoardMs": {
+    "median": 136,
+    "runs": [
+     176,
+     136,
+     131
+    ]
+   },
+   "docBytesEncoded": 556422,
+   "strokesLoaded": 1000,
+   "openOnePageMs": {
+    "median": 144,
+    "runs": [
+     145,
+     129,
+     144
+    ],
+    "note": "same doc as whole board (opening a page needs the whole board)"
+   },
+   "renderPage": {
+    "strokes": 50,
+    "points": 8744,
+    "decodeMs": 1,
+    "drawMs": 5,
+    "totalMs": 6
+   },
+   "renderWholeBoard": {
+    "strokes": 1000,
+    "points": 172332,
+    "decodeMs": 3,
+    "drawMs": 20,
+    "totalMs": 23
+   },
+   "remoteStrokeApply": {
+    "n": 101,
+    "median": 1,
+    "p95": 1,
+    "max": 3,
+    "note": "ms per remote update inside Yjs: beforeAllTransactions to afterAllTransactions, includes the observer below"
+   },
+   "remoteStrokeObserverDecodeDraw": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "part of the above: unpack one stroke and draw its path"
+   },
+   "remoteStrokesNote": "server sends 100 single-stroke adds, then one transaction deleting them again (so n is about 101)",
+   "heapMB": null
+  },
+  {
+   "size": 1000,
+   "layout": "page",
+   "docs": 20,
+   "reps": 3,
+   "httpRttMs": 5.5,
+   "syncWholeBoardMs": {
+    "median": 221,
+    "runs": [
+     221,
+     254,
+     151
+    ]
+   },
+   "docBytesEncoded": 554091,
+   "strokesLoaded": 1000,
+   "openOnePageMs": {
+    "median": 54,
+    "runs": [
+     133,
+     50,
+     54
+    ],
+    "note": "page-0 doc only"
+   },
+   "renderPage": {
+    "strokes": 50,
+    "points": 8744,
+    "decodeMs": 0,
+    "drawMs": 6,
+    "totalMs": 6
+   },
+   "renderWholeBoard": {
+    "strokes": 1000,
+    "points": 172332,
+    "decodeMs": 4,
+    "drawMs": 25,
+    "totalMs": 29
+   },
+   "remoteStrokeApply": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "ms per remote update inside Yjs: beforeAllTransactions to afterAllTransactions, includes the observer below"
+   },
+   "remoteStrokeObserverDecodeDraw": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "part of the above: unpack one stroke and draw its path"
+   },
+   "remoteStrokesNote": "server sends 100 single-stroke adds, then one transaction deleting them again (so n is about 101)",
+   "heapMB": null
+  },
+  {
+   "size": 3000,
+   "layout": "board",
+   "docs": 1,
+   "reps": 3,
+   "httpRttMs": 7,
+   "syncWholeBoardMs": {
+    "median": 236,
+    "runs": [
+     236,
+     247,
+     224
+    ]
+   },
+   "docBytesEncoded": 1699218,
+   "strokesLoaded": 3000,
+   "openOnePageMs": {
+    "median": 246,
+    "runs": [
+     246,
+     237,
+     319
+    ],
+    "note": "same doc as whole board (opening a page needs the whole board)"
+   },
+   "renderPage": {
+    "strokes": 150,
+    "points": 24704,
+    "decodeMs": 1,
+    "drawMs": 11,
+    "totalMs": 12
+   },
+   "renderWholeBoard": {
+    "strokes": 3000,
+    "points": 526984,
+    "decodeMs": 7,
+    "drawMs": 42,
+    "totalMs": 49
+   },
+   "remoteStrokeApply": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "ms per remote update inside Yjs: beforeAllTransactions to afterAllTransactions, includes the observer below"
+   },
+   "remoteStrokeObserverDecodeDraw": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "part of the above: unpack one stroke and draw its path"
+   },
+   "remoteStrokesNote": "server sends 100 single-stroke adds, then one transaction deleting them again (so n is about 101)",
+   "heapMB": null
+  },
+  {
+   "size": 3000,
+   "layout": "page",
+   "docs": 20,
+   "reps": 3,
+   "httpRttMs": 8,
+   "syncWholeBoardMs": {
+    "median": 412,
+    "runs": [
+     412,
+     412,
+     225
+    ]
+   },
+   "docBytesEncoded": 1691908,
+   "strokesLoaded": 3000,
+   "openOnePageMs": {
+    "median": 44,
+    "runs": [
+     38,
+     81,
+     44
+    ],
+    "note": "page-0 doc only"
+   },
+   "renderPage": {
+    "strokes": 150,
+    "points": 24704,
+    "decodeMs": 1,
+    "drawMs": 10,
+    "totalMs": 11
+   },
+   "renderWholeBoard": {
+    "strokes": 3000,
+    "points": 526984,
+    "decodeMs": 14,
+    "drawMs": 41,
+    "totalMs": 55
+   },
+   "remoteStrokeApply": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "ms per remote update inside Yjs: beforeAllTransactions to afterAllTransactions, includes the observer below"
+   },
+   "remoteStrokeObserverDecodeDraw": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "part of the above: unpack one stroke and draw its path"
+   },
+   "remoteStrokesNote": "server sends 100 single-stroke adds, then one transaction deleting them again (so n is about 101)",
+   "heapMB": null
+  },
+  {
+   "size": 5000,
+   "layout": "board",
+   "docs": 1,
+   "reps": 3,
+   "httpRttMs": 8,
+   "syncWholeBoardMs": {
+    "median": 332,
+    "runs": [
+     332,
+     325,
+     399
+    ]
+   },
+   "docBytesEncoded": 2809622,
+   "strokesLoaded": 5000,
+   "openOnePageMs": {
+    "median": 328,
+    "runs": [
+     324,
+     328,
+     445
+    ],
+    "note": "same doc as whole board (opening a page needs the whole board)"
+   },
+   "renderPage": {
+    "strokes": 250,
+    "points": 42321,
+    "decodeMs": 2,
+    "drawMs": 14,
+    "totalMs": 16
+   },
+   "renderWholeBoard": {
+    "strokes": 5000,
+    "points": 871056,
+    "decodeMs": 22,
+    "drawMs": 66,
+    "totalMs": 87
+   },
+   "remoteStrokeApply": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "ms per remote update inside Yjs: beforeAllTransactions to afterAllTransactions, includes the observer below"
+   },
+   "remoteStrokeObserverDecodeDraw": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "part of the above: unpack one stroke and draw its path"
+   },
+   "remoteStrokesNote": "server sends 100 single-stroke adds, then one transaction deleting them again (so n is about 101)",
+   "heapMB": null
+  },
+  {
+   "size": 5000,
+   "layout": "page",
+   "docs": 20,
+   "reps": 3,
+   "httpRttMs": 7,
+   "syncWholeBoardMs": {
+    "median": 399,
+    "runs": [
+     361,
+     405,
+     399
+    ]
+   },
+   "docBytesEncoded": 2797310,
+   "strokesLoaded": 5000,
+   "openOnePageMs": {
+    "median": 54,
+    "runs": [
+     50,
+     54,
+     65
+    ],
+    "note": "page-0 doc only"
+   },
+   "renderPage": {
+    "strokes": 250,
+    "points": 42321,
+    "decodeMs": 2,
+    "drawMs": 13,
+    "totalMs": 15
+   },
+   "renderWholeBoard": {
+    "strokes": 5000,
+    "points": 871056,
+    "decodeMs": 11,
+    "drawMs": 65,
+    "totalMs": 76
+   },
+   "remoteStrokeApply": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "ms per remote update inside Yjs: beforeAllTransactions to afterAllTransactions, includes the observer below"
+   },
+   "remoteStrokeObserverDecodeDraw": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "part of the above: unpack one stroke and draw its path"
+   },
+   "remoteStrokesNote": "server sends 100 single-stroke adds, then one transaction deleting them again (so n is about 101)",
+   "heapMB": null
+  },
+  {
+   "size": 10000,
+   "layout": "board",
+   "docs": 1,
+   "reps": 3,
+   "httpRttMs": 7,
+   "syncWholeBoardMs": {
+    "median": 874,
+    "runs": [
+     1446,
+     874,
+     629
+    ]
+   },
+   "docBytesEncoded": 5647466,
+   "strokesLoaded": 10000,
+   "openOnePageMs": {
+    "median": 590,
+    "runs": [
+     580,
+     601,
+     590
+    ],
+    "note": "same doc as whole board (opening a page needs the whole board)"
+   },
+   "renderPage": {
+    "strokes": 500,
+    "points": 84373,
+    "decodeMs": 4,
+    "drawMs": 25,
+    "totalMs": 29
+   },
+   "renderWholeBoard": {
+    "strokes": 10000,
+    "points": 1751449,
+    "decodeMs": 22,
+    "drawMs": 125,
+    "totalMs": 147
+   },
+   "remoteStrokeApply": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "ms per remote update inside Yjs: beforeAllTransactions to afterAllTransactions, includes the observer below"
+   },
+   "remoteStrokeObserverDecodeDraw": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "part of the above: unpack one stroke and draw its path"
+   },
+   "remoteStrokesNote": "server sends 100 single-stroke adds, then one transaction deleting them again (so n is about 101)",
+   "heapMB": null
+  },
+  {
+   "size": 10000,
+   "layout": "page",
+   "docs": 20,
+   "reps": 3,
+   "httpRttMs": 6.5,
+   "syncWholeBoardMs": {
+    "median": 564,
+    "runs": [
+     564,
+     577,
+     546
+    ]
+   },
+   "docBytesEncoded": 5622656,
+   "strokesLoaded": 10000,
+   "openOnePageMs": {
+    "median": 74,
+    "runs": [
+     57,
+     76,
+     74
+    ],
+    "note": "page-0 doc only"
+   },
+   "renderPage": {
+    "strokes": 500,
+    "points": 84373,
+    "decodeMs": 4,
+    "drawMs": 24,
+    "totalMs": 28
+   },
+   "renderWholeBoard": {
+    "strokes": 10000,
+    "points": 1751449,
+    "decodeMs": 24,
+    "drawMs": 124,
+    "totalMs": 149
+   },
+   "remoteStrokeApply": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "ms per remote update inside Yjs: beforeAllTransactions to afterAllTransactions, includes the observer below"
+   },
+   "remoteStrokeObserverDecodeDraw": {
+    "n": 101,
+    "median": 0,
+    "p95": 1,
+    "max": 1,
+    "note": "part of the above: unpack one stroke and draw its path"
+   },
+   "remoteStrokesNote": "server sends 100 single-stroke adds, then one transaction deleting them again (so n is about 101)",
+   "heapMB": null
+  }
+ ]
+}
