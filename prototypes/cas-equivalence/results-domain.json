@@ -1,0 +1,3037 @@
+{
+ "new": [
+  {
+   "step": {
+    "id": "D1",
+    "topic": "cancel (x-1)",
+    "before": "\\frac{x^2-1}{x-1}",
+    "after": "x+1",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "x^2-1=(x-1)(x+1): equal for x!=1; at 1 before is 0/0, after is 2.",
+    "excluded": null,
+    "added": {
+     "x": "{1}"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(x**2 + 1*(-1))/(x + 1*(-1))",
+    "x + 1"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 16,
+    "excluded": "",
+    "added": "x in {1}",
+    "wit_excl": null,
+    "wit_add": "(x=1)",
+    "detail": "added (defined after, not before): x in {1}; witness added (x=1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "14 common points, max rel diff 6.6e-142",
+    "num_ok": true
+   },
+   "ms": 25.06487793289125,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D2",
+    "topic": "cancel two factors",
+    "before": "\\frac{x^2-4}{(x-2)(x+2)}",
+    "after": "1",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "x^2-4=(x-2)(x+2): equal to 1 wherever defined; before undefined at -2 and 2.",
+    "excluded": null,
+    "added": {
+     "x": "{-2, 2}"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(x**2 + 4*(-1))/(((x + 2)*(x + 2*(-1))))",
+    "1"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 19,
+    "excluded": "",
+    "added": "x in {-2, 2}",
+    "wit_excl": null,
+    "wit_add": "(x=-2)",
+    "detail": "added (defined after, not before): x in {-2, 2}; witness added (x=-2)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "13 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 31.412685057148337,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D3",
+    "topic": "x/x",
+    "before": "\\frac{x}{x}",
+    "after": "1",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal to 1 for x!=0; before undefined at 0.",
+    "excluded": null,
+    "added": {
+     "x": "{0}"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "x/x",
+    "1"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 15,
+    "excluded": "",
+    "added": "x in {0}",
+    "wit_excl": null,
+    "wit_add": "(x=0)",
+    "detail": "added (defined after, not before): x in {0}; witness added (x=0)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "14 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 12.574410997331142,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D4",
+    "topic": "x^2/x",
+    "before": "\\frac{x^2}{x}",
+    "after": "x",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "x^2/x=x for x!=0; before undefined at 0.",
+    "excluded": null,
+    "added": {
+     "x": "{0}"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "x**2/x",
+    "x"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 15,
+    "excluded": "",
+    "added": "x in {0}",
+    "wit_excl": null,
+    "wit_add": "(x=0)",
+    "detail": "added (defined after, not before): x in {0}; witness added (x=0)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "14 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 14.099423075094819,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D5",
+    "topic": "factor numerator only",
+    "before": "\\frac{x^2-1}{x-1}",
+    "after": "\\frac{(x-1)(x+1)}{x-1}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "Same value everywhere; both undefined exactly at x=1.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(x**2 + 1*(-1))/(x + 1*(-1))",
+    "((x + 1)*(x + 1*(-1)))/(x + 1*(-1))"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 16 tried",
+    "tried": 16,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "14 common points, max rel diff 6.6e-142",
+    "num_ok": true
+   },
+   "ms": 27.32910495251417,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D6",
+    "topic": "add fractions",
+    "before": "\\frac{1}{x}+\\frac{1}{x+1}",
+    "after": "\\frac{2x+1}{x\\cdot(x+1)}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "1/x+1/(x+1)=(x+1+x)/(x(x+1)); both undefined exactly at 0 and -1.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "1/(x + 1) + 1/x",
+    "(2*x + 1)/((x*(x + 1)))"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 16 tried",
+    "tried": 16,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "13 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 33.031396102160215,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D7",
+    "topic": "tan x cos x",
+    "before": "\\tan(x)\\cos(x)",
+    "after": "\\sin(x)",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "tan x = sin x/cos x: equal where cos x!=0; before undefined at pi/2+k*pi.",
+    "excluded": null,
+    "added": {
+     "x": "{pi/2 + pi*k}"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "cos(x)*tan(x)",
+    "sin(x)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 27,
+    "excluded": "",
+    "added": "x in {pi/2 + pi*k}",
+    "wit_excl": null,
+    "wit_add": "(x=pi/2)",
+    "detail": "added (defined after, not before): x in {pi/2 + pi*k}; witness added (x=pi/2)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "12 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 41.84786998666823,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D8",
+    "topic": "tan as sin/cos",
+    "before": "\\tan(x)",
+    "after": "\\frac{\\sin(x)}{\\cos(x)}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "Identity; both undefined exactly where cos x=0.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "tan(x)",
+    "sin(x)/cos(x)"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 27 tried",
+    "tried": 27,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "12 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 44.90168206393719,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D9",
+    "topic": "tan x cot x",
+    "before": "\\tan(x)\\cot(x)",
+    "after": "1",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "tan x cot x=1 wherever both defined; before undefined where cos x=0 or sin x=0, i.e. x=k*pi/2 (two ImageSets, one set).",
+    "excluded": null,
+    "added": {
+     "x": "{0 + pi/2*k}"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "tan(x)*cot(x)",
+    "1"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 23,
+    "excluded": "",
+    "added": "x in {0 + pi/2*k}",
+    "wit_excl": null,
+    "wit_add": "(x=0)",
+    "detail": "added (defined after, not before): x in {0 + pi/2*k}; witness added (x=0)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "9 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 43.1042208801955,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D10",
+    "topic": "tan via double angle",
+    "before": "\\tan(x)",
+    "after": "\\frac{\\sin(2x)}{1+\\cos(2x)}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "sin2x/(1+cos2x)=2sin x cos x/(2cos^2 x)=tan x; 1+cos2x=0 exactly at x=pi/2+k*pi, the same set as cos x=0 (different ImageSet from solveset).",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "tan(x)",
+    "sin(2*x)/(cos(2*x) + 1)"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 27 tried",
+    "tried": 27,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "12 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 52.85117099992931,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D11",
+    "topic": "tan 2x",
+    "before": "\\tan(2x)",
+    "after": "\\frac{2\\tan(x)}{1-\\tan^2(x)}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Double-angle formula holds where both defined. Before undefined at pi/4+k*pi/2; after undefined there too and also where tan x is undefined (pi/2+k*pi). So pi/2+k*pi is defined before, not after.",
+    "excluded": {
+     "x": "{pi/2 + pi*k}"
+    },
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "tan(2*x)",
+    "(2*tan(x))/(1 - tan(x)**2)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 40,
+    "excluded": "x in {pi/2 + pi*k}",
+    "added": "",
+    "wit_excl": "(x=pi/2)",
+    "wit_add": null,
+    "detail": "excluded (defined before, not after): x in {pi/2 + pi*k}; witness excluded (x=pi/2)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "11 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 113.40566794387996,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D12",
+    "topic": "sin 2x / sin x",
+    "before": "\\frac{\\sin(2x)}{\\sin(x)}",
+    "after": "2\\cos(x)",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "sin2x=2 sin x cos x: equal where sin x!=0; before undefined at k*pi.",
+    "excluded": null,
+    "added": {
+     "x": "{0 + pi*k}"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "sin(2*x)/sin(x)",
+    "2*cos(x)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 23,
+    "excluded": "",
+    "added": "x in {0 + pi*k}",
+    "wit_excl": null,
+    "wit_add": "(x=0)",
+    "detail": "added (defined after, not before): x in {0 + pi*k}; witness added (x=0)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "12 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 32.46559179387987,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D13",
+    "topic": "sqrt(x) squared by product",
+    "before": "\\sqrt{x}\\cdot\\sqrt{x}",
+    "after": "x",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal to x for x>=0; before undefined for x<0.",
+    "excluded": null,
+    "added": {
+     "x": "Interval.open(-oo, 0)"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt(x)*sqrt(x)",
+    "x"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 16,
+    "excluded": "",
+    "added": "x in Interval.open(-oo, 0)",
+    "wit_excl": null,
+    "wit_add": "(x=-1)",
+    "detail": "added (defined after, not before): x in Interval.open(-oo, 0); witness added (x=-1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "9 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 19.778763875365257,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D14",
+    "topic": "sqrt of a square",
+    "before": "\\sqrt{x^2}",
+    "after": "|x|",
+    "kind": "expr",
+    "expected": "same",
+    "why": "sqrt(x^2)=|x| for all real x; both defined on all of R.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt(x**2)",
+    "Abs(x)"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 15 tried",
+    "tried": 15,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "15 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 16.631450969725847,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D15",
+    "topic": "square of a root",
+    "before": "\\sqrt{x-1}^2",
+    "after": "x-1",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal to x-1 for x>=1; before undefined for x<1.",
+    "excluded": null,
+    "added": {
+     "x": "Interval.open(-oo, 1)"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(sqrt(x + 1*(-1)))**2",
+    "x + 1*(-1)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 17,
+    "excluded": "",
+    "added": "x in Interval.open(-oo, 1)",
+    "wit_excl": null,
+    "wit_add": "(x=0)",
+    "detail": "added (defined after, not before): x in Interval.open(-oo, 1); witness added (x=0)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "6 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 29.886310221627355,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D16",
+    "topic": "product of roots to one root",
+    "before": "\\sqrt{x-1}\\cdot\\sqrt{x+1}",
+    "after": "\\sqrt{x^2-1}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal for x>=1. Before needs x>=1; after needs |x|>=1, so x<=-1 is added.",
+    "excluded": null,
+    "added": {
+     "x": "Interval(-oo, -1)"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt(x + 1)*sqrt(x + 1*(-1))",
+    "sqrt(x**2 + 1*(-1))"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 18,
+    "excluded": "",
+    "added": "x in Interval(-oo, -1)",
+    "wit_excl": null,
+    "wit_add": "(x=-1)",
+    "detail": "added (defined after, not before): x in Interval(-oo, -1); witness added (x=-1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "6 common points, max rel diff 5.8e-70",
+    "num_ok": true
+   },
+   "ms": 58.06930596008897,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D17",
+    "topic": "one root to product of roots",
+    "before": "\\sqrt{x^2-1}",
+    "after": "\\sqrt{x-1}\\cdot\\sqrt{x+1}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Reverse of D16: x<=-1 is defined before, not after.",
+    "excluded": {
+     "x": "Interval(-oo, -1)"
+    },
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt(x**2 + 1*(-1))",
+    "sqrt(x + 1)*sqrt(x + 1*(-1))"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 18,
+    "excluded": "x in Interval(-oo, -1)",
+    "added": "",
+    "wit_excl": "(x=-1)",
+    "wit_add": null,
+    "detail": "excluded (defined before, not after): x in Interval(-oo, -1); witness excluded (x=-1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "6 common points, max rel diff 5.8e-70",
+    "num_ok": true
+   },
+   "ms": 58.33762185648084,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D18",
+    "topic": "product of roots, shifted",
+    "before": "\\sqrt{x}\\cdot\\sqrt{x-2}",
+    "after": "\\sqrt{x^2-2x}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal for x>=2. Before needs x>=2; after needs x(x-2)>=0, i.e. x<=0 or x>=2; x<=0 is added.",
+    "excluded": null,
+    "added": {
+     "x": "Interval(-oo, 0)"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt(x)*sqrt(x + 2*(-1))",
+    "sqrt(x**2 - 2*x)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 19,
+    "excluded": "",
+    "added": "x in Interval(-oo, 0)",
+    "wit_excl": null,
+    "wit_add": "(x=0)",
+    "detail": "added (defined after, not before): x in Interval(-oo, 0); witness added (x=0)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "4 common points, max rel diff 7.1e-74",
+    "num_ok": true
+   },
+   "ms": 58.750461088493466,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D19",
+    "topic": "log of a square",
+    "before": "\\ln(x^2)",
+    "after": "2\\ln(x)",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal for x>0. Before needs x!=0; after needs x>0, so x<0 is defined before, not after.",
+    "excluded": {
+     "x": "Interval.open(-oo, 0)"
+    },
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "log(x**2, E)",
+    "2*log(x, E)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 16,
+    "excluded": "x in Interval.open(-oo, 0)",
+    "added": "",
+    "wit_excl": "(x=-1)",
+    "wit_add": null,
+    "detail": "excluded (defined before, not after): x in Interval.open(-oo, 0); witness excluded (x=-1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "8 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 37.262397119775414,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D20",
+    "topic": "log power rule (reverse)",
+    "before": "2\\ln(x)",
+    "after": "\\ln(x^2)",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Reverse of D19: x<0 is defined after, not before.",
+    "excluded": null,
+    "added": {
+     "x": "Interval.open(-oo, 0)"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "2*log(x, E)",
+    "log(x**2, E)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 16,
+    "excluded": "",
+    "added": "x in Interval.open(-oo, 0)",
+    "wit_excl": null,
+    "wit_add": "(x=-1)",
+    "detail": "added (defined after, not before): x in Interval.open(-oo, 0); witness added (x=-1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "8 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 36.19256312958896,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D21",
+    "topic": "log of a square, with abs",
+    "before": "\\ln(x^2)",
+    "after": "2\\ln(|x|)",
+    "kind": "expr",
+    "expected": "same",
+    "why": "ln(x^2)=2 ln|x| for every x!=0; both undefined exactly at 0.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "log(x**2, E)",
+    "2*log(Abs(x), E)"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 15 tried",
+    "tried": 15,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "14 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 44.18298904784024,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D22",
+    "topic": "sum of logs to log of product",
+    "before": "\\ln(x)+\\ln(x-1)",
+    "after": "\\ln(x\\cdot(x-1))",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal for x>1. Before needs x>1; after needs x(x-1)>0, i.e. x<0 or x>1; x<0 is added.",
+    "excluded": null,
+    "added": {
+     "x": "Interval.open(-oo, 0)"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "log(x, E) + log(x + 1*(-1), E)",
+    "log(x*(x + 1*(-1)), E)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 17,
+    "excluded": "",
+    "added": "x in Interval.open(-oo, 0)",
+    "wit_excl": null,
+    "wit_add": "(x=-1)",
+    "detail": "added (defined after, not before): x in Interval.open(-oo, 0); witness added (x=-1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "5 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 56.9938060361892,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D23",
+    "topic": "exp of log",
+    "before": "e^{\\ln(x)}",
+    "after": "x",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "e^{ln x}=x for x>0; before needs x>0, so x<=0 is added.",
+    "excluded": null,
+    "added": {
+     "x": "Interval(-oo, 0)"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "E**log(x, E)",
+    "x"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 16,
+    "excluded": "",
+    "added": "x in Interval(-oo, 0)",
+    "wit_excl": null,
+    "wit_add": "(x=0)",
+    "detail": "added (defined after, not before): x in Interval(-oo, 0); witness added (x=0)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "8 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 18.638737965375185,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D24",
+    "topic": "log of exp",
+    "before": "\\ln(e^x)",
+    "after": "x",
+    "kind": "expr",
+    "expected": "same",
+    "why": "ln(e^x)=x for all real x; both defined on all of R.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "log(E**x, E)",
+    "x"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 15 tried",
+    "tried": 15,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "15 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 18.178283935412765,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D25",
+    "topic": "ln/ln",
+    "before": "\\frac{\\ln(x)}{\\ln(x)}",
+    "after": "1",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal to 1 wherever defined; before needs x>0 and ln x!=0 (x!=1), so x<=0 and x=1 are added.",
+    "excluded": null,
+    "added": {
+     "x": "Union({1}, Interval(-oo, 0))"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "log(x, E)/log(x, E)",
+    "1"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 16,
+    "excluded": "",
+    "added": "x in Union({1}, Interval(-oo, 0))",
+    "wit_excl": null,
+    "wit_add": "(x=0)",
+    "detail": "added (defined after, not before): x in Union({1}, Interval(-oo, 0)); witness added (x=0)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "7 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 28.309704968705773,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D26",
+    "topic": "sin of arcsin",
+    "before": "\\sin(\\arcsin(x))",
+    "after": "x",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal to x for |x|<=1; before needs |x|<=1, so |x|>1 is added.",
+    "excluded": null,
+    "added": {
+     "x": "Union(Interval.open(-oo, -1), Interval.open(1, oo))"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "sin(asin(x))",
+    "x"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 17,
+    "excluded": "",
+    "added": "x in Union(Interval.open(-oo, -1), Interval.open(1, oo))",
+    "wit_excl": null,
+    "wit_add": "(x=-2)",
+    "detail": "added (defined after, not before): x in Union(Interval.open(-oo, -1), Interval.open(1, oo)); witness added (x=-2)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "6 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 45.30376894399524,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D27",
+    "topic": "arcsin + arccos",
+    "before": "\\arcsin(x)+\\arccos(x)",
+    "after": "\\frac{\\pi}{2}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Identity on [-1,1]; the constant is defined everywhere, so |x|>1 is added.",
+    "excluded": null,
+    "added": {
+     "x": "Union(Interval.open(-oo, -1), Interval.open(1, oo))"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "acos(x) + asin(x)",
+    "pi/2"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 17,
+    "excluded": "",
+    "added": "x in Union(Interval.open(-oo, -1), Interval.open(1, oo))",
+    "wit_excl": null,
+    "wit_add": "(x=-2)",
+    "detail": "added (defined after, not before): x in Union(Interval.open(-oo, -1), Interval.open(1, oo)); witness added (x=-2)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "6 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 63.30548506230116,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D28",
+    "topic": "cos of arcsin",
+    "before": "\\cos(\\arcsin(x))",
+    "after": "\\sqrt{1-x^2}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "cos(arcsin x)=sqrt(1-x^2) (arcsin x in [-pi/2,pi/2], cos>=0); both need |x|<=1.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "cos(asin(x))",
+    "sqrt(1 - x**2)"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 17 tried",
+    "tried": 17,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "6 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 62.455310951918364,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D29",
+    "topic": "fraction with 1-x^2 under root",
+    "before": "\\frac{1-x^2}{\\sqrt{1-x^2}}",
+    "after": "\\sqrt{1-x^2}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal on |x|<1. Before needs 1-x^2>0; after needs 1-x^2>=0, so x=-1 and x=1 are added.",
+    "excluded": null,
+    "added": {
+     "x": "{-1, 1}"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(1 - x**2)/(sqrt(1 - x**2))",
+    "sqrt(1 - x**2)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 17,
+    "excluded": "",
+    "added": "x in {-1, 1}",
+    "wit_excl": null,
+    "wit_add": "(x=-1)",
+    "detail": "added (defined after, not before): x in {-1, 1}; witness added (x=-1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "4 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 52.93269292451441,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D30",
+    "topic": "x^(3/2)",
+    "before": "x^{\\frac{3}{2}}",
+    "after": "x\\sqrt{x}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "x^(3/2)=x*sqrt(x); both need x>=0.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "x**(3/2)",
+    "sqrt(x)*x"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 16 tried",
+    "tried": 16,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "9 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 19.51052201911807,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D31",
+    "topic": "x^(2/3), real cube root",
+    "before": "x^{\\frac{2}{3}}",
+    "after": "(x^{\\frac{1}{3}})^2",
+    "kind": "expr",
+    "expected": "same",
+    "why": "Real convention: odd root defined on all R, so both sides defined on all of R and equal ((cbrt x)^2). Convention-dependent.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "x**(2/3)",
+    "(x**(1/3))**2"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 0 tried",
+    "tried": 0,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "15 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 17.06484705209732,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D32",
+    "topic": "x^(-1/2)",
+    "before": "x^{-\\frac{1}{2}}",
+    "after": "\\frac{1}{\\sqrt{x}}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "Both need x>0.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "x**(-1/2)",
+    "1/(sqrt(x))"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 16 tried",
+    "tried": 16,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "8 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 23.564090952277184,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D33",
+    "topic": "(x^(1/2))^2",
+    "before": "(x^{\\frac{1}{2}})^2",
+    "after": "x",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal to x for x>=0; before undefined for x<0.",
+    "excluded": null,
+    "added": {
+     "x": "Interval.open(-oo, 0)"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(x**(1/2))**2",
+    "x"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 16,
+    "excluded": "",
+    "added": "x in Interval.open(-oo, 0)",
+    "wit_excl": null,
+    "wit_add": "(x=-1)",
+    "detail": "added (defined after, not before): x in Interval.open(-oo, 0); witness added (x=-1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "9 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 17.37889996729791,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D34",
+    "topic": "sqrt of sqrt",
+    "before": "\\sqrt{\\sqrt{x}}",
+    "after": "x^{\\frac{1}{4}}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "Both need x>=0 and are equal there.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt(sqrt(x))",
+    "x**(1/4)"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 16 tried",
+    "tried": 16,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "9 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 41.272082133218646,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D35",
+    "topic": "denest radical",
+    "before": "\\sqrt{x+2\\sqrt{x-1}}",
+    "after": "\\sqrt{x-1}+1",
+    "kind": "expr",
+    "expected": "same",
+    "why": "x+2sqrt(x-1)=(sqrt(x-1)+1)^2; both need x>=1 (the outer radicand is then >=1).",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt(x + 2*sqrt(x + 1*(-1)))",
+    "sqrt(x + 1*(-1)) + 1"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 17 tried",
+    "tried": 17,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "6 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 86.76050999201834,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D36",
+    "topic": "square of nested root",
+    "before": "\\sqrt{1-\\sqrt{x}}^2",
+    "after": "1-\\sqrt{x}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal where before is defined (0<=x<=1); after needs only x>=0, so x>1 is added.",
+    "excluded": null,
+    "added": {
+     "x": "Interval.open(1, oo)"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(sqrt(1 - sqrt(x)))**2",
+    "1 - sqrt(x)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 16,
+    "excluded": "",
+    "added": "x in Interval.open(1, oo)",
+    "wit_excl": null,
+    "wit_add": "(x=2)",
+    "detail": "added (defined after, not before): x in Interval.open(1, oo); witness added (x=2)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "4 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 55.027290945872664,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D37",
+    "topic": "root in a denominator",
+    "before": "\\frac{1}{\\sqrt{x-1}}",
+    "after": "\\frac{\\sqrt{x-1}}{x-1}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "Both need x>1 (sqrt(x-1) in the denominator / x-1 in the denominator with a root on top).",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "1/(sqrt(x + 1*(-1)))",
+    "sqrt(x + 1*(-1))/(x + 1*(-1))"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 17 tried",
+    "tried": 17,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "5 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 35.34813388250768,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D38",
+    "topic": "x-1 over its root",
+    "before": "\\frac{x-1}{\\sqrt{x-1}}",
+    "after": "\\sqrt{x-1}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal for x>1; before needs x>1, after x>=1, so x=1 is added.",
+    "excluded": null,
+    "added": {
+     "x": "{1}"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(x + 1*(-1))/(sqrt(x + 1*(-1)))",
+    "sqrt(x + 1*(-1))"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 17,
+    "excluded": "",
+    "added": "x in {1}",
+    "wit_excl": null,
+    "wit_add": "(x=1)",
+    "detail": "added (defined after, not before): x in {1}; witness added (x=1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "5 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 33.816555980592966,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D39",
+    "topic": "(x^2-y^2)/(x-y)",
+    "before": "\\frac{x^2-y^2}{x-y}",
+    "after": "x+y",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal where x!=y; before undefined on the line x=y.",
+    "excluded": null,
+    "added": {
+     "x": "<function <lambda> at 0x735f7a4fb100>"
+    },
+    "region": "x=y"
+   },
+   "parse": "ok",
+   "raw": [
+    "(x**2 - y**2)/(x - y)",
+    "x + y"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "UNKNOWN",
+    "why": "pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)",
+    "tried": 121,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": "(x=-3, y=-3)",
+    "detail": "only-before constraints (the 'only if' assumptions): -x + y != 0; only-after: -; witness added (x=-3, y=-3)",
+    "cons": "before-only: -x + y != 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 2,
+    "named_ok": true,
+    "num": "110 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 68.08964302763343,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D40",
+    "topic": "x/y + y/x",
+    "before": "\\frac{x}{y}+\\frac{y}{x}",
+    "after": "\\frac{x^2+y^2}{xy}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "Equal; both undefined exactly when x=0 or y=0.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "x/y + y/x",
+    "(x**2 + y**2)/((x*y))"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 121 tried",
+    "tried": 121,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 2,
+    "num": "100 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 80.15761314891279,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D41",
+    "topic": "xy/y",
+    "before": "\\frac{xy}{y}",
+    "after": "x",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal for y!=0; before undefined on y=0.",
+    "excluded": null,
+    "added": {
+     "y": "<function <lambda> at 0x735f7a4fb1a0>"
+    },
+    "region": "y=0"
+   },
+   "parse": "ok",
+   "raw": [
+    "(x*y)/y",
+    "x"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 15,
+    "excluded": "",
+    "added": "y in {0}",
+    "wit_excl": null,
+    "wit_add": "(y=0)",
+    "detail": "added (defined after, not before): y in {0}; witness added (y=0)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 2,
+    "named_ok": true,
+    "num": "110 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 28.056225972250104,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D42",
+    "topic": "(x+y)/(x+y)",
+    "before": "\\frac{x+y}{x+y}",
+    "after": "1",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal to 1 where x+y!=0; before undefined on x+y=0.",
+    "excluded": null,
+    "added": {
+     "x": "<function <lambda> at 0x735f7a4fb380>"
+    },
+    "region": "x+y=0"
+   },
+   "parse": "ok",
+   "raw": [
+    "(x + y)/(x + y)",
+    "1"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "UNKNOWN",
+    "why": "pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)",
+    "tried": 121,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": "(x=-3, y=3)",
+    "detail": "only-before constraints (the 'only if' assumptions): -x - y != 0; only-after: -; witness added (x=-3, y=3)",
+    "cons": "before-only: -x - y != 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 2,
+    "named_ok": true,
+    "num": "112 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 38.5946009773761,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D43",
+    "topic": "cancel with factored numerator",
+    "before": "\\frac{(x-y)(x+y)}{x-y}",
+    "after": "\\frac{x^2-y^2}{x-y}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "Same value; both undefined exactly on x=y.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "((x - y)*(x + y))/(x - y)",
+    "(x**2 - y**2)/(x - y)"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 121 tried",
+    "tried": 121,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "before-only: -; after-only: -",
+    "opaque_differs": true,
+    "nvars": 2,
+    "num": "110 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 83.87709897942841,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D44",
+    "topic": "sqrt x * sqrt y",
+    "before": "\\sqrt{x}\\cdot\\sqrt{y}",
+    "after": "\\sqrt{xy}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal for x,y>=0. Before needs x>=0 and y>=0; after needs xy>=0, which also allows x<=0,y<=0; those points are added.",
+    "excluded": null,
+    "added": {
+     "x": "<function <lambda> at 0x735f7a4fb2e0>"
+    },
+    "region": "xy>=0 and not (x>=0 and y>=0), e.g. both negative"
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt(x)*sqrt(y)",
+    "sqrt(x*y)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "UNKNOWN",
+    "why": "pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)",
+    "tried": 121,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": "(x=0, y=-1)",
+    "detail": "only-before constraints (the 'only if' assumptions): -; only-after: -x*y <= 0; witness added (x=0, y=-1)",
+    "cons": "before-only: -; after-only: -x*y <= 0",
+    "opaque_differs": true,
+    "nvars": 2,
+    "named_ok": true,
+    "num": "49 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 61.511510983109474,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D45",
+    "topic": "sqrt(xy) to product",
+    "before": "\\sqrt{xy}",
+    "after": "\\sqrt{x}\\cdot\\sqrt{y}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Reverse of D44: those points are defined before, not after.",
+    "excluded": {
+     "x": "<function <lambda> at 0x735f7a4fb420>"
+    },
+    "added": null,
+    "region": "xy>=0 and not (x>=0 and y>=0)"
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt(x*y)",
+    "sqrt(x)*sqrt(y)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "UNKNOWN",
+    "why": "pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)",
+    "tried": 121,
+    "excluded": "",
+    "added": "",
+    "wit_excl": "(x=0, y=-1)",
+    "wit_add": null,
+    "detail": "only-before constraints (the 'only if' assumptions): -x*y <= 0; only-after: -; witness excluded (x=0, y=-1)",
+    "cons": "before-only: -x*y <= 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 2,
+    "named_ok": true,
+    "num": "49 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 63.18204291164875,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D46",
+    "topic": "sqrt(x/y)",
+    "before": "\\sqrt{\\frac{x}{y}}",
+    "after": "\\frac{\\sqrt{x}}{\\sqrt{y}}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal for x>=0,y>0. Before needs x/y>=0 (y!=0); after needs x>=0 and y>0, so x/y>=0 with both <=0 (y<0) is defined before, not after.",
+    "excluded": {
+     "x": "<function <lambda> at 0x735f7a4fb560>"
+    },
+    "added": null,
+    "region": "x/y>=0, y!=0, not (x>=0 and y>0), e.g. both negative"
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt(x/y)",
+    "sqrt(x)/(sqrt(y))"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "UNKNOWN",
+    "why": "pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)",
+    "tried": 121,
+    "excluded": "",
+    "added": "",
+    "wit_excl": "(x=0, y=-1)",
+    "wit_add": null,
+    "detail": "only-before constraints (the 'only if' assumptions): -x*y <= 0; only-after: -; witness excluded (x=0, y=-1)",
+    "cons": "before-only: -x*y <= 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 2,
+    "named_ok": true,
+    "num": "42 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 85.13483894057572,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D47",
+    "topic": "sqrt x * sqrt y, commuted",
+    "before": "\\sqrt{x}\\cdot\\sqrt{y}",
+    "after": "\\sqrt{y}\\cdot\\sqrt{x}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "Commutativity; same constraints.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt(x)*sqrt(y)",
+    "sqrt(x)*sqrt(y)"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 121 tried",
+    "tried": 121,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 2,
+    "num": "49 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 49.48678216896951,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D48",
+    "topic": "log of a product",
+    "before": "\\ln(xy)",
+    "after": "\\ln(x)+\\ln(y)",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal for x,y>0. Before needs xy>0 (same signs); after needs both >0, so both negative is defined before, not after.",
+    "excluded": {
+     "x": "<function <lambda> at 0x735f7a4fb600>"
+    },
+    "added": null,
+    "region": "x<0 and y<0"
+   },
+   "parse": "ok",
+   "raw": [
+    "log(x*y, E)",
+    "log(x, E) + log(y, E)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "UNKNOWN",
+    "why": "pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)",
+    "tried": 121,
+    "excluded": "",
+    "added": "",
+    "wit_excl": "(x=-1, y=-1)",
+    "wit_add": null,
+    "detail": "only-before constraints (the 'only if' assumptions): -x*y < 0; only-after: -; witness excluded (x=-1, y=-1)",
+    "cons": "before-only: -x*y < 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 2,
+    "named_ok": true,
+    "num": "36 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 62.68977909348905,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D49",
+    "topic": "log of a quotient",
+    "before": "\\ln(\\frac{x}{y})",
+    "after": "\\ln(x)-\\ln(y)",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal for x,y>0. Before needs x/y>0; both negative is defined before, not after.",
+    "excluded": {
+     "x": "<function <lambda> at 0x735f7a4fb6a0>"
+    },
+    "added": null,
+    "region": "x<0 and y<0"
+   },
+   "parse": "ok",
+   "raw": [
+    "log(x/y, E)",
+    "log(x, E) - log(y, E)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "UNKNOWN",
+    "why": "pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)",
+    "tried": 121,
+    "excluded": "",
+    "added": "",
+    "wit_excl": "(x=-1, y=-1)",
+    "wit_add": null,
+    "detail": "only-before constraints (the 'only if' assumptions): -x*y < 0; only-after: -; witness excluded (x=-1, y=-1)",
+    "cons": "before-only: -x*y < 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 2,
+    "named_ok": true,
+    "num": "36 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 70.49285597167909,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D50",
+    "topic": "x-y over its root",
+    "before": "\\frac{x-y}{\\sqrt{x-y}}",
+    "after": "\\sqrt{x-y}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal for x>y; before needs x-y>0, after x-y>=0, so x=y is added.",
+    "excluded": null,
+    "added": {
+     "x": "<function <lambda> at 0x735f7a4fb740>"
+    },
+    "region": "x=y"
+   },
+   "parse": "ok",
+   "raw": [
+    "(x - y)/(sqrt(x - y))",
+    "sqrt(x - y)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "UNKNOWN",
+    "why": "pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)",
+    "tried": 121,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": "(x=-3, y=-3)",
+    "detail": "only-before constraints (the 'only if' assumptions): -x + y != 0; only-after: -; witness added (x=-3, y=-3)",
+    "cons": "before-only: -x + y != 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 2,
+    "named_ok": true,
+    "num": "55 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 61.450494918972254,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D51",
+    "topic": "sqrt(sin) squared by product",
+    "before": "\\sqrt{\\sin(x)}\\cdot\\sqrt{\\sin(x)}",
+    "after": "\\sin(x)",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal where sin x>=0; before undefined where sin x<0.",
+    "excluded": null,
+    "added": {
+     "x": "<function <lambda> at 0x735f7a4fb7e0>"
+    },
+    "region": "sin x<0"
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt(sin(x))*sqrt(sin(x))",
+    "sin(x)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "UNKNOWN",
+    "why": "pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)",
+    "tried": 15,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": "(x=-3)",
+    "detail": "only-before constraints (the 'only if' assumptions): -sin(x) <= 0; only-after: -; witness added (x=-3)",
+    "cons": "before-only: -sin(x) <= 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "9 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 19.591925898566842,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D52",
+    "topic": "root with a factor 2",
+    "before": "2\\sqrt{\\sin(x)}",
+    "after": "\\sqrt{\\sin(x)}\\cdot2",
+    "kind": "expr",
+    "expected": "same",
+    "why": "Commutativity; same constraint sin x>=0.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "2*sqrt(sin(x))",
+    "sqrt(sin(x))*2"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 15 tried",
+    "tried": 15,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "before-only: -; after-only: -",
+    "opaque_differs": true,
+    "nvars": 1,
+    "num": "9 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 19.74784000776708,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D53",
+    "topic": "log sin, double angle",
+    "before": "\\ln(\\sin(x))",
+    "after": "\\ln(2\\sin(x)\\cos(x))-\\ln(2\\cos(x))",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "ln(2 sin x cos x)-ln(2 cos x)=ln sin x wherever both defined. Before needs sin x>0; after needs sin x cos x>0 and cos x>0, i.e. sin x>0 and cos x>0, so sin x>0 with cos x<=0 is defined before, not after.",
+    "excluded": {
+     "x": "<function <lambda> at 0x735f7a4fb880>"
+    },
+    "added": null,
+    "region": "sin x>0 and cos x<=0"
+   },
+   "parse": "ok",
+   "raw": [
+    "log(sin(x), E)",
+    "log(2*(sin(x)*cos(x)), E) - log(2*cos(x), E)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "UNKNOWN",
+    "why": "pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)",
+    "tried": 15,
+    "excluded": "",
+    "added": "",
+    "wit_excl": "(x=2)",
+    "wit_add": null,
+    "detail": "only-before constraints (the 'only if' assumptions): -sin(x) < 0; only-after: -2*cos(x) < 0, -2*sin(x)*cos(x) < 0; witness excluded (x=2)",
+    "cons": "before-only: -sin(x) < 0; after-only: -2*cos(x) < 0, -2*sin(x)*cos(x) < 0",
+    "opaque_differs": true,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "3 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 25.668711867183447,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D54",
+    "topic": "log of sin cos, double angle",
+    "before": "\\ln(\\sin(x)\\cos(x))",
+    "after": "\\ln(\\frac{\\sin(2x)}{2})",
+    "kind": "expr",
+    "expected": "same",
+    "why": "sin x cos x=sin(2x)/2, so the constraints sin x cos x>0 and sin(2x)/2>0 are the same set (honest probe: two different trig inequalities the prototype cannot canonicalise).",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "log(sin(x)*cos(x), E)",
+    "log(sin(2*x)/2, E)"
+   ],
+   "res": {
+    "verdict": "UNDECIDED",
+    "sym": "UNKNOWN",
+    "why": "opaque constraints differ and no differing point among 15 tried",
+    "tried": 15,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "before-only: -sin(x)*cos(x) < 0; after-only: -sin(2*x)/2 < 0",
+    "opaque_differs": true,
+    "nvars": 1,
+    "num": "5 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 31.0934882145375,
+   "cls": "undecided"
+  },
+  {
+   "step": {
+    "id": "D55",
+    "topic": "|x|/|x|",
+    "before": "\\frac{|x|}{|x|}",
+    "after": "1",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal to 1 for x!=0; before undefined at 0.",
+    "excluded": null,
+    "added": {
+     "x": "{0}"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "Abs(x)/Abs(x)",
+    "1"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 15,
+    "excluded": "",
+    "added": "x in {0}",
+    "wit_excl": null,
+    "wit_add": "(x=0)",
+    "detail": "added (defined after, not before): x in {0}; witness added (x=0)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "14 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 18.275171983987093,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D56",
+    "topic": "root of a product, quadratic",
+    "before": "\\sqrt{(x-1)(x-2)}",
+    "after": "\\sqrt{x-1}\\cdot\\sqrt{x-2}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal for x>=2. Before needs (x-1)(x-2)>=0, i.e. x<=1 or x>=2; after needs x>=2, so x<=1 is defined before, not after.",
+    "excluded": {
+     "x": "Interval(-oo, 1)"
+    },
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt((x + 1*(-1))*(x + 2*(-1)))",
+    "sqrt(x + 1*(-1))*sqrt(x + 2*(-1))"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 19,
+    "excluded": "x in Interval(-oo, 1)",
+    "added": "",
+    "wit_excl": "(x=1)",
+    "wit_add": null,
+    "detail": "excluded (defined before, not after): x in Interval(-oo, 1); witness excluded (x=1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "4 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 70.14905801042914,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D57",
+    "topic": "tan + cot",
+    "before": "\\tan(x)+\\cot(x)",
+    "after": "\\frac{1}{\\sin(x)\\cos(x)}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "tan x+cot x=(sin^2+cos^2)/(sin x cos x)=1/(sin x cos x); both undefined exactly at x=k*pi/2.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "tan(x) + cot(x)",
+    "1/(sin(x)*cos(x))"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 23 tried",
+    "tried": 23,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "9 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 56.0665070079267,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D58",
+    "topic": "sin / tan",
+    "before": "\\frac{\\sin(x)}{\\tan(x)}",
+    "after": "\\cos(x)",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "sin x/tan x=cos x wherever the left is defined; left undefined where tan x is undefined or 0, i.e. x=k*pi/2.",
+    "excluded": null,
+    "added": {
+     "x": "{0 + pi/2*k}"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "sin(x)/tan(x)",
+    "cos(x)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 23,
+    "excluded": "",
+    "added": "x in {0 + pi/2*k}",
+    "wit_excl": null,
+    "wit_add": "(x=0)",
+    "detail": "added (defined after, not before): x in {0 + pi/2*k}; witness added (x=0)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "9 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 41.63749096915126,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D59",
+    "topic": "1/sin x with half angles",
+    "before": "\\frac{1}{\\sin(x)}",
+    "after": "\\frac{1}{2\\sin(\\frac{x}{2})\\cos(\\frac{x}{2})}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "sin x=2 sin(x/2)cos(x/2); sin(x/2)=0 at 2k*pi and cos(x/2)=0 at pi+2k*pi, together k*pi, the same set as sin x=0 (different ImageSets).",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "1/sin(x)",
+    "1/(2*(sin(x/2)*cos(x/2)))"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 23 tried",
+    "tried": 23,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "12 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 61.00149801932275,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D60",
+    "topic": "three variables",
+    "before": "\\frac{xy}{yz}",
+    "after": "\\frac{x}{z}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal where y,z!=0; before undefined on y=0 or z=0, after only on z=0, so y=0 (z!=0) is added.",
+    "excluded": null,
+    "added": {
+     "y": "<function <lambda> at 0x735f7a4fb920>"
+    },
+    "region": "y=0 (z!=0)"
+   },
+   "parse": "ok",
+   "raw": [
+    "(x*y)/((y*z))",
+    "x/z"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 121,
+    "excluded": "",
+    "added": "y in {0}",
+    "wit_excl": null,
+    "wit_add": "(y=0, z=-1)",
+    "detail": "added (defined after, not before): y in {0}; witness added (y=0, z=-1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 3,
+    "named_ok": true,
+    "num": "150 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 62.500416999682784,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D61",
+    "topic": "off-grid plane",
+    "before": "\\frac{x-y-10}{x-y-10}",
+    "after": "1",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal to 1 where x-y!=10; before undefined on the plane x-y=10 (no grid point lies on it: built to defeat the pointwise check).",
+    "excluded": null,
+    "added": {
+     "x": "<function <lambda> at 0x735f7a4fba60>"
+    },
+    "region": "x-y=10"
+   },
+   "parse": "ok",
+   "raw": [
+    "((x - y) + 10*(-1))/((x - y) + 10*(-1))",
+    "1"
+   ],
+   "res": {
+    "verdict": "UNDECIDED",
+    "sym": "UNKNOWN",
+    "why": "opaque constraints differ and no differing point among 121 tried",
+    "tried": 121,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "before-only: -x + y + 10 != 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 2,
+    "num": "121 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 47.52720892429352,
+   "cls": "undecided"
+  },
+  {
+   "step": {
+    "id": "D62",
+    "topic": "x - x",
+    "before": "\\frac{1}{x}-\\frac{1}{x}",
+    "after": "0",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal to 0 where defined; before undefined at 0.",
+    "excluded": null,
+    "added": {
+     "x": "{0}"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "-1/x + 1/x",
+    "0"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 15,
+    "excluded": "",
+    "added": "x in {0}",
+    "wit_excl": null,
+    "wit_add": "(x=0)",
+    "detail": "added (defined after, not before): x in {0}; witness added (x=0)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "14 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 14.893150888383389,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D63",
+    "topic": "root of sin, times cos/cos",
+    "before": "\\sqrt{\\sin(x)}",
+    "after": "\\sqrt{\\sin(x)}\\cdot\\frac{\\cos(x)}{\\cos(x)}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal where both defined. Before needs sin x>=0; after also needs cos x!=0, so points with sin x>=0 and cos x=0 (x=pi/2+2k*pi, NOT 3pi/2+2k*pi) are defined before, not after. (Found by a stress probe: an earlier version named the superset pi/2+k*pi.)",
+    "excluded": {
+     "x": "<function <lambda> at 0x735f7a4fbb00>"
+    },
+    "added": null,
+    "region": "cos x=0 and sin x>=0"
+   },
+   "parse": "ok",
+   "raw": [
+    "sqrt(sin(x))",
+    "(cos(x)/cos(x))*sqrt(sin(x))"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)",
+    "tried": 27,
+    "excluded": "",
+    "added": "",
+    "wit_excl": "(x=pi/2)",
+    "wit_add": null,
+    "detail": "only-before constraints (the 'only if' assumptions): -; only-after: -; witness excluded (x=pi/2)",
+    "cons": "before-only: -; after-only: -",
+    "opaque_differs": true,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "8 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 38.2743370719254,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D64",
+    "topic": "log with a base",
+    "before": "\\log_2(x)",
+    "after": "\\frac{\\ln(x)}{\\ln(2)}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "Change of base; both need x>0. Honest probe: S7b does not support log with a base (expected UNDECIDED).",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "log(x, 2)",
+    "log(x, E)/log(2, E)"
+   ],
+   "res": {
+    "verdict": "UNDECIDED",
+    "sym": "?",
+    "why": "undecided: log with a base",
+    "tried": 0,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "numeric check error Undecided",
+    "num_ok": null
+   },
+   "ms": 3.912881948053837,
+   "cls": "undecided"
+  },
+  {
+   "step": {
+    "id": "D65",
+    "topic": "log cos squared, abs",
+    "before": "\\ln(\\cos(x)^2)",
+    "after": "2\\ln(|\\cos(x)|)",
+    "kind": "expr",
+    "expected": "same",
+    "why": "ln(cos^2 x)=2 ln|cos x|; both need cos x!=0. Honest probe: the constraints are different trig inequalities (cos^2 x>0 vs |cos x|>0), opaque to the prototype.",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "log(cos(x)**2, E)",
+    "2*log(Abs(cos(x)), E)"
+   ],
+   "res": {
+    "verdict": "UNDECIDED",
+    "sym": "UNKNOWN",
+    "why": "opaque constraints differ and no differing point among 15 tried",
+    "tried": 15,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "before-only: -cos(x)**2 < 0; after-only: -Abs(cos(x)) < 0",
+    "opaque_differs": true,
+    "nvars": 1,
+    "num": "12 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 26.064559118822217,
+   "cls": "undecided"
+  }
+ ],
+ "orig": [
+  {
+   "step": {
+    "id": 1,
+    "topic": "expand",
+    "before": "(x+3)^2",
+    "after": "x^2+6x+9",
+    "kind": "expr",
+    "expected": "EQUIV",
+    "why": "(x+3)^2 = x^2+2*3x+9. Polynomial identity."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same natural domain Reals",
+     "ms": 6.148912012577057,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
+     "ms": 5.366469966247678,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 2,
+    "topic": "expand, mistake: dropped cross term",
+    "before": "(x-2)^2",
+    "after": "x^2-4",
+    "kind": "expr",
+    "expected": "NOT_EQUIV",
+    "why": "(x-2)^2 = x^2-4x+4. At x=0 the sides are 4 and -4."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
+     "ms": 4.730145912617445,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
+     "ms": 4.392076982185245,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 3,
+    "topic": "expand, mistake: wrong sign",
+    "before": "(x-2)(x+5)",
+    "after": "x^2-3x-10",
+    "kind": "expr",
+    "expected": "NOT_EQUIV",
+    "why": "(x-2)(x+5) = x^2+5x-2x-10 = x^2+3x-10. Student has -3x. At x=0 both give -10 but at x=1: -6 vs -12."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
+     "ms": 4.627670859917998,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
+     "ms": 4.349447088316083,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 4,
+    "topic": "factor",
+    "before": "x^2-5x+6",
+    "after": "(x-2)(x-3)",
+    "kind": "expr",
+    "expected": "EQUIV",
+    "why": "(x-2)(x-3) = x^2-5x+6. Polynomial identity."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same natural domain Reals",
+     "ms": 6.944302935153246,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
+     "ms": 5.575669929385185,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 5,
+    "topic": "simplify fraction",
+    "before": "\\frac{2x+4}{6}",
+    "after": "\\frac{x+2}{3}",
+    "kind": "expr",
+    "expected": "EQUIV",
+    "why": "Divide numerator and the constant denominator by 2. Constant divisor, so no domain change."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same natural domain Reals",
+     "ms": 6.209425861015916,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
+     "ms": 5.182297900319099,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 6,
+    "topic": "add fractions",
+    "before": "\\frac{x}{2}+\\frac{x}{3}",
+    "after": "\\frac{5x}{6}",
+    "kind": "expr",
+    "expected": "EQUIV",
+    "why": "x/2+x/3 = (3x+2x)/6 = 5x/6. Constant denominators, no domain change."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same natural domain Reals",
+     "ms": 7.9541378654539585,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
+     "ms": 6.775252986699343,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 7,
+    "topic": "division-by-zero trap",
+    "before": "\\frac{x^2-1}{x-1}",
+    "after": "x+1",
+    "kind": "expr",
+    "expected": "DOMAIN",
+    "why": "Equal for every x != 1. At x=1 the left side is undefined (0/0) and the right side is 2. Valid only with x != 1."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "EQ_DOM",
+     "detail": "equal at samples; excluded points before: {1}; after: EmptySet",
+     "ms": 17.343424959108233,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "EQ_DOM",
+     "detail": "added (defined after, not before): x in {1}; witness added (x=1)",
+     "ms": 17.192989820614457,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 8,
+    "topic": "trig identity",
+    "before": "\\cos^2 x-\\sin^2 x",
+    "after": "2\\cos^2 x-1",
+    "kind": "expr",
+    "expected": "EQUIV",
+    "why": "cos 2x = cos^2 x - sin^2 x = 2cos^2 x - 1 (use sin^2 = 1 - cos^2). True for all x."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same natural domain Reals",
+     "ms": 7.461749017238617,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
+     "ms": 6.335137877613306,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 9,
+    "topic": "solve linear",
+    "before": "2x+3=7",
+    "after": "x=2",
+    "kind": "eq",
+    "expected": "EQUIV",
+    "why": "Both have solution set {2}. Residuals 2x-4 and x-2 are proportional (factor 2)."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same natural domain Reals",
+     "ms": 7.336521986871958,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
+     "ms": 6.8481010384857655,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 10,
+    "topic": "solve linear, mistake: wrong sign",
+    "before": "2x+3=7",
+    "after": "2x=10",
+    "kind": "eq",
+    "expected": "NOT_EQUIV",
+    "why": "Student added 3 instead of subtracting it. {2} vs {5}."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
+     "ms": 8.63893493078649,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
+     "ms": 7.933890214189887,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 11,
+    "topic": "solve quadratic, mistake: dropped root",
+    "before": "x^2-5x+6=0",
+    "after": "x=2",
+    "kind": "eq",
+    "expected": "NOT_EQUIV",
+    "why": "Solutions of the first are {2,3}; the student kept only 2. The step loses a root, so it is not an equivalence (it is implied backwards only)."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
+     "ms": 9.373064152896404,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
+     "ms": 8.302910951897502,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 12,
+    "topic": "solve quadratic (factored form)",
+    "before": "x^2-5x+6=0",
+    "after": "(x-2)(x-3)=0",
+    "kind": "eq",
+    "expected": "EQUIV",
+    "why": "Same polynomial, same roots {2,3}; residuals are identical."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same natural domain Reals",
+     "ms": 7.621574914082885,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
+     "ms": 6.655176868662238,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 13,
+    "topic": "rearrange formula",
+    "before": "y=2x+3",
+    "after": "x=\\frac{y-3}{2}",
+    "kind": "eq",
+    "expected": "EQUIV",
+    "solve_for": "x",
+    "why": "Subtract 3, divide by 2: x=(y-3)/2. Same relation between x and y. Residuals y-2x-3 and x-(y-3)/2 are proportional (factor -2)."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "UND",
+     "detail": "domain tracking implemented for one variable, got [x, y]",
+     "ms": 7.200316060334444,
+     "score": "und"
+    },
+    "S7b": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
+     "ms": 7.314089918509126,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 14,
+    "topic": "squaring both sides (one-way)",
+    "before": "\\sqrt{x+1}=x-1",
+    "after": "x+1=(x-1)^2",
+    "kind": "eq",
+    "expected": "ONEWAY",
+    "why": "Squaring gives x^2-3x=0, roots {0,3}. Only x=3 satisfies the original (x=0 gives 1=-1), so after follows from before but not conversely."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
+     "ms": 11.540143983438611,
+     "score": "partial"
+    },
+    "S7b": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
+     "ms": 11.259875958785415,
+     "score": "partial"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 15,
+    "topic": "squaring both sides (one-way), simple",
+    "before": "x=2",
+    "after": "x^2=4",
+    "kind": "eq",
+    "expected": "ONEWAY",
+    "why": "{2} is a subset of {-2,2}: implied forwards, not backwards."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
+     "ms": 8.261538110673428,
+     "score": "partial"
+    },
+    "S7b": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
+     "ms": 7.994794985279441,
+     "score": "partial"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 16,
+    "topic": "mistake: divide by x, lost root",
+    "before": "x^2=3x",
+    "after": "x=3",
+    "kind": "eq",
+    "expected": "NOT_EQUIV",
+    "why": "x^2=3x has roots {0,3}. Dividing by x silently drops x=0 (division by zero)."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
+     "ms": 8.115290896967053,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
+     "ms": 7.872939808294177,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 17,
+    "topic": "division-by-zero trap in an equation",
+    "before": "\\frac{x^2-1}{x-1}=2",
+    "after": "x+1=2",
+    "kind": "eq",
+    "expected": "DOMAIN",
+    "why": "Left has no solution (x=1 is excluded, any other x gives x+1=2 -> x=1). Right has {1}. The step is valid only if x != 1 is assumed, and then it shows no solution. Also one-way in solution-set terms (empty set implies {1} vacuously), so S5 reports WIDER here; that is not a mislabel."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "EQ_DOM",
+     "detail": "equal at samples; excluded points before: {1}; after: EmptySet",
+     "ms": 19.710069987922907,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "EQ_DOM",
+     "detail": "added (defined after, not before): x in {1}; witness added (x=1)",
+     "ms": 18.41029804199934,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 18,
+    "topic": "Romanian ':' division",
+    "before": "(4x+8):4",
+    "after": "x+2",
+    "kind": "expr",
+    "expected": "EQUIV",
+    "why": "(4x+8)/4 = x+2. Tests ':' -> \\div in the normalizer."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same natural domain Reals",
+     "ms": 5.861033918336034,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "EQ",
+     "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
+     "ms": 5.124410148710012,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 19,
+    "topic": "Romanian tg",
+    "before": "\\tg(x)\\cdot\\cos(x)",
+    "after": "\\sin(x)",
+    "kind": "expr",
+    "expected": "DOMAIN",
+    "why": "tan x = sin x / cos x, so tan x cos x = sin x where cos x != 0. At x = pi/2 the left side is undefined and the right side is 1. Tests tg -> \\tan."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "EQ_DOM",
+     "detail": "equal at samples; excluded points before: Union(ImageSet(Lambda(n_, 2*pi*n_ + pi/2), Integers), ImageSet(Lambda(n_, 2*pi*n_ + 3*pi/2), Integers)); after: EmptySet",
+     "ms": 62.42157705128193,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "EQ_DOM",
+     "detail": "added (defined after, not before): x in {pi/2 + pi*k}; witness added (x=pi/2)",
+     "ms": 33.77145994454622,
+     "score": "ok"
+    }
+   }
+  },
+  {
+   "step": {
+    "id": 20,
+    "topic": "sqrt of a square",
+    "before": "\\sqrt{x^2}",
+    "after": "x",
+    "kind": "expr",
+    "expected": "NOT_EQUIV",
+    "why": "sqrt(x^2) = |x|, equal to x only for x >= 0. A classic student mistake: wrong for every x < 0 where both sides are defined. True only under the assumption x >= 0, which is not a removable singularity like #7, #17, #19."
+   },
+   "cells": {
+    "S7": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
+     "ms": 4.687323933467269,
+     "score": "ok"
+    },
+    "S7b": {
+     "verdict": "NEQ",
+     "detail": "numeric(real): differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
+     "ms": 3.927030134946108,
+     "score": "ok"
+    }
+   }
+  }
+ ]
+}
