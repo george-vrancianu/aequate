@@ -54,10 +54,28 @@ CPU run: start the llama-server from "Local CPU server" below, then
 `uv run python bakeoff.py --base-url http://127.0.0.1:8089 --model qwen3.5-4b --label cpu-q35-4b-q4km --extra-body '{"chat_template_kwargs":{"enable_thinking":false}}'`
 and stop it by PID (`ps` for the real server PID).
 
+## Round 4: Gemma 4 E4B at Q4 (what would ship), llama.cpp on Modal L4 and on the local CPU
+
+```
+# GGUF (official QAT q4_0, ungated, 4.8 GiB); keep it on disk, not on the tmpfs /tmp
+curl -L -o ~/aq-31-models/gemma-4-E4B_q4_0-it.gguf https://huggingface.co/google/gemma-4-E4B-it-qat-q4_0-gguf/resolve/main/gemma-4-E4B_q4_0-it.gguf
+# GPU: llama.cpp CUDA image (b12211) on an L4; the GGUF is downloaded into the volume by the container
+modal deploy serve_llamacpp_modal.py        # app aq31-gemma4-e4b-q4-llamacpp
+uv run python bakeoff.py --base-url $URL --model m --label gpu-l4-gemma4-e4b-q4-llamacpp \
+    --extra-body '{"chat_template_kwargs":{"enable_thinking":false}}'     # REQUIRED: Gemma 4 thinks by default under llama-server --jinja
+modal app stop -y aq31-gemma4-e4b-q4-llamacpp
+# CPU: same flags as the Qwen run
+/tmp/aq-31-llama/bin/llama-b12211/llama-server -m ~/aq-31-models/gemma-4-E4B_q4_0-it.gguf --host 127.0.0.1 --port 8089 --jinja -t 16 -c 4096 --parallel 1 --alias gemma4-e4b-q4
+uv run python bakeoff.py --base-url http://127.0.0.1:8089 --model gemma4-e4b-q4 --label cpu-gemma4-e4b-q4 --extra-body '{"chat_template_kwargs":{"enable_thinking":false}}'
+```
+
 Tables and rating sheet:
 ```
-uv run python report.py results/gpu-*.jsonl results/cpu-q35-4b-q4km.jsonl > results/report.md   # RESULTS.md embeds these (minus per-step tables)
+uv run python report.py results/gpu-*.jsonl results/cpu-*.jsonl > results/report.md   # RESULTS.md embeds these (minus per-step tables)
 uv run python make_rating.py            # rating/RATING.md, ratings.csv (blank), key.csv (do not open before rating); fixed seed 31
+# make_rating.py shows every option as plain hint text (no math chips, no $ or backticks), adds the Gemma Q4 GPU run as an extra
+# hidden source, and exits non-zero if a structural feature (code spans, $, question mark, sentence count) is unique to the template in more than 8 groups.
+# Residual it only reports: the template is the shortest option in 35 of 51 groups.
 ```
 
 ## Local CPU server (phase A smoke test, and the 4B CPU measurement)
