@@ -11,3 +11,10 @@ path = ["CLAUDE.md", "CONTRIBUTING.md", "REUSE.toml", "skills-lock.json", ".clau
 precedence = "aggregate"
 SPDX-FileCopyrightText = "the Aequate contributors"
 SPDX-License-Identifier = "AGPL-3.0-or-later"
+
+# Third-party agent skills vendored from github.com/mattpocock/skills (see skills-lock.json).
+[[annotations]]
+path = [".agents/**"]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2026 Matt Pocock"
+SPDX-License-Identifier = "MIT"
