@@ -1,0 +1,22 @@
+{
+  "name": "yjs-churn-and-tablet-prototype",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "churn": "node --max-old-space-size=4096 --expose-gc churn.js",
+    "tablet": "node tablet/server.js",
+    "tablet:build": "node tablet/build.js",
+    "tablet:verify": "node tablet/verify.js"
+  },
+  "dependencies": {
+    "@hocuspocus/provider": "^4.0.0",
+    "@hocuspocus/server": "^4.0.0",
+    "esbuild": "^0.25.0",
+    "ws": "^8.18.0",
+    "yjs": "~13.6.33"
+  },
+  "devDependencies": {
+    "playwright": "^1.50.0"
+  }
+}
