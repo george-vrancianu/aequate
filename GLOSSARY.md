@@ -23,8 +23,12 @@ One confirmed line of math in a worked solution.
 _Avoid_: Line (that word means ink), equation, entry
 
 **Worked solution**:
-The ordered list of steps, level changes and goal changes on one board. Confirmed transcriptions are appended to its end. Steps can be edited or deleted but not reordered.
-_Avoid_: Transcript, history, log
+One problem's ordered list of steps and goal changes on a board, with the board's level changes shown among them by time. A board can hold several. Confirmed transcriptions are appended to the end of the active worked solution. Steps can be edited or deleted but not reordered. Students see it labelled a problem.
+_Avoid_: Transcript, history, log, problem (outside student-facing text)
+
+**Active worked solution**:
+The one worked solution on a board that newly confirmed steps join. The student picks it; ink position never decides it.
+_Avoid_: Current problem, focus
 
 **Goal**:
 What a worked solution is trying to reach: solve for a variable, simplify, factor, expand or evaluate. It is either inferred from the first step or chosen by the student (or the tutor, in v2), and it may be unset.
@@ -76,7 +80,7 @@ A named preset of assist permissions that the student chooses for one board, and
 _Avoid_: Mode, difficulty, help level
 
 **Level change**:
-A record in a worked solution, between steps, that the assist level changed and to which permissions. It is not a step.
+A record on a board that the assist level changed and to which permissions. Each worked solution shows it among its steps by time. It is not a step.
 _Avoid_: Mode switch, event
 
 **Ask**:
