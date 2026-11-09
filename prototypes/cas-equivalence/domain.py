@@ -259,7 +259,7 @@ def _untrusted(e):
     """Odd-root forms the real-root rewrite creates: a non-integer power with ODD denominator of a base containing Abs/sign
     (Abs(x)**(2/3), sign(x)*Abs(x)**(1/3)). solveset was seen to be wrong here and samples cannot CONFIRM it (the true boundary can lie
     beyond any finite probe range), so a SAME verdict that rests on such an atom is never given (UNDECIDED), and a CHANGED verdict does not name a solved set."""
-    return any(isinstance(n, sympy.Pow) and not n.exp.is_Integer and sympy.Rational(n.exp).q % 2 == 1 and n.base.has(sympy.Abs, sympy.sign)
+    return any(isinstance(n, sympy.Pow) and n.exp.is_Rational and not n.exp.is_Integer and n.exp.q % 2 == 1 and n.base.has(sympy.Abs, sympy.sign)
                for n in sympy.preorder_traversal(e))
 
 def _guard(e, rel, v, I, res):

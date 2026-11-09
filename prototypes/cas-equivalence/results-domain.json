@@ -37,7 +37,7 @@
     "num": "20 common points, max rel diff 6.6e-142",
     "num_ok": true
    },
-   "ms": 30.071157962083817,
+   "ms": 29.713256051763892,
    "cls": "TP"
   },
   {
@@ -77,7 +77,7 @@
     "num": "19 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 37.580205826088786,
+   "ms": 36.924934014678,
    "cls": "TP"
   },
   {
@@ -117,7 +117,7 @@
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 16.8293840251863,
+   "ms": 15.76238195411861,
    "cls": "TP"
   },
   {
@@ -157,7 +157,7 @@
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 16.750344075262547,
+   "ms": 18.14658986404538,
    "cls": "TP"
   },
   {
@@ -194,7 +194,7 @@
     "num": "20 common points, max rel diff 6.6e-142",
     "num_ok": true
    },
-   "ms": 38.07973815128207,
+   "ms": 37.75183600373566,
    "cls": "TN"
   },
   {
@@ -231,7 +231,7 @@
     "num": "19 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 38.118521915748715,
+   "ms": 39.583126083016396,
    "cls": "TN"
   },
   {
@@ -271,7 +271,7 @@
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 44.57263881340623,
+   "ms": 43.17573504522443,
    "cls": "TP"
   },
   {
@@ -308,7 +308,7 @@
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 48.47793793305755,
+   "ms": 51.45713989622891,
    "cls": "TN"
   },
   {
@@ -348,7 +348,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 47.018242068588734,
+   "ms": 51.175006898120046,
    "cls": "TP"
   },
   {
@@ -385,7 +385,7 @@
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 60.844289837405086,
+   "ms": 65.78595004975796,
    "cls": "TN"
   },
   {
@@ -425,7 +425,7 @@
     "num": "17 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 140.36932704038918,
+   "ms": 131.40341313555837,
    "cls": "TP"
   },
   {
@@ -465,7 +465,7 @@
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 37.74180100299418,
+   "ms": 37.86274907179177,
    "cls": "TP"
   },
   {
@@ -505,7 +505,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 22.32367009855807,
+   "ms": 22.990778787061572,
    "cls": "TP"
   },
   {
@@ -542,7 +542,7 @@
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 17.058575991541147,
+   "ms": 18.048844998702407,
    "cls": "TN"
   },
   {
@@ -582,7 +582,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 30.978198861703277,
+   "ms": 33.179513178765774,
    "cls": "TP"
   },
   {
@@ -622,7 +622,7 @@
     "num": "9 common points, max rel diff 5.8e-70",
     "num_ok": true
    },
-   "ms": 65.81767182797194,
+   "ms": 65.87943201884627,
    "cls": "TP"
   },
   {
@@ -662,7 +662,7 @@
     "num": "9 common points, max rel diff 5.8e-70",
     "num_ok": true
    },
-   "ms": 66.52984698303044,
+   "ms": 62.28173291310668,
    "cls": "TP"
   },
   {
@@ -702,7 +702,7 @@
     "num": "7 common points, max rel diff 7.1e-74",
     "num_ok": true
    },
-   "ms": 70.59800392016768,
+   "ms": 66.37344416230917,
    "cls": "TP"
   },
   {
@@ -742,7 +742,7 @@
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 43.1020341347903,
+   "ms": 42.19869989901781,
    "cls": "TP"
   },
   {
@@ -782,7 +782,7 @@
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 43.6227370519191,
+   "ms": 43.01836807280779,
    "cls": "TP"
   },
   {
@@ -819,7 +819,7 @@
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 68.45544185489416,
+   "ms": 68.51059687323868,
    "cls": "TN"
   },
   {
@@ -859,7 +859,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 65.76642813161016,
+   "ms": 67.76103703305125,
    "cls": "TP"
   },
   {
@@ -899,7 +899,7 @@
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 20.286245038732886,
+   "ms": 20.913299173116684,
    "cls": "TP"
   },
   {
@@ -936,7 +936,7 @@
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 22.16616296209395,
+   "ms": 21.889477036893368,
    "cls": "TN"
   },
   {
@@ -976,7 +976,7 @@
     "num": "10 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 31.298883026465774,
+   "ms": 30.01556801609695,
    "cls": "TP"
   },
   {
@@ -1016,7 +1016,7 @@
     "num": "6 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 47.55864315666258,
+   "ms": 49.477786058560014,
    "cls": "TP"
   },
   {
@@ -1056,7 +1056,7 @@
     "num": "6 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 64.02414198964834,
+   "ms": 61.21805706061423,
    "cls": "TP"
   },
   {
@@ -1093,7 +1093,7 @@
     "num": "6 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 66.95234193466604,
+   "ms": 68.52038903161883,
    "cls": "TN"
   },
   {
@@ -1133,7 +1133,7 @@
     "num": "4 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 55.77529687434435,
+   "ms": 61.565011041238904,
    "cls": "TP"
   },
   {
@@ -1170,7 +1170,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 20.650854101404548,
+   "ms": 22.797835059463978,
    "cls": "TN"
   },
   {
@@ -1207,7 +1207,7 @@
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 15.953270019963384,
+   "ms": 17.097458941861987,
    "cls": "TN"
   },
   {
@@ -1244,7 +1244,7 @@
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 26.860249927267432,
+   "ms": 27.59529696777463,
    "cls": "TN"
   },
   {
@@ -1284,7 +1284,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 18.276093993335962,
+   "ms": 19.153362838551402,
    "cls": "TP"
   },
   {
@@ -1321,7 +1321,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 61.70896301046014,
+   "ms": 61.02807400748134,
    "cls": "TN"
   },
   {
@@ -1358,7 +1358,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 112.00813599862158,
+   "ms": 113.45096095465124,
    "cls": "TN"
   },
   {
@@ -1398,7 +1398,7 @@
     "num": "4 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 74.91511898115277,
+   "ms": 74.39985894598067,
    "cls": "TP"
   },
   {
@@ -1435,7 +1435,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 41.54623905196786,
+   "ms": 44.53035490587354,
    "cls": "TN"
   },
   {
@@ -1475,7 +1475,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 38.53497817181051,
+   "ms": 40.44187092222273,
    "cls": "TP"
   },
   {
@@ -1489,7 +1489,7 @@
     "why": "Equal where x!=y; before undefined on the line x=y.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x7233cdb03a60>"
+     "x": "<function <lambda> at 0x7d317994f920>"
     },
     "region": "x=y"
    },
@@ -1515,7 +1515,7 @@
     "num": "110 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 73.52304295636714,
+   "ms": 66.5035939309746,
    "cls": "TP"
   },
   {
@@ -1552,7 +1552,7 @@
     "num": "100 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 77.55946810357273,
+   "ms": 80.59982699342072,
    "cls": "TN"
   },
   {
@@ -1566,7 +1566,7 @@
     "why": "Equal for y!=0; before undefined on y=0.",
     "excluded": null,
     "added": {
-     "y": "<function <lambda> at 0x7233cdb039c0>"
+     "y": "<function <lambda> at 0x7d317994f880>"
     },
     "region": "y=0"
    },
@@ -1592,7 +1592,7 @@
     "num": "110 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 29.44342396222055,
+   "ms": 32.26643498055637,
    "cls": "TP"
   },
   {
@@ -1606,7 +1606,7 @@
     "why": "Equal to 1 where x+y!=0; before undefined on x+y=0.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x7233cdb03ba0>"
+     "x": "<function <lambda> at 0x7d317994fa60>"
     },
     "region": "x+y=0"
    },
@@ -1632,7 +1632,7 @@
     "num": "112 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 40.44263600371778,
+   "ms": 39.617992006242275,
    "cls": "TP"
   },
   {
@@ -1669,7 +1669,7 @@
     "num": "110 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 75.63181896694005,
+   "ms": 77.83855102024972,
    "cls": "TN"
   },
   {
@@ -1683,7 +1683,7 @@
     "why": "Equal for x,y>=0. Before needs x>=0 and y>=0; after needs xy>=0, which also allows x<=0,y<=0; those points are added.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x7233cdb03d80>"
+     "x": "<function <lambda> at 0x7d317994fc40>"
     },
     "region": "xy>=0 and not (x>=0 and y>=0), e.g. both negative"
    },
@@ -1709,7 +1709,7 @@
     "num": "49 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 59.70054096542299,
+   "ms": 61.44940387457609,
    "cls": "TP"
   },
   {
@@ -1722,7 +1722,7 @@
     "expected": "changed",
     "why": "Reverse of D44: those points are defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x7233cdb03ce0>"
+     "x": "<function <lambda> at 0x7d317994fba0>"
     },
     "added": null,
     "region": "xy>=0 and not (x>=0 and y>=0)"
@@ -1749,7 +1749,7 @@
     "num": "49 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 60.712921898812056,
+   "ms": 62.202905071899295,
    "cls": "TP"
   },
   {
@@ -1762,7 +1762,7 @@
     "expected": "changed",
     "why": "Equal for x>=0,y>0. Before needs x/y>=0 (y!=0); after needs x>=0 and y>0, so x/y>=0 with both <=0 (y<0) is defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x7233cdb03e20>"
+     "x": "<function <lambda> at 0x7d317994fce0>"
     },
     "added": null,
     "region": "x/y>=0, y!=0, not (x>=0 and y>0), e.g. both negative"
@@ -1789,7 +1789,7 @@
     "num": "42 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 85.69470699876547,
+   "ms": 83.62898789346218,
    "cls": "TP"
   },
   {
@@ -1826,7 +1826,7 @@
     "num": "49 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 54.54005510546267,
+   "ms": 55.07334298454225,
    "cls": "TN"
   },
   {
@@ -1839,7 +1839,7 @@
     "expected": "changed",
     "why": "Equal for x,y>0. Before needs xy>0 (same signs); after needs both >0, so both negative is defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x7233cdb03f60>"
+     "x": "<function <lambda> at 0x7d317994fe20>"
     },
     "added": null,
     "region": "x<0 and y<0"
@@ -1866,7 +1866,7 @@
     "num": "36 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 60.892781941220164,
+   "ms": 61.66314706206322,
    "cls": "TP"
   },
   {
@@ -1879,7 +1879,7 @@
     "expected": "changed",
     "why": "Equal for x,y>0. Before needs x/y>0; both negative is defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x7233cdb2c040>"
+     "x": "<function <lambda> at 0x7d317994fec0>"
     },
     "added": null,
     "region": "x<0 and y<0"
@@ -1906,7 +1906,7 @@
     "num": "36 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 78.58440093696117,
+   "ms": 71.16541685536504,
    "cls": "TP"
   },
   {
@@ -1920,7 +1920,7 @@
     "why": "Equal for x>y; before needs x-y>0, after x-y>=0, so x=y is added.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x7233cdb2c0e0>"
+     "x": "<function <lambda> at 0x7d317994ff60>"
     },
     "region": "x=y"
    },
@@ -1946,7 +1946,7 @@
     "num": "55 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 71.08205603435636,
+   "ms": 64.40729508176446,
    "cls": "TP"
   },
   {
@@ -1960,7 +1960,7 @@
     "why": "Equal where sin x>=0; before undefined where sin x<0.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x7233cdb2c180>"
+     "x": "<function <lambda> at 0x7d317997c040>"
     },
     "region": "sin x<0"
    },
@@ -1986,7 +1986,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 21.070444956421852,
+   "ms": 21.624841960147023,
    "cls": "TP"
   },
   {
@@ -2023,7 +2023,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 23.730162996798754,
+   "ms": 22.394067840650678,
    "cls": "TN"
   },
   {
@@ -2036,7 +2036,7 @@
     "expected": "changed",
     "why": "ln(2 sin x cos x)-ln(2 cos x)=ln sin x wherever both defined. Before needs sin x>0; after needs sin x cos x>0 and cos x>0, i.e. sin x>0 and cos x>0, so sin x>0 with cos x<=0 is defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x7233cdb2c220>"
+     "x": "<function <lambda> at 0x7d317997c0e0>"
     },
     "added": null,
     "region": "sin x>0 and cos x<=0"
@@ -2063,7 +2063,7 @@
     "num": "5 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 32.94112300500274,
+   "ms": 33.55150599963963,
    "cls": "TP"
   },
   {
@@ -2100,7 +2100,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 38.95287588238716,
+   "ms": 39.800625992938876,
    "cls": "undecided"
   },
   {
@@ -2140,7 +2140,7 @@
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 24.042909033596516,
+   "ms": 25.331726064905524,
    "cls": "TP"
   },
   {
@@ -2180,7 +2180,7 @@
     "num": "7 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 85.90023894794285,
+   "ms": 88.8514721300453,
    "cls": "TP"
   },
   {
@@ -2217,7 +2217,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 63.96357505582273,
+   "ms": 64.45398298092186,
    "cls": "TN"
   },
   {
@@ -2257,7 +2257,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 46.08856909908354,
+   "ms": 47.00575093738735,
    "cls": "TP"
   },
   {
@@ -2294,7 +2294,7 @@
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 75.3228161484003,
+   "ms": 78.70661490596831,
    "cls": "TN"
   },
   {
@@ -2308,7 +2308,7 @@
     "why": "Equal where y,z!=0; before undefined on y=0 or z=0, after only on z=0, so y=0 (z!=0) is added.",
     "excluded": null,
     "added": {
-     "y": "<function <lambda> at 0x7233cdb2c2c0>"
+     "y": "<function <lambda> at 0x7d317997c180>"
     },
     "region": "y=0 (z!=0)"
    },
@@ -2334,7 +2334,7 @@
     "num": "150 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 67.63066886924207,
+   "ms": 75.50291996449232,
    "cls": "TP"
   },
   {
@@ -2348,7 +2348,7 @@
     "why": "Equal to 1 where x-y!=10; before undefined on the plane x-y=10 (no grid point lies on it: built to defeat the pointwise check).",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x7233cdb2c400>"
+     "x": "<function <lambda> at 0x7d317997c2c0>"
     },
     "region": "x-y=10"
    },
@@ -2373,7 +2373,7 @@
     "num": "121 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 49.01025979779661,
+   "ms": 54.02051587589085,
    "cls": "undecided"
   },
   {
@@ -2413,7 +2413,7 @@
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 17.758416011929512,
+   "ms": 18.269922118633986,
    "cls": "TP"
   },
   {
@@ -2426,7 +2426,7 @@
     "expected": "changed",
     "why": "Equal where both defined. Before needs sin x>=0; after also needs cos x!=0, so points with sin x>=0 and cos x=0 (x=pi/2+2k*pi, NOT 3pi/2+2k*pi) are defined before, not after. (Found by a stress probe: an earlier version named the superset pi/2+k*pi.)",
     "excluded": {
-     "x": "<function <lambda> at 0x7233cdb2c4a0>"
+     "x": "<function <lambda> at 0x7d317997c360>"
     },
     "added": null,
     "region": "cos x=0 and sin x>=0"
@@ -2453,7 +2453,7 @@
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 46.2065888568759,
+   "ms": 58.11030394397676,
    "cls": "TP"
   },
   {
@@ -2490,7 +2490,7 @@
     "num": "numeric check error Undecided",
     "num_ok": null
    },
-   "ms": 5.037143127992749,
+   "ms": 5.693092010915279,
    "cls": "undecided"
   },
   {
@@ -2527,7 +2527,7 @@
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 31.69341292232275,
+   "ms": 35.53065797314048,
    "cls": "undecided"
   },
   {
@@ -2567,7 +2567,7 @@
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 95.58851411566138,
+   "ms": 93.27812911942601,
    "cls": "TP"
   },
   {
@@ -2604,7 +2604,7 @@
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 47.88123583421111,
+   "ms": 57.19759198836982,
    "cls": "TN"
   },
   {
@@ -2641,7 +2641,7 @@
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 80.9664810076356,
+   "ms": 84.18382587842643,
    "cls": "undecided"
   },
   {
@@ -2681,7 +2681,7 @@
     "num": "19 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 98.95730088464916,
+   "ms": 106.6645469982177,
    "cls": "TP"
   },
   {
@@ -2718,7 +2718,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 24.06193409115076,
+   "ms": 24.433696875348687,
    "cls": "TN"
   },
   {
@@ -2755,7 +2755,7 @@
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 11.980490060523152,
+   "ms": 12.337571009993553,
    "cls": "TN"
   },
   {
@@ -2794,7 +2794,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 76.39099797233939,
+   "ms": 75.77099581249058,
    "cls": "undecided"
   },
   {
@@ -2833,7 +2833,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 75.12296014465392,
+   "ms": 78.4118389710784,
    "cls": "undecided"
   },
   {
@@ -2872,7 +2872,7 @@
     "num": "17 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 60.947042889893055,
+   "ms": 70.21430204622447,
    "cls": "undecided"
   },
   {
@@ -2911,7 +2911,7 @@
     "num": "17 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 65.78955985605717,
+   "ms": 66.61399896256626,
    "cls": "undecided"
   },
   {
@@ -2950,7 +2950,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 84.52985296025872,
+   "ms": 93.62485818564892,
    "cls": "undecided"
   },
   {
@@ -2989,7 +2989,7 @@
     "num": "16 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 64.9769059382379,
+   "ms": 71.68523804284632,
    "cls": "undecided"
   },
   {
@@ -3028,7 +3028,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 81.45708101801574,
+   "ms": 78.24385701678693,
    "cls": "undecided"
   },
   {
@@ -3068,7 +3068,7 @@
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 91.40599309466779,
+   "ms": 96.71366796828806,
    "cls": "TP"
   },
   {
@@ -3105,7 +3105,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 101.22937709093094,
+   "ms": 96.04641399346292,
    "cls": "undecided"
   },
   {
@@ -3142,7 +3142,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 89.57646484486759,
+   "ms": 82.7996430452913,
    "cls": "undecided"
   },
   {
@@ -3179,7 +3179,7 @@
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 43.00798592157662,
+   "ms": 43.938457034528255,
    "cls": "undecided"
   },
   {
@@ -3219,7 +3219,7 @@
     "num": "19 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 87.06576190888882,
+   "ms": 90.7725419383496,
    "cls": "TP"
   },
   {
@@ -3259,7 +3259,7 @@
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 89.6734120324254,
+   "ms": 105.45938089489937,
    "cls": "TP"
   },
   {
@@ -3298,7 +3298,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 74.00586199946702,
+   "ms": 81.68087410740554,
    "cls": "undecided"
   },
   {
@@ -3337,7 +3337,7 @@
     "num": "6 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 72.58520112372935,
+   "ms": 71.37163495644927,
    "cls": "undecided"
   },
   {
@@ -3376,7 +3376,7 @@
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 93.16410892643034,
+   "ms": 85.75266599655151,
    "cls": "undecided"
   },
   {
@@ -3415,7 +3415,7 @@
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 86.14588691852987,
+   "ms": 89.50640191324055,
    "cls": "undecided"
   },
   {
@@ -3454,7 +3454,7 @@
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 96.11090389080346,
+   "ms": 112.33646189793944,
    "cls": "undecided"
   },
   {
@@ -3493,7 +3493,7 @@
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 87.77489606291056,
+   "ms": 92.2998411115259,
    "cls": "undecided"
   },
   {
@@ -3533,7 +3533,7 @@
     "num": "no common grid points",
     "num_ok": null
    },
-   "ms": 68.02822300232947,
+   "ms": 70.03365596756339,
    "cls": "TP"
   },
   {
@@ -3573,7 +3573,47 @@
     "num": "no common grid points",
     "num_ok": null
    },
-   "ms": 68.81266902200878,
+   "ms": 69.9557438492775,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D93",
+    "topic": "r4: sqrt(x^pi-2) squared",
+    "before": "\\sqrt{x^{\\pi}-2}^2",
+    "after": "x^{\\pi}-2",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Real power with irrational exponent needs x>0. Before also needs x^pi>=2 i.e. x>=2^(1/pi); after needs only x>0, so (0, 2^(1/pi)) is added. Regression probe: round 3 raised TypeError in _untrusted here (reviewer N1); expected CHANGED with that set or UNDECIDED, never an exception.",
+    "excluded": null,
+    "added": {
+     "x": "Interval.open(0, 2**(1/pi))"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(sqrt(x**pi + 2*(-1)))**2",
+    "x**pi + 2*(-1)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 29,
+    "excluded": "",
+    "added": "x in Interval.open(0, 2**(1/pi))",
+    "wit_excl": null,
+    "wit_add": "(x=1)",
+    "detail": "added (defined after, not before): x in Interval.open(0, 2**(1/pi)); witness added (x=1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "8 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 83.94555584527552,
    "cls": "TP"
   }
  ],
@@ -3592,13 +3632,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 7.756715174764395,
+     "ms": 7.439738139510155,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 6.145379971712828,
+     "ms": 5.858443910256028,
      "score": "ok"
     }
    }
@@ -3617,13 +3657,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
-     "ms": 5.41285309009254,
+     "ms": 4.806088982149959,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
-     "ms": 5.204143933951855,
+     "ms": 5.160606931895018,
      "score": "ok"
     }
    }
@@ -3642,13 +3682,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
-     "ms": 5.153744015842676,
+     "ms": 6.8199478555470705,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
-     "ms": 4.504513926804066,
+     "ms": 4.84461197629571,
      "score": "ok"
     }
    }
@@ -3667,13 +3707,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 7.061772979795933,
+     "ms": 8.993730880320072,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 6.830498110502958,
+     "ms": 7.753209909424186,
      "score": "ok"
     }
    }
@@ -3692,13 +3732,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 6.69578299857676,
+     "ms": 7.580908946692944,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 5.976767046377063,
+     "ms": 7.540327962487936,
      "score": "ok"
     }
    }
@@ -3717,13 +3757,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 6.989356828853488,
+     "ms": 6.95231300778687,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 5.615987116470933,
+     "ms": 5.807087058201432,
      "score": "ok"
     }
    }
@@ -3742,13 +3782,13 @@
     "S7": {
      "verdict": "EQ_DOM",
      "detail": "equal at samples; excluded points before: {1}; after: EmptySet",
-     "ms": 22.820598213002086,
+     "ms": 18.27840507030487,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ_DOM",
      "detail": "added (defined after, not before): x in {1}; witness added (x=1)",
-     "ms": 23.788642836734653,
+     "ms": 19.86197684891522,
      "score": "ok"
     }
    }
@@ -3767,13 +3807,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 8.465586928650737,
+     "ms": 8.096408098936081,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 7.179918000474572,
+     "ms": 7.065186044201255,
      "score": "ok"
     }
    }
@@ -3792,13 +3832,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 7.82646588049829,
+     "ms": 8.707579923793674,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 7.262397091835737,
+     "ms": 7.235412951558828,
      "score": "ok"
     }
    }
@@ -3817,13 +3857,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
-     "ms": 8.980129146948457,
+     "ms": 9.809279115870595,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
-     "ms": 9.153621038421988,
+     "ms": 9.778636042028666,
      "score": "ok"
     }
    }
@@ -3842,13 +3882,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
-     "ms": 9.054313879460096,
+     "ms": 9.137770161032677,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
-     "ms": 8.883199887350202,
+     "ms": 10.350018972530961,
      "score": "ok"
     }
    }
@@ -3867,13 +3907,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 7.988211931660771,
+     "ms": 9.710848098620772,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 7.588788168504834,
+     "ms": 8.364553097635508,
      "score": "ok"
     }
    }
@@ -3893,13 +3933,13 @@
     "S7": {
      "verdict": "UND",
      "detail": "domain tracking implemented for one variable, got [x, y]",
-     "ms": 8.247009944170713,
+     "ms": 8.334657177329063,
      "score": "und"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 8.511504158377647,
+     "ms": 8.14294395968318,
      "score": "ok"
     }
    }
@@ -3918,13 +3958,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
-     "ms": 12.964733177796006,
+     "ms": 13.672698987647891,
      "score": "partial"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
-     "ms": 12.247082078829408,
+     "ms": 11.803410947322845,
      "score": "partial"
     }
    }
@@ -3943,13 +3983,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
-     "ms": 9.45187802426517,
+     "ms": 9.908274980261922,
      "score": "partial"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
-     "ms": 10.544836986809969,
+     "ms": 10.545338038355112,
      "score": "partial"
     }
    }
@@ -3968,13 +4008,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
-     "ms": 10.517479153349996,
+     "ms": 10.882132919505239,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
-     "ms": 10.886786971241236,
+     "ms": 8.996786084026098,
      "score": "ok"
     }
    }
@@ -3993,13 +4033,13 @@
     "S7": {
      "verdict": "EQ_DOM",
      "detail": "equal at samples; excluded points before: {1}; after: EmptySet",
-     "ms": 20.850996021181345,
+     "ms": 20.857902010902762,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ_DOM",
      "detail": "added (defined after, not before): x in {1}; witness added (x=1)",
-     "ms": 20.878623006865382,
+     "ms": 21.570170065388083,
      "score": "ok"
     }
    }
@@ -4018,13 +4058,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 6.305857095867395,
+     "ms": 6.724787876009941,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 5.602330202236772,
+     "ms": 5.764533067122102,
      "score": "ok"
     }
    }
@@ -4043,13 +4083,13 @@
     "S7": {
      "verdict": "EQ_DOM",
      "detail": "equal at samples; excluded points before: Union(ImageSet(Lambda(n_, 2*pi*n_ + pi/2), Integers), ImageSet(Lambda(n_, 2*pi*n_ + 3*pi/2), Integers)); after: EmptySet",
-     "ms": 66.81733508594334,
+     "ms": 73.22470215149224,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ_DOM",
      "detail": "added (defined after, not before): x in {pi/2 + pi*k}; witness added (x=pi/2)",
-     "ms": 39.64349301531911,
+     "ms": 39.65647192671895,
      "score": "ok"
     }
    }
@@ -4068,13 +4108,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
-     "ms": 5.325472913682461,
+     "ms": 5.726630100980401,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
-     "ms": 5.0328560173511505,
+     "ms": 5.937553010880947,
      "score": "ok"
     }
    }
