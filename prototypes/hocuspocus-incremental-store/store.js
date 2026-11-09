@@ -11,6 +11,7 @@
 import * as Y from 'yjs'
 import { DatabaseSync } from 'node:sqlite'
 import crypto from 'node:crypto'
+import fs from 'node:fs'
 
 export const COUNT = 500
 export const BYTES = 512 * 1024
@@ -18,7 +19,10 @@ const kindOf = (name) => name.split(':')[0]
 
 export function openDb(file) {
   const db = new DatabaseSync(file)
-  db.exec('PRAGMA journal_mode=WAL; PRAGMA synchronous=NORMAL;')
+  // wal_autocheckpoint=0: the WAL is never reset while the bench runs, so WAL file size only grows and
+  // the size delta around a write = physical bytes SQLite appended for it (whole 4 KiB page frames + 24 B headers)
+  db.exec('PRAGMA journal_mode=WAL; PRAGMA synchronous=NORMAL; PRAGMA wal_autocheckpoint=0;')
+  db.walPath = file + '-wal'
   db.exec(`CREATE TABLE IF NOT EXISTS documents (name TEXT PRIMARY KEY, data BLOB);
            CREATE TABLE IF NOT EXISTS snapshots (doc TEXT PRIMARY KEY, data BLOB);
            CREATE TABLE IF NOT EXISTS updates (id INTEGER PRIMARY KEY AUTOINCREMENT, doc TEXT NOT NULL, data BLOB NOT NULL);
@@ -73,8 +77,9 @@ export function makeStore(db, opts = {}) {
     del: db.prepare('DELETE FROM updates WHERE doc=? AND id<=?'),
     maxId: db.prepare('SELECT COALESCE(MAX(id),0) AS m FROM updates WHERE doc=?'),
   }
+  const walSize = () => { try { return fs.statSync(db.walPath).size } catch { return 0 } }
   const s = {
-    writes: [],   // {name, op:'save'|'append'|'compact', bytes, ms}
+    writes: [],   // {name, op:'save'|'append'|'compact', bytes (payload), disk (WAL bytes appended), ms}
     loads: [],    // {name, ms, rows}
     compactions: [], // {name, trigger, t0, t1, ms, rowsMerged, snapBytes, mode}
     seen: new Map(), // docName -> number of onChange calls
@@ -88,6 +93,7 @@ export function makeStore(db, opts = {}) {
 
   function compact(name, trigger, document) {
     const x = state(name)
+    const w0 = walSize()
     const t0 = performance.now()
     const wall0 = Date.now()
     db.exec('BEGIN IMMEDIATE')
@@ -107,9 +113,10 @@ export function makeStore(db, opts = {}) {
     if (s.crashBeforeCommit) process.kill(process.pid, 'SIGKILL') // simulated crash inside the compaction transaction
     db.exec('COMMIT')
     const t1 = performance.now()
+    const disk = walSize() - w0
     x.rows = 0; x.bytes = 0
     s.compactions.push({ name, trigger, t0: performance.now() - (t1 - t0), t1, wall0, ms: t1 - t0, rowsMerged: n, snapBytes: merged.length, mode: s.compactMode })
-    s.writes.push({ name, op: 'compact', bytes: merged.length, ms: t1 - t0 })
+    s.writes.push({ name, op: 'compact', bytes: merged.length, disk, ms: t1 - t0 })
   }
   s.compact = compact
 
@@ -144,29 +151,34 @@ export function makeStore(db, opts = {}) {
       const k = kindOf(documentName)
       if (k === 'lt') { state(documentName).queue.push(update); return }
       if (k !== 'lc' && k !== 'lb' && k !== 'ld' && k !== 'ln') return
+      const w0 = walSize()
       const t = performance.now()
       q.ins.run(documentName, update)
-      s.writes.push({ name: documentName, op: 'append', bytes: update.length, ms: performance.now() - t })
+      const ms = performance.now() - t
+      s.writes.push({ name: documentName, op: 'append', bytes: update.length, disk: walSize() - w0, ms })
       const x = state(documentName); x.rows++; x.bytes += update.length
       maybeCompact(documentName, document)
     },
     async onStoreDocument({ document, documentName }) {
       const k = kindOf(documentName)
       if (k === 'full' || k === 'pg') {
+        const w0 = walSize()
         const t0 = performance.now()
         const data = Y.encodeStateAsUpdate(document)
         const t1 = performance.now()
         q.putDoc.run(documentName, data)
         const t2 = performance.now()
-        s.writes.push({ name: documentName, op: 'save', bytes: data.length, ms: t2 - t1, encodeMs: t1 - t0 })
+        s.writes.push({ name: documentName, op: 'save', bytes: data.length, disk: walSize() - w0, ms: t2 - t1, encodeMs: t1 - t0 })
       } else if (k === 'lt') {
         const x = state(documentName)
         if (!x.queue.length) return
         const batch = x.queue.splice(0)
-        const merged = Y.mergeUpdates(batch)
+        const w0 = walSize()
         const t = performance.now()
+        const merged = Y.mergeUpdates(batch)
         q.ins.run(documentName, merged)
-        s.writes.push({ name: documentName, op: 'append', bytes: merged.length, ms: performance.now() - t, batched: batch.length })
+        const ms = performance.now() - t
+        s.writes.push({ name: documentName, op: 'append', bytes: merged.length, disk: walSize() - w0, ms, batched: batch.length })
         x.rows++; x.bytes += merged.length
       }
     },

@@ -155,10 +155,10 @@ for (const k of ['full', 'pg', 'ld', 'lt']) {
     doc.transact(() => map.set('single' + i, extra[1900 + i].packed), 'me')
     await waitFor(() => writesFor([name], n0).length > 0, 10000)
     await sleep(20)
-    recs.push(writesFor([name], n0).reduce((a, w) => ({ bytes: a.bytes + w.bytes, ms: a.ms + w.ms + (w.encodeMs || 0) }), { bytes: 0, ms: 0 }))
+    recs.push(writesFor([name], n0).reduce((a, w) => ({ bytes: a.bytes + w.bytes, disk: a.disk + w.disk, ms: a.ms + w.ms + (w.encodeMs || 0) }), { bytes: 0, disk: 0, ms: 0 }))
   }
   recs.shift(); upd.shift()
-  res.singleSave.push({ kind: k, updateBytes: median(upd), bytesWrittenPerSave: median(recs.map((r) => r.bytes)), saveMs: r1(median(recs.map((r) => r.ms))) })
+  res.singleSave.push({ kind: k, updateBytes: median(upd), bytesWrittenPerSave: median(recs.map((r) => r.bytes)), walBytesPerSave: median(recs.map((r) => r.disk)), saveMs: r1(median(recs.map((r) => r.ms))) })
   prov.destroy(); await waitUnloaded(hp, name)
 }
 console.error(`N=${N} single-save done`)
@@ -220,11 +220,12 @@ async function runVariant(kind) {
     const compWin = myComp.flatMap((c) => ping.samples.filter((s) => s.at >= c.t0 - 5 && s.at <= c.t1 + 60).map((s) => s.gap))
     v.sessions.push({
       session: si, durationMs: Math.round(sessionMs), erases, undos, strokesAdded: 1000,
-      saves: saveW.length, bytesWritten: saveW.reduce((a, w) => a + w.bytes, 0),
+      saves: saveW.length, bytesWritten: saveW.reduce((a, w) => a + w.bytes, 0), walBytesWritten: saveW.reduce((a, w) => a + w.disk, 0),
       bytesPerSaveMedian: Math.round(median(saveW.map((w) => w.bytes)) || 0),
+      walBytesPerSaveMedian: Math.round(median(saveW.map((w) => w.disk)) || 0),
       writeMs: stat(saveW.map((w) => w.ms + (w.encodeMs || 0))),
       compactions: myComp.map((c) => ({ trigger: c.trigger, ms: r1(c.ms), rows: c.rowsMerged, snapBytes: c.snapBytes })),
-      compactionBytesWritten: compW.reduce((a, w) => a + w.bytes, 0),
+      compactionBytesWritten: compW.reduce((a, w) => a + w.bytes, 0), compactionWalBytes: compW.reduce((a, w) => a + w.disk, 0),
       logLeftAfterSession: left, growthSeries: series,
       pingMs: stat(pa), pingGapMs: stat(pg), pingMaxDuringCompactionMs: compWin.length ? r1(Math.max(...compWin)) : null,
       correct_reloadFromStorageEqualsLive: kind === 'none' ? 'n/a' : correct, correctDetail: detail.slice(0, 3),
@@ -233,6 +234,8 @@ async function runVariant(kind) {
   const all = writesFor(names, w0)
   v.totalBytesWritten = all.reduce((a, w) => a + w.bytes, 0)
   v.totalBytesPerStroke = Math.round(v.totalBytesWritten / 2000)
+  v.totalWalBytes = all.reduce((a, w) => a + w.disk, 0)
+  v.totalWalBytesPerStroke = Math.round(v.totalWalBytes / 2000)
   v.loadsServerMs = store.loads.filter((l) => names.includes(l.name)).slice(-4).map((l) => ({ ms: r1(l.ms), rows: l.rows }))
   return v
 }

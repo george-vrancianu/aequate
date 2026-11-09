@@ -23,13 +23,15 @@ if (process.argv[2] === '--child') {
   if (mode === 'log-kill-inside-compaction') S.store.crashBeforeCommit = true
   const doc = new Y.Doc(), prov = await connect(S.url, name, doc)
   const maps = BOARD_MAPS.map((m) => doc.getMap(m)), rng = mulberry32(5)
+  let sent = 0
+  doc.on('update', (u, o) => { if (o !== prov) sent++ })
   for (let i = 0; i < ADD; i++) {
     const m = maps[i % 5]
     if (rng() < 0.1) { const ks = [...m.keys()]; doc.transact(() => m.delete(ks[Math.floor(rng() * ks.length)]), 'me') }
     doc.transact(() => m.set(strokes[BASE + i].id, strokes[BASE + i].packed), 'me')
     await sleep(2)
   }
-  await waitFor(() => (S.store.seen.get(name) || 0) >= ADD, 30000)
+  await waitFor(() => (S.store.seen.get(name) || 0) >= sent, 30000)
   fs.writeFileSync(expectedFile, JSON.stringify(digest(doc, BOARD_MAPS)))
   if (mode === 'log-kill-inside-compaction') { prov.destroy(); await sleep(2000); process.exit(3) } // compaction on disconnect SIGKILLs before COMMIT
   process.kill(process.pid, 'SIGKILL')
