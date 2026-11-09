@@ -127,4 +127,18 @@ add("D83", "r2: x^(2/3)-1 over itself", r"\frac{x^{\frac{2}{3}}-1}{x^{\frac{2}{3
 add("D84", "r2: sqrt(2x^(1/3)-1) squared", r"\sqrt{2x^{\frac{1}{3}}-1}^2", r"2x^{\frac{1}{3}}-1", "changed", "Before needs cbrt x>=1/2 i.e. x>=1/8; after is defined on all R, so (-oo,1/8) is added.", added={"x": D(OO(-oo, R(1, 8)))})
 add("D85", "r2: sqrt(x^(2/3)-1) to product of cube-root factors", r"\sqrt{x^{\frac{2}{3}}-1}", r"\sqrt{x^{\frac{1}{3}}-1}\cdot\sqrt{x^{\frac{1}{3}}+1}", "changed", "Before needs |x|>=1; after needs cbrt x>=1 and cbrt x>=-1 i.e. x>=1, so x<=-1 is defined before, not after.", excluded={"x": D(Interval(-oo, -1))})
 add("D86", "r2: sqrt(3x^(2/3)-12) squared", r"\sqrt{3x^{\frac{2}{3}}-12}^2", r"3x^{\frac{2}{3}}-12", "changed", "Before needs |x|^(2/3)>=4 i.e. |x|>=8; after is defined on all R, so (-8,8) is added.", added={"x": D(OO(-8, 8))})
+# --- POST-REVIEW ROUND 3 tier (D87-D92): ADDED AFTER REVIEW ROUND 3 (blocking B1''). Reviewer's rows where the true boundary lies BEYOND the +/-10^4
+# probe range: the round-2 guard passed them and gave a false SAME (D87-D90) or a misnamed "x in Reals" added set (D91, D92). Labels over the reals
+# with the real-root convention (x^(2/3)=|x|^(2/3) etc.): the after side is defined on all R, before needs the radicand >= 0. Regression cases, not an
+# independent sample. Expected now: UNDECIDED for D87-D90 (no witness within the +/-1000 grid, and no SAME is given on odd-root forms),
+# CHANGED with an exact witness and NO named set for D91, D92.
+S5 = 5000 * R(5) ** R(1, 2)          # 500^(3/2)
+S10 = 10000 * R(10) ** R(1, 2)       # 1000^(3/2) = 10^(9/2)
+S15 = 7200 * R(15) ** R(1, 2)        # 60^(5/2)
+add("D87", "r3: sqrt(500-x^(2/3)) squared", r"\sqrt{500-x^{\frac{2}{3}}}^2", r"500-x^{\frac{2}{3}}", "changed", "Before needs |x|^(2/3)<=500 i.e. |x|<=500^(3/2)=5000*sqrt(5) (about 11180); after is defined on all R, so |x|>5000*sqrt(5) is added. (Reviewer: false SAME in round 3, boundary beyond the probes.)", added={"x": D(Union(OO(-oo, -S5), OO(S5, oo)))})
+add("D88", "r3: sqrt(1000-x^(2/3)) squared", r"\sqrt{1000-x^{\frac{2}{3}}}^2", r"1000-x^{\frac{2}{3}}", "changed", "Before needs |x|<=1000^(3/2)=10000*sqrt(10) (about 31623); after is all R, so |x|>10000*sqrt(10) is added.", added={"x": D(Union(OO(-oo, -S10), OO(S10, oo)))})
+add("D89", "r3: sqrt(10^6-x^(4/3)) squared", r"\sqrt{10^{6}-x^{\frac{4}{3}}}^2", r"10^{6}-x^{\frac{4}{3}}", "changed", "Before needs |x|^(4/3)<=10^6 i.e. |x|<=10^(9/2)=10000*sqrt(10); after is all R, so |x|>10000*sqrt(10) is added.", added={"x": D(Union(OO(-oo, -S10), OO(S10, oo)))})
+add("D90", "r3: sqrt(60-x^(2/5)) squared", r"\sqrt{60-x^{\frac{2}{5}}}^2", r"60-x^{\frac{2}{5}}", "changed", "Before needs |x|^(2/5)<=60 i.e. |x|<=60^(5/2)=7200*sqrt(15) (about 27885); after is all R, so |x|>7200*sqrt(15) is added.", added={"x": D(Union(OO(-oo, -S15), OO(S15, oo)))})
+add("D91", "r3: sqrt(x^(2/3)-500) squared", r"\sqrt{x^{\frac{2}{3}}-500}^2", r"x^{\frac{2}{3}}-500", "changed", "Before needs |x|^(2/3)>=500 i.e. |x|>=5000*sqrt(5); after is all R, so (-5000*sqrt(5), 5000*sqrt(5)) is added. (Reviewer: round 2 named the added set 'x in Reals'.)", added={"x": D(OO(-S5, S5))})
+add("D92", "r3: sqrt(x^(2/3)-1000) squared", r"\sqrt{x^{\frac{2}{3}}-1000}^2", r"x^{\frac{2}{3}}-1000", "changed", "Before needs |x|>=10000*sqrt(10); after is all R, so (-10000*sqrt(10), 10000*sqrt(10)) is added. (Reviewer: misnamed 'x in Reals' in round 2.)", added={"x": D(OO(-S10, S10))})
 STEPS = st

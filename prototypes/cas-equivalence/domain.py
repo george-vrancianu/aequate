@@ -6,7 +6,7 @@ Real-number convention (stated, not neutral):
     ("cube root of -8 is -2"), NOT SymPy's principal-branch value. x**0 needs base != 0 (0**0 undefined).
     x**r with irrational constant r needs base > 0. A Float exponent is its decimal value as a Rational (x^{0,5} = x^(1/2)).
     Implementation of the odd-root convention: collect() rewrites b**(p/q), q odd, to (sign(b)*Abs(b)**(1/q))**p, i.e. the real root, before normalise / solveset / pointwise evaluation. x**y with a symbolic exponent y, or any unlisted function: UNDECIDED.
-    SymPy solveset is WRONG on Abs(b)**(p/q) (q odd, p even) forms that this rewrite creates, so solveset results on atoms with Abs/sign/non-integer powers are sample-checked by _guard (UNDECIDED on disagreement).
+    SymPy solveset is WRONG on Abs(b)**(p/q) (q odd, p even) forms that this rewrite creates, so solveset results on atoms with Abs/sign/non-integer powers are sample-checked by _guard (UNDECIDED on disagreement). Samples cannot CONFIRM solveset (the true boundary can lie beyond any probe), so a SAME that rests on an odd-root atom (_untrusted) is UNDECIDED, and a CHANGED there keeps only its exact witness and the constraint diff, no solved set.
   * log is the natural log, argument > 0. arcsin/arccos argument in [-1, 1]. tan/sec need cos != 0, cot/csc need sin != 0.
 
 Representation: a CONJUNCTION OF ATOMIC CONSTRAINTS (expr != 0, expr >= 0, expr > 0) collected from the UNEVALUATED parse,
@@ -255,6 +255,13 @@ def _suspect(e):
     """Forms on which SymPy solveset was seen to be WRONG (Abs(x)**(2/3) -> EmptySet or R): anything with Abs/sign or a non-integer power."""
     return e.has(sympy.Abs, sympy.sign) or any(isinstance(n, sympy.Pow) and not n.exp.is_Integer for n in sympy.preorder_traversal(e))
 
+def _untrusted(e):
+    """Odd-root forms the real-root rewrite creates: a non-integer power with ODD denominator of a base containing Abs/sign
+    (Abs(x)**(2/3), sign(x)*Abs(x)**(1/3)). solveset was seen to be wrong here and samples cannot CONFIRM it (the true boundary can lie
+    beyond any finite probe range), so a SAME verdict that rests on such an atom is never given (UNDECIDED), and a CHANGED verdict does not name a solved set."""
+    return any(isinstance(n, sympy.Pow) and not n.exp.is_Integer and sympy.Rational(n.exp).q % 2 == 1 and n.base.has(sympy.Abs, sympy.sign)
+               for n in sympy.preorder_traversal(e))
+
 def _guard(e, rel, v, I, res):
     """Cross-check a solveset result (sets of I) against exact evaluation of the atom at probe points, endpoints and midpoints
     of the returned pieces. Any disagreement -> UNDECIDED (solveset is not trusted on this form)."""
@@ -266,7 +273,6 @@ def _guard(e, rel, v, I, res):
                 if b.is_finite: pts |= {b, b + Rational(1, 2), b - Rational(1, 2)}
             if p.inf.is_finite and p.sup.is_finite: pts.add((p.inf + p.sup) / 2)
         elif isinstance(p, FiniteSet): pts |= set(p) | {x + Rational(1, 7) for x in p} | {x - Rational(1, 7) for x in p}
-    if isinstance(res, FiniteSet) and rel != "ne": pass
     for p in pts:
         if not p.is_number or not p.is_real or I.contains(p) is not S.true: continue
         sat = _sat(e, rel, {v: p})
@@ -277,12 +283,13 @@ def _guard(e, rel, v, I, res):
 
 def build(atoms):
     """-> dict var -> [I, E(Dset-like: fin set, per)], list of opaque keys, set of variables."""
-    dom, opaque, vars_ = {}, set(), set()
+    dom, opaque, vars_, untrusted = {}, set(), set(), []
     for e, rel in atoms:
         vs = e.free_symbols; vars_ |= vs
         if len(vs) != 1:
             opaque.add(_canon_key(e, rel)); continue
         v = next(iter(vs))
+        if _untrusted(e): untrusted.append(f"{e} {_SYM[rel]}")
         I, Efin, Eper = dom.setdefault(v, [S.Reals, FiniteSet(), None])
         if I == S.EmptySet: raise Undecided("empty domain")
         try:
@@ -300,7 +307,7 @@ def build(atoms):
         except Undecided: raise
         except Exception:
             opaque.add(_canon_key(e, rel))
-    return dom, opaque, vars_
+    return dom, opaque, vars_, untrusted
 
 def _diff(IA, EA, IB, EB):
     """D_A minus D_B for D = I minus E (one variable). Returns Dset."""
@@ -324,7 +331,7 @@ def _diff(IA, EA, IB, EB):
 
 def compare_symbolic(da, db):
     """da, db = (dom, opaque, vars). -> ('SAME'|'DIFF'|'UNKNOWN', excl{var:Dset}, added{var:Dset}, opaque_differs)"""
-    (doma, opa, _), (domb, opb, _) = da, db
+    (doma, opa, _, _u), (domb, opb, _, _u2) = da, db
     excl, added = {}, {}
     for v in set(doma) | set(domb):
         IA, Fa, Pa = doma.get(v, [S.Reals, FiniteSet(), None]); IB, Fb, Pb = domb.get(v, [S.Reals, FiniteSet(), None])
@@ -392,7 +399,7 @@ def witness_search(rawA, rawB, vars_, specials, budget=1500):
 
 def _specials(*doms):
     sp = {}
-    for dom, _, _ in doms:
+    for dom, *_ in doms:
         for v, (I, Ef, Ep) in dom.items():
             L = sp.setdefault(v, [])
             if I != S.Reals:
@@ -421,11 +428,15 @@ def domain_verdict(parts_a, parts_b):
         da, db = build(atA), build(atB)
         kA, kB = {_canon_key(e, r) for e, r in atA}, {_canon_key(e, r) for e, r in atB}
         vars_ = set(da[2]) | set(db[2])
+        untrusted = sorted(set(da[3]) | set(db[3]))
         sym, excl, added, opdiff = compare_symbolic(da, db)
         wab, wba, tried = witness_search(evA, evB, vars_, _specials(da, db))
     except Undecided as u:
         res["why"] = f"undecided: {u}"; return res
-    res.update(sym=sym, excluded=excl, added=added, wit_excl=wab, wit_add=wba, tried=tried, opaque_differs=opdiff)
+    res.update(sym=sym, excluded=excl, added=added, wit_excl=wab, wit_add=wba, tried=tried, opaque_differs=opdiff, untrusted=untrusted)
+    if untrusted and not opdiff:   # solved sets on these atoms are not trusted: witness (an exact refutation) and constraint lists only
+        res.update(excluded={}, added={}, hint_excl=excl, hint_add=added, opaque_differs=True,
+                   cons_only_before=sorted(kA - kB), cons_only_after=sorted(kB - kA))
     if opdiff:   # opaque constraints involved: per-variable sets are NOT the exact difference: hint only, never the answer
         res.update(excluded={}, added={}, hint_excl=excl, hint_add=added,
                    cons_only_before=sorted(kA - kB), cons_only_after=sorted(kB - kA))
@@ -435,9 +446,11 @@ def domain_verdict(parts_a, parts_b):
         res["conflict"] = True
     elif wab is not None or wba is not None:
         res["verdict"] = "CHANGED"
-        res["why"] = ("pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)" if opdiff and sym != "SAME" else
+        res["why"] = ("exact witness only (solver untrusted for odd-root form; no solved set named)" if untrusted else "pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)" if opdiff and sym != "SAME" else
                       "symbolic and pointwise agree" if sym == "DIFF" else
                       "pointwise witness only (symbolic: could not name the set)")
+    elif sym == "SAME" and untrusted:
+        res["why"] = f"solver untrusted for odd-root form ({'; '.join(untrusted)[:120]}): samples cannot confirm solveset, so no SAME"
     elif sym == "SAME":
         res["verdict"], res["why"] = "SAME", f"same constraints/sets; no differing point among {tried} tried"
     elif sym == "DIFF":

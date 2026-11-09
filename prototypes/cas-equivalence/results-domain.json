@@ -37,7 +37,7 @@
     "num": "20 common points, max rel diff 6.6e-142",
     "num_ok": true
    },
-   "ms": 28.53215904906392,
+   "ms": 30.071157962083817,
    "cls": "TP"
   },
   {
@@ -77,7 +77,7 @@
     "num": "19 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 36.963701946660876,
+   "ms": 37.580205826088786,
    "cls": "TP"
   },
   {
@@ -117,7 +117,7 @@
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 14.118539169430733,
+   "ms": 16.8293840251863,
    "cls": "TP"
   },
   {
@@ -157,7 +157,7 @@
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 16.16775500588119,
+   "ms": 16.750344075262547,
    "cls": "TP"
   },
   {
@@ -194,7 +194,7 @@
     "num": "20 common points, max rel diff 6.6e-142",
     "num_ok": true
    },
-   "ms": 35.80231708474457,
+   "ms": 38.07973815128207,
    "cls": "TN"
   },
   {
@@ -231,7 +231,7 @@
     "num": "19 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 36.93920699879527,
+   "ms": 38.118521915748715,
    "cls": "TN"
   },
   {
@@ -271,7 +271,7 @@
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 41.41877009533346,
+   "ms": 44.57263881340623,
    "cls": "TP"
   },
   {
@@ -308,7 +308,7 @@
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 48.3649498783052,
+   "ms": 48.47793793305755,
    "cls": "TN"
   },
   {
@@ -348,7 +348,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 49.42669300362468,
+   "ms": 47.018242068588734,
    "cls": "TP"
   },
   {
@@ -385,7 +385,7 @@
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 60.07995898835361,
+   "ms": 60.844289837405086,
    "cls": "TN"
   },
   {
@@ -425,7 +425,7 @@
     "num": "17 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 129.75932913832366,
+   "ms": 140.36932704038918,
    "cls": "TP"
   },
   {
@@ -465,7 +465,7 @@
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 40.62895104289055,
+   "ms": 37.74180100299418,
    "cls": "TP"
   },
   {
@@ -505,7 +505,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 23.95488996990025,
+   "ms": 22.32367009855807,
    "cls": "TP"
   },
   {
@@ -542,7 +542,7 @@
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 18.404056085273623,
+   "ms": 17.058575991541147,
    "cls": "TN"
   },
   {
@@ -582,7 +582,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 29.73769581876695,
+   "ms": 30.978198861703277,
    "cls": "TP"
   },
   {
@@ -622,7 +622,7 @@
     "num": "9 common points, max rel diff 5.8e-70",
     "num_ok": true
    },
-   "ms": 61.29161803983152,
+   "ms": 65.81767182797194,
    "cls": "TP"
   },
   {
@@ -662,7 +662,7 @@
     "num": "9 common points, max rel diff 5.8e-70",
     "num_ok": true
    },
-   "ms": 62.6181869301945,
+   "ms": 66.52984698303044,
    "cls": "TP"
   },
   {
@@ -702,7 +702,7 @@
     "num": "7 common points, max rel diff 7.1e-74",
     "num_ok": true
    },
-   "ms": 68.82010493427515,
+   "ms": 70.59800392016768,
    "cls": "TP"
   },
   {
@@ -742,7 +742,7 @@
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 40.1306611020118,
+   "ms": 43.1020341347903,
    "cls": "TP"
   },
   {
@@ -782,7 +782,7 @@
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 40.30099301598966,
+   "ms": 43.6227370519191,
    "cls": "TP"
   },
   {
@@ -819,7 +819,7 @@
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 61.69571215286851,
+   "ms": 68.45544185489416,
    "cls": "TN"
   },
   {
@@ -859,7 +859,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 67.70092807710171,
+   "ms": 65.76642813161016,
    "cls": "TP"
   },
   {
@@ -899,7 +899,7 @@
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 21.33819297887385,
+   "ms": 20.286245038732886,
    "cls": "TP"
   },
   {
@@ -936,7 +936,7 @@
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 23.0164029635489,
+   "ms": 22.16616296209395,
    "cls": "TN"
   },
   {
@@ -976,7 +976,7 @@
     "num": "10 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 29.50760698877275,
+   "ms": 31.298883026465774,
    "cls": "TP"
   },
   {
@@ -1016,7 +1016,7 @@
     "num": "6 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 47.04053909517825,
+   "ms": 47.55864315666258,
    "cls": "TP"
   },
   {
@@ -1056,7 +1056,7 @@
     "num": "6 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 65.28091710060835,
+   "ms": 64.02414198964834,
    "cls": "TP"
   },
   {
@@ -1093,7 +1093,7 @@
     "num": "6 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 67.02946615405381,
+   "ms": 66.95234193466604,
    "cls": "TN"
   },
   {
@@ -1133,7 +1133,7 @@
     "num": "4 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 59.66095207259059,
+   "ms": 55.77529687434435,
    "cls": "TP"
   },
   {
@@ -1170,7 +1170,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 21.71949204057455,
+   "ms": 20.650854101404548,
    "cls": "TN"
   },
   {
@@ -1207,7 +1207,7 @@
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 16.730824019759893,
+   "ms": 15.953270019963384,
    "cls": "TN"
   },
   {
@@ -1244,7 +1244,7 @@
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 27.859376976266503,
+   "ms": 26.860249927267432,
    "cls": "TN"
   },
   {
@@ -1284,7 +1284,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 17.17432588338852,
+   "ms": 18.276093993335962,
    "cls": "TP"
   },
   {
@@ -1321,7 +1321,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 59.12730609998107,
+   "ms": 61.70896301046014,
    "cls": "TN"
   },
   {
@@ -1358,7 +1358,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 109.67372893355787,
+   "ms": 112.00813599862158,
    "cls": "TN"
   },
   {
@@ -1398,7 +1398,7 @@
     "num": "4 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 73.69794696569443,
+   "ms": 74.91511898115277,
    "cls": "TP"
   },
   {
@@ -1435,7 +1435,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 42.50806802883744,
+   "ms": 41.54623905196786,
    "cls": "TN"
   },
   {
@@ -1475,7 +1475,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 38.59046706929803,
+   "ms": 38.53497817181051,
    "cls": "TP"
   },
   {
@@ -1489,7 +1489,7 @@
     "why": "Equal where x!=y; before undefined on the line x=y.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x7f198a0e3880>"
+     "x": "<function <lambda> at 0x7233cdb03a60>"
     },
     "region": "x=y"
    },
@@ -1515,7 +1515,7 @@
     "num": "110 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 66.7115559335798,
+   "ms": 73.52304295636714,
    "cls": "TP"
   },
   {
@@ -1552,7 +1552,7 @@
     "num": "100 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 80.8097468689084,
+   "ms": 77.55946810357273,
    "cls": "TN"
   },
   {
@@ -1566,7 +1566,7 @@
     "why": "Equal for y!=0; before undefined on y=0.",
     "excluded": null,
     "added": {
-     "y": "<function <lambda> at 0x7f198a0e37e0>"
+     "y": "<function <lambda> at 0x7233cdb039c0>"
     },
     "region": "y=0"
    },
@@ -1592,7 +1592,7 @@
     "num": "110 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 30.60450591146946,
+   "ms": 29.44342396222055,
    "cls": "TP"
   },
   {
@@ -1606,7 +1606,7 @@
     "why": "Equal to 1 where x+y!=0; before undefined on x+y=0.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x7f198a0e39c0>"
+     "x": "<function <lambda> at 0x7233cdb03ba0>"
     },
     "region": "x+y=0"
    },
@@ -1632,7 +1632,7 @@
     "num": "112 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 39.7263178601861,
+   "ms": 40.44263600371778,
    "cls": "TP"
   },
   {
@@ -1669,7 +1669,7 @@
     "num": "110 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 75.67102089524269,
+   "ms": 75.63181896694005,
    "cls": "TN"
   },
   {
@@ -1683,7 +1683,7 @@
     "why": "Equal for x,y>=0. Before needs x>=0 and y>=0; after needs xy>=0, which also allows x<=0,y<=0; those points are added.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x7f198a0e3ba0>"
+     "x": "<function <lambda> at 0x7233cdb03d80>"
     },
     "region": "xy>=0 and not (x>=0 and y>=0), e.g. both negative"
    },
@@ -1709,7 +1709,7 @@
     "num": "49 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 58.596232905983925,
+   "ms": 59.70054096542299,
    "cls": "TP"
   },
   {
@@ -1722,7 +1722,7 @@
     "expected": "changed",
     "why": "Reverse of D44: those points are defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x7f198a0e3b00>"
+     "x": "<function <lambda> at 0x7233cdb03ce0>"
     },
     "added": null,
     "region": "xy>=0 and not (x>=0 and y>=0)"
@@ -1749,7 +1749,7 @@
     "num": "49 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 60.9337838832289,
+   "ms": 60.712921898812056,
    "cls": "TP"
   },
   {
@@ -1762,7 +1762,7 @@
     "expected": "changed",
     "why": "Equal for x>=0,y>0. Before needs x/y>=0 (y!=0); after needs x>=0 and y>0, so x/y>=0 with both <=0 (y<0) is defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x7f198a0e3c40>"
+     "x": "<function <lambda> at 0x7233cdb03e20>"
     },
     "added": null,
     "region": "x/y>=0, y!=0, not (x>=0 and y>0), e.g. both negative"
@@ -1789,7 +1789,7 @@
     "num": "42 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 78.85610079392791,
+   "ms": 85.69470699876547,
    "cls": "TP"
   },
   {
@@ -1826,7 +1826,7 @@
     "num": "49 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 52.41593695245683,
+   "ms": 54.54005510546267,
    "cls": "TN"
   },
   {
@@ -1839,7 +1839,7 @@
     "expected": "changed",
     "why": "Equal for x,y>0. Before needs xy>0 (same signs); after needs both >0, so both negative is defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x7f198a0e3d80>"
+     "x": "<function <lambda> at 0x7233cdb03f60>"
     },
     "added": null,
     "region": "x<0 and y<0"
@@ -1866,7 +1866,7 @@
     "num": "36 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 59.16351382620633,
+   "ms": 60.892781941220164,
    "cls": "TP"
   },
   {
@@ -1879,7 +1879,7 @@
     "expected": "changed",
     "why": "Equal for x,y>0. Before needs x/y>0; both negative is defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x7f198a0e3e20>"
+     "x": "<function <lambda> at 0x7233cdb2c040>"
     },
     "added": null,
     "region": "x<0 and y<0"
@@ -1906,7 +1906,7 @@
     "num": "36 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 71.93182990886271,
+   "ms": 78.58440093696117,
    "cls": "TP"
   },
   {
@@ -1920,7 +1920,7 @@
     "why": "Equal for x>y; before needs x-y>0, after x-y>=0, so x=y is added.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x7f198a0e3ec0>"
+     "x": "<function <lambda> at 0x7233cdb2c0e0>"
     },
     "region": "x=y"
    },
@@ -1946,7 +1946,7 @@
     "num": "55 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 64.75886609405279,
+   "ms": 71.08205603435636,
    "cls": "TP"
   },
   {
@@ -1960,7 +1960,7 @@
     "why": "Equal where sin x>=0; before undefined where sin x<0.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x7f198a0e3f60>"
+     "x": "<function <lambda> at 0x7233cdb2c180>"
     },
     "region": "sin x<0"
    },
@@ -1986,7 +1986,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 20.659715868532658,
+   "ms": 21.070444956421852,
    "cls": "TP"
   },
   {
@@ -2023,7 +2023,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 22.1494329161942,
+   "ms": 23.730162996798754,
    "cls": "TN"
   },
   {
@@ -2036,7 +2036,7 @@
     "expected": "changed",
     "why": "ln(2 sin x cos x)-ln(2 cos x)=ln sin x wherever both defined. Before needs sin x>0; after needs sin x cos x>0 and cos x>0, i.e. sin x>0 and cos x>0, so sin x>0 with cos x<=0 is defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x7f198a110040>"
+     "x": "<function <lambda> at 0x7233cdb2c220>"
     },
     "added": null,
     "region": "sin x>0 and cos x<=0"
@@ -2063,7 +2063,7 @@
     "num": "5 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 32.19393501058221,
+   "ms": 32.94112300500274,
    "cls": "TP"
   },
   {
@@ -2100,7 +2100,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 37.65633306466043,
+   "ms": 38.95287588238716,
    "cls": "undecided"
   },
   {
@@ -2140,7 +2140,7 @@
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 23.30563892610371,
+   "ms": 24.042909033596516,
    "cls": "TP"
   },
   {
@@ -2180,7 +2180,7 @@
     "num": "7 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 76.52280409820378,
+   "ms": 85.90023894794285,
    "cls": "TP"
   },
   {
@@ -2217,7 +2217,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 61.10753398388624,
+   "ms": 63.96357505582273,
    "cls": "TN"
   },
   {
@@ -2257,7 +2257,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 42.723089922219515,
+   "ms": 46.08856909908354,
    "cls": "TP"
   },
   {
@@ -2294,7 +2294,7 @@
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 69.72759403288364,
+   "ms": 75.3228161484003,
    "cls": "TN"
   },
   {
@@ -2308,7 +2308,7 @@
     "why": "Equal where y,z!=0; before undefined on y=0 or z=0, after only on z=0, so y=0 (z!=0) is added.",
     "excluded": null,
     "added": {
-     "y": "<function <lambda> at 0x7f198a1100e0>"
+     "y": "<function <lambda> at 0x7233cdb2c2c0>"
     },
     "region": "y=0 (z!=0)"
    },
@@ -2334,7 +2334,7 @@
     "num": "150 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 68.1415288709104,
+   "ms": 67.63066886924207,
    "cls": "TP"
   },
   {
@@ -2348,7 +2348,7 @@
     "why": "Equal to 1 where x-y!=10; before undefined on the plane x-y=10 (no grid point lies on it: built to defeat the pointwise check).",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x7f198a110220>"
+     "x": "<function <lambda> at 0x7233cdb2c400>"
     },
     "region": "x-y=10"
    },
@@ -2373,7 +2373,7 @@
     "num": "121 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 45.44317303225398,
+   "ms": 49.01025979779661,
    "cls": "undecided"
   },
   {
@@ -2413,7 +2413,7 @@
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 16.195107018575072,
+   "ms": 17.758416011929512,
    "cls": "TP"
   },
   {
@@ -2426,7 +2426,7 @@
     "expected": "changed",
     "why": "Equal where both defined. Before needs sin x>=0; after also needs cos x!=0, so points with sin x>=0 and cos x=0 (x=pi/2+2k*pi, NOT 3pi/2+2k*pi) are defined before, not after. (Found by a stress probe: an earlier version named the superset pi/2+k*pi.)",
     "excluded": {
-     "x": "<function <lambda> at 0x7f198a1102c0>"
+     "x": "<function <lambda> at 0x7233cdb2c4a0>"
     },
     "added": null,
     "region": "cos x=0 and sin x>=0"
@@ -2453,7 +2453,7 @@
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 41.980789974331856,
+   "ms": 46.2065888568759,
    "cls": "TP"
   },
   {
@@ -2490,7 +2490,7 @@
     "num": "numeric check error Undecided",
     "num_ok": null
    },
-   "ms": 3.917346941307187,
+   "ms": 5.037143127992749,
    "cls": "undecided"
   },
   {
@@ -2527,7 +2527,7 @@
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 29.098774073645473,
+   "ms": 31.69341292232275,
    "cls": "undecided"
   },
   {
@@ -2553,21 +2553,21 @@
    "res": {
     "verdict": "CHANGED",
     "sym": "DIFF",
-    "why": "symbolic and pointwise agree",
+    "why": "exact witness only (solver untrusted for odd-root form; no solved set named)",
     "tried": 22,
-    "excluded": "x in Interval.open(-oo, 0)",
+    "excluded": "",
     "added": "",
     "wit_excl": "(x=-1)",
     "wit_add": null,
-    "detail": "excluded (defined before, not after): x in Interval.open(-oo, 0); witness excluded (x=-1)",
-    "cons": "-",
-    "opaque_differs": false,
+    "detail": "only-before constraints (the 'only if' assumptions): Abs(x)**(2/3)*sign(x)**2 > 0; only-after: x > 0; witness excluded (x=-1)",
+    "cons": "before-only: Abs(x)**(2/3)*sign(x)**2 > 0; after-only: x > 0",
+    "opaque_differs": true,
     "nvars": 1,
     "named_ok": true,
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 78.88697599992156,
+   "ms": 95.58851411566138,
    "cls": "TP"
   },
   {
@@ -2604,7 +2604,7 @@
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 43.86766999959946,
+   "ms": 47.88123583421111,
    "cls": "TN"
   },
   {
@@ -2626,23 +2626,23 @@
     "((x**(2/3) - x**(1/3)) + 1)/(x + 1)"
    ],
    "res": {
-    "verdict": "SAME",
+    "verdict": "UNDECIDED",
     "sym": "SAME",
-    "why": "same constraints/sets; no differing point among 22 tried",
+    "why": "solver untrusted for odd-root form (Abs(x)**(1/3)*sign(x) + 1 != 0): samples cannot confirm solveset, so no SAME",
     "tried": 22,
     "excluded": "",
     "added": "",
     "wit_excl": null,
     "wit_add": null,
     "detail": "",
-    "cons": "-",
-    "opaque_differs": false,
+    "cons": "before-only: Abs(x)**(1/3)*sign(x) + 1 != 0; after-only: x + 1 != 0",
+    "opaque_differs": true,
     "nvars": 1,
     "num": "20 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 76.79737196303904,
-   "cls": "TN"
+   "ms": 80.9664810076356,
+   "cls": "undecided"
   },
   {
    "step": {
@@ -2667,21 +2667,21 @@
    "res": {
     "verdict": "CHANGED",
     "sym": "DIFF",
-    "why": "symbolic and pointwise agree",
+    "why": "exact witness only (solver untrusted for odd-root form; no solved set named)",
     "tried": 28,
     "excluded": "",
-    "added": "x in Interval.open(-oo, -27)",
+    "added": "",
     "wit_excl": null,
     "wit_add": "(x=-28)",
-    "detail": "added (defined after, not before): x in Interval.open(-oo, -27); witness added (x=-28)",
-    "cons": "-",
-    "opaque_differs": false,
+    "detail": "only-before constraints (the 'only if' assumptions): Abs(x)**(1/3)*sign(x) + 3 >= 0; only-after: -; witness added (x=-28)",
+    "cons": "before-only: Abs(x)**(1/3)*sign(x) + 3 >= 0; after-only: -",
+    "opaque_differs": true,
     "nvars": 1,
     "named_ok": true,
     "num": "19 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 89.91038496606052,
+   "ms": 98.95730088464916,
    "cls": "TP"
   },
   {
@@ -2718,7 +2718,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 21.265523973852396,
+   "ms": 24.06193409115076,
    "cls": "TN"
   },
   {
@@ -2755,7 +2755,7 @@
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 10.725622996687889,
+   "ms": 11.980490060523152,
    "cls": "TN"
   },
   {
@@ -2794,7 +2794,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 71.24403398483992,
+   "ms": 76.39099797233939,
    "cls": "undecided"
   },
   {
@@ -2833,7 +2833,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 75.19364589825273,
+   "ms": 75.12296014465392,
    "cls": "undecided"
   },
   {
@@ -2872,7 +2872,7 @@
     "num": "17 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 61.87953497283161,
+   "ms": 60.947042889893055,
    "cls": "undecided"
   },
   {
@@ -2911,7 +2911,7 @@
     "num": "17 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 61.29460711963475,
+   "ms": 65.78955985605717,
    "cls": "undecided"
   },
   {
@@ -2950,7 +2950,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 79.61102109402418,
+   "ms": 84.52985296025872,
    "cls": "undecided"
   },
   {
@@ -2989,7 +2989,7 @@
     "num": "16 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 65.59575605206192,
+   "ms": 64.9769059382379,
    "cls": "undecided"
   },
   {
@@ -3028,7 +3028,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 68.80628410726786,
+   "ms": 81.45708101801574,
    "cls": "undecided"
   },
   {
@@ -3054,21 +3054,21 @@
    "res": {
     "verdict": "CHANGED",
     "sym": "DIFF",
-    "why": "symbolic and pointwise agree",
+    "why": "exact witness only (solver untrusted for odd-root form; no solved set named)",
     "tried": 28,
     "excluded": "",
-    "added": "x in Interval.open(8, oo)",
+    "added": "",
     "wit_excl": null,
     "wit_add": "(x=9)",
-    "detail": "added (defined after, not before): x in Interval.open(8, oo); witness added (x=9)",
-    "cons": "-",
-    "opaque_differs": false,
+    "detail": "only-before constraints (the 'only if' assumptions): Abs(x)**(1/3)*sign(x) - 2 <= 0; only-after: -; witness added (x=9)",
+    "cons": "before-only: Abs(x)**(1/3)*sign(x) - 2 <= 0; after-only: -",
+    "opaque_differs": true,
     "nvars": 1,
     "named_ok": true,
     "num": "18 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 87.39676116965711,
+   "ms": 91.40599309466779,
    "cls": "TP"
   },
   {
@@ -3105,7 +3105,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 91.03611810132861,
+   "ms": 101.22937709093094,
    "cls": "undecided"
   },
   {
@@ -3142,7 +3142,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 78.12185096554458,
+   "ms": 89.57646484486759,
    "cls": "undecided"
   },
   {
@@ -3164,23 +3164,23 @@
     "x**(2/3) + 1"
    ],
    "res": {
-    "verdict": "SAME",
+    "verdict": "UNDECIDED",
     "sym": "SAME",
-    "why": "same constraints/sets; no differing point among 21 tried",
+    "why": "solver untrusted for odd-root form (Abs(x)**(2/3)*sign(x)**2 + 1 >= 0): samples cannot confirm solveset, so no SAME",
     "tried": 21,
     "excluded": "",
     "added": "",
     "wit_excl": null,
     "wit_add": null,
     "detail": "",
-    "cons": "-",
-    "opaque_differs": false,
+    "cons": "before-only: Abs(x)**(2/3)*sign(x)**2 + 1 >= 0; after-only: -",
+    "opaque_differs": true,
     "nvars": 1,
     "num": "21 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 41.89835395663977,
-   "cls": "TN"
+   "ms": 43.00798592157662,
+   "cls": "undecided"
   },
   {
    "step": {
@@ -3205,21 +3205,21 @@
    "res": {
     "verdict": "CHANGED",
     "sym": "DIFF",
-    "why": "symbolic and pointwise agree",
+    "why": "exact witness only (solver untrusted for odd-root form; no solved set named)",
     "tried": 23,
     "excluded": "",
-    "added": "x in {-1, 1}",
+    "added": "",
     "wit_excl": null,
     "wit_add": "(x=-1)",
-    "detail": "added (defined after, not before): x in {-1, 1}; witness added (x=-1)",
-    "cons": "-",
-    "opaque_differs": false,
+    "detail": "only-before constraints (the 'only if' assumptions): Abs(x)**(1/3)*sign(x) + 1 != 0, Abs(x)**(1/3)*sign(x) - 1 != 0; only-after: -; witness added (x=-1)",
+    "cons": "before-only: Abs(x)**(1/3)*sign(x) + 1 != 0, Abs(x)**(1/3)*sign(x) - 1 != 0; after-only: -",
+    "opaque_differs": true,
     "nvars": 1,
     "named_ok": true,
     "num": "19 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 82.26343593560159,
+   "ms": 87.06576190888882,
    "cls": "TP"
   },
   {
@@ -3245,21 +3245,21 @@
    "res": {
     "verdict": "CHANGED",
     "sym": "DIFF",
-    "why": "symbolic and pointwise agree",
+    "why": "exact witness only (solver untrusted for odd-root form; no solved set named)",
     "tried": 28,
     "excluded": "",
-    "added": "x in Interval.open(-oo, 1/8)",
+    "added": "",
     "wit_excl": null,
     "wit_add": "(x=-7/8)",
-    "detail": "added (defined after, not before): x in Interval.open(-oo, 1/8); witness added (x=-7/8)",
-    "cons": "-",
-    "opaque_differs": false,
+    "detail": "only-before constraints (the 'only if' assumptions): 2*Abs(x)**(1/3)*sign(x) - 1 >= 0; only-after: -; witness added (x=-7/8)",
+    "cons": "before-only: 2*Abs(x)**(1/3)*sign(x) - 1 >= 0; after-only: -",
+    "opaque_differs": true,
     "nvars": 1,
     "named_ok": true,
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 88.23702111840248,
+   "ms": 89.6734120324254,
    "cls": "TP"
   },
   {
@@ -3298,7 +3298,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 68.68581706658006,
+   "ms": 74.00586199946702,
    "cls": "undecided"
   },
   {
@@ -3337,8 +3337,244 @@
     "num": "6 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 63.708115834742785,
+   "ms": 72.58520112372935,
    "cls": "undecided"
+  },
+  {
+   "step": {
+    "id": "D87",
+    "topic": "r3: sqrt(500-x^(2/3)) squared",
+    "before": "\\sqrt{500-x^{\\frac{2}{3}}}^2",
+    "after": "500-x^{\\frac{2}{3}}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Before needs |x|^(2/3)<=500 i.e. |x|<=500^(3/2)=5000*sqrt(5) (about 11180); after is defined on all R, so |x|>5000*sqrt(5) is added. (Reviewer: false SAME in round 3, boundary beyond the probes.)",
+    "excluded": null,
+    "added": {
+     "x": "Union(Interval.open(-oo, -5000*sqrt(5)), Interval.open(5000*sqrt(5), oo))"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(sqrt(500 - x**(2/3)))**2",
+    "500 - x**(2/3)"
+   ],
+   "res": {
+    "verdict": "UNDECIDED",
+    "sym": "SAME",
+    "why": "solver untrusted for odd-root form (-Abs(x)**(2/3)*sign(x)**2 + 500 >= 0): samples cannot confirm solveset, so no SAME",
+    "tried": 21,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "before-only: Abs(x)**(2/3)*sign(x)**2 - 500 <= 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 1,
+    "num": "21 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 93.16410892643034,
+   "cls": "undecided"
+  },
+  {
+   "step": {
+    "id": "D88",
+    "topic": "r3: sqrt(1000-x^(2/3)) squared",
+    "before": "\\sqrt{1000-x^{\\frac{2}{3}}}^2",
+    "after": "1000-x^{\\frac{2}{3}}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Before needs |x|<=1000^(3/2)=10000*sqrt(10) (about 31623); after is all R, so |x|>10000*sqrt(10) is added.",
+    "excluded": null,
+    "added": {
+     "x": "Union(Interval.open(-oo, -10000*sqrt(10)), Interval.open(10000*sqrt(10), oo))"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(sqrt(1000 - x**(2/3)))**2",
+    "1000 - x**(2/3)"
+   ],
+   "res": {
+    "verdict": "UNDECIDED",
+    "sym": "SAME",
+    "why": "solver untrusted for odd-root form (-Abs(x)**(2/3)*sign(x)**2 + 1000 >= 0): samples cannot confirm solveset, so no SAME",
+    "tried": 21,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "before-only: Abs(x)**(2/3)*sign(x)**2 - 1000 <= 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 1,
+    "num": "21 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 86.14588691852987,
+   "cls": "undecided"
+  },
+  {
+   "step": {
+    "id": "D89",
+    "topic": "r3: sqrt(10^6-x^(4/3)) squared",
+    "before": "\\sqrt{10^{6}-x^{\\frac{4}{3}}}^2",
+    "after": "10^{6}-x^{\\frac{4}{3}}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Before needs |x|^(4/3)<=10^6 i.e. |x|<=10^(9/2)=10000*sqrt(10); after is all R, so |x|>10000*sqrt(10) is added.",
+    "excluded": null,
+    "added": {
+     "x": "Union(Interval.open(-oo, -10000*sqrt(10)), Interval.open(10000*sqrt(10), oo))"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(sqrt(-x**(4/3) + 10**6))**2",
+    "-x**(4/3) + 10**6"
+   ],
+   "res": {
+    "verdict": "UNDECIDED",
+    "sym": "SAME",
+    "why": "solver untrusted for odd-root form (-Abs(x)**(4/3)*sign(x)**4 + 1000000 >= 0): samples cannot confirm solveset, so no SAME",
+    "tried": 21,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "before-only: (Abs(x)**(2/3)*sign(x)**2 - 1000)*(Abs(x)**(2/3)*sign(x)**2 + 1000) <= 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 1,
+    "num": "21 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 96.11090389080346,
+   "cls": "undecided"
+  },
+  {
+   "step": {
+    "id": "D90",
+    "topic": "r3: sqrt(60-x^(2/5)) squared",
+    "before": "\\sqrt{60-x^{\\frac{2}{5}}}^2",
+    "after": "60-x^{\\frac{2}{5}}",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Before needs |x|^(2/5)<=60 i.e. |x|<=60^(5/2)=7200*sqrt(15) (about 27885); after is all R, so |x|>7200*sqrt(15) is added.",
+    "excluded": null,
+    "added": {
+     "x": "Union(Interval.open(-oo, -7200*sqrt(15)), Interval.open(7200*sqrt(15), oo))"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(sqrt(60 - x**(2/5)))**2",
+    "60 - x**(2/5)"
+   ],
+   "res": {
+    "verdict": "UNDECIDED",
+    "sym": "SAME",
+    "why": "solver untrusted for odd-root form (-Abs(x)**(2/5)*sign(x)**2 + 60 >= 0): samples cannot confirm solveset, so no SAME",
+    "tried": 21,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "before-only: Abs(x)**(2/5)*sign(x)**2 - 60 <= 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 1,
+    "num": "21 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 87.77489606291056,
+   "cls": "undecided"
+  },
+  {
+   "step": {
+    "id": "D91",
+    "topic": "r3: sqrt(x^(2/3)-500) squared",
+    "before": "\\sqrt{x^{\\frac{2}{3}}-500}^2",
+    "after": "x^{\\frac{2}{3}}-500",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Before needs |x|^(2/3)>=500 i.e. |x|>=5000*sqrt(5); after is all R, so (-5000*sqrt(5), 5000*sqrt(5)) is added. (Reviewer: round 2 named the added set 'x in Reals'.)",
+    "excluded": null,
+    "added": {
+     "x": "Interval.open(-5000*sqrt(5), 5000*sqrt(5))"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(sqrt(x**(2/3) + 500*(-1)))**2",
+    "x**(2/3) + 500*(-1)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "exact witness only (solver untrusted for odd-root form; no solved set named)",
+    "tried": 21,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": "(x=-3)",
+    "detail": "only-before constraints (the 'only if' assumptions): Abs(x)**(2/3)*sign(x)**2 - 500 >= 0; only-after: -; witness added (x=-3)",
+    "cons": "before-only: Abs(x)**(2/3)*sign(x)**2 - 500 >= 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "no common grid points",
+    "num_ok": null
+   },
+   "ms": 68.02822300232947,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D92",
+    "topic": "r3: sqrt(x^(2/3)-1000) squared",
+    "before": "\\sqrt{x^{\\frac{2}{3}}-1000}^2",
+    "after": "x^{\\frac{2}{3}}-1000",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Before needs |x|>=10000*sqrt(10); after is all R, so (-10000*sqrt(10), 10000*sqrt(10)) is added. (Reviewer: misnamed 'x in Reals' in round 2.)",
+    "excluded": null,
+    "added": {
+     "x": "Interval.open(-10000*sqrt(10), 10000*sqrt(10))"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(sqrt(x**(2/3) + 1000*(-1)))**2",
+    "x**(2/3) + 1000*(-1)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "exact witness only (solver untrusted for odd-root form; no solved set named)",
+    "tried": 21,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": "(x=-3)",
+    "detail": "only-before constraints (the 'only if' assumptions): Abs(x)**(2/3)*sign(x)**2 - 1000 >= 0; only-after: -; witness added (x=-3)",
+    "cons": "before-only: Abs(x)**(2/3)*sign(x)**2 - 1000 >= 0; after-only: -",
+    "opaque_differs": true,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "no common grid points",
+    "num_ok": null
+   },
+   "ms": 68.81266902200878,
+   "cls": "TP"
   }
  ],
  "orig": [
@@ -3356,13 +3592,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 6.0431379824876785,
+     "ms": 7.756715174764395,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 4.794039996340871,
+     "ms": 6.145379971712828,
      "score": "ok"
     }
    }
@@ -3381,13 +3617,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
-     "ms": 4.169176798313856,
+     "ms": 5.41285309009254,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
-     "ms": 3.618506947532296,
+     "ms": 5.204143933951855,
      "score": "ok"
     }
    }
@@ -3406,13 +3642,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
-     "ms": 4.00169100612402,
+     "ms": 5.153744015842676,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
-     "ms": 3.959526075050235,
+     "ms": 4.504513926804066,
      "score": "ok"
     }
    }
@@ -3431,13 +3667,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 6.337938131764531,
+     "ms": 7.061772979795933,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 5.415647989138961,
+     "ms": 6.830498110502958,
      "score": "ok"
     }
    }
@@ -3456,13 +3692,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 5.950157064944506,
+     "ms": 6.69578299857676,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 5.0902399234473705,
+     "ms": 5.976767046377063,
      "score": "ok"
     }
    }
@@ -3481,13 +3717,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 5.659859860315919,
+     "ms": 6.989356828853488,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 4.756344016641378,
+     "ms": 5.615987116470933,
      "score": "ok"
     }
    }
@@ -3506,13 +3742,13 @@
     "S7": {
      "verdict": "EQ_DOM",
      "detail": "equal at samples; excluded points before: {1}; after: EmptySet",
-     "ms": 16.27014996483922,
+     "ms": 22.820598213002086,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ_DOM",
      "detail": "added (defined after, not before): x in {1}; witness added (x=1)",
-     "ms": 18.639570102095604,
+     "ms": 23.788642836734653,
      "score": "ok"
     }
    }
@@ -3531,13 +3767,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 7.96028901822865,
+     "ms": 8.465586928650737,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 6.802475079894066,
+     "ms": 7.179918000474572,
      "score": "ok"
     }
    }
@@ -3556,13 +3792,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 7.172232028096914,
+     "ms": 7.82646588049829,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 6.2134950421750546,
+     "ms": 7.262397091835737,
      "score": "ok"
     }
    }
@@ -3581,13 +3817,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
-     "ms": 7.836255943402648,
+     "ms": 8.980129146948457,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
-     "ms": 7.821693085134029,
+     "ms": 9.153621038421988,
      "score": "ok"
     }
    }
@@ -3606,13 +3842,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
-     "ms": 8.381444029510021,
+     "ms": 9.054313879460096,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
-     "ms": 6.949290866032243,
+     "ms": 8.883199887350202,
      "score": "ok"
     }
    }
@@ -3631,13 +3867,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 7.79393594712019,
+     "ms": 7.988211931660771,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 6.994056049734354,
+     "ms": 7.588788168504834,
      "score": "ok"
     }
    }
@@ -3657,13 +3893,13 @@
     "S7": {
      "verdict": "UND",
      "detail": "domain tracking implemented for one variable, got [x, y]",
-     "ms": 6.98676286265254,
+     "ms": 8.247009944170713,
      "score": "und"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 6.7014440428465605,
+     "ms": 8.511504158377647,
      "score": "ok"
     }
    }
@@ -3682,13 +3918,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
-     "ms": 11.0816799569875,
+     "ms": 12.964733177796006,
      "score": "partial"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
-     "ms": 10.651748161762953,
+     "ms": 12.247082078829408,
      "score": "partial"
     }
    }
@@ -3707,13 +3943,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
-     "ms": 8.556725922971964,
+     "ms": 9.45187802426517,
      "score": "partial"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
-     "ms": 8.116594050079584,
+     "ms": 10.544836986809969,
      "score": "partial"
     }
    }
@@ -3732,13 +3968,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
-     "ms": 9.544864064082503,
+     "ms": 10.517479153349996,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
-     "ms": 9.028344880789518,
+     "ms": 10.886786971241236,
      "score": "ok"
     }
    }
@@ -3757,13 +3993,13 @@
     "S7": {
      "verdict": "EQ_DOM",
      "detail": "equal at samples; excluded points before: {1}; after: EmptySet",
-     "ms": 17.431961139664054,
+     "ms": 20.850996021181345,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ_DOM",
      "detail": "added (defined after, not before): x in {1}; witness added (x=1)",
-     "ms": 18.526076106354594,
+     "ms": 20.878623006865382,
      "score": "ok"
     }
    }
@@ -3782,13 +4018,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 5.815261974930763,
+     "ms": 6.305857095867395,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 5.086633143946528,
+     "ms": 5.602330202236772,
      "score": "ok"
     }
    }
@@ -3807,13 +4043,13 @@
     "S7": {
      "verdict": "EQ_DOM",
      "detail": "equal at samples; excluded points before: Union(ImageSet(Lambda(n_, 2*pi*n_ + pi/2), Integers), ImageSet(Lambda(n_, 2*pi*n_ + 3*pi/2), Integers)); after: EmptySet",
-     "ms": 63.279256923124194,
+     "ms": 66.81733508594334,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ_DOM",
      "detail": "added (defined after, not before): x in {pi/2 + pi*k}; witness added (x=pi/2)",
-     "ms": 35.2217978797853,
+     "ms": 39.64349301531911,
      "score": "ok"
     }
    }
@@ -3832,13 +4068,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
-     "ms": 4.831340862438083,
+     "ms": 5.325472913682461,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
-     "ms": 4.173134919255972,
+     "ms": 5.0328560173511505,
      "score": "ok"
     }
    }
