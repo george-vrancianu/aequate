@@ -23,7 +23,7 @@ One confirmed line of math in a worked solution.
 _Avoid_: Line (that word means ink), equation, entry
 
 **Worked solution**:
-The ordered list of steps on one board. Confirmed transcriptions are appended to its end. Steps can be edited or deleted but not reordered.
+The ordered list of steps and level changes on one board. Confirmed transcriptions are appended to its end. Steps can be edited or deleted but not reordered.
 _Avoid_: Transcript, history, log
 
 **Goal**:
@@ -60,8 +60,12 @@ The three toggles check visible, hints allowed, and solve allowed. In v1 the stu
 _Avoid_: Locks, gates, unblocks
 
 **Assist level**:
-A named preset of assist permissions that the student chooses, and can change at any time.
+A named preset of assist permissions that the student chooses for one board, and can change at any time. The four levels are cumulative: each adds one permission to the level below.
 _Avoid_: Mode, difficulty, help level
+
+**Level change**:
+A record in a worked solution, between steps, that the assist level changed and to which permissions. It is not a step.
+_Avoid_: Mode switch, event
 
 **Ask**:
 (v2) A student's request for a hint or solve that their assist permissions block. It goes to the tutor, who can approve it once.
