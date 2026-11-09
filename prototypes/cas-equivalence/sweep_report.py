@@ -199,7 +199,7 @@ def write(src, dst):
     pb = M["pool_budget"]
     pool = agg(D["pool"])
     pk_ = [k for k in steps if D["parse"][k]["status"] == "ok"]
-    both = [(k, sid) for k in pk_ for sid in SIDS if (k, sid, "x") not in () and (k, sid, pb) in strat and (k, sid, pb) in pool]
+    both = [(k, sid) for k in pk_ for sid in SIDS if (k, sid, pb) in strat and (k, sid, pb) in pool]
     wf = [strat[(k, s, pb)]["wall_ms"] for k, s in both if strat[(k, s, pb)]["verdict"] not in ("TO",) and pool[(k, s, pb)]["verdict"] not in ("TO",)]
     wp_ = [pool[(k, s, pb)]["wall_ms"] for k, s in both if strat[(k, s, pb)]["verdict"] not in ("TO",) and pool[(k, s, pb)]["verdict"] not in ("TO",)]
     L.append(f"One long-lived forked worker (strategy loaded, killed and re-forked after a timeout; the re-fork is not counted in the timed call), all strategy calls sequentially, budget {pb*1000:.0f} ms, {M['reps']} reps, run alone (not in parallel). "

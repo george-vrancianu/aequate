@@ -103,7 +103,7 @@ def _row(kind, key, sid, budget, rep, res):
         if st == "ok": r["verdict"], r["detail"] = val[0], str(val[1])[:160]
         elif st == "timeout": r["verdict"], r["detail"] = "TO", f"killed after {budget}s"
         else: r["verdict"], r["detail"] = "ERR", str(val)
-        r["score"] = score(BY_KEY[key]["expected"], r["verdict"]) if r["verdict"] not in ("EQ", "NEQ", "EQ_DOM", "NARROW", "WIDER", "UND", "NA") or True else None
+        r["score"] = score(BY_KEY[key]["expected"], r["verdict"])
     else:
         if st == "ok":
             r["verdict"], tr = val; r["trace"] = [(n, round(m, 2), v) for n, m, v in tr]
@@ -188,13 +188,14 @@ def main():
     ap.add_argument("--ref-budget", type=float, default=10.0, help="long budget used once to measure how long the timed-out calls really take")
     ap.add_argument("--quick", action="store_true")
     ap.add_argument("--out", default=OUT, help="raw JSON path (default results-hard.json)")
+    ap.add_argument("--md", default=MD, help="report mode: Markdown output path (default RESULTS-hard.md; analysis-hard.md is read from its directory)")
     a = ap.parse_args()
     if a.mode == "report":
-        import sweep_report; sweep_report.write(OUT, MD); return
+        import sweep_report; sweep_report.write(a.out, a.md); return
     workers = min(4, a.workers)
     budgets = [float(x) for x in a.budgets.split(",")]
     reps = 1 if a.quick else a.reps
-    keys = [k for k in BY_KEY if not a.quick or k in ("O1", "O7", "H2", "H7", "H11", "H27", "H29", "H31", "H34", "H36")]
+    keys = [k for k in BY_KEY if not a.quick or k in ("O1", "O7", "H2", "H7", "H11", "H27", "H29", "H31", "H34")]
     check_line("x+1")                                              # warm up ANTLR/Lark in the parent
     parse_info = {}
     for k in keys:
@@ -227,7 +228,7 @@ def main():
         for b in budgets:
             for k in PARSED:
                 tasks.append(("strategy", rep, b, k)); tasks.append(("stack", rep, b, k))
-    # steps that parse with the stack but reject: the stack row is still recorded (verdict UND, parse REJECT)
+    # only steps that parse get tasks; parse rejects get no stack row (sweep_report counts them as UND)
     t0 = time.time()
     rows, floor_load = run_pool(workers, tasks)
     meta["sweep_seconds"] = time.time() - t0
