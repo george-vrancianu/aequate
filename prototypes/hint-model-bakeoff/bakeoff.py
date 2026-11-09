@@ -29,6 +29,11 @@ SCHEMA = {"type": "object", "properties": {"hint": {"type": "string"}, "math": {
 RESPONSE_FORMAT = {"type": "json_schema", "json_schema": {"name": "hint", "strict": True, "schema": SCHEMA}}
 
 
+# unrecorded warm-up item: NOT one of the measured steps, so prefix/prompt caching cannot make the first measured hint faster
+WARMUP_ITEM = dict(goal="solve for y", steps=[r"4y-9=11"], verdicts=[], builds_on=1, goal_status="y is not isolated yet",
+                   method="isolate y by undoing the operations in reverse order", operation="add 9 to both sides")
+
+
 def messages_for(item, rung, locale):
     return [{"role": "system", "content": SYSTEM.format(language=LANG[locale])},
             {"role": "user", "content": json.dumps(payload(item, rung), ensure_ascii=False)}]
@@ -113,6 +118,8 @@ def run_hint(client, a, item, rung, locale):
         msgs = msgs[:2] + ([{"role": "assistant", "content": rec["content"]}] if rec["content"] else []) + \
             [{"role": "user", "content": f"Rejected: {reason}. Rewrite the hint without it."}]
     whole = round(time.monotonic() - t0, 3)
+    if final and whole > a.budget:      # the read timeout is per read, so an attempt can end a little after the budget: the product shows the template
+        final = None
     if final:
         p = attempts[-1]["parsed"]
         shown = {"hint": p["hint"], "math": p["math"]}
@@ -153,7 +160,7 @@ def main():
     path = os.path.join(a.out, f"{a.label}.jsonl")
     with httpx.Client() as client:
         for _ in range(a.warmup):
-            call(client, a.base_url, a.model, a.extra, messages_for(ITEMS[0], 1, "en"), 600, a.api_key)
+            call(client, a.base_url, a.model, a.extra, messages_for(WARMUP_ITEM, 1, "en"), 600, a.api_key)
         with open(path, "w") as f:
             for i, (it, r, l) in enumerate(combos, 1):
                 rec = run_hint(client, a, it, r, l)

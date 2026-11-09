@@ -44,8 +44,31 @@ curl -L -o /tmp/aq-31-llama/models/Qwen3.5-4B-Q4_K_M.gguf https://huggingface.co
     --jinja -t 16 -c 4096 --parallel 1 --alias qwen3.5-4b
 ```
 
-## Deviations from the design (so far)
+## Deviations from the design
 
 - Forbidden numbers exclude 0 and 1 from the next step (too common in "= 0"), unless they are an answer value.
-- Bare relations in prose ("so x=2.") are also parsed as formulas (models often skip the `$`).
-- Numbers are compared by absolute value, so -3 and 3 are the same number.
+- Bare relations in prose ("so x=2.", "x = y/2 - 3/2.") are also parsed as formulas (models often skip the `$`).
+- Numbers are compared by absolute value, so -3 and 3 are the same number. "2,3" is read both as a decimal and as a list.
+- Step indices and the equation numbers of a system ("equation 2") are allowed numbers.
+- Formula operands are parsed separately and compared as (op, lhs, rhs), because SymPy auto-evaluates `Eq(a, a)` to True. Atoms that
+  equal a parsed student step are dropped from the hidden set (SymPy auto-evaluates `3(x-2)` to `3x-6`, so brack, frac and dec would
+  otherwise reject the current step); those items rely on the number rule. Each side of a relation is compared to an expression-typed
+  hidden step (dom item), and to non-trivial hidden sides and a moved-terms form of the next step (`x^2-2x=3` for `x^2-2x-3=0`).
+  A bare number, symbol or `c*x` side is too trivial to match, because `(x+y)+(x-y)` auto-evaluates to `2x`.
+- Known gate limit: a hint stating `x^2-1=(x-1)(x+1)` for the dom item is not flagged. Catching it needs `sympy.evaluate(False)`, which
+  does not work through the parsing.py pipeline (ValueError). Count it in the human review.
+- The gate-miss audit also covers answer values written as words, "x is N" and "the solutions are". Number words that the payload uses
+  itself or that count a noun ("the two equations") are skipped.
+- The frac item is `x/2+x/3=10` (answer 12) so that naming the common denominator 6 in rung 3 is not a leak.
+- Rung 1 payload for the one-way items puts the "check for extra solutions" note in goal_status (as design.md says).
+- The 20 s budget is enforced via the httpx timeout = remaining budget; that is a per-read timeout, so an attempt can end a little
+  after 20 s. A valid reply that arrives after the budget counts as template (cause "over budget" in the report).
+- The warm-up request uses an item that is not measured (`WARMUP_ITEM`), so caching cannot speed up the first measured hint.
+
+## Report metrics (`report.py`)
+
+leak a1 = leaking / valid attempt-1 replies (timeouts, request errors and invalid JSON are counted next to it). leak a2 = of the hints
+whose attempt 1 leaked and whose attempt 2 ran, the share where attempt 2 leaked again; residual = of the hints whose attempt 1 leaked,
+the share that ended on the template. Fallback causes (timeout, request error, no time to retry, over budget, rejected twice) add up to
+the template count. Request errors are not JSON-validity failures. "attempts with reasoning" must be 0 (thinking really off). p95 over
+fewer than 30 hints is the maximum, so it is shown as max; read p95 on the per-language and overall rows (n = 39 / 78).

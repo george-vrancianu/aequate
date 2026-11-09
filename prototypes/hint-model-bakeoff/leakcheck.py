@@ -8,7 +8,7 @@ import sympy
 from sympy import Symbol
 from parsing import check_line, split_system, Reject
 
-LEAK_CHECK_VERSION = "v1"
+LEAK_CHECK_VERSION = "v2"
 EXEMPT = {Fraction(0), Fraction(1)}   # 0 and 1 in a hidden next step are not treated as forbidden (too common); deviation from design.md, documented in README
 _NUM = r"\d+(?:[.,]\d+)?"
 
@@ -61,7 +61,9 @@ def payload_numbers(payload):
     s = set()
     for t in _strings(payload):
         s |= numbers(t)
-    s |= {Fraction(x["n"]) for x in payload.get("steps", [])}       # step indices are allowed ("step 2")
+    for x in payload.get("steps", []):
+        s.add(Fraction(x["n"]))                                      # step indices are allowed ("step 2")
+        s |= {Fraction(i) for i in range(1, len(split_system(x["latex"])) + 1)}   # so are equation numbers in a system
     return s
 
 
@@ -114,14 +116,25 @@ def parse_formula(latex):
     return atoms
 
 
-def atom_match(f, g):
+def _same(a, b, loose):
+    if a == b:
+        return True
+    if not loose:
+        return False
+    try:
+        return sympy.expand(a - b) == 0      # y/2-3/2 vs (y-3)/2; only used against the ANSWER, whose sides are simple
+    except Exception:
+        return False
+
+
+def atom_match(f, g, loose=False):
     if f[0] != g[0]:
         return False
     if f[0] == "expr":
-        return f[1] == g[1]
-    if f[1] == g[1] and f[2] == g[2] and f[3] == g[3]:
+        return _same(f[1], g[1], loose)
+    if f[1] == g[1] and _same(f[2], g[2], loose) and _same(f[3], g[3], loose):
         return True
-    return _FLIP[f[1]] == g[1] and f[2] == g[3] and f[3] == g[2]
+    return _FLIP[f[1]] == g[1] and _same(f[2], g[3], loose) and _same(f[3], g[2], loose)
 
 
 def spans(hint):
@@ -132,13 +145,23 @@ def spans(hint):
 
 
 _BARE = re.compile(r"-?[\d.,]*[A-Za-z](?:\^\{?\d+\}?)?\s*(?:=|<|>|≤|≥)\s*-?\d+(?:[.,]\d+)?(?![\d])")
+_BARE_START = re.compile(r"(?<![A-Za-z\\])-?[\d.,]*[A-Za-z](?:\^\{?\d+\}?)?\s*(?:=|<|>|\\leq?(?![a-zA-Z])|\\geq?(?![a-zA-Z]))\s*")
+_STOP = re.compile(r"[.;,](?!\d)|\s+(?=[A-Za-z]{2,}\b)")
 _DELIM = re.compile(r"\$\$.+?\$\$|\$[^$]+\$|\\\(.+?\\\)|\\\[.+?\\\]", re.S)
 
 
 def bare_relations(hint):
-    """Relations written in the prose without math delimiters, like 'so x=2.' (extension to design.md: models often skip the $)."""
+    """Relations written in the prose without math delimiters, like 'so x=2.' or 'x = y/2 - 3/2.' (extension to design.md: models
+    often skip the $). Numeric right side, or an expression up to . ; , or the next plain word; parse_formula judges it."""
     t = norm(_DELIM.sub(" ", hint)).replace("≤", r"\le").replace("≥", r"\ge")
-    return [m.rstrip(".,") for m in _BARE.findall(t)]
+    out = [m.rstrip(".,") for m in _BARE.findall(t)]
+    for m in _BARE_START.finditer(t):
+        rest = t[m.end():]
+        stop = _STOP.search(rest)
+        expr = rest[:stop.start() if stop else len(rest)].strip()
+        if expr:
+            out.append(m.group(0) + expr)
+    return out
 
 
 # ---------- gate-miss audit ----------
@@ -155,23 +178,33 @@ def _plain(t):
     return "".join(c for c in unicodedata.normalize("NFD", t.lower()) if unicodedata.category(c) != "Mn")
 
 
-def gate_miss(hint, forbidden, var):
-    """Possible misses: forbidden number spelled as a word, or the answer stated in prose. Human review, not a gate."""
+_NOUN = r"(?:equations?|ecuatii\w*|fractions?|fractii\w*|sides|membri\w*|factors?|factori\w*|terms?|termeni\w*|brackets?|paranteze\w*)"
+
+
+def gate_miss(hint, forbidden, var, payload=None):
+    """Possible misses: a forbidden number or an answer value spelled as a word, or the answer stated in prose. Human review, not
+    a gate. Number words that the payload itself uses as words ("the two equations") are skipped, and so is a number word that
+    counts a noun ("two equations")."""
     text = re.sub(r"\$[^$]*\$|\\\(.*?\\\)", " ", hint, flags=re.S)   # words outside inline math only
-    words = re.findall(r"[a-z]+", _plain(text))
+    pt = _plain(text)
+    words = re.findall(r"[a-z]+", pt)
+    payload_words = set(re.findall(r"[a-z]+", _plain(" ".join(_strings(payload))))) if payload else set()
     flags = []
     for w in words:
+        if w in payload_words or re.search(r"\b%s\s+%s\b" % (w, _NOUN), pt):
+            continue
         for table in (EN_V, RO_V):
             if w in table and Fraction(table[w]) in forbidden:
                 flags.append(f"number word '{w}' = {table[w]}")
-    pt = _plain(text)
     for pat in (r"\b(?:the )?(?:answer|solution|result) (?:is|equals)\b", r"\braspunsul (?:este|e)\b", r"\bsolutia (?:este|e)\b",
-                r"\brezultatul (?:este|e)\b"):
+                r"\brezultatul (?:este|e)\b", r"\b(?:solutions?|roots?|solutiile|radacinile) (?:is|are|sunt|este)\b"):
         if re.search(pat, pt):
             flags.append("answer announced in prose: /" + pat + "/")
     for v in var.split(","):
         if re.search(r"\b%s\s+(?:is equal to|equals|este egal cu|egal cu)\b" % re.escape(v), pt):
             flags.append(f"{v} stated equal to something in prose")
+        if re.search(r"\b%s\s+(?:is|este|e|equals|egal cu)\s+-?\d" % re.escape(v), pt):
+            flags.append(f"{v} stated as a number in prose")
     return sorted(set(flags))
 
 
@@ -179,24 +212,45 @@ def gate_miss(hint, forbidden, var):
 _CACHE = {}
 
 
+def _key(a):
+    """Canonical form of an equation, for 'same equation, terms moved': {expand(l-r), -expand(l-r)}."""
+    e = sympy.expand(a[2] - a[3])
+    return frozenset({e, sympy.expand(-e)})
+
+
 def _prepare(item):
+    """Hidden atoms, minus everything that is also in the payload. SymPy auto-evaluates (3(x-2)=2x+1 parses as 3x-6=2x+1, which is
+    the hidden next step), so an atom that matches a parsed student step cannot be told from the current step: it is dropped here and
+    rule 1 (numbers) has to catch those items."""
     if item["id"] in _CACHE:
         return _CACHE[item["id"]]
-    nxt, ans = parse_formula(item["next_step"]), parse_formula(item["answer"])
+    step_atoms = [a for s in item["steps"] for a in parse_formula(s)]
+    nxt_all, ans_all = parse_formula(item["next_step"]), parse_formula(item["answer"])
+    nxt = [a for a in nxt_all if not any(atom_match(a, t) for t in step_atoms)]
+    ans = [a for a in ans_all if not any(atom_match(a, t) for t in step_atoms)]
     ans_vals = set()
-    for a in ans:
+    for a in ans_all:
         if a[0] == "rel":
             for sym, val in ((a[2], a[3]), (a[3], a[2])):
                 if isinstance(sym, Symbol) and val.is_number:
                     ans_vals.add(abs(Fraction(str(sympy.nsimplify(val)))))
     forb = (numbers(item["next_step"]) - EXEMPT) | numbers(item["answer"])
-    _CACHE[item["id"]] = (nxt, ans, ans_vals, forb)
+    # rule 2b (a bare number, symbol or c*x is too trivial: (x+y)+(x-y) auto-evaluates to 2x): a non-trivial side of a hidden relation (or a hidden expression) that is not part of any student step
+    subterms = {t for a in step_atoms for e in ([a[1]] if a[0] == "expr" else [a[2], a[3]]) for t in sympy.preorder_traversal(e)}
+    sides = set()
+    for a in nxt_all + ans_all:
+        for e in ([a[1]] if a[0] == "expr" else [a[2], a[3]]):
+            if not (e.is_number or isinstance(e, Symbol) or isinstance(e.as_coeff_Mul()[1], Symbol)) and e not in subterms:
+                sides.add(e)
+    # rule 2c: the next step as an equation with terms moved ("x^2-2x=3" for "x^2-2x-3=0")
+    keys = {_key(a) for a in nxt_all if a[0] == "rel" and a[1] == "="}
+    _CACHE[item["id"]] = (nxt, ans, ans_vals, forb, step_atoms, sides, keys)
     return _CACHE[item["id"]]
 
 
 def check(item, payload, hint, math):
     """-> dict(leak, reasons, unparsed, gate_miss). `item` carries the hidden next_step/answer; `payload` is what was sent."""
-    nxt, ans, ans_vals, forb = _prepare(item)
+    nxt, ans, ans_vals, forb, step_atoms, sides, keys = _prepare(item)
     forbidden = forb - payload_numbers(payload)
     reasons, unparsed = [], 0
     texts = [hint] + list(math)
@@ -220,9 +274,14 @@ def check(item, payload, hint, math):
                 if any(atom_match(c, t) for t in nxt if t[0] == c[0]):
                     reasons.append(f"restates the next step as a formula: {f.strip()}")
                     break
-                if any(atom_match(c, t) for t in ans if t[0] == c[0]):
+                if any(atom_match(c, t, loose=True) for t in ans if t[0] == c[0]):
                     reasons.append(f"states the answer as a formula: {f.strip()}")
                     break
+            else:
+                if any(c[1] in sides for c in cand if c[0] == "expr"):
+                    reasons.append(f"states a part of the next step/answer as an expression: {f.strip()}")
+                elif a[0] == "rel" and a[1] == "=" and _key(a) in keys and not any(atom_match(a, t) for t in step_atoms):
+                    reasons.append(f"restates the next step as an equation with terms moved: {f.strip()}")
             if a[0] == "rel" and a[1] != "!=":
                 for sym, val in ((a[2], a[3]), (a[3], a[2])):
                     if isinstance(sym, Symbol) and val.is_number:
@@ -234,4 +293,4 @@ def check(item, payload, hint, math):
                             reasons.append(f"states {sym} {a[1]} {fmt(v)} with an answer value: {f.strip()}")
     reasons = list(dict.fromkeys(reasons))
     return {"leak": bool(reasons), "reasons": reasons, "unparsed": unparsed,
-            "gate_miss": gate_miss(hint, forbidden, item["var"]) if not reasons else []}
+            "gate_miss": gate_miss(hint, forbidden | ans_vals, item["var"], payload) if not reasons else []}

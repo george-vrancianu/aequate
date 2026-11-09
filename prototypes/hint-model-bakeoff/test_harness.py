@@ -47,3 +47,13 @@ def test_request_contract():
     _, seen = run([GOOD]); b = seen[0]
     assert b["temperature"] == 0 and b["max_tokens"] == 400 and b["response_format"]["type"] == "json_schema"
     assert "2x=4" not in json.dumps(b) and "x=2" not in b["messages"][1]["content"]
+
+
+def test_valid_reply_after_the_budget_is_template():
+    r, _ = run([GOOD], budget=-1.0)
+    assert r["final_source"] == "template" and r["over_budget"] and r["attempts"][0]["valid"]
+
+
+def test_warmup_is_not_a_measured_item():
+    import bakeoff as b
+    assert all(b.WARMUP_ITEM["steps"] != i["steps"] for i in ITEMS)
