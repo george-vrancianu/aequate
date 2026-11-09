@@ -1,4 +1,4 @@
-PROTOTYPE (throwaway, issue #31): do not build on this code. Answer = RESULTS.md (when phase C is done).
+PROTOTYPE (throwaway, issue #31): do not build on this code. Answer = RESULTS.md (provisional recommendation until the human ratings in rating/ are in).
 
 # Hint model bake-off
 
@@ -32,7 +32,33 @@ uv run python bakeoff.py --base-url http://127.0.0.1:8080 --model qwen3.5-4b --l
 uv run python report.py                # all results/*.jsonl; paste into RESULTS.md
 ```
 
-Phase A (this commit) was smoke-tested on CPU with `llama-server` (see below); no GPU/Modal runs yet.
+Phase A was smoke-tested on CPU with `llama-server` (see below). Phase B (GPU on Modal, CPU full run, results, rating sheet) is below.
+
+## Phase B: GPU runs on Modal, one app per model (vLLM on an L4, `serve_modal.py`)
+
+```
+# needs `modal` authenticated; AQ_MODEL = HF repo, AQ_APP = app name, AQ_EXTRA = extra `vllm serve` flags
+AQ_MODEL=Qwen/Qwen3.5-4B AQ_APP=aq31-qwen35-4b modal deploy serve_modal.py
+# URL printed by deploy: https://<workspace>--aq31-qwen35-4b-serve.us-east.modal.run (first request cold-starts the container, several minutes)
+uv run python bakeoff.py --base-url $URL --model m --label gpu-l4-qwen35-4b \
+    --extra-body '{"chat_template_kwargs":{"enable_thinking":false}}'
+modal app stop -y aq31-qwen35-4b        # always; then `modal app list` must show nothing running
+```
+Per model (AQ_MODEL / AQ_EXTRA; the harness `--extra-body` only for Qwen3.5):
+- Qwen3.5-9B: `Qwen/Qwen3.5-9B`, `--limit-mm-per-prompt {"image":0,"video":0} --max-num-seqs 4 --max-num-batched-tokens 2048`
+- Gemma 4 E4B: `google/gemma-4-E4B-it`, `--limit-mm-per-prompt {"image":0,"audio":0,"video":0} --max-num-seqs 4 --max-num-batched-tokens 2048`
+- Ministral 3 8B: `mistralai/Ministral-3-8B-Instruct-2512-BF16`, `--tokenizer-mode mistral --config-format mistral --load-format mistral --limit-mm-per-prompt {"image":0} --max-num-seqs 4 --max-num-batched-tokens 2048`
+- EuroLLM: `utter-project/EuroLLM-9B-Instruct-2512`, `--max-num-seqs 4 --max-num-batched-tokens 2048`
+
+CPU run: start the llama-server from "Local CPU server" below, then
+`uv run python bakeoff.py --base-url http://127.0.0.1:8089 --model qwen3.5-4b --label cpu-q35-4b-q4km --extra-body '{"chat_template_kwargs":{"enable_thinking":false}}'`
+and stop it by PID (`ps` for the real server PID).
+
+Tables and rating sheet:
+```
+uv run python report.py results/gpu-*.jsonl results/cpu-q35-4b-q4km.jsonl > results/report.md   # RESULTS.md embeds these (minus per-step tables)
+uv run python make_rating.py            # rating/RATING.md, ratings.csv (blank), key.csv (do not open before rating); fixed seed 31
+```
 
 ## Local CPU server (phase A smoke test, and the 4B CPU measurement)
 
