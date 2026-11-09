@@ -752,19 +752,17 @@ Student steps: (1) `0,5x+0,25x=3`
 CAS verdicts: none. Ladder builds on step 1. Goal status: x is not isolated yet.
 Hidden from the model and the student: next step `0,75x=3`, answer `x=4`.
 
-**A.** Ai adunat deja termenii cu x, acum trebuie să împarți ambii membri ai ecuației la coeficientul lui x pentru a izola x.
+**A.** Pentru a izola variabila x, adună termenii similari care conțin x din ecuația ta.
 
-**B.** Încearcă să aduni termenii care conțin x din partea stângă a ecuației.
+**B.** Începe prin combinarea termenilor asemănători care conțin x. Adună valorile coeficienților lor.
 
 **C.** Pentru a izola x, adună termenii cu x: 0,5x și 0,25x.
 
 **D.** Încearcă să aduni termenii care conțin x din partea stângă a ecuației.
 
-**E.** Pentru a izola variabila x, adună termenii similari care conțin x din ecuația ta.
+**E.** Adună cei doi termeni în x: 0,5x și 0,25x.
 
-**F.** Începe prin combinarea termenilor asemănători care conțin x. Adună valorile coeficienților lor.
-
-**G.** Adună cei doi termeni în x: 0,5x și 0,25x.
+**F.** Ai adunat deja termenii cu x, acum trebuie să împarți ambii membri ai ecuației la coeficientul lui x pentru a izola x.
 
 ## dom-r1-ro
 
@@ -941,19 +939,17 @@ Student steps: (1) `x^2-5x+6=0`
 CAS verdicts: none. Ladder builds on step 1. Goal status: the equation is quadratic and x is not isolated yet.
 Hidden from the model and the student: next step `(x-2)(x-3)=0`, answer `x=2 \lor x=3`.
 
-**A.** Factor the trinomial x^2-5x+6 into two linear factors.
+**A.** Since this is a quadratic equation, try factoring the trinomial first. What two binomials multiply to give you x^2-5x+6?
 
-**B.** Factor the trinomial x^2-5x+6 into two linear factors.
+**B.** Since the equation is quadratic and x is not isolated, factor the trinomial x^2-5x+6 into two linear factors.
 
-**C.** Since this is a quadratic equation, try factoring the trinomial first. What two binomials multiply to give you x^2-5x+6?
+**C.** Since this is a quadratic equation, try factoring the trinomial into two linear factors.
 
-**D.** Your equation is quadratic, so try to factor it into two binomials that multiply to give the original expression.
+**D.** Factor the trinomial x^2-5x+6 into two linear factors.
 
-**E.** Since the equation is quadratic and x is not isolated yet, factor the trinomial x^2-5x+6 into two linear factors, then set each factor to zero.
+**E.** Your equation is quadratic, so try to factor it into two binomials that multiply to give the original expression.
 
-**F.** Since this is a quadratic equation, try factoring the trinomial into two linear factors.
-
-**G.** Since the equation is quadratic and x is not isolated, factor the trinomial x^2-5x+6 into two linear factors.
+**F.** Since the equation is quadratic and x is not isolated yet, factor the trinomial x^2-5x+6 into two linear factors, then set each factor to zero.
 
 ## ineq-r1-en
 
@@ -962,19 +958,19 @@ Student steps: (1) `-2x>6`
 CAS verdicts: none. Ladder builds on step 1. Goal status: x is not isolated yet.
 Hidden from the model and the student: next step `x<-3`, answer `x<-3`.
 
-**A.** To solve the inequality for x, you need to isolate the variable. Remember to divide both sides by the coefficient of x.
+**A.** You need to isolate x in the inequality. Try dividing both sides by -2.
 
-**B.** The goal is to solve the inequality for x. x is not isolated yet.
+**B.** You need to solve the inequality ≤-2x>6≤ for x.
 
-**C.** You need to isolate x in the inequality. Try dividing both sides by -2.
+**C.** Your inequality has a variable on both sides. Try to move the term with x to one side to isolate it.
 
-**D.** You need to solve the inequality ≤-2x>6≤ for x.
+**D.** The goal is to solve the inequality for x. x is not isolated yet.
 
-**E.** Your inequality has a variable on both sides. Try to move the term with x to one side to isolate it.
+**E.** You have the inequality -2x > 6, but x is not isolated yet. To proceed, divide both sides by -2 and remember to reverse the inequality sign.
 
 **F.** You need to isolate x to solve the inequality. What operation should you apply to both sides?
 
-**G.** You have the inequality -2x > 6, but x is not isolated yet. To proceed, divide both sides by -2 and remember to reverse the inequality sign.
+**G.** To solve the inequality for x, you need to isolate the variable. Remember to divide both sides by the coefficient of x.
 
 ## ineq-r2-en
 
@@ -983,19 +979,19 @@ Student steps: (1) `-2x>6`
 CAS verdicts: none. Ladder builds on step 1. Goal status: x is not isolated yet.
 Hidden from the model and the student: next step `x<-3`, answer `x<-3`.
 
-**A.** To isolate x, divide both sides by -2 and remember to reverse the inequality sign.
+**A.** You need to isolate x by dividing both sides by the coefficient of x. Remember that when you divide by a negative number, you must reverse the inequality sign.
 
-**B.** Divide both sides by the coefficient of x. Dividing by a negative number reverses the inequality sign.
+**B.** You have an inequality involving x. To isolate x, consider dividing both sides by the coefficient of x, but remember how this affects the inequality sign.
 
-**C.** You need to isolate x by dividing both sides by the coefficient of x. Remember that when you divide by a negative number, you must reverse the inequality sign.
+**C.** To solve the inequality ≠-2x≠6, divide both sides by ∐2. Remember that dividing by a negative number reverses the inequality sign.
 
-**D.** You have an inequality involving x. To isolate x, consider dividing both sides by the coefficient of x, but remember how this affects the inequality sign.
+**D.** To solve the inequality, divide both sides by the coefficient of x. Remember that dividing by a negative number reverses the inequality sign.
 
-**E.** To solve the inequality ≠-2x≠6, divide both sides by ∐2. Remember that dividing by a negative number reverses the inequality sign.
+**E.** Remember that when you divide both sides by a negative number, you need to reverse the inequality sign.
 
-**F.** Remember that when you divide both sides by a negative number, you need to reverse the inequality sign.
+**F.** To isolate x, divide both sides by -2 and remember to reverse the inequality sign.
 
-**G.** To solve the inequality, divide both sides by the coefficient of x. Remember that dividing by a negative number reverses the inequality sign.
+**G.** Divide both sides by the coefficient of x. Dividing by a negative number reverses the inequality sign.
 
 ## ineq-r3-en
 
@@ -1004,19 +1000,19 @@ Student steps: (1) `-2x>6`
 CAS verdicts: none. Ladder builds on step 1. Goal status: x is not isolated yet.
 Hidden from the model and the student: next step `x<-3`, answer `x<-3`.
 
-**A.** Divide both sides by -2 and reverse the inequality sign.
+**A.** Remember that when you divide both sides by a negative number, you must reverse the inequality sign. Try dividing both sides by -2.
 
 **B.** To isolate x, divide both sides of the inequality by the coefficient of x, but remember to reverse the inequality sign when dividing by a negative number.
 
-**C.** Remember that when you divide both sides by a negative number, you must reverse the inequality sign. Try dividing both sides by -2.
+**C.** To isolate x, divide both sides by -2 and remember to reverse the inequality sign.
 
-**D.** To solve the inequality, divide both sides by -2 and remember to reverse the inequality sign.
+**D.** To solve the inequality ≠x>6, divide both sides by -2 and reverse the inequality sign.
 
-**E.** To isolate x, divide both sides by -2 and remember to reverse the inequality sign.
+**E.** Divide both sides by -2 and reverse the inequality sign.
 
-**F.** To solve the inequality ≠x>6, divide both sides by -2 and reverse the inequality sign.
+**F.** To isolate x, you need to divide both sides by the coefficient of x and remember to reverse the inequality sign.
 
-**G.** To isolate x, you need to divide both sides by the coefficient of x and remember to reverse the inequality sign.
+**G.** To solve the inequality, divide both sides by -2 and remember to reverse the inequality sign.
 
 ## wrong-r1-en
 
@@ -1025,19 +1021,19 @@ Student steps: (1) `2x+3=7`; (2) `2x=10`
 CAS verdicts: not equivalent. Ladder builds on step 1. Goal status: step 2 doesn't follow from step 1; the ladder builds on step 1.
 Hidden from the model and the student: next step `2x=4`, answer `x=2`.
 
-**A.** Check if the second equation is equivalent to the first one. You need to perform an operation on both sides of the equation.
+**A.** Your second step does not follow from the first. Remember that to isolate x, you must perform the same operation on both sides of the equation.
 
-**B.** Your step 2 does not follow from step 1. Check your arithmetic to ensure the equation remains equivalent.
+**B.** Step 2 doesn't follow from step 1. The hints build on step 1.
 
 **C.** You need to undo the second operation to solve for x. Start by subtracting 3 from both sides.
 
-**D.** Check if the second equation is equivalent to the first one. You should use the method of isolating the variable.
+**D.** Your step 2 does not follow from step 1. Check your arithmetic to ensure the equation remains equivalent.
 
-**E.** Step 2 doesn't follow from step 1. The hints build on step 1.
+**E.** You started with the correct equation, but how can you get from 2x + 3 = 7 to 2x = 10? Think about what operation you can use to isolate the term with x.
 
-**F.** You started with the correct equation, but how can you get from 2x + 3 = 7 to 2x = 10? Think about what operation you can use to isolate the term with x.
+**F.** Check if the second equation is equivalent to the first one. You should use the method of isolating the variable.
 
-**G.** Your second step does not follow from the first. Remember that to isolate x, you must perform the same operation on both sides of the equation.
+**G.** Check if the second equation is equivalent to the first one. You need to perform an operation on both sides of the equation.
 
 ## wrong-r2-en
 
@@ -1048,15 +1044,15 @@ Hidden from the model and the student: next step `2x=4`, answer `x=2`.
 
 **A.** Your second step does not follow from the first. Remember to isolate x by undoing the operations in reverse order.
 
-**B.** Your step 2 does not follow from step 1. To isolate x, undo the operations in reverse order.
+**B.** When you moved the constant term, the equation is no longer equivalent. Try isolating x by undoing the operations in reverse order.
 
-**C.** Starting from step 1: isolate x by undoing the operations in reverse order.
+**C.** Your step 2 does not follow from step 1. To isolate x, undo the operations in reverse order.
 
-**D.** When you moved the constant term, the equation is no longer equivalent. Try isolating x by undoing the operations in reverse order.
+**D.** You started correctly by isolating the term with x, but check how you moved the constant term to the other side—did you keep the equation balanced?
 
-**E.** You started correctly by isolating the term with x, but check how you moved the constant term to the other side—did you keep the equation balanced?
+**E.** You need to undo the subtraction of 3 to isolate x. Start by subtracting 3 from both sides.
 
-**F.** You need to undo the subtraction of 3 to isolate x. Start by subtracting 3 from both sides.
+**F.** Starting from step 1: isolate x by undoing the operations in reverse order.
 
 **G.** When you move from the first equation to the second, the steps are not equivalent. Try isolating x by undoing the operations in reverse order.
 

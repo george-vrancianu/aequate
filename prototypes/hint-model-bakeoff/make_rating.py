@@ -57,11 +57,11 @@ for (sid, rung, loc) in groups:
         if r is None:
             continue
         sh = r["shown"]
-        if r["final_source"] == "template" or (sh["hint"] == tpl and not sh["math"]):
+        if r["final_source"] == "template" or norm(sh["hint"]) == norm(tpl):   # same visible text as the template
             tpl_srcs.append(f"{lab}:{'fallback' if r['final_source']=='template' else 'llm-identical'}")
             continue
         for o in opts:
-            if o[0] == sh["hint"] and o[1] == sh["math"]:   # two models gave identical text: show once
+            if norm(o[0]) == norm(sh["hint"]):   # two models gave the same visible text: show once
                 o[2].append(f"{lab}:{r['final_source']}")
                 break
         else:

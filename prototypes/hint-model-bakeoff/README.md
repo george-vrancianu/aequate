@@ -15,6 +15,7 @@ Design notes live in the ticket; the step set has 13 items (see `steps_bakeoff.p
 - `steps_bakeoff.py` steps, hidden next step/answer, `payload()`, hand-written en/ro templates.
 - `verify_steps.py` SymPy check of every hidden next step and answer.
 - `leakcheck.py`, `test_leakcheck.py` the gate and its fixtures. `parsing.py` copied from `prototypes/cas-equivalence` (origin/prototype/cas-equivalence).
+- `serve_modal.py` (vLLM on Modal), `serve_llamacpp_modal.py` (llama.cpp on Modal, Gemma Q4), `make_rating.py` (blind rating sheet).
 - `bakeoff.py` the harness. `report.py` results/*.jsonl -> markdown tables.
 
 ## Run
@@ -75,7 +76,8 @@ uv run python report.py results/gpu-*.jsonl results/cpu-*.jsonl > results/report
 uv run python make_rating.py            # rating/RATING.md, ratings.csv (blank), key.csv (do not open before rating); fixed seed 31
 # make_rating.py shows every option as plain hint text (no math chips, no $ or backticks), adds the Gemma Q4 GPU run as an extra
 # hidden source, and exits non-zero if a structural feature (code spans, $, question mark, sentence count) is unique to the template in more than 8 groups.
-# Residual it only reports: the template is the shortest option in 35 of 51 groups.
+# Residual it only reports: the template is the shortest option in 36 of 51 groups.
+# Also recognisable: the rung-1 template uses a fixed opener ("Scopul este" / "The goal"), so it reads as a recurring source in rung-1 groups.
 ```
 
 ## Local CPU server (phase A smoke test, and the 4B CPU measurement)
