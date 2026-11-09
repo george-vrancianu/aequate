@@ -16,7 +16,8 @@
             "ScheduleWakeup",
             "AskUserQuestion",
             "SendFeedback"
-        ]
+        ],
+        "allow": ["Bash(gh pr merge:*)", "Bash(gh issue comment:*)", "Bash(gh issue close:*)"]
     },
     "statusLine": {
         "type": "command",
