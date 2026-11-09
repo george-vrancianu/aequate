@@ -14,7 +14,7 @@ def leaks(item_id, hint, math=(), rung=3):
 
 def test_numbers_normalisation():
     assert Fraction(3, 4) in numbers("0,75")
-    assert Fraction(2) in numbers(r"\frac{8}{2}") and Fraction(4) in numbers("4.0")
+    assert numbers(r"\frac{8}{2}") == {Fraction(4)} and Fraction(4) in numbers("4.0")   # a literal fraction counts by its value only
     assert numbers("\u22123") == {Fraction(3)}
 
 
@@ -224,3 +224,33 @@ def test_extraneous_roots_are_guarded():                  # finding 6
     assert leaks("log", "Check whether $x=-1$ works.", rung=1)["leak"]
     assert leaks("sqrt", "Note that $x=0$ is extraneous.", rung=1)["leak"]
     assert not leaks("log", "Check your solution in the original equation.", rung=1)["leak"]
+
+
+# --- round 3 review fixtures
+def test_delimited_arrow_and_wrapped_formulas_leak():     # finding 1
+    assert leaks("lin2", "Divide.", ["$x=2$"])["leak"]
+    assert leaks("log", "Expand.", ["$x^2-2x-3=0$"])["leak"]
+    assert leaks("log", "Expand.", [r"\(x^2-2x-3=0\)"])["leak"]
+    assert leaks("log", r"Then $x^2-2x-3=0 \implies x=3$.")["leak"]
+    assert leaks("lin2", r"So $\mathbf{x=2}$.")["leak"]
+    assert leaks("log", "Expand.", [r"\displaystyle x^2-2x-3=0"])["leak"]
+    assert leaks("lin2", "Divide.", [r"\text{so } x=2"])["leak"]
+    assert not leaks("lin2", "You have this.", ["$2x+3=7$"])["leak"]
+
+
+def test_literal_fraction_counts_by_value():              # finding 2
+    assert not leaks("dec", "0,25 is 1/4 and 0,5 is 1/2; add the two terms.")["leak"]
+    assert not leaks("dec", "Add the terms.", [r"\frac{1}{4}x"])["leak"]
+    assert leaks("dec", "Add the terms.", [r"\frac{3}{4}x"])["leak"]
+    assert leaks("dec", "It is 3/4 in the end.")["leak"]
+
+
+def test_gate_miss_ignores_step_and_ordinal_words():      # finding 3
+    for item, hint in (("wrong", "Step two doesn't follow from step one."), ("wrong", "Pasul doi nu rezultă din pasul unu."),
+                       ("sys", "Adună prima ecuație cu a doua ecuație.")):
+        assert not leaks(item, hint, rung=1)["gate_miss"], hint
+
+
+def test_extraneous_reason_shows_the_value_as_written():  # finding 6
+    r = leaks("log", "Check whether $x=-1$ works.", rung=1)
+    assert any("x = -1" in x and "extraneous root" in x for x in r["reasons"]), r["reasons"]

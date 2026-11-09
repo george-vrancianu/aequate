@@ -115,7 +115,7 @@ def run_hint(client, a, item, rung, locale):
             break
         reason = ("; ".join(rec["leak"]["reasons"]) if rec["valid"] else
                   "the reply was not valid JSON of the form {\"hint\": string, \"math\": [strings]}")
-        msgs = msgs[:2] + ([{"role": "assistant", "content": rec["content"]}] if rec["content"] else []) + \
+        msgs = msgs[:2] + [{"role": "assistant", "content": rec["content"] or "(empty reply)"}] + \
             [{"role": "user", "content": f"Rejected: {reason}. Rewrite the hint without it."}]
     whole = round(time.monotonic() - t0, 3)
     if final and whole > a.budget:      # the read timeout is per read, so an attempt can end a little after the budget: the product shows the template

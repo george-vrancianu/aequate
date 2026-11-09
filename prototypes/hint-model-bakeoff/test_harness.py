@@ -70,3 +70,9 @@ def test_request_error_does_not_retry(monkeypatch):      # finding 5
     a = argparse.Namespace(budget=20.0, min_retry=5.0, base_url="x", model="m", extra={}, api_key="", label="t")
     r = bakeoff.run_hint(None, a, bakeoff.ITEMS[0], 1, "en")
     assert len(calls) == 1 and len(r["attempts"]) == 1 and r["final_source"] == "template"
+
+
+def test_retry_after_empty_reply_keeps_roles_alternating():      # finding 4
+    r, seen = run(["", GOOD]); assert r["final_source"] == "llm2"
+    roles = [m["role"] for m in seen[1]["messages"]]
+    assert roles == ["system", "user", "assistant", "user"]

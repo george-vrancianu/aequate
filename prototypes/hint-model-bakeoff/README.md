@@ -5,7 +5,7 @@ PROTOTYPE (throwaway, issue #31): do not build on this code. Answer = RESULTS.md
 Question: which local model should be the default hint phraser? Runs every model through the same contract the product will use
 (ADR 0005 / #48): OpenAI-compatible `/v1/chat/completions`, one English system prompt (`PROMPT_VERSION` v1) with output language
 from the locale, the rung's CAS facts as JSON (never the next step or the answer), JSON `{hint, math[]}` via `response_format`,
-temperature 0, thinking off, 20 s budget over both attempts, deterministic leak check (`LEAK_CHECK_VERSION` v3), one retry if at
+temperature 0, thinking off, 20 s budget over both attempts, deterministic leak check (`LEAK_CHECK_VERSION` v4), one retry if at
 least 5 s are left, template fallback. Rungs 1-3 only: rung 4 is the CAS's next step shown as math and never comes from the LLM (ADR 0001).
 
 Design notes live in the ticket; the step set has 13 items (see `steps_bakeoff.py`), sources cited per item.
@@ -64,7 +64,7 @@ curl -L -o /tmp/aq-31-llama/models/Qwen3.5-4B-Q4_K_M.gguf https://huggingface.co
   `3x/6+2x/6=10` is a partial step that the gate does not flag (SymPy evaluates it to the current step): a rung-adherence issue for the human rating, not a gate leak.
 - Formulas written without `$` are checked too: besides `x = ...` relations, maximal runs of formula characters in the prose that contain
   one of the item's variable letters and an operator (`Expand to get x^2 - 2x - 3 = 0.`, `It simplifies to x + 1.`) are parsed; a run that does not parse is skipped silently.
-  `x²` is read as `x^2`, `\boxed{..}`, `\text{..}` and `\mathrm{..}` are unwrapped, and `x \in \{a, b\}` is read as `x=a \lor x=b`.
+  `x²` is read as `x^2`, `\boxed{..}`, `\text{..}` and `\mathrm{..}` (also `\mathbf`, `\mathit`, `\bm`) are unwrapped, one outer `$..$`, `\(..\)` and `\displaystyle` are stripped, `\Rightarrow`/`\implies`/`\iff`/`\to` chains are split, bare relations are also searched inside every math[] entry and span, and `x \in \{a, b\}` is read as `x=a \lor x=b`.
 - Hidden `extraneous` field (log: -1, sqrt: 0): the extraneous roots of the one-way items are guarded like answer values in the
   "var op value" rule (not in the gate-miss audit). Never sent to the model.
 - A request error (HTTP 4xx/5xx, connection error) ends the hint on the template with no retry, like a timeout.

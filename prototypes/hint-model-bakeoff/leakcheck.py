@@ -8,7 +8,7 @@ import sympy
 from sympy import Symbol
 from parsing import check_line, split_system, Reject
 
-LEAK_CHECK_VERSION = "v3"
+LEAK_CHECK_VERSION = "v4"
 EXEMPT = {Fraction(0), Fraction(1)}   # 0 and 1 in a hidden next step are not treated as forbidden (too common); deviation from design.md, documented in README
 _NUM = r"\d+(?:[.,]\d+)?"
 
@@ -29,12 +29,14 @@ def numbers(text):
     """Set of absolute values (Fraction) of every number in `text`: decimal comma, unicode minus, literal \\frac{a}{b} and a/b."""
     t = norm(text)
     out = set()
-    for m in re.finditer(r"\\[dt]?frac\s*\{\s*(%s)\s*\}\s*\{\s*(%s)\s*\}" % (_NUM, _NUM), t):
+
+    def lit(m):                                  # a literal fraction counts by its value only (1/4 is 0.25, not "1" and "4"); masked afterwards
         if _frac(m.group(2)) != 0:
             out.add(_frac(m.group(1)) / _frac(m.group(2)))
-    for m in re.finditer(r"(?<![\d.,])(%s)\s*/\s*(%s)(?![\d])" % (_NUM, _NUM), t):
-        if _frac(m.group(2)) != 0:
-            out.add(_frac(m.group(1)) / _frac(m.group(2)))
+            return " "
+        return m.group(0)
+    t = re.sub(r"\\[dt]?frac\s*\{\s*(%s)\s*\}\s*\{\s*(%s)\s*\}" % (_NUM, _NUM), lit, t)
+    t = re.sub(r"(?<![\d.,])(%s)\s*/\s*(%s)(?![\d])" % (_NUM, _NUM), lit, t)
     for m in re.finditer(r"(?<![\d.,])" + _NUM + r"(?![\d])", t):
         s = m.group(0)
         out.add(_frac(s))
@@ -99,7 +101,17 @@ def _operand(s):
     return r[0]
 
 
-_WRAP = re.compile(r"\\(?:boxed|text|mathrm|mbox)\s*\{")
+_WRAP = re.compile(r"\\(?:boxed|text|mathrm|mbox|mathbf|mathit|bm)\s*\{")
+_DELIMS = re.compile(r"^\s*(?:\$\$(.*)\$\$|\$(.*)\$|\\\((.*)\\\)|\\\[(.*)\\\])\s*$", re.S)
+_ARROWS = r"\\(?:Longrightarrow|Rightarrow|implies|iff|Leftrightarrow|therefore|to)(?![a-zA-Z])"
+
+
+def strip_delims(s):
+    """One outer $$..$$, $..$, \\(..\\) or \\[..\\] and \\displaystyle removed."""
+    m = _DELIMS.match(s)
+    if m:
+        s = next(g for g in m.groups() if g is not None)
+    return s.replace(r"\displaystyle", " ").strip()
 _IN = re.compile(r"([A-Za-z])\s*\\in\s*\\\{([^{}]*?)\\\}")
 
 
@@ -122,9 +134,9 @@ def parse_formula(latex):
     Operands are parsed separately so that SymPy cannot auto-evaluate `a=a` to True."""
     atoms = []
     pieces = []
-    latex = _unwrap(latex.replace("\u2212", "-").replace("\u00b2", "^2").replace("\u00b3", "^3").strip())
+    latex = _unwrap(strip_delims(latex).replace("\u2212", "-").replace("\u00b2", "^2").replace("\u00b3", "^3").strip())
     for line in split_system(latex):
-        pieces += [p for p in re.split(r"\\lor|\\land|\\vee|\\wedge|\;|(?<=\d),\s*(?=[a-zA-Z]\s*(?:=|<|>|\\le|\\ge))", line) if p.strip()]
+        pieces += [p for p in re.split(_ARROWS + r"|\\lor|\\land|\\vee|\\wedge|\;|(?<=\d),\s*(?=[a-zA-Z]\s*(?:=|<|>|\\le|\\ge))", line) if p.strip()]
     for p in pieces:
         p = re.sub(r"(?:\\[,;:!]|\\quad|\\qquad|\s)+$", "", p.strip())
         parts, ops = _split_top(p)
@@ -213,7 +225,7 @@ def _plain(t):
     return "".join(c for c in unicodedata.normalize("NFD", t.lower()) if unicodedata.category(c) != "Mn")
 
 
-_NOUN = r"(?:equations?|ecuatii\w*|fractions?|fractii\w*|sides|membri\w*|factors?|factori\w*|terms?|termeni\w*|brackets?|paranteze\w*)"
+_NOUN = r"(?:equations?|ecuati\w*|fractions?|fractii\w*|sides|membri\w*|factors?|factori\w*|terms?|termeni\w*|brackets?|paranteze\w*)"
 
 
 def gate_miss(hint, forbidden, var, payload=None):
@@ -226,7 +238,7 @@ def gate_miss(hint, forbidden, var, payload=None):
     payload_words = set(re.findall(r"[a-z]+", _plain(" ".join(_strings(payload))))) if payload else set()
     flags = []
     for w in words:
-        if w in payload_words or re.search(r"\b%s\s+%s\b" % (w, _NOUN), pt):
+        if w in payload_words or re.search(r"\b%s\s+%s\b" % (w, _NOUN), pt) or re.search(r"\b(?:step|pasul|pas|equation|ecuatia|ecuatie)\s+%s\b|\ba\s+%s\b" % (w, w), pt):
             continue
         for table in (EN_V, RO_V):
             if w in table and Fraction(table[w]) in forbidden:
@@ -298,12 +310,15 @@ def check(item, payload, hint, math):
     for n in sorted(seen & forbidden):
         reasons.append(f"states the number {fmt(n)} from the next step/answer")
     # rule 2: formulas (math[] entries whole, hint inline spans)
-    formulas = list(math) + spans(hint) + bare_relations(hint, letters)
-    for f in formulas:
+    own = list(math) + spans(hint)
+    # bare relations inside every math[] entry / span too, so an unparseable wrapper ("\\text{so } x=2") still yields "x=2"; not counted as unparsed
+    extra = [b for f in own for b in bare_relations(strip_delims(f), letters)]
+    formulas = [(f, True) for f in own + bare_relations(hint, letters)] + [(f, False) for f in extra]
+    for f, count in formulas:
         try:
             atoms = parse_formula(f)
         except Exception:
-            unparsed += 1
+            unparsed += count
             continue
         for a in atoms:
             cand = [a] + ([("expr", a[2]), ("expr", a[3])] if a[0] == "rel" else [])
@@ -327,7 +342,8 @@ def check(item, payload, hint, math):
                         except Exception:
                             continue
                         if v in ans_vals or v in ext:
-                            reasons.append(f"states {sym} {a[1]} {fmt(v)} with an answer value: {f.strip()}")
+                            kind = "an answer value" if v in ans_vals else "an extraneous root"
+                            reasons.append(f"states {sym} {a[1]} {val} ({kind}): {f.strip()}")
     reasons = list(dict.fromkeys(reasons))
     return {"leak": bool(reasons), "reasons": reasons, "unparsed": unparsed,
             "gate_miss": gate_miss(hint, forbidden | ans_vals, item["var"], payload) if not reasons else []}
