@@ -53,7 +53,7 @@ md += 'Variants: **noum** = no UndoManager (pure erase); **none** = UndoManagers
   T(['layout', 'variant', 'payload', 'server encoded', 'client encoded', 'client: deleted items with content', 'their payload', 'undo stack', 'content-holding deleted items just before um.clear() (after the final checks)', 'client encoded after um.clear()', 'client content-holding deleted items after um.clear()', 'after reload into gc doc: content-holding / re-encoded'], rows)
 }
 md += 'The "3x" columns are the 3x checkpoint. The "before/after um.clear()" columns are taken after the final correctness checks (extra erases, up to 300 undos and redos), which is why they differ from the 3x column; compare after-clear with before-clear, not with 3x.\n\n'
-md += '#### T6b. Who deleted the retained items (user 0 replica, gc=true, 5k, 3x churn, measured in the harness)\n\n'
+md += '#### T6b. Who deleted the retained items (user 0 replica, gc=true, 5k, at the end of the run after the final checks, measured in the harness)\n\n'
 {
   const rows = ret.filter((r) => r.retention?.attribution).map((r) => { const a = r.retention.attribution, t = a.retainedFromOwn + a.retainedFromOthers; return [r.cfg.layout, r.cfg.cap, t, a.retainedFromOwn, a.retainedFromOthers, t ? (100 * a.retainedFromOthers / t).toFixed(1) + '%' : '', a.user0TrackedDeletions] })
   T(['layout', 'variant', 'retained items (content held)', 'deleted in user 0 tracked transactions (erase, redo, undone draw)', 'other', 'other share', 'all items user 0 deleted in tracked transactions'], rows)

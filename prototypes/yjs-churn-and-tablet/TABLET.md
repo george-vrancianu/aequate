@@ -5,10 +5,17 @@ Goal: measure how long a 1k / 3k / 5k / 10k-stroke Yjs board takes to sync, open
 ## 1. Install (once, in WSL)
 
 ```
+cd /home/giu/projects/aequate
 git fetch origin prototype/yjs-churn-and-tablet
 git worktree add ~/aequate-tablet origin/prototype/yjs-churn-and-tablet   # separate folder, the main checkout stays untouched
 cd ~/aequate-tablet/prototypes/yjs-churn-and-tablet
 npm install
+```
+
+If the branch is not on origin yet (the fetch fails), use the existing worktree that already has the branch checked out instead (do not try `git worktree add` for it, git refuses a branch that is checked out elsewhere):
+
+```
+cd /home/giu/projects/aequate/.claude/worktrees/prototype-yjs-churn-and-tablet/prototypes/yjs-churn-and-tablet
 ```
 
 ## 2. Start the server (WSL terminal, leave it running)
@@ -17,7 +24,7 @@ npm install
 npm run tablet
 ```
 
-Default port 8787. Another port: `PORT=9000 npm run tablet` or `npm run tablet -- --port 9000`. The server prints the Windows LAN URL, the WSL IP and the exact commands for steps 3 and 4 with your numbers filled in. Use those printed commands rather than the examples below if they differ. If the Windows LAN IP could not be detected, run `ipconfig` in Windows and take the IPv4 address of the Wi-Fi adapter (the one the tablet is also on).
+Default port 8787. Another port: `PORT=9000 npm run tablet` or `npm run tablet -- --port 9000`. The server prints the Windows LAN URL, the WSL IP and the exact commands for step 3 with your numbers filled in. Use those printed commands rather than the examples below if they differ. If the Windows LAN IP could not be detected, run `ipconfig` in Windows and take the IPv4 address of the Wi-Fi adapter (the one the tablet is also on).
 
 ## 3. Windows networking: pick the path for your WSL2 mode
 
@@ -86,8 +93,8 @@ netsh interface portproxy delete v4tov4 listenaddress=0.0.0.0 listenport=8787
 Remove-NetFirewallRule -DisplayName "aequate-proto-8787"
 ```
 
-(or `netsh advfirewall firewall delete rule name="aequate-proto-8787"`). Verify with `Get-NetFirewallHyperVRule -Name aequate-proto-8787` (should error: not found) and, in NAT mode, `netsh interface portproxy show v4tov4` (should be empty). Remove the worktree with `git worktree remove ~/aequate-tablet`. Server data lives only in memory, nothing else to delete.
+(or `netsh advfirewall firewall delete rule name="aequate-proto-8787"`). Verify with `Get-NetFirewallHyperVRule -Name aequate-proto-8787` (should error: not found) and, in NAT mode, `netsh interface portproxy show v4tov4` (should be empty). If you created the `~/aequate-tablet` worktree, remove it with `git worktree remove ~/aequate-tablet`. Server data lives only in memory, nothing else to delete.
 
 ## What it measures
 
-Per size and layout: time to sync and open the whole board (median of 3 fresh connects), time to open one page (for one-doc-per-board that is the same doc), apply time per remote stroke while the server streams 100 strokes 30 ms apart, time to decode and draw all strokes to a canvas (one page and the whole board), encoded doc bytes, JS JS heap where available (coarse on plain http, see step 6), and the HTTP round trip to the server. Times include real Wi-Fi latency and bandwidth.
+Per size and layout: time to sync and open the whole board (median of 3 fresh connects), time to open one page (for one-doc-per-board that is the same doc), apply time per remote stroke while the server streams 100 strokes 30 ms apart, time to decode and draw all strokes to a canvas (one page and the whole board), encoded doc bytes, JS heap where available (coarse on plain http, see step 6), and the HTTP round trip to the server. Times include real Wi-Fi latency and bandwidth.
