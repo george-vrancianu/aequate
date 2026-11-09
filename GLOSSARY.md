@@ -97,6 +97,10 @@ _Avoid_: Request, I'm stuck, escalation
 The person who installs an instance and manages its accounts.
 _Avoid_: Owner, operator, superuser
 
+**Grant**:
+Permission, recorded with a start and an end, for someone other than the owning student to see that student's work. v1 has none; v2 tutor sessions create them.
+_Avoid_: Share, access, permission
+
 **Session**:
 (v2) A live lesson a tutor runs with 1–5 students on a shared board and their own boards.
 _Avoid_: Lesson, class, room
