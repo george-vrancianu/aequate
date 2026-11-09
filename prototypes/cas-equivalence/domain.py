@@ -6,6 +6,7 @@ Real-number convention (stated, not neutral):
     ("cube root of -8 is -2"), NOT SymPy's principal-branch value. x**0 needs base != 0 (0**0 undefined).
     x**r with irrational constant r needs base > 0. A Float exponent is its decimal value as a Rational (x^{0,5} = x^(1/2)).
     Implementation of the odd-root convention: collect() rewrites b**(p/q), q odd, to (sign(b)*Abs(b)**(1/q))**p, i.e. the real root, before normalise / solveset / pointwise evaluation. x**y with a symbolic exponent y, or any unlisted function: UNDECIDED.
+    SymPy solveset is WRONG on Abs(b)**(p/q) (q odd, p even) forms that this rewrite creates, so solveset results on atoms with Abs/sign/non-integer powers are sample-checked by _guard (UNDECIDED on disagreement).
   * log is the natural log, argument > 0. arcsin/arccos argument in [-1, 1]. tan/sec need cos != 0, cot/csc need sin != 0.
 
 Representation: a CONJUNCTION OF ATOMIC CONSTRAINTS (expr != 0, expr >= 0, expr > 0) collected from the UNEVALUATED parse,
@@ -247,6 +248,33 @@ def _interval_ok(res):
     if res is S.EmptySet or isinstance(res, (Interval, FiniteSet)): return True
     return isinstance(res, Union) and all(_interval_ok(a) for a in res.args)
 
+_PROBE = [Rational(k, 2) for k in (-3, -2, -1, 1, 2, 3)] + [Rational(k) for k in (-5, -2, -1, 0, 1, 2, 3, 4, 5, 7, 9, 10)] + \
+         [Rational(s * m) for m in (10, 30, 100, 1000, 10000) for s in (-1, 1)] + [Rational(1, 10 ** k) * s for k in (1, 2) for s in (-1, 1)]
+
+def _suspect(e):
+    """Forms on which SymPy solveset was seen to be WRONG (Abs(x)**(2/3) -> EmptySet or R): anything with Abs/sign or a non-integer power."""
+    return e.has(sympy.Abs, sympy.sign) or any(isinstance(n, sympy.Pow) and not n.exp.is_Integer for n in sympy.preorder_traversal(e))
+
+def _guard(e, rel, v, I, res):
+    """Cross-check a solveset result (sets of I) against exact evaluation of the atom at probe points, endpoints and midpoints
+    of the returned pieces. Any disagreement -> UNDECIDED (solveset is not trusted on this form)."""
+    pts = set(_PROBE)
+    pieces = res.args if isinstance(res, Union) else [res]
+    for p in pieces:
+        if isinstance(p, Interval):
+            for b in (p.inf, p.sup):
+                if b.is_finite: pts |= {b, b + Rational(1, 2), b - Rational(1, 2)}
+            if p.inf.is_finite and p.sup.is_finite: pts.add((p.inf + p.sup) / 2)
+        elif isinstance(p, FiniteSet): pts |= set(p) | {x + Rational(1, 7) for x in p} | {x - Rational(1, 7) for x in p}
+    if isinstance(res, FiniteSet) and rel != "ne": pass
+    for p in pts:
+        if not p.is_number or not p.is_real or I.contains(p) is not S.true: continue
+        sat = _sat(e, rel, {v: p})
+        if sat is None: continue
+        inside = res.contains(p) is S.true
+        if rel == "ne": inside = not inside     # res is the zero set
+        if sat != inside: raise Undecided(f"solveset result {res} for {e} {_SYM[rel]} disagrees with exact evaluation at {v}={p}; solver not trusted")
+
 def build(atoms):
     """-> dict var -> [I, E(Dset-like: fin set, per)], list of opaque keys, set of variables."""
     dom, opaque, vars_ = {}, set(), set()
@@ -261,11 +289,13 @@ def build(atoms):
             if rel == "ne":
                 d = decode_pts(solveset(e, v, S.Reals))
                 if d is None: opaque.add(_canon_key(e, rel)); continue
+                if _suspect(e) and d[1] is None: _guard(e, "ne", v, I, d[0])
                 dom[v][1], dom[v][2] = Efin | d[0], p_union(Eper, d[1])
             else:
                 if e.has(*_PERIODIC): opaque.add(_canon_key(e, rel)); continue
                 res = solveset(e >= 0 if rel == "ge" else e > 0, v, I)
                 if not _interval_ok(res): opaque.add(_canon_key(e, rel)); continue
+                if _suspect(e): _guard(e, rel, v, I, res)
                 dom[v][0] = I & res
         except Undecided: raise
         except Exception:
@@ -327,7 +357,8 @@ def member(raw, pt):
         if r is None: unknown = True
     return None if unknown else True
 
-BASE = [Rational(k, 2) for k in (-6, -4, -2, -1, 0, 1, 2, 4, 6)] + [pi / 2, pi, pi / 4, -pi / 2, 3 * pi / 2, -pi]
+BASE = [Rational(k, 2) for k in (-6, -4, -2, -1, 0, 1, 2, 4, 6)] + [pi / 2, pi, pi / 4, -pi / 2, 3 * pi / 2, -pi] + \
+       [Rational(k) for k in (-10, 10, -100, 100, -1000, 1000)]   # far points (added after review round 2)
 
 def candidates(vars_, specials):
     n = len(vars_)

@@ -52,7 +52,7 @@ def check_step(st, ra, rb):
             pt = dict(zip(vs, combo))
             if member(evA, pt) is True and member(evB, pt) is True:
                 with sympy.evaluate(True):
-                    a, b = complex(ra.subs(pt).evalf(30)), complex(rb.subs(pt).evalf(30))
+                    a, b = complex(domain.realify(ra).subs(pt).evalf(30)), complex(domain.realify(rb).subs(pt).evalf(30))   # real-root convention, not SymPy's principal branch (D81 was flagged without this)
                 worst = max(worst, abs(a - b) / max(1.0, abs(a))); n += 1
         out["num"] = f"{n} common points, max rel diff {worst:.1e}" if n else "no common grid points"
         out["num_ok"] = (worst < 1e-9) if n else None
@@ -121,7 +121,7 @@ def write_md(rows, reg, a):
     L.append("- Representation: a conjunction of atomic constraints (`e != 0`, `e >= 0`, `e > 0`), not a set over R^n. Univariate atoms are solved per variable into intervals plus excluded points with canonical periodic classes (this is the `ImageSet` / union canonicalisation: `pi/2 + k*pi` equals `pi/2 + 2k*pi` U `3pi/2 + 2k*pi`). Multivariate atoms, and univariate inequalities with trig (SymPy's `solveset(sin(x) > 0)` returns one period only), stay symbolic and are compared by canonical key. Any difference or sameness is then cross-checked at exact grid points; a differing point proves CHANGED; a claimed difference that no point confirms, or opaque constraints that differ with no differing point, are UNDECIDED.\n")
     L.append("## 1. New hand-labelled set: expected vs actual\n")
     L.append("Labels (`same` / `changed` and which values) and one-line justifications are in `steps_domain.py` and repeated in the last column. `excluded` / `added` are named by an exact set when the constraints are all one-variable; otherwise a witness point (exact values) is given. `named` = the reported sets / witness match the label (predicate labels are checked at the witness point only). `numeric` = before and after evaluated at exact points where both sides are defined (checks that the step is a valid rewrite).\n")
-    L.append("| id | topic | before -> after | vars | expected | verdict | class | excluded (before only) | added (after only) | named | constraint diff (opaque atoms only) | numeric check of label | ms | label justification |\n|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
+    L.append("| id | topic | before -> after | vars | expected | verdict | class | excluded (before only) | added (after only) | named | constraint diff (normalised atoms, shown when opaque atoms differ) | numeric check of label | ms | label justification |\n|---|---|---|---|---|---|---|---|---|---|---|---|---|---|")
     for r in rows:
         s, o = r["step"], r["res"]
         def spec(d, region):
