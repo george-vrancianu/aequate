@@ -1,0 +1,5788 @@
+{
+ "meta": {
+  "node": "v24.21.0",
+  "yjs": "13.6.x",
+  "debounce": 100,
+  "maxDebounce": 500,
+  "paceMs": 4,
+  "COUNT": 500,
+  "BYTES": 524288,
+  "date": "2026-11-09T12:53:16.085Z",
+  "note": "WSL2: numbers are relative"
+ },
+ "sizes": {
+  "1000": {
+   "N": 1000,
+   "load": {
+    "N": 1000,
+    "rows": {
+     "rows": 1100,
+     "bytes": 566873
+    },
+    "liveStateBytes": 505011,
+    "liveDigest": {
+     "strokes": 900,
+     "content": "891f585ebe15",
+     "sv": "01f6b7d7910ee807"
+    },
+    "updatesAppliedToWriter": 1100,
+    "replayDirectMs": 13.9,
+    "mergeThenApplyDirectMs": 47,
+    "hocuspocusOpenBeforeCompaction": {
+     "clientOpenMs": 93.6,
+     "serverLoadMs": 29.6
+    },
+    "correct_replayEqualsLive": true,
+    "correct_mergeEqualsLive": true,
+    "compact_doc": {
+     "mode": "doc",
+     "compactMs": 35.8,
+     "snapshotBytes": 505011,
+     "rowsMerged": 1100,
+     "rowsLeft": 0,
+     "pingGapCalmP50Ms": 5.4,
+     "pingGapMaxDuringCompactionMs": 41.4,
+     "directLoadMs": 4.2,
+     "hocuspocusOpen": {
+      "clientOpenMs": 12.2,
+      "serverLoadMs": 2.4
+     },
+     "correct_equalsLive": true,
+     "tailRows": 100,
+     "tailBytes": 57263,
+     "hocuspocusOpenSnapshotPlusTail": {
+      "clientOpenMs": 14.6,
+      "serverLoadMs": 3.3
+     },
+     "directLoadSnapshotPlusTailMs": 3.6,
+     "correct_snapshotPlusTailEqualsLive": true
+    },
+    "compact_merge": {
+     "mode": "merge",
+     "compactMs": 20.2,
+     "snapshotBytes": 556196,
+     "rowsMerged": 1100,
+     "rowsLeft": 0,
+     "pingGapCalmP50Ms": 5.1,
+     "pingGapMaxDuringCompactionMs": 25.5,
+     "directLoadMs": 1.4,
+     "hocuspocusOpen": {
+      "clientOpenMs": 9.5,
+      "serverLoadMs": 1.9
+     },
+     "correct_equalsLive": true,
+     "tailRows": 100,
+     "tailBytes": 57263,
+     "hocuspocusOpenSnapshotPlusTail": {
+      "clientOpenMs": 12.6,
+      "serverLoadMs": 3.2
+     },
+     "directLoadSnapshotPlusTailMs": 3,
+     "correct_snapshotPlusTailEqualsLive": true
+    }
+   },
+   "singleSave": [
+    {
+     "kind": "full",
+     "updateBytes": 443,
+     "bytesWrittenPerSave": 558341,
+     "saveMs": 2.7
+    },
+    {
+     "kind": "pg",
+     "updateBytes": 441,
+     "bytesWrittenPerSave": 30789,
+     "saveMs": 0.3
+    },
+    {
+     "kind": "ld",
+     "updateBytes": 443,
+     "bytesWrittenPerSave": 443,
+     "saveMs": 0.1
+    },
+    {
+     "kind": "lt",
+     "updateBytes": 443,
+     "bytesWrittenPerSave": 443,
+     "saveMs": 0.1
+    }
+   ],
+   "sessions": [
+    {
+     "kind": "full",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4315,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 7711890,
+       "bytesPerSaveMedian": 860880,
+       "writeMs": {
+        "n": 9,
+        "p50": 3.9368570000006002,
+        "p95": 29.71172900000056,
+        "p99": 29.71172900000056,
+        "max": 29.71172900000056,
+        "sum": 109.0848240000023
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 840,
+        "p50": 0.6304559999998673,
+        "p95": 1.0322070000001986,
+        "p99": 1.395883999999569,
+        "max": 31.24292500000047,
+        "sum": 621.0438379999869
+       },
+       "pingGapMs": {
+        "n": 840,
+        "p50": 5.298687000000427,
+        "p95": 5.835400999999365,
+        "p99": 7.140656999999919,
+        "max": 35.96145500000057,
+        "sum": 4415.474907000001
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "full:s1000",
+         "ok": true,
+         "strokesStored": 1885,
+         "strokesLive": 1885
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4331,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 12380670,
+       "bytesPerSaveMedian": 1382184,
+       "writeMs": {
+        "n": 9,
+        "p50": 17.869935000000623,
+        "p95": 33.46060200000102,
+        "p99": 33.46060200000102,
+        "max": 33.46060200000102,
+        "sum": 152.8035260000015
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 842,
+        "p50": 0.6179609999999229,
+        "p95": 0.9493110000003071,
+        "p99": 1.3220629999996163,
+        "max": 34.45923599999878,
+        "sum": 597.3865150000074
+       },
+       "pingGapMs": {
+        "n": 842,
+        "p50": 5.292395000000397,
+        "p95": 5.797027000000526,
+        "p99": 6.3712109999996756,
+        "max": 38.649616999999125,
+        "sum": 4430.88298
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "full:s1000",
+         "ok": true,
+         "strokesStored": 2798,
+         "strokesLive": 2798
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 20092560,
+     "totalBytesPerStroke": 10046,
+     "loadsServerMs": [
+      {
+       "ms": 1.7,
+       "rows": 0
+      },
+      {
+       "ms": 1.9,
+       "rows": 0
+      },
+      {
+       "ms": 5.9,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "pg",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4184,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 10,
+       "bytesWritten": 2018181,
+       "bytesPerSaveMedian": 214946,
+       "writeMs": {
+        "n": 10,
+        "p50": 1.0333089999985532,
+        "p95": 14.542327999999543,
+        "p99": 14.542327999999543,
+        "max": 14.542327999999543,
+        "sum": 22.669711999997162
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 833,
+        "p50": 0.5517209999998158,
+        "p95": 0.7644939999991038,
+        "p99": 0.8843780000006518,
+        "max": 1.8300530000014987,
+        "sum": 478.9685189999127
+       },
+       "pingGapMs": {
+        "n": 833,
+        "p50": 5.244643999998516,
+        "p95": 5.572403000000122,
+        "p99": 5.847241999999824,
+        "max": 19.032139000000825,
+        "sum": 4280.206056999999
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "pg:1000:0",
+         "ok": true,
+         "strokesStored": 498,
+         "strokesLive": 498
+        },
+        {
+         "doc": "pg:1000:1",
+         "ok": true,
+         "strokesStored": 487,
+         "strokesLive": 487
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4147,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 10,
+       "bytesWritten": 2065892,
+       "bytesPerSaveMedian": 218832,
+       "writeMs": {
+        "n": 10,
+        "p50": 0.9591990000008082,
+        "p95": 15.811384999997244,
+        "p99": 15.811384999997244,
+        "max": 15.811384999997244,
+        "sum": 23.57232799999838
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 832,
+        "p50": 0.5211180000005697,
+        "p95": 0.730067999997118,
+        "p99": 0.8584129999981087,
+        "max": 4.825684999999794,
+        "sum": 454.40347599996676
+       },
+       "pingGapMs": {
+        "n": 832,
+        "p50": 5.22534000000087,
+        "p95": 5.5266779999983555,
+        "p99": 5.744438000001537,
+        "max": 9.307705999999598,
+        "sum": 4245.433884000002
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "pg:1000:2",
+         "ok": true,
+         "strokesStored": 510,
+         "strokesLive": 510
+        },
+        {
+         "doc": "pg:1000:3",
+         "ok": true,
+         "strokesStored": 503,
+         "strokesLive": 503
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 4084073,
+     "totalBytesPerStroke": 2042,
+     "loadsServerMs": [
+      {
+       "ms": 0.2,
+       "rows": 0
+      },
+      {
+       "ms": 0.4,
+       "rows": 0
+      },
+      {
+       "ms": 0.1,
+       "rows": 0
+      },
+      {
+       "ms": 0.1,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "lc",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4235,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 1121,
+       "bytesWritten": 581013,
+       "bytesPerSaveMedian": 523,
+       "writeMs": {
+        "n": 1121,
+        "p50": 0.07268699999985984,
+        "p95": 0.10809399999925517,
+        "p99": 0.1708519999992859,
+        "max": 21.374305000001186,
+        "sum": 163.77273600011904
+       },
+       "compactions": [
+        {
+         "trigger": "count",
+         "ms": 2.9,
+         "rows": 500,
+         "snapBytes": 787422
+        },
+        {
+         "trigger": "count",
+         "ms": 27.7,
+         "rows": 500,
+         "snapBytes": 1013420
+        }
+       ],
+       "compactionBytesWritten": 1800842,
+       "logLeftAfterSession": {
+        "rows": 121,
+        "bytes": 57953
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 56798
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 220,
+         "logBytes": 111359
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 329,
+         "logBytes": 171230
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 438,
+         "logBytes": 229793
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 57,
+         "logBytes": 29025
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 172,
+         "logBytes": 89798
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 287,
+         "logBytes": 146846
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 397,
+         "logBytes": 206328
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 5,
+         "logBytes": 2293
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 120,
+         "logBytes": 57272
+        }
+       ],
+       "pingMs": {
+        "n": 835,
+        "p50": 0.5219339999966905,
+        "p95": 0.8889510000008158,
+        "p99": 1.3208930000000692,
+        "max": 34.11550899999929,
+        "sum": 582.322206999972
+       },
+       "pingGapMs": {
+        "n": 835,
+        "p50": 5.245907000000443,
+        "p95": 5.672062999998161,
+        "p99": 6.243527000002359,
+        "max": 38.82382200000211,
+        "sum": 4332.020380999998
+       },
+       "pingMaxDuringCompactionMs": 38.8,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lc:s1000",
+         "ok": true,
+         "strokesStored": 1879,
+         "strokesLive": 1879
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4266,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 1087,
+       "bytesWritten": 581505,
+       "bytesPerSaveMedian": 561,
+       "writeMs": {
+        "n": 1087,
+        "p50": 0.07992100000046776,
+        "p95": 0.14617599999837694,
+        "p99": 0.2267779999965569,
+        "max": 20.67493900000045,
+        "sum": 144.56268399995315
+       },
+       "compactions": [
+        {
+         "trigger": "count",
+         "ms": 30.1,
+         "rows": 500,
+         "snapBytes": 1249375
+        },
+        {
+         "trigger": "count",
+         "ms": 31.5,
+         "rows": 500,
+         "snapBytes": 1491815
+        }
+       ],
+       "compactionBytesWritten": 2741190,
+       "logLeftAfterSession": {
+        "rows": 208,
+        "bytes": 110667
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 229,
+         "logBytes": 114350
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 335,
+         "logBytes": 170363
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 445,
+         "logBytes": 228655
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 50,
+         "logBytes": 26850
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 160,
+         "logBytes": 86061
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 271,
+         "logBytes": 145757
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 378,
+         "logBytes": 202774
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 485,
+         "logBytes": 258746
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 94,
+         "logBytes": 51862
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 207,
+         "logBytes": 110191
+        }
+       ],
+       "pingMs": {
+        "n": 832,
+        "p50": 0.534429999999702,
+        "p95": 0.9806300000018382,
+        "p99": 1.4268119999978808,
+        "max": 6.059562999998889,
+        "sum": 518.3153870000315
+       },
+       "pingGapMs": {
+        "n": 832,
+        "p50": 5.291344000001118,
+        "p95": 5.810622999997577,
+        "p99": 6.34891300000163,
+        "max": 41.75192699999752,
+        "sum": 4361.986165999999
+       },
+       "pingMaxDuringCompactionMs": 41.8,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lc:s1000",
+         "ok": true,
+         "strokesStored": 2792,
+         "strokesLive": 2792
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 5704550,
+     "totalBytesPerStroke": 2852,
+     "loadsServerMs": [
+      {
+       "ms": 1.7,
+       "rows": 0
+      },
+      {
+       "ms": 9.3,
+       "rows": 121
+      }
+     ]
+    },
+    {
+     "kind": "lb",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4336,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 1121,
+       "bytesWritten": 581013,
+       "bytesPerSaveMedian": 523,
+       "writeMs": {
+        "n": 1121,
+        "p50": 0.08799700000236044,
+        "p95": 0.18332599999848753,
+        "p99": 0.33374900000490015,
+        "max": 26.084100000000035,
+        "sum": 236.33239799997682
+       },
+       "compactions": [
+        {
+         "trigger": "bytes",
+         "ms": 6.3,
+         "rows": 1004,
+         "snapBytes": 1014965
+        }
+       ],
+       "compactionBytesWritten": 1014965,
+       "logLeftAfterSession": {
+        "rows": 117,
+        "bytes": 56372
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 56798
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 220,
+         "logBytes": 111359
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 329,
+         "logBytes": 171230
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 438,
+         "logBytes": 229793
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 557,
+         "logBytes": 290735
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 672,
+         "logBytes": 351508
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 787,
+         "logBytes": 408556
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 897,
+         "logBytes": 468038
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 1,
+         "logBytes": 712
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 116,
+         "logBytes": 55691
+        }
+       ],
+       "pingMs": {
+        "n": 840,
+        "p50": 0.6211120000007213,
+        "p95": 1.2083500000007916,
+        "p99": 2.0143909999969765,
+        "max": 23.180559000000358,
+        "sum": 653.9920259999926
+       },
+       "pingGapMs": {
+        "n": 840,
+        "p50": 5.269181999996363,
+        "p95": 6.0190569999977015,
+        "p99": 6.786103999998886,
+        "max": 35.19458999999915,
+        "sum": 4432.653237999999
+       },
+       "pingMaxDuringCompactionMs": 9.6,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lb:s1000",
+         "ok": true,
+         "strokesStored": 1879,
+         "strokesLive": 1879
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4244,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 1087,
+       "bytesWritten": 581505,
+       "bytesPerSaveMedian": 561,
+       "writeMs": {
+        "n": 1087,
+        "p50": 0.07585300000209827,
+        "p95": 0.11116999999649124,
+        "p99": 0.1674159999965923,
+        "max": 23.807795000000624,
+        "sum": 181.5035829999979
+       },
+       "compactions": [
+        {
+         "trigger": "bytes",
+         "ms": 6.8,
+         "rows": 991,
+         "snapBytes": 1489156
+        }
+       ],
+       "compactionBytesWritten": 1489156,
+       "logLeftAfterSession": {
+        "rows": 213,
+        "bytes": 113588
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 225,
+         "logBytes": 112769
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 331,
+         "logBytes": 168782
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 441,
+         "logBytes": 227074
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 546,
+         "logBytes": 287439
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 656,
+         "logBytes": 346650
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 767,
+         "logBytes": 406346
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 874,
+         "logBytes": 463363
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 981,
+         "logBytes": 519335
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 99,
+         "logBytes": 54783
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 212,
+         "logBytes": 113112
+        }
+       ],
+       "pingMs": {
+        "n": 839,
+        "p50": 0.5174970000007306,
+        "p95": 0.8299710000064806,
+        "p99": 1.0205860000060056,
+        "max": 29.34802800000034,
+        "sum": 526.2015559998908
+       },
+       "pingGapMs": {
+        "n": 839,
+        "p50": 5.27136099999916,
+        "p95": 5.658216999996512,
+        "p99": 6.017741000003298,
+        "max": 33.772256000003836,
+        "sum": 4343.696762
+       },
+       "pingMaxDuringCompactionMs": 8.1,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lb:s1000",
+         "ok": true,
+         "strokesStored": 2792,
+         "strokesLive": 2792
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 3666639,
+     "totalBytesPerStroke": 1833,
+     "loadsServerMs": [
+      {
+       "ms": 2.6,
+       "rows": 0
+      },
+      {
+       "ms": 11.5,
+       "rows": 117
+      }
+     ]
+    },
+    {
+     "kind": "ld",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4273,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 1121,
+       "bytesWritten": 582093,
+       "bytesPerSaveMedian": 524,
+       "writeMs": {
+        "n": 1121,
+        "p50": 0.07629399999859743,
+        "p95": 0.11866400000144495,
+        "p99": 0.20766200000070967,
+        "max": 21.626149000003352,
+        "sum": 190.62883400003193
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 4.6,
+         "rows": 1121,
+         "snapBytes": 1065443
+        }
+       ],
+       "compactionBytesWritten": 1065443,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 56904
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 220,
+         "logBytes": 111576
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 329,
+         "logBytes": 171552
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 438,
+         "logBytes": 230223
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 557,
+         "logBytes": 291277
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 672,
+         "logBytes": 352159
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 787,
+         "logBytes": 409313
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 897,
+         "logBytes": 468902
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 1005,
+         "logBytes": 526321
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 1120,
+         "logBytes": 581411
+        }
+       ],
+       "pingMs": {
+        "n": 843,
+        "p50": 0.5099169999957667,
+        "p95": 0.8356519999942975,
+        "p99": 1.2157630000001518,
+        "max": 5.509586000000127,
+        "sum": 490.87690799997654
+       },
+       "pingGapMs": {
+        "n": 843,
+        "p50": 5.255094999993162,
+        "p95": 5.6388090000036755,
+        "p99": 5.943723999997019,
+        "max": 30.700875999995333,
+        "sum": 4369.714550000004
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "ld:s1000",
+         "ok": true,
+         "strokesStored": 1885,
+         "strokesLive": 1885
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4240,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 1087,
+       "bytesWritten": 581522,
+       "bytesPerSaveMedian": 561,
+       "writeMs": {
+        "n": 1087,
+        "p50": 0.07427000000461703,
+        "p95": 0.10768400000233669,
+        "p99": 0.16172499999811407,
+        "max": 25.035976999999548,
+        "sum": 200.01857399999426
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 32.5,
+         "rows": 1087,
+         "snapBytes": 1591256
+        }
+       ],
+       "compactionBytesWritten": 1591256,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 56398
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 214,
+         "logBytes": 112412
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 324,
+         "logBytes": 170709
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 429,
+         "logBytes": 231074
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 539,
+         "logBytes": 290287
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 650,
+         "logBytes": 349983
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 757,
+         "logBytes": 407001
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 864,
+         "logBytes": 462974
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 973,
+         "logBytes": 522713
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 1086,
+         "logBytes": 581046
+        }
+       ],
+       "pingMs": {
+        "n": 834,
+        "p50": 0.5096120000016526,
+        "p95": 0.8264310000013211,
+        "p99": 1.2146969999957946,
+        "max": 26.56736099999398,
+        "sum": 536.7581429999773
+       },
+       "pingGapMs": {
+        "n": 834,
+        "p50": 5.256967999994231,
+        "p95": 5.639811000000918,
+        "p99": 5.911243999995349,
+        "max": 50.25578200000018,
+        "sum": 4339.462359000005
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "ld:s1000",
+         "ok": true,
+         "strokesStored": 2798,
+         "strokesLive": 2798
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 3820314,
+     "totalBytesPerStroke": 1910,
+     "loadsServerMs": [
+      {
+       "ms": 2.6,
+       "rows": 0
+      },
+      {
+       "ms": 2.6,
+       "rows": 0
+      },
+      {
+       "ms": 3.7,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "lt",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4130,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 571539,
+       "bytesPerSaveMedian": 70398,
+       "writeMs": {
+        "n": 9,
+        "p50": 0.2306749999988824,
+        "p95": 13.318077999996603,
+        "p99": 13.318077999996603,
+        "max": 13.318077999996603,
+        "sum": 15.126930000005814
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 4.1,
+         "rows": 9,
+         "snapBytes": 1065443
+        }
+       ],
+       "compactionBytesWritten": 1065443,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 0,
+         "logBytes": 0
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 1,
+         "logBytes": 69422
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 2,
+         "logBytes": 137203
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 3,
+         "logBytes": 211078
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 4,
+         "logBytes": 282598
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 4,
+         "logBytes": 282598
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 5,
+         "logBytes": 353799
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 6,
+         "logBytes": 425319
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 7,
+         "logBytes": 495717
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 8,
+         "logBytes": 561758
+        }
+       ],
+       "pingMs": {
+        "n": 829,
+        "p50": 0.515984000005119,
+        "p95": 0.7427059999972698,
+        "p99": 0.8774650000050315,
+        "max": 1.7417459999996936,
+        "sum": 455.2488809998613
+       },
+       "pingGapMs": {
+        "n": 829,
+        "p50": 5.23336399999971,
+        "p95": 5.515557000006083,
+        "p99": 5.7554589999999735,
+        "max": 15.636162000002514,
+        "sum": 4229.981967
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lt:s1000",
+         "ok": true,
+         "strokesStored": 1885,
+         "strokesLive": 1885
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4121,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 571213,
+       "bytesPerSaveMedian": 70407,
+       "writeMs": {
+        "n": 9,
+        "p50": 0.23003399999288376,
+        "p95": 0.24181700000190176,
+        "p99": 0.24181700000190176,
+        "max": 0.24181700000190176,
+        "sum": 1.9806669999961741
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 34.3,
+         "rows": 9,
+         "snapBytes": 1591256
+        }
+       ],
+       "compactionBytesWritten": 1591256,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 0,
+         "logBytes": 0
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 1,
+         "logBytes": 71448
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 2,
+         "logBytes": 137185
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 3,
+         "logBytes": 209353
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 4,
+         "logBytes": 279760
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 4,
+         "logBytes": 279760
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 5,
+         "logBytes": 351028
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 6,
+         "logBytes": 419457
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 7,
+         "logBytes": 488901
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 8,
+         "logBytes": 560156
+        }
+       ],
+       "pingMs": {
+        "n": 827,
+        "p50": 0.4969769999952405,
+        "p95": 0.6862449999971432,
+        "p99": 0.8110119999982999,
+        "max": 1.8635960000028717,
+        "sum": 430.6581970000043
+       },
+       "pingGapMs": {
+        "n": 827,
+        "p50": 5.186816000001272,
+        "p95": 5.44574499999726,
+        "p99": 6.049293999996735,
+        "max": 6.671087000002444,
+        "sum": 4221.186673000004
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lt:s1000",
+         "ok": true,
+         "strokesStored": 2798,
+         "strokesLive": 2798
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 3799451,
+     "totalBytesPerStroke": 1900,
+     "loadsServerMs": [
+      {
+       "ms": 4,
+       "rows": 0
+      },
+      {
+       "ms": 2.7,
+       "rows": 0
+      },
+      {
+       "ms": 3.4,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "none",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4118,
+       "erases": 59,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 0,
+       "bytesWritten": 0,
+       "bytesPerSaveMedian": 0,
+       "writeMs": null,
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 828,
+        "p50": 0.48740900000120746,
+        "p95": 0.6574729999992996,
+        "p99": 0.7569890000013402,
+        "max": 1.1621039999954519,
+        "sum": 420.60793199991895
+       },
+       "pingGapMs": {
+        "n": 828,
+        "p50": 5.183283999998821,
+        "p95": 5.41016700000182,
+        "p99": 5.6640279999992345,
+        "max": 6.05899700000009,
+        "sum": 4217.890290999996
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": "n/a",
+       "correctDetail": []
+      },
+      {
+       "session": 2,
+       "durationMs": 4109,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 0,
+       "bytesWritten": 0,
+       "bytesPerSaveMedian": 0,
+       "writeMs": null,
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 824,
+        "p50": 0.49867299999459647,
+        "p95": 0.6880099999980303,
+        "p99": 0.7924569999959203,
+        "max": 5.2656649999989895,
+        "sum": 436.89501900008327
+       },
+       "pingGapMs": {
+        "n": 824,
+        "p50": 5.198417999999947,
+        "p95": 5.432119999997667,
+        "p99": 5.679645999996865,
+        "max": 9.94832999999926,
+        "sum": 4209.262315999993
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": "n/a",
+       "correctDetail": []
+      }
+     ],
+     "totalBytesWritten": 0,
+     "totalBytesPerStroke": 0,
+     "loadsServerMs": [
+      {
+       "ms": 0,
+       "rows": 0
+      },
+      {
+       "ms": 0,
+       "rows": 0
+      }
+     ]
+    }
+   ],
+   "hooks": [
+    {
+     "hook": "onDisconnect",
+     "documentName": "ld:s1000",
+     "clientsCount": 0
+    },
+    {
+     "hook": "onDisconnect",
+     "documentName": "ld:s1000",
+     "clientsCount": 0
+    },
+    {
+     "hook": "onDisconnect",
+     "documentName": "ld:s1000",
+     "clientsCount": 0
+    }
+   ]
+  },
+  "3000": {
+   "N": 3000,
+   "load": {
+    "N": 3000,
+    "rows": {
+     "rows": 3300,
+     "bytes": 1730870
+    },
+    "liveStateBytes": 1538880,
+    "liveDigest": {
+     "strokes": 2700,
+     "content": "89cc7d143737",
+     "sv": "019acd90900eb817"
+    },
+    "updatesAppliedToWriter": 3300,
+    "replayDirectMs": 29.6,
+    "mergeThenApplyDirectMs": 139.6,
+    "hocuspocusOpenBeforeCompaction": {
+     "clientOpenMs": 117.8,
+     "serverLoadMs": 80.1
+    },
+    "correct_replayEqualsLive": true,
+    "correct_mergeEqualsLive": true,
+    "compact_doc": {
+     "mode": "doc",
+     "compactMs": 46.1,
+     "snapshotBytes": 1538880,
+     "rowsMerged": 3300,
+     "rowsLeft": 0,
+     "pingGapCalmP50Ms": 4.9,
+     "pingGapMaxDuringCompactionMs": 50.8,
+     "directLoadMs": 12.2,
+     "hocuspocusOpen": {
+      "clientOpenMs": 18.6,
+      "serverLoadMs": 5.7
+     },
+     "correct_equalsLive": true,
+     "tailRows": 100,
+     "tailBytes": 56256,
+     "hocuspocusOpenSnapshotPlusTail": {
+      "clientOpenMs": 20.9,
+      "serverLoadMs": 7.3
+     },
+     "directLoadSnapshotPlusTailMs": 4.6,
+     "correct_snapshotPlusTailEqualsLive": true
+    },
+    "compact_merge": {
+     "mode": "merge",
+     "compactMs": 163.1,
+     "snapshotBytes": 1698535,
+     "rowsMerged": 3300,
+     "rowsLeft": 0,
+     "pingGapCalmP50Ms": 4.8,
+     "pingGapMaxDuringCompactionMs": 168.3,
+     "directLoadMs": 4.4,
+     "hocuspocusOpen": {
+      "clientOpenMs": 20.7,
+      "serverLoadMs": 5.7
+     },
+     "correct_equalsLive": true,
+     "tailRows": 100,
+     "tailBytes": 56156,
+     "hocuspocusOpenSnapshotPlusTail": {
+      "clientOpenMs": 21.4,
+      "serverLoadMs": 7.5
+     },
+     "directLoadSnapshotPlusTailMs": 4.6,
+     "correct_snapshotPlusTailEqualsLive": true
+    }
+   },
+   "singleSave": [
+    {
+     "kind": "full",
+     "updateBytes": 752,
+     "bytesWrittenPerSave": 1700257,
+     "saveMs": 11.1
+    },
+    {
+     "kind": "pg",
+     "updateBytes": 750,
+     "bytesWrittenPerSave": 82515,
+     "saveMs": 0.5
+    },
+    {
+     "kind": "ld",
+     "updateBytes": 752,
+     "bytesWrittenPerSave": 752,
+     "saveMs": 0.1
+    },
+    {
+     "kind": "lt",
+     "updateBytes": 752,
+     "bytesWrittenPerSave": 752,
+     "saveMs": 0.1
+    }
+   ],
+   "sessions": [
+    {
+     "kind": "full",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4388,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 17892193,
+       "bytesPerSaveMedian": 1993900,
+       "writeMs": {
+        "n": 9,
+        "p50": 21.670632999999725,
+        "p95": 35.97236200000043,
+        "p99": 35.97236200000043,
+        "max": 35.97236200000043,
+        "sum": 207.2601229999982
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 843,
+        "p50": 0.5921969999999419,
+        "p95": 0.8894799999998213,
+        "p99": 1.2679630000002362,
+        "max": 8.840119000000414,
+        "sum": 553.3638390000133
+       },
+       "pingGapMs": {
+        "n": 843,
+        "p50": 5.316756000000169,
+        "p95": 5.6970299999993586,
+        "p99": 6.861525999998776,
+        "max": 41.20557600000029,
+        "sum": 4485.137575000001
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "full:s3000",
+         "ok": true,
+         "strokesStored": 3885,
+         "strokesLive": 3885
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4414,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 22448826,
+       "bytesPerSaveMedian": 2502229,
+       "writeMs": {
+        "n": 9,
+        "p50": 23.356109000000288,
+        "p95": 38.84447399999772,
+        "p99": 38.84447399999772,
+        "max": 38.84447399999772,
+        "sum": 248.7334979999996
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 838,
+        "p50": 0.577832999999373,
+        "p95": 0.8696129999989353,
+        "p99": 1.3050720000010188,
+        "max": 39.269068999999945,
+        "sum": 577.501152999972
+       },
+       "pingGapMs": {
+        "n": 838,
+        "p50": 5.293157000000065,
+        "p95": 5.682070999999269,
+        "p99": 7.460046000000148,
+        "max": 43.692049000001134,
+        "sum": 4514.879803000002
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "full:s3000",
+         "ok": true,
+         "strokesStored": 4798,
+         "strokesLive": 4798
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 40341019,
+     "totalBytesPerStroke": 20171,
+     "loadsServerMs": [
+      {
+       "ms": 6.3,
+       "rows": 0
+      },
+      {
+       "ms": 6.1,
+       "rows": 0
+      },
+      {
+       "ms": 9,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "pg",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4165,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 10,
+       "bytesWritten": 2506253,
+       "bytesPerSaveMedian": 263656,
+       "writeMs": {
+        "n": 10,
+        "p50": 1.3027279999987513,
+        "p95": 27.02963699999964,
+        "p99": 27.02963699999964,
+        "max": 27.02963699999964,
+        "sum": 51.655760999998165
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 830,
+        "p50": 0.5423359999986133,
+        "p95": 0.769280999997136,
+        "p99": 0.9288149999993038,
+        "max": 2.222552999999607,
+        "sum": 479.4306330000145
+       },
+       "pingGapMs": {
+        "n": 830,
+        "p50": 5.236918999999034,
+        "p95": 5.540163999998185,
+        "p99": 5.776789999999892,
+        "max": 32.373813999998674,
+        "sum": 4261.679046000001
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "pg:3000:0",
+         "ok": true,
+         "strokesStored": 598,
+         "strokesLive": 598
+        },
+        {
+         "doc": "pg:3000:1",
+         "ok": true,
+         "strokesStored": 587,
+         "strokesLive": 587
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4157,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 10,
+       "bytesWritten": 2590349,
+       "bytesPerSaveMedian": 269519,
+       "writeMs": {
+        "n": 10,
+        "p50": 1.0835140000017418,
+        "p95": 1.6133539999973436,
+        "p99": 1.6133539999973436,
+        "max": 1.6133539999973436,
+        "sum": 11.304178999995202
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 835,
+        "p50": 0.531938000000082,
+        "p95": 0.7560130000019853,
+        "p99": 0.9144310000010591,
+        "max": 5.495033999999578,
+        "sum": 475.70779399996536
+       },
+       "pingGapMs": {
+        "n": 835,
+        "p50": 5.238784000001033,
+        "p95": 5.551903999999922,
+        "p99": 5.8325389999990875,
+        "max": 10.148237999997946,
+        "sum": 4257.614633000001
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "pg:3000:2",
+         "ok": true,
+         "strokesStored": 610,
+         "strokesLive": 610
+        },
+        {
+         "doc": "pg:3000:3",
+         "ok": true,
+         "strokesStored": 603,
+         "strokesLive": 603
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 5096602,
+     "totalBytesPerStroke": 2548,
+     "loadsServerMs": [
+      {
+       "ms": 0.4,
+       "rows": 0
+      },
+      {
+       "ms": 1.2,
+       "rows": 0
+      },
+      {
+       "ms": 0.4,
+       "rows": 0
+      },
+      {
+       "ms": 0.4,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "lc",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4306,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 1121,
+       "bytesWritten": 558213,
+       "bytesPerSaveMedian": 506,
+       "writeMs": {
+        "n": 1121,
+        "p50": 0.07523199999923236,
+        "p95": 0.11003799999889452,
+        "p99": 0.17505000000164728,
+        "max": 23.80242999999973,
+        "sum": 175.2982949999896
+       },
+       "compactions": [
+        {
+         "trigger": "count",
+         "ms": 33.1,
+         "rows": 500,
+         "snapBytes": 1921810
+        },
+        {
+         "trigger": "count",
+         "ms": 31.4,
+         "rows": 500,
+         "snapBytes": 2133575
+        }
+       ],
+       "compactionBytesWritten": 4055385,
+       "logLeftAfterSession": {
+        "rows": 121,
+        "bytes": 58038
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 55577
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 220,
+         "logBytes": 110214
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 329,
+         "logBytes": 166287
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 438,
+         "logBytes": 223250
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 57,
+         "logBytes": 26198
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 172,
+         "logBytes": 83527
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 287,
+         "logBytes": 138461
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 397,
+         "logBytes": 194639
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 5,
+         "logBytes": 2677
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 120,
+         "logBytes": 57170
+        }
+       ],
+       "pingMs": {
+        "n": 841,
+        "p50": 0.5215549999993527,
+        "p95": 0.8612390000016603,
+        "p99": 1.6037259999975504,
+        "max": 32.37795199999891,
+        "sum": 583.8626789999798
+       },
+       "pingGapMs": {
+        "n": 841,
+        "p50": 5.273710999998002,
+        "p95": 5.6457919999993464,
+        "p99": 5.867150999998557,
+        "max": 42.68371400000251,
+        "sum": 4402.6719809999995
+       },
+       "pingMaxDuringCompactionMs": 42.7,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lc:s3000",
+         "ok": true,
+         "strokesStored": 3879,
+         "strokesLive": 3879
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4285,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 1087,
+       "bytesWritten": 571901,
+       "bytesPerSaveMedian": 533,
+       "writeMs": {
+        "n": 1087,
+        "p50": 0.07540200000221375,
+        "p95": 0.10580999999729102,
+        "p99": 0.14622599999711383,
+        "max": 20.977891000002273,
+        "sum": 143.43528499999593
+       },
+       "compactions": [
+        {
+         "trigger": "count",
+         "ms": 34.9,
+         "rows": 500,
+         "snapBytes": 2366649
+        },
+        {
+         "trigger": "count",
+         "ms": 34.6,
+         "rows": 500,
+         "snapBytes": 2602812
+        }
+       ],
+       "compactionBytesWritten": 4969461,
+       "logLeftAfterSession": {
+        "rows": 208,
+        "bytes": 107078
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 229,
+         "logBytes": 115239
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 335,
+         "logBytes": 174154
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 445,
+         "logBytes": 228939
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 50,
+         "logBytes": 28789
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 160,
+         "logBytes": 89051
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 271,
+         "logBytes": 146746
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 378,
+         "logBytes": 205768
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 485,
+         "logBytes": 255761
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 94,
+         "logBytes": 50671
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 207,
+         "logBytes": 106790
+        }
+       ],
+       "pingMs": {
+        "n": 835,
+        "p50": 0.5363520000028075,
+        "p95": 0.8469179999992775,
+        "p99": 1.1331179999979213,
+        "max": 6.2742529999959515,
+        "sum": 511.1665830000529
+       },
+       "pingGapMs": {
+        "n": 835,
+        "p50": 5.2711099999942235,
+        "p95": 5.649439999997412,
+        "p99": 5.890024000000267,
+        "max": 44.74435999999696,
+        "sum": 4384.085450999999
+       },
+       "pingMaxDuringCompactionMs": 44.7,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lc:s3000",
+         "ok": true,
+         "strokesStored": 4792,
+         "strokesLive": 4792
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 10154960,
+     "totalBytesPerStroke": 5077,
+     "loadsServerMs": [
+      {
+       "ms": 5.1,
+       "rows": 0
+      },
+      {
+       "ms": 7.8,
+       "rows": 121
+      }
+     ]
+    },
+    {
+     "kind": "lb",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4299,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 1121,
+       "bytesWritten": 558213,
+       "bytesPerSaveMedian": 506,
+       "writeMs": {
+        "n": 1121,
+        "p50": 0.07506199999625096,
+        "p95": 0.11829299999953946,
+        "p99": 0.1702819999991334,
+        "max": 21.965570000000298,
+        "sum": 175.48916599992663
+       },
+       "compactions": [
+        {
+         "trigger": "bytes",
+         "ms": 34,
+         "rows": 1051,
+         "snapBytes": 2153464
+        }
+       ],
+       "compactionBytesWritten": 2153464,
+       "logLeftAfterSession": {
+        "rows": 70,
+        "bytes": 33751
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 55577
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 220,
+         "logBytes": 110214
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 329,
+         "logBytes": 166287
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 438,
+         "logBytes": 223250
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 557,
+         "logBytes": 279823
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 672,
+         "logBytes": 337152
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 787,
+         "logBytes": 392086
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 897,
+         "logBytes": 448264
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 1005,
+         "logBytes": 502852
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 69,
+         "logBytes": 32883
+        }
+       ],
+       "pingMs": {
+        "n": 843,
+        "p50": 0.5258720000056201,
+        "p95": 0.8558549999943352,
+        "p99": 1.0437400000009802,
+        "max": 26.79371800000081,
+        "sum": 542.0799849999676
+       },
+       "pingGapMs": {
+        "n": 843,
+        "p50": 5.271837000000232,
+        "p95": 5.657325000000128,
+        "p99": 5.878296999995655,
+        "max": 44.20397899999807,
+        "sum": 4394.150694000004
+       },
+       "pingMaxDuringCompactionMs": 44.2,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lb:s3000",
+         "ok": true,
+         "strokesStored": 3879,
+         "strokesLive": 3879
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4260,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 1087,
+       "bytesWritten": 572951,
+       "bytesPerSaveMedian": 534,
+       "writeMs": {
+        "n": 1087,
+        "p50": 0.07693500000459608,
+        "p95": 0.11141099999804283,
+        "p99": 0.16269699999975273,
+        "max": 21.234575999995286,
+        "sum": 162.15658699991036
+       },
+       "compactions": [
+        {
+         "trigger": "bytes",
+         "ms": 38.2,
+         "rows": 993,
+         "snapBytes": 2626557
+        }
+       ],
+       "compactionBytesWritten": 2626557,
+       "logLeftAfterSession": {
+        "rows": 164,
+        "bytes": 82216
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 178,
+         "logBytes": 91059
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 284,
+         "logBytes": 150078
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 394,
+         "logBytes": 204966
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 499,
+         "logBytes": 264587
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 609,
+         "logBytes": 324953
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 720,
+         "logBytes": 382756
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 827,
+         "logBytes": 441881
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 934,
+         "logBytes": 491979
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 50,
+         "logBytes": 25702
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 163,
+         "logBytes": 81927
+        }
+       ],
+       "pingMs": {
+        "n": 835,
+        "p50": 0.5212140000003274,
+        "p95": 0.844955000000482,
+        "p99": 1.0475970000043162,
+        "max": 17.047215000005963,
+        "sum": 512.1313109999974
+       },
+       "pingGapMs": {
+        "n": 835,
+        "p50": 5.284380999997666,
+        "p95": 5.690066999995906,
+        "p99": 5.956874000003154,
+        "max": 44.57809999999881,
+        "sum": 4359.170103000004
+       },
+       "pingMaxDuringCompactionMs": 44.6,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lb:s3000",
+         "ok": true,
+         "strokesStored": 4792,
+         "strokesLive": 4792
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 5911185,
+     "totalBytesPerStroke": 2956,
+     "loadsServerMs": [
+      {
+       "ms": 6.6,
+       "rows": 0
+      },
+      {
+       "ms": 7.3,
+       "rows": 70
+      }
+     ]
+    },
+    {
+     "kind": "ld",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4301,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 1121,
+       "bytesWritten": 558216,
+       "bytesPerSaveMedian": 506,
+       "writeMs": {
+        "n": 1121,
+        "p50": 0.07918900000368012,
+        "p95": 0.11828300000343006,
+        "p99": 0.1643199999962235,
+        "max": 21.913010999996914,
+        "sum": 185.459942999958
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 35.9,
+         "rows": 1121,
+         "snapBytes": 2185933
+        }
+       ],
+       "compactionBytesWritten": 2185933,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 55577
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 220,
+         "logBytes": 110217
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 329,
+         "logBytes": 166290
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 438,
+         "logBytes": 223253
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 557,
+         "logBytes": 279826
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 672,
+         "logBytes": 337155
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 787,
+         "logBytes": 392089
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 897,
+         "logBytes": 448267
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 1005,
+         "logBytes": 502855
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 1120,
+         "logBytes": 557348
+        }
+       ],
+       "pingMs": {
+        "n": 842,
+        "p50": 0.5529890000034356,
+        "p95": 0.892253999998502,
+        "p99": 1.0786730000036187,
+        "max": 5.873476999993727,
+        "sum": 524.4623290000673
+       },
+       "pingGapMs": {
+        "n": 842,
+        "p50": 5.299028000001272,
+        "p95": 5.711315000000468,
+        "p99": 6.059393000003183,
+        "max": 31.464938999997685,
+        "sum": 4397.085277999999
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "ld:s3000",
+         "ok": true,
+         "strokesStored": 3885,
+         "strokesLive": 3885
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4329,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 1087,
+       "bytesWritten": 571901,
+       "bytesPerSaveMedian": 533,
+       "writeMs": {
+        "n": 1087,
+        "p50": 0.09030000000348082,
+        "p95": 0.13409300000057556,
+        "p99": 0.18600099999457598,
+        "max": 22.448445999994874,
+        "sum": 184.5490280001104
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 42.8,
+         "rows": 1087,
+         "snapBytes": 2701069
+        }
+       ],
+       "compactionBytesWritten": 2701069,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 57201
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 214,
+         "logBytes": 116116
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 324,
+         "logBytes": 170901
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 429,
+         "logBytes": 230418
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 539,
+         "logBytes": 290680
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 650,
+         "logBytes": 348375
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 757,
+         "logBytes": 407397
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 864,
+         "logBytes": 457390
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 973,
+         "logBytes": 515494
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 1086,
+         "logBytes": 571613
+        }
+       ],
+       "pingMs": {
+        "n": 847,
+        "p50": 0.6161579999970854,
+        "p95": 0.9935400000031223,
+        "p99": 1.241347000002861,
+        "max": 22.568723000003956,
+        "sum": 608.3116970000119
+       },
+       "pingGapMs": {
+        "n": 847,
+        "p50": 5.344863999998779,
+        "p95": 5.783903000003193,
+        "p99": 6.064201999994111,
+        "max": 30.55787699999928,
+        "sum": 4426.543252000003
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "ld:s3000",
+         "ok": true,
+         "strokesStored": 4798,
+         "strokesLive": 4798
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 6017119,
+     "totalBytesPerStroke": 3009,
+     "loadsServerMs": [
+      {
+       "ms": 5.3,
+       "rows": 0
+      },
+      {
+       "ms": 6.4,
+       "rows": 0
+      },
+      {
+       "ms": 7.8,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "lt",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4237,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 547692,
+       "bytesPerSaveMedian": 64789,
+       "writeMs": {
+        "n": 9,
+        "p50": 0.24975199999607867,
+        "p95": 13.900247000005038,
+        "p99": 13.900247000005038,
+        "max": 13.900247000005038,
+        "sum": 15.967938000001595
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 9,
+         "rows": 9,
+         "snapBytes": 2185933
+        }
+       ],
+       "compactionBytesWritten": 2185933,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 0,
+         "logBytes": 0
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 1,
+         "logBytes": 67166
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 2,
+         "logBytes": 131727
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 3,
+         "logBytes": 199669
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 4,
+         "logBytes": 264458
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 4,
+         "logBytes": 264458
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 5,
+         "logBytes": 331337
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 6,
+         "logBytes": 395568
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 7,
+         "logBytes": 459972
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 8,
+         "logBytes": 525563
+        }
+       ],
+       "pingMs": {
+        "n": 840,
+        "p50": 0.5925530000022263,
+        "p95": 0.8325810000023921,
+        "p99": 1.0274530000024242,
+        "max": 2.0035700000007637,
+        "sum": 519.9422870000999
+       },
+       "pingGapMs": {
+        "n": 840,
+        "p50": 5.286038999998709,
+        "p95": 5.664061999996193,
+        "p99": 5.950457000006281,
+        "max": 19.455894999999146,
+        "sum": 4335.981557000006
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lt:s3000",
+         "ok": true,
+         "strokesStored": 3885,
+         "strokesLive": 3885
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4214,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 562660,
+       "bytesPerSaveMedian": 66581,
+       "writeMs": {
+        "n": 9,
+        "p50": 0.2661819999993895,
+        "p95": 0.2905380000011064,
+        "p99": 0.2905380000011064,
+        "max": 0.2905380000011064,
+        "sum": 2.304056999993918
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 46.1,
+         "rows": 9,
+         "snapBytes": 2701071
+        }
+       ],
+       "compactionBytesWritten": 2701071,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 0,
+         "logBytes": 0
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 1,
+         "logBytes": 69197
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 2,
+         "logBytes": 139906
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 3,
+         "logBytes": 205121
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 4,
+         "logBytes": 276110
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 4,
+         "logBytes": 276110
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 5,
+         "logBytes": 344695
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 6,
+         "logBytes": 411276
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 7,
+         "logBytes": 475434
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 8,
+         "logBytes": 541028
+        }
+       ],
+       "pingMs": {
+        "n": 839,
+        "p50": 0.5838719999956083,
+        "p95": 0.8324410000059288,
+        "p99": 1.0155159999994794,
+        "max": 3.0280080000011367,
+        "sum": 515.7509869997884
+       },
+       "pingGapMs": {
+        "n": 839,
+        "p50": 5.302845000005618,
+        "p95": 5.639200000005076,
+        "p99": 5.896725999999035,
+        "max": 6.905198000000382,
+        "sum": 4313.294816000001
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lt:s3000",
+         "ok": true,
+         "strokesStored": 4798,
+         "strokesLive": 4798
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 5997356,
+     "totalBytesPerStroke": 2999,
+     "loadsServerMs": [
+      {
+       "ms": 6.2,
+       "rows": 0
+      },
+      {
+       "ms": 6.5,
+       "rows": 0
+      },
+      {
+       "ms": 8.6,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "none",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4150,
+       "erases": 59,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 0,
+       "bytesWritten": 0,
+       "bytesPerSaveMedian": 0,
+       "writeMs": null,
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 831,
+        "p50": 0.5363720000023022,
+        "p95": 0.7640519999986282,
+        "p99": 0.8934969999972964,
+        "max": 1.1846050000021933,
+        "sum": 461.96864799997275
+       },
+       "pingGapMs": {
+        "n": 831,
+        "p50": 5.196609999999055,
+        "p95": 5.54802799999743,
+        "p99": 5.8612839999987045,
+        "max": 6.283374999999069,
+        "sum": 4245.980057000001
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": "n/a",
+       "correctDetail": []
+      },
+      {
+       "session": 2,
+       "durationMs": 4119,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 0,
+       "bytesWritten": 0,
+       "bytesPerSaveMedian": 0,
+       "writeMs": null,
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 826,
+        "p50": 0.5018290000007255,
+        "p95": 0.6897920000046724,
+        "p99": 0.8065919999935431,
+        "max": 1.9039320000010775,
+        "sum": 433.72465599988936
+       },
+       "pingGapMs": {
+        "n": 826,
+        "p50": 5.185213999997359,
+        "p95": 5.457557000001543,
+        "p99": 5.889171999995597,
+        "max": 6.363555999996606,
+        "sum": 4216.766597000009
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": "n/a",
+       "correctDetail": []
+      }
+     ],
+     "totalBytesWritten": 0,
+     "totalBytesPerStroke": 0,
+     "loadsServerMs": [
+      {
+       "ms": 0,
+       "rows": 0
+      },
+      {
+       "ms": 0,
+       "rows": 0
+      }
+     ]
+    }
+   ],
+   "hooks": [
+    {
+     "hook": "onDisconnect",
+     "documentName": "ld:s3000",
+     "clientsCount": 0
+    },
+    {
+     "hook": "onDisconnect",
+     "documentName": "ld:s3000",
+     "clientsCount": 0
+    },
+    {
+     "hook": "onDisconnect",
+     "documentName": "ld:s3000",
+     "clientsCount": 0
+    }
+   ]
+  },
+  "5000": {
+   "N": 5000,
+   "load": {
+    "N": 5000,
+    "rows": {
+     "rows": 5500,
+     "bytes": 2862474
+    },
+    "liveStateBytes": 2542673,
+    "liveDigest": {
+     "strokes": 4500,
+     "content": "7e11ee0651c6",
+     "sv": "01b3e3c0f60e8827"
+    },
+    "updatesAppliedToWriter": 5500,
+    "replayDirectMs": 39.9,
+    "mergeThenApplyDirectMs": 395.6,
+    "hocuspocusOpenBeforeCompaction": {
+     "clientOpenMs": 213.1,
+     "serverLoadMs": 156.4
+    },
+    "correct_replayEqualsLive": true,
+    "correct_mergeEqualsLive": true,
+    "compact_doc": {
+     "mode": "doc",
+     "compactMs": 52.5,
+     "snapshotBytes": 2542673,
+     "rowsMerged": 5500,
+     "rowsLeft": 0,
+     "pingGapCalmP50Ms": 5,
+     "pingGapMaxDuringCompactionMs": 56.1,
+     "directLoadMs": 7.6,
+     "hocuspocusOpen": {
+      "clientOpenMs": 38.8,
+      "serverLoadMs": 12
+     },
+     "correct_equalsLive": true,
+     "tailRows": 100,
+     "tailBytes": 61532,
+     "hocuspocusOpenSnapshotPlusTail": {
+      "clientOpenMs": 30.6,
+      "serverLoadMs": 10.2
+     },
+     "directLoadSnapshotPlusTailMs": 6.4,
+     "correct_snapshotPlusTailEqualsLive": true
+    },
+    "compact_merge": {
+     "mode": "merge",
+     "compactMs": 394.1,
+     "snapshotBytes": 2808470,
+     "rowsMerged": 5500,
+     "rowsLeft": 0,
+     "pingGapCalmP50Ms": 4.8,
+     "pingGapMaxDuringCompactionMs": 398.3,
+     "directLoadMs": 6.6,
+     "hocuspocusOpen": {
+      "clientOpenMs": 35.3,
+      "serverLoadMs": 11.1
+     },
+     "correct_equalsLive": true,
+     "tailRows": 100,
+     "tailBytes": 61532,
+     "hocuspocusOpenSnapshotPlusTail": {
+      "clientOpenMs": 34.2,
+      "serverLoadMs": 11.7
+     },
+     "directLoadSnapshotPlusTailMs": 7.6,
+     "correct_snapshotPlusTailEqualsLive": true
+    }
+   },
+   "singleSave": [
+    {
+     "kind": "full",
+     "updateBytes": 831,
+     "bytesWrittenPerSave": 2810409,
+     "saveMs": 20.9
+    },
+    {
+     "kind": "pg",
+     "updateBytes": 829,
+     "bytesWrittenPerSave": 140133,
+     "saveMs": 0.9
+    },
+    {
+     "kind": "ld",
+     "updateBytes": 831,
+     "bytesWrittenPerSave": 831,
+     "saveMs": 0.1
+    },
+    {
+     "kind": "lt",
+     "updateBytes": 831,
+     "bytesWrittenPerSave": 831,
+     "saveMs": 0.1
+    }
+   ],
+   "sessions": [
+    {
+     "kind": "full",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4531,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 27967383,
+       "bytesPerSaveMedian": 3110919,
+       "writeMs": {
+        "n": 9,
+        "p50": 41.16116800000054,
+        "p95": 47.64769299999898,
+        "p99": 47.64769299999898,
+        "max": 47.64769299999898,
+        "sum": 323.1436349999949
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 848,
+        "p50": 0.6519659999994474,
+        "p95": 0.9739779999999882,
+        "p99": 1.4447559999989608,
+        "max": 45.64133699999911,
+        "sum": 739.4289379999955
+       },
+       "pingGapMs": {
+        "n": 848,
+        "p50": 5.317438000000038,
+        "p95": 5.8244789999989734,
+        "p99": 7.840347999999722,
+        "max": 50.446453999998994,
+        "sum": 4628.118071999999
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "full:s5000",
+         "ok": true,
+         "strokesStored": 5885,
+         "strokesLive": 5885
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4492,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 32618675,
+       "bytesPerSaveMedian": 3624062,
+       "writeMs": {
+        "n": 9,
+        "p50": 30.534302000000025,
+        "p95": 50.67989299999681,
+        "p99": 50.67989299999681,
+        "max": 50.67989299999681,
+        "sum": 311.74626599999647
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 842,
+        "p50": 0.5957549999984622,
+        "p95": 0.8885660000014468,
+        "p99": 1.4642579999999725,
+        "max": 3.895150000000285,
+        "sum": 546.6441049999939
+       },
+       "pingGapMs": {
+        "n": 842,
+        "p50": 5.297785999999178,
+        "p95": 5.735608000002685,
+        "p99": 8.66339599999992,
+        "max": 54.198200999999244,
+        "sum": 4588.481861999999
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "full:s5000",
+         "ok": true,
+         "strokesStored": 6798,
+         "strokesLive": 6798
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 60586058,
+     "totalBytesPerStroke": 30293,
+     "loadsServerMs": [
+      {
+       "ms": 10.7,
+       "rows": 0
+      },
+      {
+       "ms": 11.2,
+       "rows": 0
+      },
+      {
+       "ms": 16.3,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "pg",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4226,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 10,
+       "bytesWritten": 3091492,
+       "bytesPerSaveMedian": 319822,
+       "writeMs": {
+        "n": 10,
+        "p50": 1.625836999999592,
+        "p95": 30.610606000002008,
+        "p99": 30.610606000002008,
+        "max": 30.610606000002008,
+        "sum": 59.984849999997095
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 836,
+        "p50": 0.5520230000001902,
+        "p95": 0.8015419999974256,
+        "p99": 0.9608829999997397,
+        "max": 2.041325999998662,
+        "sum": 487.6732750000119
+       },
+       "pingGapMs": {
+        "n": 836,
+        "p50": 5.246452999999747,
+        "p95": 5.612380999999004,
+        "p99": 5.986995999999635,
+        "max": 33.542083000000275,
+        "sum": 4322.348628
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "pg:5000:0",
+         "ok": true,
+         "strokesStored": 698,
+         "strokesLive": 698
+        },
+        {
+         "doc": "pg:5000:1",
+         "ok": true,
+         "strokesStored": 687,
+         "strokesLive": 687
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4289,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 10,
+       "bytesWritten": 3159645,
+       "bytesPerSaveMedian": 325832,
+       "writeMs": {
+        "n": 10,
+        "p50": 1.4955110000009881,
+        "p95": 26.937495999998646,
+        "p99": 26.937495999998646,
+        "max": 26.937495999998646,
+        "sum": 53.78068600000188
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 840,
+        "p50": 0.6447369999987131,
+        "p95": 1.0979719999995723,
+        "p99": 1.4510080000000016,
+        "max": 2.7324250000019674,
+        "sum": 586.806687999946
+       },
+       "pingGapMs": {
+        "n": 840,
+        "p50": 5.261711999999534,
+        "p95": 5.959616000000096,
+        "p99": 6.306349000002228,
+        "max": 28.079890999997588,
+        "sum": 4388.895228000001
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "pg:5000:2",
+         "ok": true,
+         "strokesStored": 710,
+         "strokesLive": 710
+        },
+        {
+         "doc": "pg:5000:3",
+         "ok": true,
+         "strokesStored": 703,
+         "strokesLive": 703
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 6251137,
+     "totalBytesPerStroke": 3126,
+     "loadsServerMs": [
+      {
+       "ms": 1.6,
+       "rows": 0
+      },
+      {
+       "ms": 0.6,
+       "rows": 0
+      },
+      {
+       "ms": 0.6,
+       "rows": 0
+      },
+      {
+       "ms": 0.7,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "lc",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4448,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 1121,
+       "bytesWritten": 582263,
+       "bytesPerSaveMedian": 536,
+       "writeMs": {
+        "n": 1121,
+        "p50": 0.07983099999910337,
+        "p95": 0.1273399999990943,
+        "p99": 0.1808309999978519,
+        "max": 63.465234999999666,
+        "sum": 264.2539499998966
+       },
+       "compactions": [
+        {
+         "trigger": "count",
+         "ms": 14.2,
+         "rows": 500,
+         "snapBytes": 3039801
+        },
+        {
+         "trigger": "count",
+         "ms": 46.1,
+         "rows": 500,
+         "snapBytes": 3257949
+        }
+       ],
+       "compactionBytesWritten": 6297750,
+       "logLeftAfterSession": {
+        "rows": 121,
+        "bytes": 66231
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 60918
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 220,
+         "logBytes": 114636
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 329,
+         "logBytes": 171326
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 438,
+         "logBytes": 233121
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 57,
+         "logBytes": 28814
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 172,
+         "logBytes": 85339
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 287,
+         "logBytes": 140804
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 397,
+         "logBytes": 195048
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 5,
+         "logBytes": 3834
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 120,
+         "logBytes": 65765
+        }
+       ],
+       "pingMs": {
+        "n": 847,
+        "p50": 0.5644150000007357,
+        "p95": 0.9617939999952796,
+        "p99": 1.4537780000027851,
+        "max": 24.387855000000854,
+        "sum": 630.3922190000267
+       },
+       "pingGapMs": {
+        "n": 847,
+        "p50": 5.288453000001027,
+        "p95": 5.780053999998927,
+        "p99": 6.235658000001422,
+        "max": 91.23867699999755,
+        "sum": 4549.004372999996
+       },
+       "pingMaxDuringCompactionMs": 56.9,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lc:s5000",
+         "ok": true,
+         "strokesStored": 5879,
+         "strokesLive": 5879
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4354,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 1087,
+       "bytesWritten": 580093,
+       "bytesPerSaveMedian": 549,
+       "writeMs": {
+        "n": 1087,
+        "p50": 0.08164400000532623,
+        "p95": 0.12980500000412576,
+        "p99": 0.19246299999940675,
+        "max": 22.337901999999303,
+        "sum": 155.62131300006877
+       },
+       "compactions": [
+        {
+         "trigger": "count",
+         "ms": 42,
+         "rows": 500,
+         "snapBytes": 3498682
+        },
+        {
+         "trigger": "count",
+         "ms": 44.8,
+         "rows": 500,
+         "snapBytes": 3736887
+        }
+       ],
+       "compactionBytesWritten": 7235569,
+       "logLeftAfterSession": {
+        "rows": 208,
+        "bytes": 114193
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 229,
+         "logBytes": 121688
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 335,
+         "logBytes": 183784
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 445,
+         "logBytes": 239044
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 50,
+         "logBytes": 27038
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 160,
+         "logBytes": 81306
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 271,
+         "logBytes": 137738
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 378,
+         "logBytes": 193101
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 485,
+         "logBytes": 254325
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 94,
+         "logBytes": 51693
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 207,
+         "logBytes": 113527
+        }
+       ],
+       "pingMs": {
+        "n": 842,
+        "p50": 0.556072999999742,
+        "p95": 0.9683789999980945,
+        "p99": 1.3439550000039162,
+        "max": 45.9551169999977,
+        "sum": 612.9493830001156
+       },
+       "pingGapMs": {
+        "n": 842,
+        "p50": 5.2956520000007,
+        "p95": 5.752057999998215,
+        "p99": 6.105158999998821,
+        "max": 52.160015000001295,
+        "sum": 4453.107709999997
+       },
+       "pingMaxDuringCompactionMs": 52.2,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lc:s5000",
+         "ok": true,
+         "strokesStored": 6792,
+         "strokesLive": 6792
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 14695675,
+     "totalBytesPerStroke": 7348,
+     "loadsServerMs": [
+      {
+       "ms": 14.1,
+       "rows": 0
+      },
+      {
+       "ms": 15.6,
+       "rows": 121
+      }
+     ]
+    },
+    {
+     "kind": "lb",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4339,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 1121,
+       "bytesWritten": 582263,
+       "bytesPerSaveMedian": 536,
+       "writeMs": {
+        "n": 1121,
+        "p50": 0.0803520000044955,
+        "p95": 0.1330009999946924,
+        "p99": 0.1893980000022566,
+        "max": 21.408494000002975,
+        "sum": 193.55542999981844
+       },
+       "compactions": [
+        {
+         "trigger": "bytes",
+         "ms": 42.1,
+         "rows": 1015,
+         "snapBytes": 3263976
+        }
+       ],
+       "compactionBytesWritten": 3263976,
+       "logLeftAfterSession": {
+        "rows": 106,
+        "bytes": 57943
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 60918
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 220,
+         "logBytes": 114636
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 329,
+         "logBytes": 171326
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 438,
+         "logBytes": 233121
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 557,
+         "logBytes": 292119
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 672,
+         "logBytes": 348644
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 787,
+         "logBytes": 404109
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 897,
+         "logBytes": 458353
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 1005,
+         "logBytes": 519866
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 105,
+         "logBytes": 57477
+        }
+       ],
+       "pingMs": {
+        "n": 845,
+        "p50": 0.5324739999996382,
+        "p95": 0.9082239999988815,
+        "p99": 1.2639619999972638,
+        "max": 48.26784400000179,
+        "sum": 583.5448739999847
+       },
+       "pingGapMs": {
+        "n": 845,
+        "p50": 5.278212999997777,
+        "p95": 5.704524000000674,
+        "p99": 6.151236000005156,
+        "max": 52.628811000002315,
+        "sum": 4433.501702000001
+       },
+       "pingMaxDuringCompactionMs": 52.6,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lb:s5000",
+         "ok": true,
+         "strokesStored": 5879,
+         "strokesLive": 5879
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4269,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 1087,
+       "bytesWritten": 580093,
+       "bytesPerSaveMedian": 549,
+       "writeMs": {
+        "n": 1087,
+        "p50": 0.07364899999811314,
+        "p95": 0.10991700000158744,
+        "p99": 0.16002199999638833,
+        "max": 21.477224000002025,
+        "sum": 165.37014400012413
+       },
+       "compactions": [
+        {
+         "trigger": "bytes",
+         "ms": 44.1,
+         "rows": 987,
+         "snapBytes": 3737260
+        }
+       ],
+       "compactionBytesWritten": 3737260,
+       "logLeftAfterSession": {
+        "rows": 206,
+        "bytes": 113312
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 214,
+         "logBytes": 113400
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 320,
+         "logBytes": 175496
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 430,
+         "logBytes": 230756
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 535,
+         "logBytes": 288207
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 645,
+         "logBytes": 342475
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 756,
+         "logBytes": 398907
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 863,
+         "logBytes": 454270
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 970,
+         "logBytes": 515494
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 92,
+         "logBytes": 50812
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 205,
+         "logBytes": 112646
+        }
+       ],
+       "pingMs": {
+        "n": 837,
+        "p50": 0.5110760000025039,
+        "p95": 0.8340489999973215,
+        "p99": 1.0992539999933797,
+        "max": 45.06197300000349,
+        "sum": 555.7762460000376
+       },
+       "pingGapMs": {
+        "n": 837,
+        "p50": 5.2570489999998244,
+        "p95": 5.654339000000618,
+        "p99": 5.9391560000003665,
+        "max": 49.61028800000349,
+        "sum": 4365.735473000001
+       },
+       "pingMaxDuringCompactionMs": 49.6,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lb:s5000",
+         "ok": true,
+         "strokesStored": 6792,
+         "strokesLive": 6792
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 8163592,
+     "totalBytesPerStroke": 4082,
+     "loadsServerMs": [
+      {
+       "ms": 12,
+       "rows": 0
+      },
+      {
+       "ms": 26.5,
+       "rows": 106
+      }
+     ]
+    },
+    {
+     "kind": "ld",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4274,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 1121,
+       "bytesWritten": 582263,
+       "bytesPerSaveMedian": 536,
+       "writeMs": {
+        "n": 1121,
+        "p50": 0.07529200000135461,
+        "p95": 0.11408500000106869,
+        "p99": 0.17512800000258721,
+        "max": 26.10658699999476,
+        "sum": 186.1495319999667
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 33.2,
+         "rows": 1121,
+         "snapBytes": 3318128
+        }
+       ],
+       "compactionBytesWritten": 3318128,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 60918
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 220,
+         "logBytes": 114636
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 329,
+         "logBytes": 171326
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 438,
+         "logBytes": 233121
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 557,
+         "logBytes": 292119
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 672,
+         "logBytes": 348644
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 787,
+         "logBytes": 404109
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 897,
+         "logBytes": 458353
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 1005,
+         "logBytes": 519866
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 1120,
+         "logBytes": 581797
+        }
+       ],
+       "pingMs": {
+        "n": 841,
+        "p50": 0.5324739999996382,
+        "p95": 0.8820740000010119,
+        "p99": 1.8214670000015758,
+        "max": 27.18834899999638,
+        "sum": 592.7394380000405
+       },
+       "pingGapMs": {
+        "n": 841,
+        "p50": 5.283514000002469,
+        "p95": 5.674385999998776,
+        "p99": 6.101081000000704,
+        "max": 31.956876999996894,
+        "sum": 4372.437035999996
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "ld:s5000",
+         "ok": true,
+         "strokesStored": 5885,
+         "strokesLive": 5885
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4228,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 1087,
+       "bytesWritten": 580093,
+       "bytesPerSaveMedian": 549,
+       "writeMs": {
+        "n": 1087,
+        "p50": 0.07445100000040838,
+        "p95": 0.11482599999726517,
+        "p99": 0.1714739999952144,
+        "max": 20.72172000000137,
+        "sum": 165.70936700003222
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 49.8,
+         "rows": 1087,
+         "snapBytes": 3840889
+        }
+       ],
+       "compactionBytesWritten": 3840889,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 55457
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 214,
+         "logBytes": 117553
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 324,
+         "logBytes": 172813
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 429,
+         "logBytes": 230264
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 539,
+         "logBytes": 284532
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 650,
+         "logBytes": 340964
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 757,
+         "logBytes": 396327
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 864,
+         "logBytes": 457551
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 973,
+         "logBytes": 517593
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 1086,
+         "logBytes": 579427
+        }
+       ],
+       "pingMs": {
+        "n": 834,
+        "p50": 0.5157929999986663,
+        "p95": 0.8323749999981374,
+        "p99": 1.054629999998724,
+        "max": 21.626877000002423,
+        "sum": 501.36581900004967
+       },
+       "pingGapMs": {
+        "n": 834,
+        "p50": 5.278619000004255,
+        "p95": 5.650904000001901,
+        "p99": 5.859888999999384,
+        "max": 30.06623899999977,
+        "sum": 4324.73201
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "ld:s5000",
+         "ok": true,
+         "strokesStored": 6798,
+         "strokesLive": 6798
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 8321373,
+     "totalBytesPerStroke": 4161,
+     "loadsServerMs": [
+      {
+       "ms": 21.4,
+       "rows": 0
+      },
+      {
+       "ms": 9.3,
+       "rows": 0
+      },
+      {
+       "ms": 26.4,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "lt",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4166,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 571745,
+       "bytesPerSaveMedian": 68163,
+       "writeMs": {
+        "n": 9,
+        "p50": 0.27809500000148546,
+        "p95": 14.287794000003487,
+        "p99": 14.287794000003487,
+        "max": 14.287794000003487,
+        "sum": 16.337141999996675
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 37.6,
+         "rows": 9,
+         "snapBytes": 3318128
+        }
+       ],
+       "compactionBytesWritten": 3318128,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 0,
+         "logBytes": 0
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 1,
+         "logBytes": 72013
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 2,
+         "logBytes": 136317
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 3,
+         "logBytes": 208750
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 4,
+         "logBytes": 278093
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 4,
+         "logBytes": 278093
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 5,
+         "logBytes": 346256
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 6,
+         "logBytes": 413653
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 7,
+         "logBytes": 481722
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 8,
+         "logBytes": 554397
+        }
+       ],
+       "pingMs": {
+        "n": 832,
+        "p50": 0.5348400000002584,
+        "p95": 0.7671229999978095,
+        "p99": 0.9002790000013192,
+        "max": 2.138336000003619,
+        "sum": 470.54191800005356
+       },
+       "pingGapMs": {
+        "n": 832,
+        "p50": 5.229217000000062,
+        "p95": 5.530128999998851,
+        "p99": 5.729089000000386,
+        "max": 18.661920999998983,
+        "sum": 4266.916988999998
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lt:s5000",
+         "ok": true,
+         "strokesStored": 5885,
+         "strokesLive": 5885
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4238,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 569796,
+       "bytesPerSaveMedian": 65943,
+       "writeMs": {
+        "n": 9,
+        "p50": 0.26006000000052154,
+        "p95": 14.676621999999043,
+        "p99": 14.676621999999043,
+        "max": 14.676621999999043,
+        "sum": 16.87463699998625
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 45.3,
+         "rows": 9,
+         "snapBytes": 3841062
+        }
+       ],
+       "compactionBytesWritten": 3841062,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 0,
+         "logBytes": 0
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 1,
+         "logBytes": 65943
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 2,
+         "logBytes": 137986
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 3,
+         "logBytes": 206225
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 4,
+         "logBytes": 271094
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 4,
+         "logBytes": 271094
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 5,
+         "logBytes": 335721
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 6,
+         "logBytes": 401297
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 7,
+         "logBytes": 471618
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 8,
+         "logBytes": 542037
+        }
+       ],
+       "pingMs": {
+        "n": 841,
+        "p50": 0.5623709999999846,
+        "p95": 0.8195039999991423,
+        "p99": 1.0413049999988289,
+        "max": 17.253583999998227,
+        "sum": 520.0160109999779
+       },
+       "pingGapMs": {
+        "n": 841,
+        "p50": 5.254154000002018,
+        "p95": 5.660010000006878,
+        "p99": 5.970666000001074,
+        "max": 22.02103899999929,
+        "sum": 4338.735741999997
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lt:s5000",
+         "ok": true,
+         "strokesStored": 6798,
+         "strokesLive": 6798
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 8300731,
+     "totalBytesPerStroke": 4150,
+     "loadsServerMs": [
+      {
+       "ms": 12.1,
+       "rows": 0
+      },
+      {
+       "ms": 10.3,
+       "rows": 0
+      },
+      {
+       "ms": 9.8,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "none",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4201,
+       "erases": 59,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 0,
+       "bytesWritten": 0,
+       "bytesPerSaveMedian": 0,
+       "writeMs": null,
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 839,
+        "p50": 0.5826890000025742,
+        "p95": 0.8293550000089454,
+        "p99": 1.015692000000854,
+        "max": 2.0337169999984326,
+        "sum": 511.04400599978544
+       },
+       "pingGapMs": {
+        "n": 839,
+        "p50": 5.26518999999098,
+        "p95": 5.6128199999948265,
+        "p99": 5.877931000002718,
+        "max": 6.474325000002864,
+        "sum": 4298.064670000007
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": "n/a",
+       "correctDetail": []
+      },
+      {
+       "session": 2,
+       "durationMs": 4169,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 0,
+       "bytesWritten": 0,
+       "bytesPerSaveMedian": 0,
+       "writeMs": null,
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 836,
+        "p50": 0.5467809999972815,
+        "p95": 0.7548529999912716,
+        "p99": 0.9952480000065407,
+        "max": 9.285168999995221,
+        "sum": 486.7704660002055
+       },
+       "pingGapMs": {
+        "n": 836,
+        "p50": 5.240077999987989,
+        "p95": 5.569226999999955,
+        "p99": 5.7499189999944065,
+        "max": 13.586985000001732,
+        "sum": 4267.743690999996
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": "n/a",
+       "correctDetail": []
+      }
+     ],
+     "totalBytesWritten": 0,
+     "totalBytesPerStroke": 0,
+     "loadsServerMs": [
+      {
+       "ms": 0,
+       "rows": 0
+      },
+      {
+       "ms": 0,
+       "rows": 0
+      }
+     ]
+    }
+   ],
+   "hooks": [
+    {
+     "hook": "onDisconnect",
+     "documentName": "ld:s5000",
+     "clientsCount": 0
+    },
+    {
+     "hook": "onDisconnect",
+     "documentName": "ld:s5000",
+     "clientsCount": 0
+    },
+    {
+     "hook": "onDisconnect",
+     "documentName": "ld:s5000",
+     "clientsCount": 0
+    }
+   ]
+  },
+  "10000": {
+   "N": 10000,
+   "load": {
+    "N": 10000,
+    "rows": {
+     "rows": 11000,
+     "bytes": 5753315
+    },
+    "liveStateBytes": 5110316,
+    "liveDigest": {
+     "strokes": 9000,
+     "content": "6ff50f1c4aec",
+     "sv": "01cfe3aae80a904e"
+    },
+    "updatesAppliedToWriter": 11000,
+    "replayDirectMs": 105.1,
+    "mergeThenApplyDirectMs": 1517.5,
+    "hocuspocusOpenBeforeCompaction": {
+     "clientOpenMs": 442.1,
+     "serverLoadMs": 381
+    },
+    "correct_replayEqualsLive": true,
+    "correct_mergeEqualsLive": true,
+    "compact_doc": {
+     "mode": "doc",
+     "compactMs": 86.2,
+     "snapshotBytes": 5110316,
+     "rowsMerged": 11000,
+     "rowsLeft": 0,
+     "pingGapCalmP50Ms": 5.2,
+     "pingGapMaxDuringCompactionMs": 90,
+     "directLoadMs": 19.7,
+     "hocuspocusOpen": {
+      "clientOpenMs": 92.7,
+      "serverLoadMs": 23.6
+     },
+     "correct_equalsLive": true,
+     "tailRows": 100,
+     "tailBytes": 56569,
+     "hocuspocusOpenSnapshotPlusTail": {
+      "clientOpenMs": 84.1,
+      "serverLoadMs": 25.3
+     },
+     "directLoadSnapshotPlusTailMs": 29,
+     "correct_snapshotPlusTailEqualsLive": true
+    },
+    "compact_merge": {
+     "mode": "merge",
+     "compactMs": 1490.7,
+     "snapshotBytes": 5645184,
+     "rowsMerged": 11000,
+     "rowsLeft": 0,
+     "pingGapCalmP50Ms": 4.9,
+     "pingGapMaxDuringCompactionMs": 1495.5,
+     "directLoadMs": 33.4,
+     "hocuspocusOpen": {
+      "clientOpenMs": 76.7,
+      "serverLoadMs": 26.3
+     },
+     "correct_equalsLive": true,
+     "tailRows": 100,
+     "tailBytes": 56569,
+     "hocuspocusOpenSnapshotPlusTail": {
+      "clientOpenMs": 78.4,
+      "serverLoadMs": 22.6
+     },
+     "directLoadSnapshotPlusTailMs": 38.6,
+     "correct_snapshotPlusTailEqualsLive": true
+    }
+   },
+   "singleSave": [
+    {
+     "kind": "full",
+     "updateBytes": 642,
+     "bytesWrittenPerSave": 5644528,
+     "saveMs": 50.2
+    },
+    {
+     "kind": "pg",
+     "updateBytes": 640,
+     "bytesWrittenPerSave": 273781,
+     "saveMs": 1.2
+    },
+    {
+     "kind": "ld",
+     "updateBytes": 642,
+     "bytesWrittenPerSave": 642,
+     "saveMs": 0.1
+    },
+    {
+     "kind": "lt",
+     "updateBytes": 642,
+     "bytesWrittenPerSave": 642,
+     "saveMs": 0.1
+    }
+   ],
+   "sessions": [
+    {
+     "kind": "full",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4641,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 53452244,
+       "bytesPerSaveMedian": 5941970,
+       "writeMs": {
+        "n": 9,
+        "p50": 54.88476100000116,
+        "p95": 62.91693200000009,
+        "p99": 62.91693200000009,
+        "max": 62.91693200000009,
+        "sum": 492.2192230000037
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 843,
+        "p50": 0.5664540000034322,
+        "p95": 0.9108190000006289,
+        "p99": 1.279302999999345,
+        "max": 56.65546800000084,
+        "sum": 665.8349609999605
+       },
+       "pingGapMs": {
+        "n": 843,
+        "p50": 5.260736000000179,
+        "p95": 5.718130000001111,
+        "p99": 11.327066999998351,
+        "max": 67.6170689999999,
+        "sum": 4740.881192999997
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "full:s10000",
+         "ok": true,
+         "strokesStored": 10885,
+         "strokesLive": 10885
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4786,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 58082688,
+       "bytesPerSaveMedian": 6459148,
+       "writeMs": {
+        "n": 9,
+        "p50": 63.19221100000141,
+        "p95": 81.92848199999935,
+        "p99": 81.92848199999935,
+        "max": 81.92848199999935,
+        "sum": 589.9268020000018
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 844,
+        "p50": 0.664784000000509,
+        "p95": 1.1374959999993735,
+        "p99": 1.662105999999767,
+        "max": 74.00255900000047,
+        "sum": 806.7008779999851
+       },
+       "pingGapMs": {
+        "n": 844,
+        "p50": 5.2627099999990605,
+        "p95": 6.012503999998444,
+        "p99": 6.96385900000314,
+        "max": 87.40809600000284,
+        "sum": 4886.937615999999
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "full:s10000",
+         "ok": true,
+         "strokesStored": 11798,
+         "strokesLive": 11798
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 111534932,
+     "totalBytesPerStroke": 55767,
+     "loadsServerMs": [
+      {
+       "ms": 20.3,
+       "rows": 0
+      },
+      {
+       "ms": 30.2,
+       "rows": 0
+      },
+      {
+       "ms": 29.3,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "pg",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4285,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 10,
+       "bytesWritten": 4461017,
+       "bytesPerSaveMedian": 456027,
+       "writeMs": {
+        "n": 10,
+        "p50": 1.8704089999955613,
+        "p95": 26.707402000000002,
+        "p99": 26.707402000000002,
+        "max": 26.707402000000002,
+        "sum": 57.613725999985036
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 844,
+        "p50": 0.6396569999997155,
+        "p95": 1.1985119999990275,
+        "p99": 2.251242000002094,
+        "max": 3.6181020000003628,
+        "sum": 604.275230000083
+       },
+       "pingGapMs": {
+        "n": 844,
+        "p50": 5.2546239999937825,
+        "p95": 5.945146999998542,
+        "p99": 6.814758000000438,
+        "max": 20.415344000000914,
+        "sum": 4384.260451000002
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "pg:10000:0",
+         "ok": true,
+         "strokesStored": 948,
+         "strokesLive": 948
+        },
+        {
+         "doc": "pg:10000:1",
+         "ok": true,
+         "strokesStored": 937,
+         "strokesLive": 937
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4212,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 10,
+       "bytesWritten": 4617235,
+       "bytesPerSaveMedian": 473786,
+       "writeMs": {
+        "n": 10,
+        "p50": 1.7637879999965662,
+        "p95": 25.823253000002296,
+        "p99": 25.823253000002296,
+        "max": 25.823253000002296,
+        "sum": 59.30625899998995
+       },
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 836,
+        "p50": 0.5198110000055749,
+        "p95": 0.776030000000901,
+        "p99": 0.9395470000017667,
+        "max": 2.2172540000028675,
+        "sum": 462.785322000047
+       },
+       "pingGapMs": {
+        "n": 836,
+        "p50": 5.22692200000165,
+        "p95": 5.558718000000226,
+        "p99": 6.147774999997637,
+        "max": 28.197010999996564,
+        "sum": 4307.995378
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "pg:10000:2",
+         "ok": true,
+         "strokesStored": 960,
+         "strokesLive": 960
+        },
+        {
+         "doc": "pg:10000:3",
+         "ok": true,
+         "strokesStored": 953,
+         "strokesLive": 953
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 9078252,
+     "totalBytesPerStroke": 4539,
+     "loadsServerMs": [
+      {
+       "ms": 1.2,
+       "rows": 0
+      },
+      {
+       "ms": 1,
+       "rows": 0
+      },
+      {
+       "ms": 0.9,
+       "rows": 0
+      },
+      {
+       "ms": 0.8,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "lc",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4374,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 1121,
+       "bytesWritten": 571778,
+       "bytesPerSaveMedian": 531,
+       "writeMs": {
+        "n": 1121,
+        "p50": 0.0881470000022091,
+        "p95": 0.14014399999723537,
+        "p99": 0.17835599999671103,
+        "max": 22.40619500000321,
+        "sum": 165.6276640000433
+       },
+       "compactions": [
+        {
+         "trigger": "count",
+         "ms": 58.1,
+         "rows": 500,
+         "snapBytes": 5868083
+        },
+        {
+         "trigger": "count",
+         "ms": 46.9,
+         "rows": 500,
+         "snapBytes": 6086606
+        }
+       ],
+       "compactionBytesWritten": 11954689,
+       "logLeftAfterSession": {
+        "rows": 121,
+        "bytes": 60424
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 55870
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 220,
+         "logBytes": 111946
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 329,
+         "logBytes": 170318
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 438,
+         "logBytes": 229425
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 57,
+         "logBytes": 26963
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 172,
+         "logBytes": 83688
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 287,
+         "logBytes": 141011
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 397,
+         "logBytes": 196706
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 5,
+         "logBytes": 2257
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 120,
+         "logBytes": 60186
+        }
+       ],
+       "pingMs": {
+        "n": 843,
+        "p50": 0.5941009999951348,
+        "p95": 1.0172640000018873,
+        "p99": 1.5075240000005579,
+        "max": 6.507392999999865,
+        "sum": 580.4682909999538
+       },
+       "pingGapMs": {
+        "n": 843,
+        "p50": 5.316861999999674,
+        "p95": 5.8121160000009695,
+        "p99": 6.251054000000295,
+        "max": 66.9171920000008,
+        "sum": 4474.580488
+       },
+       "pingMaxDuringCompactionMs": 66.9,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lc:s10000",
+         "ok": true,
+         "strokesStored": 10879,
+         "strokesLive": 10879
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4396,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 1087,
+       "bytesWritten": 578513,
+       "bytesPerSaveMedian": 552,
+       "writeMs": {
+        "n": 1087,
+        "p50": 0.08155399999668589,
+        "p95": 0.12937399999646004,
+        "p99": 0.22128700000030221,
+        "max": 22.070332000002963,
+        "sum": 156.27546500000608
+       },
+       "compactions": [
+        {
+         "trigger": "count",
+         "ms": 56,
+         "rows": 500,
+         "snapBytes": 6327640
+        },
+        {
+         "trigger": "count",
+         "ms": 73.5,
+         "rows": 500,
+         "snapBytes": 6563443
+        }
+       ],
+       "compactionBytesWritten": 12891083,
+       "logLeftAfterSession": {
+        "rows": 208,
+        "bytes": 111988
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 229,
+         "logBytes": 117347
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 335,
+         "logBytes": 174831
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 445,
+         "logBytes": 234673
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 50,
+         "logBytes": 27090
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 160,
+         "logBytes": 83330
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 271,
+         "logBytes": 140224
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 378,
+         "logBytes": 196189
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 485,
+         "logBytes": 252516
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 94,
+         "logBytes": 51998
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 207,
+         "logBytes": 111390
+        }
+       ],
+       "pingMs": {
+        "n": 839,
+        "p50": 0.6198500000027707,
+        "p95": 1.0218440000026021,
+        "p99": 1.4836100000029546,
+        "max": 23.107745999994222,
+        "sum": 607.3409510001438
+       },
+       "pingGapMs": {
+        "n": 839,
+        "p50": 5.313164999999572,
+        "p95": 5.843897000006109,
+        "p99": 6.124875000001339,
+        "max": 84.29519900000014,
+        "sum": 4494.441080000004
+       },
+       "pingMaxDuringCompactionMs": 84.3,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lc:s10000",
+         "ok": true,
+         "strokesStored": 11792,
+         "strokesLive": 11792
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 25996063,
+     "totalBytesPerStroke": 12998,
+     "loadsServerMs": [
+      {
+       "ms": 17.5,
+       "rows": 0
+      },
+      {
+       "ms": 22.6,
+       "rows": 121
+      }
+     ]
+    },
+    {
+     "kind": "lb",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4435,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 1121,
+       "bytesWritten": 571778,
+       "bytesPerSaveMedian": 531,
+       "writeMs": {
+        "n": 1121,
+        "p50": 0.11055900000064867,
+        "p95": 0.19138099999690894,
+        "p99": 0.4327770000018063,
+        "max": 21.761428999998316,
+        "sum": 239.12546700007078
+       },
+       "compactions": [
+        {
+         "trigger": "bytes",
+         "ms": 65.7,
+         "rows": 1028,
+         "snapBytes": 6098291
+        }
+       ],
+       "compactionBytesWritten": 6098291,
+       "logLeftAfterSession": {
+        "rows": 93,
+        "bytes": 46903
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 55870
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 220,
+         "logBytes": 111946
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 329,
+         "logBytes": 170318
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 438,
+         "logBytes": 229425
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 557,
+         "logBytes": 286954
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 672,
+         "logBytes": 343679
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 787,
+         "logBytes": 401002
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 897,
+         "logBytes": 456697
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 1005,
+         "logBytes": 513611
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 92,
+         "logBytes": 46665
+        }
+       ],
+       "pingMs": {
+        "n": 846,
+        "p50": 0.7032360000011977,
+        "p95": 1.3187079999988782,
+        "p99": 2.5010390000024927,
+        "max": 21.968400000005204,
+        "sum": 724.1205520001095
+       },
+       "pingGapMs": {
+        "n": 846,
+        "p50": 5.220610000003944,
+        "p95": 6.097454999995534,
+        "p99": 6.61295699999755,
+        "max": 75.95194600000104,
+        "sum": 4535.219591000001
+       },
+       "pingMaxDuringCompactionMs": 76,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lb:s10000",
+         "ok": true,
+         "strokesStored": 10879,
+         "strokesLive": 10879
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4364,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 1087,
+       "bytesWritten": 578513,
+       "bytesPerSaveMedian": 552,
+       "writeMs": {
+        "n": 1087,
+        "p50": 0.08540099999663653,
+        "p95": 0.1457250000021304,
+        "p99": 0.21568700000352692,
+        "max": 22.189988000005542,
+        "sum": 182.17950000012934
+       },
+       "compactions": [
+        {
+         "trigger": "bytes",
+         "ms": 53.7,
+         "rows": 992,
+         "snapBytes": 6573622
+        }
+       ],
+       "compactionBytesWritten": 6573622,
+       "logLeftAfterSession": {
+        "rows": 188,
+        "bytes": 100983
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 201,
+         "logBytes": 103826
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 307,
+         "logBytes": 161310
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 417,
+         "logBytes": 221152
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 522,
+         "logBytes": 280870
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 632,
+         "logBytes": 337110
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 743,
+         "logBytes": 394004
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 850,
+         "logBytes": 449969
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 957,
+         "logBytes": 506296
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 74,
+         "logBytes": 40993
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 187,
+         "logBytes": 100385
+        }
+       ],
+       "pingMs": {
+        "n": 845,
+        "p50": 0.6198290000029374,
+        "p95": 0.9961239999975078,
+        "p99": 1.9273259999972652,
+        "max": 22.57997299999988,
+        "sum": 622.3659890000199
+       },
+       "pingGapMs": {
+        "n": 845,
+        "p50": 5.295582000006107,
+        "p95": 5.82150399999955,
+        "p99": 6.378956000000471,
+        "max": 64.16634999999951,
+        "sum": 4463.556838999997
+       },
+       "pingMaxDuringCompactionMs": 64.2,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lb:s10000",
+         "ok": true,
+         "strokesStored": 11792,
+         "strokesLive": 11792
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 13822204,
+     "totalBytesPerStroke": 6911,
+     "loadsServerMs": [
+      {
+       "ms": 25.5,
+       "rows": 0
+      },
+      {
+       "ms": 30.9,
+       "rows": 93
+      }
+     ]
+    },
+    {
+     "kind": "ld",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4314,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 1121,
+       "bytesWritten": 571778,
+       "bytesPerSaveMedian": 531,
+       "writeMs": {
+        "n": 1121,
+        "p50": 0.08119299999816576,
+        "p95": 0.13289000000077067,
+        "p99": 0.19862499999726424,
+        "max": 22.326838000000862,
+        "sum": 199.5833770000172
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 71.2,
+         "rows": 1121,
+         "snapBytes": 6145395
+        }
+       ],
+       "compactionBytesWritten": 6145395,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 55870
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 220,
+         "logBytes": 111946
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 329,
+         "logBytes": 170318
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 438,
+         "logBytes": 229425
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 557,
+         "logBytes": 286954
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 672,
+         "logBytes": 343679
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 787,
+         "logBytes": 401002
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 897,
+         "logBytes": 456697
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 1005,
+         "logBytes": 513611
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 1120,
+         "logBytes": 571540
+        }
+       ],
+       "pingMs": {
+        "n": 850,
+        "p50": 0.5543560000005527,
+        "p95": 0.930726999999024,
+        "p99": 1.4358589999974356,
+        "max": 22.648478000002797,
+        "sum": 581.9143709999553
+       },
+       "pingGapMs": {
+        "n": 850,
+        "p50": 5.288969000001089,
+        "p95": 5.7846149999968475,
+        "p99": 6.1841740000018035,
+        "max": 31.11289399999805,
+        "sum": 4414.526694
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "ld:s10000",
+         "ok": true,
+         "strokesStored": 10885,
+         "strokesLive": 10885
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4272,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 1087,
+       "bytesWritten": 578513,
+       "bytesPerSaveMedian": 552,
+       "writeMs": {
+        "n": 1087,
+        "p50": 0.07859799999278039,
+        "p95": 0.12622800000099232,
+        "p99": 0.17020100000081584,
+        "max": 21.380355000001146,
+        "sum": 179.26060000001598
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 75.7,
+         "rows": 1087,
+         "snapBytes": 6670207
+        }
+       ],
+       "compactionBytesWritten": 6670207,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 108,
+         "logBytes": 56923
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 214,
+         "logBytes": 114407
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 324,
+         "logBytes": 174249
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 429,
+         "logBytes": 233967
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 539,
+         "logBytes": 290207
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 650,
+         "logBytes": 347101
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 757,
+         "logBytes": 403066
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 864,
+         "logBytes": 459393
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 973,
+         "logBytes": 518523
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 1086,
+         "logBytes": 577915
+        }
+       ],
+       "pingMs": {
+        "n": 839,
+        "p50": 0.562952000000223,
+        "p95": 0.9147809999994934,
+        "p99": 1.2857759999897098,
+        "max": 27.747779000012088,
+        "sum": 565.432488999948
+       },
+       "pingGapMs": {
+        "n": 839,
+        "p50": 5.287496999997529,
+        "p95": 5.728373999998439,
+        "p99": 6.099948999995831,
+        "max": 32.08823800001119,
+        "sum": 4370.642660999998
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "ld:s10000",
+         "ok": true,
+         "strokesStored": 11798,
+         "strokesLive": 11798
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 13965893,
+     "totalBytesPerStroke": 6983,
+     "loadsServerMs": [
+      {
+       "ms": 17.6,
+       "rows": 0
+      },
+      {
+       "ms": 28.8,
+       "rows": 0
+      },
+      {
+       "ms": 42.9,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "lt",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4257,
+       "erases": 60,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 561266,
+       "bytesPerSaveMedian": 67286,
+       "writeMs": {
+        "n": 9,
+        "p50": 0.27889700001105666,
+        "p95": 13.49811800000316,
+        "p99": 13.49811800000316,
+        "max": 13.49811800000316,
+        "sum": 15.903267000016058
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 64.3,
+         "rows": 9,
+         "snapBytes": 6145395
+        }
+       ],
+       "compactionBytesWritten": 6145395,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 0,
+         "logBytes": 0
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 1,
+         "logBytes": 63292
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 2,
+         "logBytes": 132584
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 3,
+         "logBytes": 200905
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 4,
+         "logBytes": 268704
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 5,
+         "logBytes": 334452
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 5,
+         "logBytes": 334452
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 6,
+         "logBytes": 401738
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 7,
+         "logBytes": 469004
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 8,
+         "logBytes": 536857
+        }
+       ],
+       "pingMs": {
+        "n": 842,
+        "p50": 0.5800339999987045,
+        "p95": 0.9495909999968717,
+        "p99": 1.6051990000123624,
+        "max": 4.971509999988484,
+        "sum": 537.8139660001762
+       },
+       "pingGapMs": {
+        "n": 842,
+        "p50": 5.267970000000787,
+        "p95": 5.811115000004065,
+        "p99": 6.762738999997964,
+        "max": 18.358348000008846,
+        "sum": 4353.852393000008
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lt:s10000",
+         "ok": true,
+         "strokesStored": 10885,
+         "strokesLive": 10885
+        }
+       ]
+      },
+      {
+       "session": 2,
+       "durationMs": 4209,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 9,
+       "bytesWritten": 568252,
+       "bytesPerSaveMedian": 67695,
+       "writeMs": {
+        "n": 9,
+        "p50": 0.26932900000247173,
+        "p95": 14.46434199999203,
+        "p99": 14.46434199999203,
+        "max": 14.46434199999203,
+        "sum": 16.469725999995717
+       },
+       "compactions": [
+        {
+         "trigger": "disconnect",
+         "ms": 61.7,
+         "rows": 9,
+         "snapBytes": 6670207
+        }
+       ],
+       "compactionBytesWritten": 6670207,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [
+        {
+         "afterStrokes": 100,
+         "logRows": 0,
+         "logBytes": 0
+        },
+        {
+         "afterStrokes": 200,
+         "logRows": 1,
+         "logBytes": 65652
+        },
+        {
+         "afterStrokes": 300,
+         "logRows": 2,
+         "logBytes": 135578
+        },
+        {
+         "afterStrokes": 400,
+         "logRows": 3,
+         "logBytes": 207671
+        },
+        {
+         "afterStrokes": 500,
+         "logRows": 4,
+         "logBytes": 275366
+        },
+        {
+         "afterStrokes": 600,
+         "logRows": 4,
+         "logBytes": 275366
+        },
+        {
+         "afterStrokes": 700,
+         "logRows": 5,
+         "logBytes": 343523
+        },
+        {
+         "afterStrokes": 800,
+         "logRows": 6,
+         "logBytes": 409242
+        },
+        {
+         "afterStrokes": 900,
+         "logRows": 7,
+         "logBytes": 475708
+        },
+        {
+         "afterStrokes": 1000,
+         "logRows": 8,
+         "logBytes": 547167
+        }
+       ],
+       "pingMs": {
+        "n": 836,
+        "p50": 0.5865360000025248,
+        "p95": 1.0324330000003101,
+        "p99": 1.5903499999985797,
+        "max": 16.95823800000653,
+        "sum": 557.6036010000389
+       },
+       "pingGapMs": {
+        "n": 836,
+        "p50": 5.239376000012271,
+        "p95": 5.765348000000813,
+        "p99": 6.284056999997119,
+        "max": 21.610003000008874,
+        "sum": 4306.513179000001
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": true,
+       "correctDetail": [
+        {
+         "doc": "lt:s10000",
+         "ok": true,
+         "strokesStored": 11798,
+         "strokesLive": 11798
+        }
+       ]
+      }
+     ],
+     "totalBytesWritten": 13945120,
+     "totalBytesPerStroke": 6973,
+     "loadsServerMs": [
+      {
+       "ms": 30.1,
+       "rows": 0
+      },
+      {
+       "ms": 33.9,
+       "rows": 0
+      },
+      {
+       "ms": 61.2,
+       "rows": 0
+      }
+     ]
+    },
+    {
+     "kind": "none",
+     "sessions": [
+      {
+       "session": 1,
+       "durationMs": 4266,
+       "erases": 59,
+       "undos": 61,
+       "strokesAdded": 1000,
+       "saves": 0,
+       "bytesWritten": 0,
+       "bytesPerSaveMedian": 0,
+       "writeMs": null,
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 845,
+        "p50": 0.64940999999817,
+        "p95": 1.136183999988134,
+        "p99": 1.5142170000035549,
+        "max": 2.9721579999895766,
+        "sum": 599.6390889999457
+       },
+       "pingGapMs": {
+        "n": 845,
+        "p50": 5.294138999990537,
+        "p95": 5.783588000005693,
+        "p99": 6.39574699998775,
+        "max": 7.808181999993394,
+        "sum": 4363.081121999989
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": "n/a",
+       "correctDetail": []
+      },
+      {
+       "session": 2,
+       "durationMs": 4299,
+       "erases": 46,
+       "undos": 41,
+       "strokesAdded": 1000,
+       "saves": 0,
+       "bytesWritten": 0,
+       "bytesPerSaveMedian": 0,
+       "writeMs": null,
+       "compactions": [],
+       "compactionBytesWritten": 0,
+       "logLeftAfterSession": {
+        "rows": 0,
+        "bytes": 0
+       },
+       "growthSeries": [],
+       "pingMs": {
+        "n": 844,
+        "p50": 0.7277680000115652,
+        "p95": 1.2837219999928493,
+        "p99": 1.712576000005356,
+        "max": 5.901273999988916,
+        "sum": 674.7565789998771
+       },
+       "pingGapMs": {
+        "n": 844,
+        "p50": 5.224371999996947,
+        "p95": 6.103902000002563,
+        "p99": 6.4877810000034515,
+        "max": 10.085398999988683,
+        "sum": 4398.666611000008
+       },
+       "pingMaxDuringCompactionMs": null,
+       "correct_reloadFromStorageEqualsLive": "n/a",
+       "correctDetail": []
+      }
+     ],
+     "totalBytesWritten": 0,
+     "totalBytesPerStroke": 0,
+     "loadsServerMs": [
+      {
+       "ms": 0,
+       "rows": 0
+      },
+      {
+       "ms": 0,
+       "rows": 0
+      }
+     ]
+    }
+   ],
+   "hooks": [
+    {
+     "hook": "onDisconnect",
+     "documentName": "ld:s10000",
+     "clientsCount": 0
+    },
+    {
+     "hook": "onDisconnect",
+     "documentName": "ld:s10000",
+     "clientsCount": 0
+    },
+    {
+     "hook": "onDisconnect",
+     "documentName": "ld:s10000",
+     "clientsCount": 0
+    }
+   ]
+  }
+ },
+ "crash": [
+  {
+   "mode": "log-per-update",
+   "childSignal": "SIGKILL",
+   "expectedStrokes": 1530,
+   "recoveredStrokes": 1530,
+   "logRowsLeft": 670,
+   "snapshotBytes": 555919,
+   "svEqual": true,
+   "contentEqual": true,
+   "result": "PASS"
+  },
+  {
+   "mode": "log-compacted-midway",
+   "childSignal": "SIGKILL",
+   "expectedStrokes": 1530,
+   "recoveredStrokes": 1530,
+   "logRowsLeft": 170,
+   "snapshotBytes": 789822,
+   "svEqual": true,
+   "contentEqual": true,
+   "result": "PASS"
+  },
+  {
+   "mode": "log-batched",
+   "childSignal": "SIGKILL",
+   "expectedStrokes": 1530,
+   "recoveredStrokes": 1411,
+   "logRowsLeft": 2,
+   "snapshotBytes": 555919,
+   "svEqual": false,
+   "contentEqual": false,
+   "result": "FAIL"
+  },
+  {
+   "mode": "full-rewrite",
+   "childSignal": "SIGKILL",
+   "expectedStrokes": 1530,
+   "recoveredStrokes": 1413,
+   "logRowsLeft": 0,
+   "snapshotBytes": null,
+   "svEqual": false,
+   "contentEqual": false,
+   "result": "FAIL"
+  },
+  {
+   "mode": "log-kill-inside-compaction",
+   "childSignal": "SIGKILL",
+   "expectedStrokes": 1530,
+   "recoveredStrokes": 1530,
+   "logRowsLeft": 670,
+   "snapshotBytes": 555919,
+   "svEqual": true,
+   "contentEqual": true,
+   "result": "PASS"
+  }
+ ]
+}

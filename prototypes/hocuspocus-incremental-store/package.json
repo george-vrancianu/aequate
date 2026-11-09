@@ -1,0 +1,15 @@
+{
+  "name": "hocuspocus-incremental-store-prototype",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "bench": "node bench.js"
+  },
+  "dependencies": {
+    "@hocuspocus/provider": "^4.0.0",
+    "@hocuspocus/server": "^4.0.0",
+    "ws": "^8.18.0",
+    "yjs": "~13.6.33"
+  }
+}
