@@ -1,6 +1,6 @@
 # Results: Yjs board under erase/undo churn, and on a low-end tablet (ticket #39)
 
-PROTOTYPE (throwaway). Machine: WSL2, Ryzen 9 5950X, Node 24, Yjs 13.6.x, Hocuspocus 4.x; numbers are relative, not absolute. The tablet section is empty until a human runs [TABLET.md](TABLET.md).
+PROTOTYPE (throwaway). Machine: WSL2, Ryzen 9 5950X, Node 24, Yjs 13.6.x, Hocuspocus 4.x; numbers are relative, not absolute. Tablet numbers: one iPad 9th generation run (iPadOS 26.5, Chrome for iOS, so WebKit) over home Wi-Fi, see Part 2.
 
 ## Part 1: churn
 
@@ -90,7 +90,32 @@ How the page was verified: Playwright (devDependency of this folder only; `chrom
 
 ### Tablet results
 
-(Empty. To be filled in by the human from the JSON the page produces; see TABLET.md. iPad: no `performance.memory`, so no heap numbers.)
+iPad, iPadOS 26.5, Chrome for iOS 156 (`CriOS`, so WebKit underneath, same engine as Safari), 810x1080 CSS px at 2x, `hardwareConcurrency` 4, home Wi-Fi to the Hocuspocus server on this PC (mirrored WSL2). One run of all 4 sizes x 2 layouts on 2026-11-09. Raw JSON: `tablet/ipad.json`. iPad 9th generation (2021, A13 Bionic, 3 GB RAM), Wi-Fi probably 5 GHz (from memory, not checked); battery state not recorded. No heap numbers (iOS exposes no `performance.memory`). WebKit clamps `performance.now()` to 1 ms, so the apply column reads 0 or 1: it means "under about 1 ms", not a measured value.
+
+Times in ms, median of 3, same definitions as the desktop table. In brackets: ratio to the desktop baseline. The desktop ran over loopback, so the sync and open ratios mix device CPU with Wi-Fi latency and bandwidth; the render ratio is device only.
+
+| size | layout | sync + open whole board | open one page | apply per stroke med / p95 / max | render one page | render whole board | doc bytes | HTTP RTT |
+|---|---|---|---|---|---|---|---|---|
+| 1k | board | 136 (9.1x) | 144 (11.1x) | 1 / 1 / 3 | 6 | 23 (1.2x) | 556,422 | 4 |
+| 1k | page | 221 (12.6x) | 54 (13.5x) | 0 / 1 / 1 | 6 | 29 (2.1x) | 554,091 | 5.5 |
+| 3k | board | 236 (9.1x) | 246 (8.6x) | 0 / 1 / 1 | 12 | 49 (1.2x) | 1,699,218 | 7 |
+| 3k | page | 412 (13.0x) | 44 (8.5x) | 0 / 1 / 1 | 11 | 55 (1.3x) | 1,691,908 | 8 |
+| 5k | board | 332 (7.7x) | 328 (8.4x) | 0 / 1 / 1 | 16 | 87 (1.3x) | 2,809,622 | 8 |
+| 5k | page | 399 (8.2x) | 54 (9.3x) | 0 / 1 / 1 | 15 | 76 (1.1x) | 2,797,310 | 7 |
+| 10k | board | 874 (11.3x) | 590 (7.7x) | 0 / 1 / 1 | 29 | 147 (0.9x) | 5,647,466 | 7 |
+| 10k | page | 564 (7.2x) | 74 (9.6x) | 0 / 1 / 1 | 28 | 149 (1.0x) | 5,622,656 | 6.5 |
+
+Facts from the table:
+
+- **Live collaboration is not the limit on the iPad.** Applying one remote stroke (Yjs plus decode and draw) stays under about 1 ms at every size, worst case 3 ms (1k board, first update). That is well inside a 16.7 ms frame.
+- **Rendering matches the desktop.** Drawing all 10k strokes (1.75 M points) takes about 150 ms on both. That is likely because the desktop baseline is headless Chromium drawing in software, so this compares rendering paths, not CPUs. One page (500 strokes at 10k) draws in 28 to 29 ms, about 2 frames.
+- **Opening the board is the cost, and it grows with bytes.** With one doc per board, opening any page means syncing the whole board: 136 ms at 1k up to 590 to 874 ms at 10k (5.6 MB). The first 10k run took 1,446 ms. With one doc per page, opening one page takes 44 to 74 ms at every size, so it stays flat. Syncing the whole board as 20 docs is slower than one doc at 1k and 3k (221 vs 136, 412 vs 236), similar at 5k, and faster at 10k (564 vs 874). The 10k board number is noisy (runs 1,446 / 874 / 629).
+- Encoded doc bytes match the desktop exactly, or within a few bytes of `/stream` tombstone drift. Wi-Fi RTT was 4 to 8 ms.
+
+Not measured on the tablet: a churned doc. On desktop, a 3x-churned 10k doc loads cold about 4x slower than a fresh one (Part 1). The page has no churn mode, so nobody knows whether that 4x holds on the iPad. If it did, a churned 10k one-doc-per-board open would land in the seconds. That is an extrapolation, not a measurement.
+
+Answer for the tablet half of the ticket: the spike's conclusion holds on this iPad. Per-stroke CPU is negligible, and the cost that grows is bytes, felt as open time. A 10k board opens in under a second as one doc. As one doc per page, the first page opens in under 100 ms.
+
 
 ## Appendix: full churn tables
 
