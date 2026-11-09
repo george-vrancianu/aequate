@@ -62,6 +62,11 @@ function makeWorld(layout, cfg, rng) {
     if (!pt.isServer && world.curOp) upd[world.curOp].push(u.length)
     parts.forEach((q) => { if (q !== pt) queues[q.r][di].push(u) })
   })))
+  if (cfg.retention) { // attribution: items deleted by user 0's own tracked transactions (own origin or own UndoManager); key includes the doc guid (page docs share a clientID)
+    const pt0 = parts[0]; world.own = new Set()
+    pt0.docs.forEach((d) => d.on('afterTransaction', (tr) => { const o = tr.origin; if (o === pt0.origin || pt0.ums.includes(o)) Y.iterateDeletedStructs(tr, tr.deleteSet, (it) => { if (it instanceof Y.Item) world.own.add(d.guid + ':' + it.id.client + ':' + it.id.clock) }) }))
+  }
+  world.loopAsserted = 0; world.loopFailed = []
   const di = (p) => (layout === 'board' ? 0 : p)
   world.map = (pt, p) => pt.docs[di(p)].getMap(layout === 'board' ? 'strokes:' + p : 'strokes')
   const release = (pt, di_, si) => { if (cfg.cap === 'release') Y.iterateDeletedStructs({ doc: pt.docs[di_] }, si.deletions, (it) => { if (it instanceof Y.Item) it.keep = false }) }
@@ -177,7 +182,9 @@ function checks(world) {
   check('convergence: identical state vectors', svEq())
   check('integrity: every live stroke equals the bytes originally drawn', (() => { let bad = 0; for (let p = 0; p < P; p++) world.map(server, p).forEach((v, k) => { if (world.truth.get(k) !== hashBytes(v)) bad++ }); return bad === 0 })())
   check('cold load of server state: content identical', keysOf({ docs: server.docs.map((d) => { const f = new Y.Doc({ gc: true }); Y.applyUpdate(f, Y.encodeStateAsUpdate(d)); return f }) }) === keysOf(server))
+  const Z = parts[2]
   if (!hasUm) { check('undo checks skipped (no UndoManager variant)', true, 'n/a'); return res }
+  check(`churn loop: each of ${world.loopAsserted} interleaved undo/redo ops by the acting users left the right stroke present/absent with equal bytes on all 4 replicas`, hasUm && world.loopAsserted > 0 && world.loopFailed.length === 0, world.loopAsserted + ' asserted; ' + world.loopFailed.slice(0, 3).join('; '))
   // erase -> undo -> redo -> undo
   {
     const [p, id] = pickLive(X), h = hashBytes(get(X, p, id))
@@ -210,7 +217,23 @@ function checks(world) {
     world.undo(X); world.flush()
     check('double erase of one stroke by two users: X undo restores it', parts.every((pt) => present(pt, p, id) && hashBytes(get(pt, p, id)) === h))
     world.undo(Y2); world.flush()
-    check('double erase: Y undo afterwards keeps convergence', allEq())
+    check('double erase: Y undo afterwards keeps convergence and the stroke stays present', allEq() && parts.every((pt) => present(pt, p, id) && hashBytes(get(pt, p, id)) === h))
+  }
+  // three users erase three different strokes concurrently, undo in a shuffled order, redo one
+  {
+    const [pa, a] = pickLive(X); const [pb, b] = pickLive(Y2, new Set([a])); const [pc, c] = pickLive(Z, new Set([a, b]))
+    const hh = { [a]: hashBytes(get(X, pa, a)), [b]: hashBytes(get(Y2, pb, b)), [c]: hashBytes(get(Z, pc, c)) }
+    world.erase(X, pa, a); world.erase(Y2, pb, b); world.erase(Z, pc, c); world.flush()
+    check('three-user interleave: all three erased', parts.every((pt) => !present(pt, pa, a) && !present(pt, pb, b) && !present(pt, pc, c)))
+    const back = (pt, p, id) => present(pt, p, id) && hashBytes(get(pt, p, id)) === hh[id]
+    world.undo(Z); world.flush()
+    check('three-user interleave: Z undo restores only c', parts.every((pt) => back(pt, pc, c) && !present(pt, pa, a) && !present(pt, pb, b)))
+    world.undo(X); world.flush()
+    check('three-user interleave: X undo restores only a (b still gone)', parts.every((pt) => back(pt, pa, a) && back(pt, pc, c) && !present(pt, pb, b)))
+    world.redo(Z); world.flush()
+    check('three-user interleave: Z redo re-erases only c', parts.every((pt) => !present(pt, pc, c) && back(pt, pa, a) && !present(pt, pb, b)))
+    world.undo(Y2); world.flush()
+    check('three-user interleave: Y undo restores b; a back, c gone, converged', parts.every((pt) => back(pt, pb, b) && back(pt, pa, a) && !present(pt, pc, c)) && allEq() && svEq())
   }
   // stack cap + drain
   const cap = world.cfg.cap
@@ -218,7 +241,7 @@ function checks(world) {
   {
     let n = 0; while (n < 300 && world.undo(X)) n++
     world.flush()
-    const e1 = allEq(), e2 = svEq(); check(`drain: ${n} consecutive undos by X (stack ${cap === 'none' ? 'unbounded, limited to 300' : 'capped'}) run without error and converge`, e1 && e2, 'undos=' + n + ' content=' + e1 + ' sv=' + e2 + ' sizes=' + parts.map((pt) => world.total(pt)).join('/') + ' pending=' + parts.map((pt) => (pt.docs[0].store.pendingStructs ? 1 : 0) + (pt.docs[0].store.pendingDs ? 1 : 0)).join('/'))
+    const e1 = allEq(), e2 = svEq(); check(`drain: ${n} consecutive undos by X (stack ${cap === 'none' ? 'unbounded, limited to 300' : 'capped'}) run without error and converge`, e1 && e2 && n > 0, 'undos=' + n + ' content=' + e1 + ' sv=' + e2 + ' sizes=' + parts.map((pt) => world.total(pt)).join('/') + ' pending=' + parts.map((pt) => (pt.docs[0].store.pendingStructs ? 1 : 0) + (pt.docs[0].store.pendingDs ? 1 : 0)).join('/'))
     let m = 0; while (m < 300 && world.redo(X)) m++
     world.flush()
     check(`drain: ${m} redos (the ${n} undos plus older redo entries) converge`, allEq() && svEq() && m > 0, `redos=${m}`)
@@ -257,21 +280,37 @@ function runChild(cfg) {
     const nAct = rng() < 0.2 ? 2 : 1
     const acting = [0, 1, 2].sort(() => rng() - 0.5).slice(0, nAct)
     let first = null
+    const erased = []
     for (const ui of acting) {
       const pt = users[ui]
       let tgt = randStroke(pt)
       if (nAct === 2 && first && rng() < 0.25 && world.map(pt, first[0]).has(first[1])) tgt = first // concurrent double-erase
       if (!tgt) continue
       first ??= tgt
+      erased.push({ ui, p: tgt[0], id: tgt[1] })
       world.erase(pt, tgt[0], tgt[1]); ops.erases++
     }
+    const afterUndo = [] // per-op assertions (no rng use, so the op sequence is unchanged)
     for (const ui of acting) {
       const pt = users[ui]
       if (pt.ums.length && rng() < 0.35) {
-        if (world.undo(pt)) { ops.undos++; if (rng() < 0.5 && world.redo(pt)) ops.redos++ }
+        const mine = erased.find((e) => e.ui === ui)
+        if (world.undo(pt)) {
+          ops.undos++
+          let st = 'present'
+          if (rng() < 0.5 && world.redo(pt)) { ops.redos++; st = 'absent' }
+          if (mine) afterUndo.push({ ...mine, st })
+        } else if (mine) world.loopFailed.push('undo returned false after own erase ' + mine.id)
       }
     }
     world.flush()
+    // the undone stroke must be back (or, after redo, gone again) with equal bytes on all 4 replicas. Skipped when another acting user erased the same stroke concurrently
+    for (const a of afterUndo) {
+      if (erased.filter((e) => e.id === a.id).length > 1) continue
+      world.loopAsserted++
+      const ok = world.parts.every((r) => { const here = world.map(r, a.p).has(a.id); return a.st === 'present' ? here && hashBytes(world.map(r, a.p).get(a.id)) === world.truth.get(a.id) : !here })
+      if (!ok) world.loopFailed.push(`${a.st} expected for ${a.id} after user ${a.ui} undo${a.st === 'absent' ? '+redo' : ''}`)
+    }
     // restore the live count with fresh strokes (re-draw)
     while (world.total(users[0]) < N) { world.draw(users[Math.floor(rng() * USERS)], Math.floor(rng() * P), pack(genStroke(rng))); ops.redraws++; world.flush() }
     // undo of an erase brings a stroke back AND the redraw may overshoot: erase surplus
@@ -296,6 +335,9 @@ function runChild(cfg) {
   const retention = {}
   if (cfg.retention && X.ums.length) {
     retention.beforeClear = { clientStats: sumStats(X), stack: { undo: world.undoLen(X), redo: world.redoLen(X) } }
+    { let own = 0, other = 0, ownB = 0, otherB = 0
+      X.docs.forEach((d) => d.store.clients.forEach((ss) => { for (const st of ss) if (st instanceof Y.Item && st.deleted && !(st.content instanceof Y.ContentDeleted)) { const k = d.guid + ':' + st.id.client + ':' + st.id.clock, b = st.content.content?.length ?? 0; if (world.own.has(k)) { own++; ownB += b } else { other++; otherB += b } } }))
+      retention.attribution = { user0TrackedDeletions: world.own.size, retainedFromOwn: own, retainedFromOwnPayload: ownB, retainedFromOthers: other, retainedFromOthersPayload: otherB } }
     X.ums.forEach((um) => um.clear())
     X.undoG.length = 0; X.redoG.length = 0
     const m = mem()

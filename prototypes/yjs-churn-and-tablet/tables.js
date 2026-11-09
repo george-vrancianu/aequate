@@ -48,9 +48,15 @@ md += 'Variants: **noum** = no UndoManager (pure erase); **none** = UndoManagers
   const rows = []
   for (const r of [...ret, ...mains.filter((m) => !ret.some((x) => x.cfg.layout === m.cfg.layout && x.cfg.cap === 'splice'))].sort((a, b) => a.cfg.layout.localeCompare(b.cfg.layout) || a.cfg.cap.localeCompare(b.cfg.cap))) {
     const c = r.rows[3], rt = r.retention
-    rows.push([r.cfg.layout, r.cfg.cap, kb(c.livePayloadBytes), kb(c.encodedServerV1), kb(c.encodedClientV1), c.clientStats.retainedDeleted, kb(c.clientStats.retainedBytes), c.userStack.undo, rt?.afterClear ? kb(rt.afterClear.encodedClientV1) : '', rt?.afterClear ? rt.afterClear.clientStats.retainedDeleted : '', rt?.afterReloadGcTrue ? rt.afterReloadGcTrue.stats.retainedDeleted + ' / ' + kb(rt.afterReloadGcTrue.encodedV1) : ''])
+    rows.push([r.cfg.layout, r.cfg.cap, kb(c.livePayloadBytes), kb(c.encodedServerV1), kb(c.encodedClientV1), c.clientStats.retainedDeleted, kb(c.clientStats.retainedBytes), c.userStack.undo, rt?.beforeClear ? rt.beforeClear.clientStats.retainedDeleted : '', rt?.afterClear ? kb(rt.afterClear.encodedClientV1) : '', rt?.afterClear ? rt.afterClear.clientStats.retainedDeleted : '', rt?.afterReloadGcTrue ? rt.afterReloadGcTrue.stats.retainedDeleted + ' / ' + kb(rt.afterReloadGcTrue.encodedV1) : ''])
   }
-  T(['layout', 'variant', 'payload', 'server encoded', 'client encoded', 'client: deleted items with content', 'their payload', 'undo stack', 'client encoded after um.clear()', 'client content-holding deleted items after um.clear()', 'after reload into gc doc: content-holding / re-encoded'], rows)
+  T(['layout', 'variant', 'payload', 'server encoded', 'client encoded', 'client: deleted items with content', 'their payload', 'undo stack', 'content-holding deleted items just before um.clear() (after the final checks)', 'client encoded after um.clear()', 'client content-holding deleted items after um.clear()', 'after reload into gc doc: content-holding / re-encoded'], rows)
+}
+md += 'The "3x" columns are the 3x checkpoint. The "before/after um.clear()" columns are taken after the final correctness checks (extra erases, up to 300 undos and redos), which is why they differ from the 3x column; compare after-clear with before-clear, not with 3x.\n\n'
+md += '#### T6b. Who deleted the retained items (user 0 replica, gc=true, 5k, 3x churn, measured in the harness)\n\n'
+{
+  const rows = ret.filter((r) => r.retention?.attribution).map((r) => { const a = r.retention.attribution, t = a.retainedFromOwn + a.retainedFromOthers; return [r.cfg.layout, r.cfg.cap, t, a.retainedFromOwn, a.retainedFromOthers, t ? (100 * a.retainedFromOthers / t).toFixed(1) + '%' : '', a.user0TrackedDeletions] })
+  T(['layout', 'variant', 'retained items (content held)', 'deleted in user 0 tracked transactions (erase, redo, undone draw)', 'other', 'other share', 'all items user 0 deleted in tracked transactions'], rows)
 }
 md += '### T7. Correctness checks (every run)\n\n'
 {

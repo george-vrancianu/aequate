@@ -12,6 +12,8 @@ const docName = (size, layout, p) => (layout === 'board' ? `t-${size}-board` : `
 const mapOf = (doc, layout, p) => doc.getMap(layout === 'board' ? 'strokes:' + p : 'strokes')
 const now = () => performance.now()
 const hasMem = !!(performance && performance.memory && performance.memory.usedJSHeapSize)
+// performance.memory is bucketed/stale unless Chromium runs with --enable-precise-memory-info (only the desktop verify run does; add ?precise to the URL to declare that). On a tablet it is not.
+const preciseMemory = new URLSearchParams(location.search).has('precise')
 const heapMB = () => (hasMem ? +(performance.memory.usedJSHeapSize / 1048576).toFixed(1) : null)
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
 const raf = () => new Promise((r) => requestAnimationFrame(() => r()))
@@ -24,9 +26,9 @@ const device = () => ({
   userAgent: navigator.userAgent, platform: navigator.platform, hardwareConcurrency: navigator.hardwareConcurrency ?? null,
   deviceMemoryGB: navigator.deviceMemory ?? null, screen: `${screen.width}x${screen.height}`, devicePixelRatio: window.devicePixelRatio,
   connection: navigator.connection ? { effectiveType: navigator.connection.effectiveType, downlink: navigator.connection.downlink, rtt: navigator.connection.rtt } : null,
-  performanceMemoryAvailable: hasMem, secureContext: window.isSecureContext, serverHost: location.host, when: new Date().toISOString(),
+  performanceMemoryAvailable: hasMem, preciseMemory: hasMem && preciseMemory, secureContext: window.isSecureContext, serverHost: location.host, when: new Date().toISOString(),
 })
-$('memnote').textContent = hasMem ? 'JS heap: performance.memory is available (Chromium).' : 'JS heap: performance.memory does NOT exist in this browser (iOS Safari and Firefox), so heap numbers will be blank. Use "deviceMemoryGB"/the OS if you need memory.'
+$('memnote').textContent = hasMem ? (preciseMemory ? 'JS heap: performance.memory is available (Chromium, precise-memory-info on).' : 'JS heap: performance.memory exists but is coarse (bucketed, can be stale) without --enable-precise-memory-info, so heap numbers are marked (coarse) and should not be used for sizing.') : 'JS heap: performance.memory does NOT exist in this browser (iOS Safari and Firefox), so heap numbers will be blank. Use "deviceMemoryGB"/the OS if you need memory.'
 
 function log(s) { const el = $('log'); el.textContent += s + '\n'; el.scrollTop = el.scrollHeight }
 
@@ -128,7 +130,7 @@ async function measure(sz, lay) {
   row.remoteStrokeApply = arrived ? { ...k(applyMs), note: 'ms per remote update inside Yjs: beforeAllTransactions to afterAllTransactions, includes the observer below' } : { n: 0 }
   row.remoteStrokeObserverDecodeDraw = obsMs.length ? { ...k(obsMs), note: 'part of the above: unpack one stroke and draw its path' } : { n: 0 }
   row.remoteStrokesNote = 'server sends 100 single-stroke adds, then one transaction deleting them again (so n is about 101)'
-  row.heapMB = hasMem ? { beforeOpen: heapBefore, afterOpen: heapAfterOpen, afterRender: heapAfterRender, afterStream: heapMB() } : null
+  row.heapMB = hasMem ? { preciseMemory, beforeOpen: heapBefore, afterOpen: heapAfterOpen, afterRender: heapAfterRender, afterStream: heapMB() } : null
   open.close()
   log(`done: sync ${row.syncWholeBoardMs.median} ms, one page ${row.openOnePageMs.median} ms, apply/stroke median ${row.remoteStrokeApply.median} ms, render whole ${row.renderWholeBoard.totalMs} ms`)
   return row
@@ -142,7 +144,7 @@ function renderTable() {
     s += '<tr>' + [r.size, r.layout, r.syncWholeBoardMs.median, r.openOnePageMs.median,
       r.remoteStrokeApply.n ? `${r.remoteStrokeApply.median} / ${r.remoteStrokeApply.p95} / ${r.remoteStrokeApply.max}, ${r.remoteStrokeApply.n}` : 'none arrived',
       `${r.renderPage.totalMs} (${r.renderPage.strokes})`, `${r.renderWholeBoard.totalMs} (${r.renderWholeBoard.strokes})`, r.docBytesEncoded,
-      r.heapMB ? `${r.heapMB.afterOpen} / ${r.heapMB.afterRender}` : 'n/a'].map((x) => '<td>' + x + '</td>').join('') + '</tr>'
+      r.heapMB ? `${r.heapMB.afterOpen} / ${r.heapMB.afterRender}${r.heapMB.preciseMemory ? '' : ' (coarse)'}` : 'n/a'].map((x) => '<td>' + x + '</td>').join('') + '</tr>'
   }
   $('tbl').innerHTML = s + '</table>'
   $('json').value = JSON.stringify({ prototype: 'yjs-churn-and-tablet', device: device(), results }, null, 1)

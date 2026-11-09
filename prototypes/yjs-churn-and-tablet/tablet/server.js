@@ -5,7 +5,7 @@ import { Server } from '@hocuspocus/server'
 import os from 'node:os'
 import fs from 'node:fs'
 import path from 'node:path'
-import { execSync } from 'node:child_process'
+import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
 import { build } from './build.js'
 import { genStrokes, genStroke, pack, mulberry32, pageOf } from '../lib.js'
@@ -109,25 +109,42 @@ if (import.meta.url === 'file://' + process.argv[1]) {
     addrs.forEach((a) => console.log(`  http://${a.address}:${P}/   (${a.name})`))
   } else {
     const wslIp = addrs.find((a) => a.name === 'eth0')?.address ?? addrs[0]?.address ?? '<WSL-IP>'
-    let winIp = '<WINDOWS-LAN-IP>'
-    try {
-      const o = execSync(`powershell.exe -NoProfile -Command "(Get-NetIPConfiguration | Where-Object { $_.IPv4DefaultGateway -ne $null -and $_.NetAdapter.Status -eq 'Up' } | Select-Object -First 1).IPv4Address.IPAddress"`, { timeout: 8000, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim()
+    // networking mode: `wslinfo --networking-mode` (nat | mirrored), else the 10.255.255.254 loopback marker that mirrored mode adds
+    let mode = (process.env.WSL_MODE || '').toLowerCase() // optional override: WSL_MODE=nat or mirrored
+    if (!mode) try { mode = execFileSync('wslinfo', ['--networking-mode'], { timeout: 4000, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim().toLowerCase() } catch {}
+    if (!mode) mode = (os.networkInterfaces().lo || []).some((a) => a.address === '10.255.255.254') ? 'mirrored' : 'nat'
+    let winIp = ''
+    try { // execFileSync: no /bin/sh, so $_ and $null reach PowerShell unexpanded
+      const script = "(Get-NetIPConfiguration | Where-Object { $_.IPv4DefaultGateway -ne $null -and $_.NetAdapter.Status -eq 'Up' } | Select-Object -First 1).IPv4Address.IPAddress"
+      const o = execFileSync('powershell.exe', ['-NoProfile', '-Command', script], { timeout: 8000, stdio: ['ignore', 'pipe', 'ignore'] }).toString().trim()
       if (/^\d+\.\d+\.\d+\.\d+$/.test(o)) winIp = o
     } catch {}
-    console.log(`WSL2 detected. WSL IP: ${wslIp}   Windows LAN IP: ${winIp}${winIp.startsWith('<') ? '  (could not detect: run ipconfig in Windows, use the Wi-Fi IPv4 address)' : ''}`)
-    console.log('Open on the tablet (same Wi-Fi) AFTER the Windows port proxy and firewall rule below exist:')
-    console.log(`  http://${winIp}:${P}/`)
-    console.log(`(Inside WSL / Windows this machine only: http://localhost:${P}/  or  http://${wslIp}:${P}/)`)
-    console.log('\nWSL2 is NATed, so the tablet cannot reach it directly. In an ADMIN PowerShell on Windows run:')
-    console.log(`  netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=${P} connectaddress=${wslIp} connectport=${P}`)
-    console.log(`  New-NetFirewallRule -DisplayName "aequate-proto-${P}" -Direction Inbound -Action Allow -Protocol TCP -LocalPort ${P}`)
-    console.log('  (or: netsh advfirewall firewall add rule name="aequate-proto-' + P + '" dir=in action=allow protocol=TCP localport=' + P + ')')
-    console.log('The WSL IP changes on every WSL restart: if it does, delete and re-add the portproxy. Cleanup afterwards:')
-    console.log(`  netsh interface portproxy delete v4tov4 listenaddress=0.0.0.0 listenport=${P}`)
-    console.log(`  Remove-NetFirewallRule -DisplayName "aequate-proto-${P}"`)
-    console.log('  (or: netsh advfirewall firewall delete rule name="aequate-proto-' + P + '")')
-    console.log('Check: netsh interface portproxy show v4tov4')
-    console.log('If Windows still blocks it, the Wi-Fi profile may be "Public": set it to Private, or allow the rule on all profiles (the rule above applies to all).')
+    if (!winIp && mode === 'mirrored') winIp = wslIp // mirrored: WSL shares the Windows interfaces, eth0 is the LAN address
+    const winShown = winIp || '<WINDOWS-LAN-IP>'
+    console.log(`WSL2 detected, networking mode: ${mode}. WSL eth0: ${wslIp}   Windows LAN IP: ${winShown}${winIp ? '' : '  (could not detect: run ipconfig in Windows, use the Wi-Fi IPv4 address)'}`)
+    console.log('Open on the tablet (same Wi-Fi) AFTER the Windows rules below exist:')
+    console.log(`  http://${winShown}:${P}/`)
+    console.log(`(On this machine only: http://localhost:${P}/)`)
+    if (mode === 'mirrored') {
+      console.log('\nMirrored mode: WSL shares the Windows network, so NO portproxy is needed (do not add one). Inbound traffic is blocked by the Hyper-V firewall and by the Windows firewall. In an ADMIN PowerShell on Windows run:')
+      console.log(`  New-NetFirewallHyperVRule -Name aequate-proto-${P} -DisplayName "aequate-proto-${P}" -Direction Inbound -VMCreatorId '{40E0AC32-46A5-438A-A0B2-2B479E8F2E90}' -Protocol TCP -LocalPorts ${P}`)
+      console.log(`  New-NetFirewallRule -DisplayName "aequate-proto-${P}" -Direction Inbound -Action Allow -Protocol TCP -LocalPort ${P}`)
+      console.log('Cleanup afterwards:')
+      console.log(`  Remove-NetFirewallHyperVRule -Name aequate-proto-${P}`)
+      console.log(`  Remove-NetFirewallRule -DisplayName "aequate-proto-${P}"`)
+      console.log('Check: Get-NetFirewallHyperVRule -Name aequate-proto-' + P)
+    } else {
+      console.log('\nNAT mode: the tablet cannot reach WSL directly. In an ADMIN PowerShell on Windows run:')
+      console.log(`  netsh interface portproxy add v4tov4 listenaddress=0.0.0.0 listenport=${P} connectaddress=${wslIp} connectport=${P}`)
+      console.log(`  New-NetFirewallRule -DisplayName "aequate-proto-${P}" -Direction Inbound -Action Allow -Protocol TCP -LocalPort ${P}`)
+      console.log('  (or: netsh advfirewall firewall add rule name="aequate-proto-' + P + '" dir=in action=allow protocol=TCP localport=' + P + ')')
+      console.log('The WSL IP changes on every WSL restart: if it does, delete and re-add the portproxy. Cleanup afterwards:')
+      console.log(`  netsh interface portproxy delete v4tov4 listenaddress=0.0.0.0 listenport=${P}`)
+      console.log(`  Remove-NetFirewallRule -DisplayName "aequate-proto-${P}"`)
+      console.log('  (or: netsh advfirewall firewall delete rule name="aequate-proto-' + P + '")')
+      console.log('Check: netsh interface portproxy show v4tov4')
+    }
+    console.log('If Windows still blocks it, the Wi-Fi profile may be "Public": set it to Private (the rules above apply to all profiles).')
   }
   const stop = async () => { await s.close(); process.exit(0) }
   process.on('SIGINT', stop); process.on('SIGTERM', stop)

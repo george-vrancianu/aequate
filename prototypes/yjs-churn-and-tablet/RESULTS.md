@@ -33,55 +33,60 @@ PROTOTYPE (throwaway). Machine: WSL2, Ryzen 9 5950X, Node 24, Yjs 13.6.x, Hocusp
 
 | state | whole board ms | memory MB (heap + ab) |
 |---|---|---|
-| fresh, 0x | 14 to 20 | 9.6 |
-| 3x churn, gc=true | 55 to 75 | 19.4 |
-| 3x churn, author gc=false loaded into gc=true doc | 149 to 199 (first load, includes content strip) | 19.4 |
-| 3x churn, gc=false doc loaded into gc=false doc | 153 | 48.2 |
+| fresh, 0x | 12 to 20 | 9.6 |
+| 3x churn, gc=true | 46 to 75 | 19.4 |
+| 3x churn, author gc=false loaded into gc=true doc | 98 to 199 (each load strips the content) | 19.4 |
+| 3x churn, gc=false doc loaded into gc=false doc | 96 to 153 | 48.2 |
 
-At 5k: 24 ms and 9.7 MB (gc=true, 3x) against 6 to 9 ms and 4.8 MB fresh. One page of a per-page layout at 10k, 3x: 1.6 to 2.7 ms. Churn costs about 3.4 to 5.3 ms per iteration at 10k for three replicas plus relay (T5), so CPU for editing is negligible.
+At 5k: 18 to 27 ms and 9.7 MB (gc=true, 3x) against 6 to 9 ms and 4.8 MB fresh. One page of a per-page layout at 10k, 3x: 1.6 to 2.9 ms. Churn costs about 3.0 to 5.3 ms per iteration at 10k for three replicas plus relay (T5; this is harness cost for four replicas, not an editing-client figure).
+
+Timings vary run to run (the table gives the range over the original run, the reviewer's re-run and the fixer's re-run, which share seeds and so have identical byte numbers). Every byte, count and memory figure was identical in all three runs.
+
+Per item, what churn costs the server doc at 10k, 3x (facts): encoded bytes +17 B per deleted stroke (5.37 MB fresh to 6.06 MB, 0.69 MB over 40,879 tombstones); heap after load goes from 9.6 to 19.4 MB, about 250 B of heap per tombstone (40,879 tombstones, +9.8 MB); cold load goes from 12 to 20 ms to 46 to 75 ms, about 4x. The heap and load costs are per item, not per encoded byte, and are what a weak tablet will feel; they have not been measured on one.
 
 **3. Undo stacks and gc (the client side, user 0 with an UndoManager, gc=true, 10k, 3x):**
 
 - The editing client's encoded state is 15.3 MB against 6.06 MB on the server (payload 5.14 MB): **2.98x payload versus 1.18x**. 17,940 deleted items on the client still hold their content (9.2 MB of payload). The server, without an UndoManager, holds none.
 - Cause (from the Yjs source, `UndoManager` and `cleanupTransactions`): an item deleted in a tracked transaction is marked `keep`, and gc only inspects the items of the transaction that deleted them. So content that was kept at deletion time is never collected in that live doc, even after the stack entry is dropped.
-- **The cap did not change this.** Retained content is identical with no cap (10,648 stack entries at the end), the spike's cap (100), and the cap plus clearing `keep` on the dropped entries (T6: 8,991 items, 4.61 MB at 5k in all three). Calling `um.clear()` on the whole stack did not reclaim anything in the live doc either (9,295 and 9,094 content-holding items remained). A fresh `applyUpdate` into a gc doc (reload) reclaims all of it (0 content-holding items, 3.06 MB at 5k).
+- **The cap did not change this.** Retained content is identical with no cap (10,648 stack entries at the end), the spike's cap (100), and the cap plus clearing `keep` on the dropped entries (T6: 8,991 items, 4.61 MB at 5k in all three). Calling `um.clear()` on the whole stack did not reclaim anything in the live doc either: the content-holding count is identical just before and just after the clear (9,296 / 9,095 / 9,092). Those counts are higher than the 8,991 at the 3x checkpoint only because the final correctness checks ran more erases and undos before the clear; `clear()` itself changed nothing. A fresh `applyUpdate` into a gc doc (reload) reclaims all of it (0 content-holding items, 3.06 MB at 5k).
 - Without any UndoManager the client equals the server (3.07 MB at 5k).
-- The retained amount is proportional to the number of erases by that user during the session (about 520 B per erase), not to the stack depth. Not measured: live-heap of the client replica separately (only the retained payload bytes and the encoded size are); the explanation that the retained items are mostly the user's own erases is inferred from the counts, not isolated.
+- Attribution, measured (T6b, 5k, gc=true, items still holding content on user 0's replica): 93.8 to 94.0% were deleted in user 0's own tracked transactions (own erases, redo re-erases, undone draws); 562 items (6.0 to 6.2%) were deleted by other users. The 6% is explained by Yjs `redoItem`, which also calls `keepItem(redoneItem, true)`: a stroke that this user restored by undo stays `keep` while live, so a later erase of it, by anyone including a remote user, retains its content. So the retained amount grows with the number of items deleted by that user's tracked transactions (about 520 B per such item) plus restored strokes erased later by anyone, not with the stack depth. Not measured: the live heap of the client replica separately (only retained payload bytes and encoded size are).
+- Mechanism, checked in the Yjs source: in `cleanupTransactions` `afterTransaction` (and with it the UndoManager's `keepItem(item, true)`) runs before `tryGcDeleteSet`, which only looks at that transaction's delete set; `clearUndoManagerStackItem` only resets `keep`. So the cap, the release variant and `um.clear()` cannot reclaim content in a live doc, and a reload can.
 
-**4. Correctness after heavy churn** (T7, all 12 runs pass, 0 failures): replicas and server converge (content and state vectors identical); every live stroke equals the bytes originally drawn; an erased stroke is restored by undo with equal content on every replica (also with gc=true, because kept items survive); redo re-erases; a second undo restores again; interleaved concurrent erases by two users undo independently (only own erase is undone); concurrent double-erase of one stroke then undo works; the capped stack holds at most 100; draining up to 300 undos then redos converges. Per-page undo needed one fix: `UndoManager.undo()` can consume several stack entries when earlier ones are no-ops (for instance the stroke was already erased by someone else), so the app-level page stack must only push a redo when `undo()` returned a result.
+**4. Correctness after heavy churn** (T7, all 12 runs pass, 0 failures; the checks were extended in the fix round and every run re-run): in the churn loop, every undo by an acting user (and each undo+redo) is asserted individually after the flush: the right stroke is present (or gone after redo) with equal bytes on all 4 replicas (1,188 asserted ops at 1k, skipped where another user erased the same stroke concurrently); a three-user interleave is checked too. Replicas and server converge (content and state vectors identical); every live stroke equals the bytes originally drawn; an erased stroke is restored by undo with equal content on every replica (also with gc=true, because kept items survive); redo re-erases; a second undo restores again; interleaved concurrent erases by two users undo independently (only own erase is undone); concurrent double-erase of one stroke then undo works; the capped stack holds at most 100; draining up to 300 undos then redos converges. Per-page undo needed one fix: `UndoManager.undo()` can consume several stack entries when earlier ones are no-ops (for instance the stroke was already erased by someone else), so the app-level page stack must only push a redo when `undo()` returned a result.
 
 ### Answer to the ticket question
 
-- **Do the spike's conclusions hold: CPU and memory are not the limit up to 10k strokes, the cost is bytes?** CPU: yes. Churn costs a few ms per iteration, a 10k cold load of a 3x-churned server doc is 55 to 75 ms (about 4x a fresh doc, still well under a frame budget on this machine; not yet known on the tablet) and an erase is a 7-byte update. Bytes: yes, and churn adds a second byte cost. Memory: a qualified yes. The server doc is 19 MB against 9.6 MB fresh at 10k, 3x churn. The editing client with an UndoManager is the exception: it holds about 9 MB of dead stroke payload after 3x churn at 10k and the cap does not release it.
+- **Do the spike's conclusions hold: CPU and memory are not the limit up to 10k strokes, the cost is bytes?** CPU: yes. Churn costs a few ms per iteration, a 10k cold load of a 3x-churned server doc is 46 to 75 ms on this desktop (about 4x a fresh doc), a one-off cost of roughly 3 to 4.5 frames at 16.7 ms that will be several times larger on a weak tablet (not measured there), while applying one remote stroke is about 0.1 ms, the per-frame number, and an erase is a 7-byte update. Bytes: yes for the wire and encoded size (about 17 B per deleted stroke), but the per-tombstone cost that remains is per item: about 250 B of heap and about 4x on cold load after 3x churn at 10k. Memory: a qualified yes. The server doc is 19 MB against 9.6 MB fresh at 10k, 3x churn. The editing client with an UndoManager is the exception: it holds about 9 MB of dead stroke payload after 3x churn at 10k and the cap does not release it.
 - **Do gc plus the cap keep the doc bounded?** gc: partly. With gc=true the server doc stays near the live payload (1.18x at 3x churn) but still grows linearly with every deletion, about 17 B per deleted stroke, with no compaction found short of rebuilding the doc; gc=false is not bounded in any useful sense (5.3x at 3x churn, 27 MB at 10k). The cap: it bounds the stack length (and the memory of the stack objects themselves) but, as measured, **not** the dead content the client retains; only a reload of the doc frees it. One doc per board and one doc per page are indistinguishable here.
 
 ### Recommendations (labelled opinion, derived from the above)
 
 1. Keep `doc.gc = true` (the Hocuspocus default) on the server and clients; do not turn it off for any undo or history feature (gc=false costs 5x at 3x churn).
-2. Do not rely on the stack cap to free memory in a long editing session. Either reload the client doc (drop and re-fetch it, which loses the undo stack) at natural boundaries, or accept about 520 B of retained payload per erase by that user until reload. At 10k strokes with 3x churn that is about 9 MB, probably acceptable but unmeasured on the tablet.
-3. The per-erase tombstone (about 17 B) is small enough that no server-side compaction is needed for v1; if it ever matters, rebuilding a doc from live content (copy strokes into a new doc) is the only reset found, and it invalidates client state.
+2. Do not rely on the stack cap to free memory in a long editing session. Either reload the client doc (drop and re-fetch it, which loses the undo stack) at natural boundaries, or accept about 520 B of retained payload per item deleted by that user's tracked transactions (plus restored strokes erased later by anyone) until reload. At 10k strokes with 3x churn that is about 9 MB, probably acceptable but unmeasured on the tablet.
+3. The encoded size of a tombstone (about 17 B) is small, but its heap (about 250 B) and load cost (cold load about 4x at 3x churn) are per item and have not been measured on the tablet. Opinion: no server-side compaction for v1, revisit after the tablet numbers; if it ever matters, rebuilding a doc from live content (copy strokes into a new doc) is the only reset found, and it invalidates client state.
 4. The per-page app-level undo stack needs the "push redo only if undo returned a result" rule.
 
 ## Part 2: low-end tablet
 
 ### Desktop baseline (headless Chromium 158 on this machine, loopback, `tablet/desktop-baseline.json`)
 
-Not a tablet: this is the reference to compare the tablet numbers against. Times in ms, median of 3 for sync and open, render includes decode and draw to an 800x1200 canvas, apply is per remote stroke update (n about 101: 100 single-stroke adds, then one transaction deleting them again) from beforeAllTransactions to afterAllTransactions including an observer that decodes and draws the stroke. Heap from `performance.memory` with `--enable-precise-memory-info`, not gc-forced, so noisy (the page-layout 10k row is clearly affected by garbage).
+Not a tablet: this is the reference to compare the tablet numbers against. Times in ms, median of 3 for sync and open, render includes decode and draw to an 800x1200 canvas, apply is per remote stroke update (n about 101: 100 single-stroke adds, then one transaction deleting them again) from beforeAllTransactions to afterAllTransactions including an observer that decodes and draws the stroke. Heap from `performance.memory` with `--enable-precise-memory-info` (the verify run passes `?precise` so the JSON records `preciseMemory: true`), not gc-forced, so noisy (the page-layout 10k row is clearly affected by garbage). On a real tablet over plain http that flag is not set: the value is bucketed and can be stale (a 1k board read 9.5 MB at all four points in one check), so the page marks tablet heap values "(coarse)" and records `preciseMemory: false`; treat tablet heap as unavailable.
 
 | size | layout | sync + open whole board | open one page | apply per stroke med / p95 / max | render one page | render whole board | doc bytes | heap MB after open / after render |
 |---|---|---|---|---|---|---|---|---|
-| 1k | board | 15.7 | 12.9 | 0.1 / 0.2 / 0.7 | 2.0 | 21.3 | 556,422 | 8.8 / 20.7 |
-| 1k | page | 15.5 | 4.2 | 0.1 / 0.2 / 0.3 | 1.0 | 14.6 | 554,091 | 31.3 / 25.2 |
-| 3k | board | 24.1 | 27.2 | 0.1 / 0.2 / 0.2 | 2.5 | 44.8 | 1,699,217 | 49.9 / 38.0 |
-| 3k | page | 30.4 | 4.9 | 0.1 / 0.2 / 0.3 | 2.0 | 43.6 | 1,691,907 | 65.0 / 40.5 |
-| 5k | board | 40.2 | 39.9 | 0.1 / 0.2 / 0.3 | 3.6 | 77.7 | 2,809,622 | 80.3 / 69.5 |
-| 5k | page | 50.3 | 6.5 | 0.1 / 0.2 / 0.4 | 3.9 | 69.0 | 2,797,311 | 92.0 / 82.4 |
-| 10k | board | 70.9 | 83.8 | 0.1 / 0.2 / 0.5 | 6.6 | 166.2 | 5,647,466 | 165.7 / 142.6 |
-| 10k | page | 89.1 | 8.2 | 0.1 / 0.2 / 0.3 | 5.9 | 180.7 | 5,622,655 | 215.6 / 287.0 |
+| 1k | board | 14.9 | 13 | 0.1 / 0.2 / 0.8 | 1 | 18.9 | 556,422 | 8.2 / 16.7 |
+| 1k | page | 17.5 | 4 | 0.1 / 0.2 / 0.3 | 0.7 | 13.6 | 554,091 | 26.3 / 28.6 |
+| 3k | board | 25.8 | 28.7 | 0.1 / 0.2 / 0.3 | 1.9 | 41.9 | 1,699,218 | 29.5 / 33.1 |
+| 3k | page | 31.8 | 5.2 | 0.1 / 0.2 / 0.2 | 2.1 | 42.8 | 1,691,906 | 43.5 / 40.4 |
+| 5k | board | 43.2 | 38.9 | 0.1 / 0.2 / 0.3 | 3 | 65.9 | 2,809,622 | 80.8 / 69.5 |
+| 5k | page | 48.5 | 5.8 | 0.1 / 0.2 / 0.3 | 4 | 68.6 | 2,797,312 | 92 / 82.3 |
+| 10k | board | 77.3 | 76.8 | 0.1 / 0.2 / 0.3 | 6 | 157.2 | 5,647,466 | 165.7 / 142.6 |
+| 10k | page | 78 | 7.7 | 0.1 / 0.2 / 0.3 | 5.9 | 142.5 | 5,622,656 | 215.6 / 287.3 |
 
-HTTP round trip to the server was 1.3 to 1.7 ms. Open-one-page for the one-doc-per-board layout is the whole-board sync by construction (note the 3x 5k and 10k values equal the whole-board value within noise). The apply time per stroke is far below a frame at every size on desktop; what grows is the whole-board open (bytes) and the full render.
+HTTP round trip to the server was 1.2 to 1.6 ms. Open-one-page for the one-doc-per-board layout is the whole-board sync by construction (so those two columns agree for the board layout; at 10k the 76.8 ms against 77.3 ms here is noise). The apply time per stroke is far below a frame at every size on desktop; what grows is the whole-board open (bytes) and the full render.
 
-How the page was verified: Playwright (devDependency of this folder only; `chromium-headless-shell` downloaded cleanly) drove the real page against the server on an ephemeral port; the "Copy results as JSON" path reported "copied" (the plain-http fallback to a selected textarea was not exercised, since localhost is a secure context). Server and browser were shut down afterwards; no process left running.
+How the page was verified: Playwright (devDependency of this folder only; `chromium-headless-shell` downloaded cleanly) drove the real page against the server on an ephemeral port; the "Copy results as JSON" path reported "copied". The plain-http fallback was exercised separately by the reviewer over the LAN IP (secure context false, no clipboard API): `execCommand` copied, and with `execCommand` forced to fail the page showed the "use the iPad Copy bubble" message with the text selected. This was not run on a real tablet. Server and browser were shut down afterwards; no process left running.
 
 ### Tablet results
 

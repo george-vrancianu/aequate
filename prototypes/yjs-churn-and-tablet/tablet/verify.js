@@ -16,7 +16,7 @@ try {
   const page = await browser.newPage({ viewport: { width: 1024, height: 1400 } })
   page.on('console', (m) => { if (m.type() === 'error') console.log('[page error]', m.text()) })
   page.on('pageerror', (e) => console.log('[pageerror]', e.message))
-  await page.goto(`http://127.0.0.1:${s.port}/`)
+  await page.goto(`http://127.0.0.1:${s.port}/?precise`)
   for (const n of sizes) for (const lay of ['board', 'page']) {
     const t = Date.now()
     await page.evaluate(([n, lay]) => window.__run(n, lay), [n, lay])

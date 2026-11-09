@@ -16,7 +16,7 @@ npx playwright install chromium-headless-shell   # only for the local desktop ve
 ## Part 1: churn (`churn.js`)
 
 ```
-npm run churn          # ~5 min: 1k/5k/10k x {board, page} x gc {true,false}, plus retention variants at 5k. Writes results/*.json and results.json
+npm run churn          # ~15 min: 1k/5k/10k x {board, page} x gc {true,false}, plus retention variants at 5k. Writes results/*.json and results.json
 node --expose-gc churn.js quick   # 1k smoke test (writes results/quick.json)
 ```
 
