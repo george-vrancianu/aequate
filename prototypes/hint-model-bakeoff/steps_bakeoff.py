@@ -5,6 +5,7 @@ Fields:
   steps      LaTeX lines the student wrote (numbered from 1). verdicts: CAS verdict for steps 2.. (list, may be empty).
   builds_on  1-based index of the step the ladder builds on. goal_status: the rung-1 fact.
   method     rung 2+ fact. operation: rung 3 fact.
+  extraneous: HIDDEN, optional; the extraneous roots of a one-way step (guarded like answer values).
   next_step / answer: HIDDEN. Never sent to the model; only the leak check and verify_steps.py use them.
   tpl[rung] = (en, ro): the CAS-rule template wording the product would fall back to (built from the same facts).
   check: how verify_steps.py verifies (kind: eq | ineq | sys | expr, var).
@@ -61,14 +62,14 @@ ITEMS = [
   goal="solve for x", kind="eq", var="x", steps=[r"\frac{x}{2}+\frac{x}{3}=10"], verdicts=[], builds_on=1,
   goal_status="x is spread over two fractions and is not isolated yet",
   method="bring the fractions to a common denominator and add them",
-  operation="write both fractions over the common denominator 6",
+  operation="add the two fractions over the common denominator 6",
   next_step=r"\frac{5x}{6}=10", answer=r"x=12",
   tpl={1: ("The goal is to solve for $x$. $x$ is spread over two fractions and is not isolated yet.",
            "Scopul este să rezolvi în raport cu $x$. $x$ apare în două fracții și nu este încă izolat."),
        2: ("Bring the fractions to a common denominator and add them.",
            "Adu fracțiile la același numitor și adună-le."),
-       3: ("Write both fractions over the common denominator $6$.",
-           "Scrie ambele fracții cu numitorul comun $6$.")}),
+       3: ("Add the two fractions over the common denominator $6$.",
+           "Adună cele două fracții având numitorul comun $6$.")}),
  dict(id="rearr", source="steps.py #13 (y=2x+3)", topic="rearrange a formula",
   goal="solve for x in terms of y", kind="eq", var="x", steps=[r"y=2x+3"], verdicts=[], builds_on=1,
   goal_status="x is not isolated yet",
@@ -110,7 +111,7 @@ ITEMS = [
   goal_status="x is not isolated yet; step 2 is one-way: you combined logarithms, so check for extra solutions at the end",
   method="expand and move everything to one side, then solve the quadratic",
   operation="expand the product and subtract 3 from both sides",
-  next_step=r"x^2-2x-3=0", answer=r"x=3",
+  next_step=r"x^2-2x-3=0", answer=r"x=3", extraneous=[-1],
   tpl={1: ("The goal is to solve for $x$. $x$ is not isolated yet. Step 2 is one-way: you combined logarithms, so check for extra solutions at the end.",
            "Scopul este să rezolvi în raport cu $x$. $x$ nu este încă izolat. Pasul 2 merge într-un singur sens: ai combinat logaritmii, deci verifică la final soluțiile străine."),
        2: ("Expand and move everything to one side, then solve the quadratic.",
@@ -123,7 +124,7 @@ ITEMS = [
   goal_status="x is not isolated yet; step 2 is one-way: you squared both sides, so check for extra solutions at the end",
   method="expand the square and move everything to one side, then solve the quadratic",
   operation="expand (x-1)^2 and subtract x+1 from both sides",
-  next_step=r"x^2-3x=0", answer=r"x=3",
+  next_step=r"x^2-3x=0", answer=r"x=3", extraneous=[0],
   tpl={1: ("The goal is to solve for $x$. $x$ is not isolated yet. Step 2 is one-way: you squared both sides, so check for extra solutions at the end.",
            "Scopul este să rezolvi în raport cu $x$. $x$ nu este încă izolat. Pasul 2 merge într-un singur sens: ai ridicat la pătrat ambii membri, deci verifică la final soluțiile străine."),
        2: ("Expand the square and move everything to one side, then solve the quadratic.",

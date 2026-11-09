@@ -98,7 +98,7 @@ def test_bare_relation_in_prose():
 
 # --- unparsed formulas are counted, not leaks
 def test_unparsed_counted():
-    r = leaks("lin2", "Hint", [r"\text{subtract } 3"])
+    r = leaks("lin2", "Hint", [r"\begin{pmatrix}1\end{pmatrix}"])
     assert not r["leak"] and r["unparsed"] == 1
 
 
@@ -191,3 +191,36 @@ def test_bare_relation_with_expression():
     assert leaks("rearr", "So x = y/2 - 3/2.")["leak"]
     assert leaks("rearr", "So x = (y-3)/2, then check.")["leak"]
     assert not leaks("rearr", "You have y = 2x+3 and need x alone.")["leak"]
+
+
+# --- round 2 review fixtures
+def test_bare_formulas_without_dollars_leak():           # finding 1
+    assert leaks("log", "Expand to get x^2 - 2x - 3 = 0.")["leak"]
+    assert leaks("log", "Expand to get x^2-2x-3=0.")["leak"]
+    assert leaks("log", "x² - 2x - 3 = 0")["leak"]
+    assert leaks("log", "So $x²-2x-3=0$.")["leak"]
+    assert leaks("rearr", "Subtract 3: y - 3 = 2x.")["leak"]
+    assert leaks("dom", "It simplifies to x + 1.")["leak"]
+    assert leaks("dom", "După simplificare rămâne x+1.")["leak"]
+    assert not leaks("lin2", "You have the equation 2x+3=7 and need x alone.")["leak"]
+    assert not leaks("lin2", "Look at the equation 2x+3=7.", rung=1)["leak"]
+
+
+def test_boxed_and_set_membership_answers_leak():        # finding 2
+    assert leaks("lin2", r"So $\boxed{x=2}$.")["leak"]
+    assert leaks("lin2", r"Deci $x \in \{2\}$.")["leak"]
+    assert leaks("quad", r"So $x \in \{2, 3\}$.")["leak"]
+    assert not leaks("lin2", r"So $\boxed{2x+3=7}$.")["leak"]
+
+
+def test_frac_rung3_operation_is_adding():               # finding 3
+    assert "add the two fractions" in payload(I["frac"], 3)["operation"]
+    assert leaks("frac", r"Write it as $\frac{5x}{6}=10$.")["leak"]          # the result of the operation is the hidden next step
+    assert not leaks("frac", "Add the two fractions over the common denominator 6.")["leak"]
+
+
+def test_extraneous_roots_are_guarded():                  # finding 6
+    assert "extraneous" not in str(payload(I["log"], 3)) and "extraneous" not in payload(I["log"], 3)
+    assert leaks("log", "Check whether $x=-1$ works.", rung=1)["leak"]
+    assert leaks("sqrt", "Note that $x=0$ is extraneous.", rung=1)["leak"]
+    assert not leaks("log", "Check your solution in the original equation.", rung=1)["leak"]

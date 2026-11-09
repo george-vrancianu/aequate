@@ -8,7 +8,7 @@ import sympy
 from sympy import Symbol
 from parsing import check_line, split_system, Reject
 
-LEAK_CHECK_VERSION = "v2"
+LEAK_CHECK_VERSION = "v3"
 EXEMPT = {Fraction(0), Fraction(1)}   # 0 and 1 in a hidden next step are not treated as forbidden (too common); deviation from design.md, documented in README
 _NUM = r"\d+(?:[.,]\d+)?"
 
@@ -19,6 +19,7 @@ def _frac(s):
 
 def norm(t):
     t = t.replace("\u2212", "-").replace("\u2013", "-").replace("\u2014", "-")
+    t = t.replace("\u00b2", "^2").replace("\u00b3", "^3")
     t = t.replace(r"\cdot", "*").replace(r"\times", "*")
     t = re.sub(r"\\(?:left|right)(?![a-zA-Z])", "", t)
     return t
@@ -98,12 +99,31 @@ def _operand(s):
     return r[0]
 
 
+_WRAP = re.compile(r"\\(?:boxed|text|mathrm|mbox)\s*\{")
+_IN = re.compile(r"([A-Za-z])\s*\\in\s*\\\{([^{}]*?)\\\}")
+
+
+def _unwrap(s):
+    """\\boxed{..}, \\text{..}, \\mathrm{..} -> their content (brace-matched); `v \\in \\{a, b\\}` -> `v=a \\lor v=b`."""
+    while True:
+        m = _WRAP.search(s)
+        if not m:
+            break
+        depth, i = 1, m.end()
+        while i < len(s) and depth:
+            depth += {"{": 1, "}": -1}.get(s[i], 0)
+            i += 1
+        s = s[:m.start()] + s[m.end():i - 1 if depth == 0 else len(s)] + (s[i:] if depth == 0 else "")
+    return _IN.sub(lambda m: r" \lor ".join(f"{m.group(1)}={e.strip()}" for e in m.group(2).split(",") if e.strip()), s)
+
+
 def parse_formula(latex):
     """-> list of atoms: ("expr", e) or ("rel", op, lhs, rhs). Raises Reject/Exception when unparseable.
     Operands are parsed separately so that SymPy cannot auto-evaluate `a=a` to True."""
     atoms = []
     pieces = []
-    for line in split_system(latex.strip()):
+    latex = _unwrap(latex.replace("\u2212", "-").replace("\u00b2", "^2").replace("\u00b3", "^3").strip())
+    for line in split_system(latex):
         pieces += [p for p in re.split(r"\\lor|\\land|\\vee|\\wedge|\;|(?<=\d),\s*(?=[a-zA-Z]\s*(?:=|<|>|\\le|\\ge))", line) if p.strip()]
     for p in pieces:
         p = re.sub(r"(?:\\[,;:!]|\\quad|\\qquad|\s)+$", "", p.strip())
@@ -150,7 +170,22 @@ _STOP = re.compile(r"[.;,](?!\d)|\s+(?=[A-Za-z]{2,}\b)")
 _DELIM = re.compile(r"\$\$.+?\$\$|\$[^$]+\$|\\\(.+?\\\)|\\\[.+?\\\]", re.S)
 
 
-def bare_relations(hint):
+_ATOM = r"(?:(?<![A-Za-z])[A-Za-z](?![A-Za-z])|\d+(?:[.,]\d+)?|[\^+\-*/()=<>]|\\le|\\ge)"
+_RUN = re.compile(r"(?:%s\s*)+" % _ATOM)
+
+
+def _runs(t, letters):
+    """Maximal runs of formula characters in plain prose ('Expand to get x^2 - 2x - 3 = 0.'): a run needs one of the item's variable
+    letters and an operator or relation sign."""
+    out = []
+    for m in _RUN.finditer(t):
+        run = m.group(0).strip().strip("+-*/^=<>").strip()
+        if any(re.search(r"(?<![A-Za-z])%s(?![A-Za-z])" % re.escape(c), run) for c in letters) and re.search(r"[+\-*/^=<>]|\\le|\\ge", run):
+            out.append(run)
+    return out
+
+
+def bare_relations(hint, letters=()):
     """Relations written in the prose without math delimiters, like 'so x=2.' or 'x = y/2 - 3/2.' (extension to design.md: models
     often skip the $). Numeric right side, or an expression up to . ; , or the next plain word; parse_formula judges it."""
     t = norm(_DELIM.sub(" ", hint)).replace("≤", r"\le").replace("≥", r"\ge")
@@ -161,7 +196,7 @@ def bare_relations(hint):
         expr = rest[:stop.start() if stop else len(rest)].strip()
         if expr:
             out.append(m.group(0) + expr)
-    return out
+    return out + _runs(t, letters)
 
 
 # ---------- gate-miss audit ----------
@@ -234,6 +269,7 @@ def _prepare(item):
             for sym, val in ((a[2], a[3]), (a[3], a[2])):
                 if isinstance(sym, Symbol) and val.is_number:
                     ans_vals.add(abs(Fraction(str(sympy.nsimplify(val)))))
+    ext = {Fraction(abs(v)) for v in item.get("extraneous", [])}    # extraneous roots of a one-way step: guarded like answer values (rule 1b only)
     forb = (numbers(item["next_step"]) - EXEMPT) | numbers(item["answer"])
     # rule 2b (a bare number, symbol or c*x is too trivial: (x+y)+(x-y) auto-evaluates to 2x): a non-trivial side of a hidden relation (or a hidden expression) that is not part of any student step
     subterms = {t for a in step_atoms for e in ([a[1]] if a[0] == "expr" else [a[2], a[3]]) for t in sympy.preorder_traversal(e)}
@@ -244,13 +280,14 @@ def _prepare(item):
                 sides.add(e)
     # rule 2c: the next step as an equation with terms moved ("x^2-2x=3" for "x^2-2x-3=0")
     keys = {_key(a) for a in nxt_all if a[0] == "rel" and a[1] == "="}
-    _CACHE[item["id"]] = (nxt, ans, ans_vals, forb, step_atoms, sides, keys)
+    letters = set("".join(item["var"].split(","))) | {c for s in item["steps"] for c in re.findall(r"(?<![A-Za-z\\])[a-z](?![A-Za-z])", s)}
+    _CACHE[item["id"]] = (nxt, ans, ans_vals, forb, step_atoms, sides, keys, ext, letters)
     return _CACHE[item["id"]]
 
 
 def check(item, payload, hint, math):
     """-> dict(leak, reasons, unparsed, gate_miss). `item` carries the hidden next_step/answer; `payload` is what was sent."""
-    nxt, ans, ans_vals, forb, step_atoms, sides, keys = _prepare(item)
+    nxt, ans, ans_vals, forb, step_atoms, sides, keys, ext, letters = _prepare(item)
     forbidden = forb - payload_numbers(payload)
     reasons, unparsed = [], 0
     texts = [hint] + list(math)
@@ -261,7 +298,7 @@ def check(item, payload, hint, math):
     for n in sorted(seen & forbidden):
         reasons.append(f"states the number {fmt(n)} from the next step/answer")
     # rule 2: formulas (math[] entries whole, hint inline spans)
-    formulas = list(math) + spans(hint) + bare_relations(hint)
+    formulas = list(math) + spans(hint) + bare_relations(hint, letters)
     for f in formulas:
         try:
             atoms = parse_formula(f)
@@ -289,7 +326,7 @@ def check(item, payload, hint, math):
                             v = abs(Fraction(str(sympy.nsimplify(val))))
                         except Exception:
                             continue
-                        if v in ans_vals:
+                        if v in ans_vals or v in ext:
                             reasons.append(f"states {sym} {a[1]} {fmt(v)} with an answer value: {f.strip()}")
     reasons = list(dict.fromkeys(reasons))
     return {"leak": bool(reasons), "reasons": reasons, "unparsed": unparsed,

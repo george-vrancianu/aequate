@@ -42,8 +42,13 @@ def row(rs, lat_label=None):
     a1_invalid = sum(1 for x in a1 if not x["valid"] and not x["error"])
     a1_valid = [x for x in a1 if x["valid"]]
     leak1 = sum(1 for x in a1_valid if is_leak(x))
-    # leak a2: of the hints whose attempt 1 leaked and whose attempt 2 ran, how many leaked again
-    retried = [r for r in rs if r["attempts"] and r["attempts"][0]["valid"] and is_leak(r["attempts"][0]) and len(r["attempts"]) > 1]
+    # leak a2: of the hints whose attempt 1 leaked and whose attempt 2 returned a valid reply, how many leaked again
+    a1_leaked = [r for r in rs if r["attempts"] and r["attempts"][0]["valid"] and is_leak(r["attempts"][0]) and len(r["attempts"]) > 1]
+    retried = [r for r in a1_leaked if r["attempts"][1]["valid"]]
+    a2_bad = [r["attempts"][1] for r in a1_leaked if not r["attempts"][1]["valid"]]
+    a2_timeout = sum(1 for x in a2_bad if x["error"] == "timeout")
+    a2_err = sum(1 for x in a2_bad if is_req_error(x))
+    a2_invalid = len(a2_bad) - a2_timeout - a2_err
     leak2 = sum(1 for r in retried if is_leak(r["attempts"][1]))
     # residual: attempt 1 leaked and no clean LLM output followed (second leak, no retry, invalid or timed-out retry...)
     leaked1 = [r for r in rs if r["attempts"] and r["attempts"][0]["valid"] and is_leak(r["attempts"][0])]
@@ -60,13 +65,13 @@ def row(rs, lat_label=None):
     lat = [r["whole_latency_s"] for r in rs]
     lat_s = f"{statistics.median(lat):.1f} / " + (f"{p95(lat):.1f}" if n >= 30 else f"{max(lat):.1f} (max, n<30)") if lat else "-"
     return [str(n), pct(leak1, len(a1_valid)), f"{a1_timeout} / {a1_err} / {a1_invalid}",
-            pct(leak2, len(retried)) if retried else "no retry", pct(residual, len(leaked1)),
+            (pct(leak2, len(retried)) if retried else "no valid retry") + f" ({a2_timeout} / {a2_err} / {a2_invalid})", pct(residual, len(leaked1)),
             pct(len(tmpl), n), " / ".join(f"{v}" for v in causes.values()),
             pct(sum(1 for x in a1 if x["valid"]), len(a1) - a1_timeout - a1_err), pct(valid_n, len(counted)),
             str(miss), str(unp), str(think), str(reasoning), lat_s, str(sum(1 for r in rs if r["over_budget"]))]
 
 
-HEAD = ["n", "leak a1 (of valid a1)", "a1 timeout / request error / invalid JSON", "leak a2 (a1 leaked and a2 ran: leaked again)",
+HEAD = ["n", "leak a1 (of valid a1)", "a1 timeout / request error / invalid JSON", "leak a2 (a1 leaked and a2 valid: leaked again) (a2 timeout / request error / invalid JSON)",
         "residual (a1 leaked, template shown)", "template fallback",
         "fallback causes: timeout / request error / no time to retry / over budget / rejected twice (sum = template)",
         "JSON valid a1", "JSON valid a1+a2", "possible gate misses", "unparsed formulas", "<think> left", "attempts with reasoning (thinking not off?)",

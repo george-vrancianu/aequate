@@ -19,16 +19,17 @@ def test_metrics():
           hint([att(valid=False), att()], "llm2"),                        # invalid JSON, retry clean
           hint([att(valid=False, error="timeout")], "template"),         # timeout
           hint([att(valid=False, error="HTTPError 400")], "template"),   # request error
-          hint([att(reasoning=50)], "template", over=True)]               # clean but over budget
+          hint([att(reasoning=50)], "template", over=True),               # clean but over budget
+          hint([att(leak=True), att(valid=False)], "template")]          # leaked, retry invalid JSON               # clean but over budget
     r = report.row(rs)
     h = dict(zip(report.HEAD, r))
-    assert h["leak a1 (of valid a1)"] == "60% (3/5)"                       # valid a1: 5 (timeout, request error and invalid JSON are not in it)
+    assert h["leak a1 (of valid a1)"] == "67% (4/6)"                       # valid a1: 6 (timeout, request error and invalid JSON are not in it)
     assert h["a1 timeout / request error / invalid JSON"] == "1 / 1 / 1"
-    assert h["leak a2 (a1 leaked and a2 ran: leaked again)"] == "50% (1/2)"
-    assert h["residual (a1 leaked, template shown)"] == "67% (2/3)"
-    assert h["template fallback"] == "62% (5/8)"
-    assert h[report.HEAD[6]] == "1 / 1 / 1 / 1 / 1"
+    assert h[report.HEAD[3]] == "50% (1/2) (0 / 0 / 1)"                   # the invalid a2 is not in the denominator, and is listed beside it
+    assert h["residual (a1 leaked, template shown)"] == "75% (3/4)"
+    assert h["template fallback"] == "67% (6/9)"
+    assert h[report.HEAD[6]] == "1 / 1 / 1 / 1 / 2"
     assert report.cause(rs[2]) == "rejected twice" and report.cause(rs[3]) == "no time to retry"
-    assert [report.cause(x) for x in rs if x["final_source"] == "template"] == ["rejected twice", "no time to retry", "timeout", "request error", "over budget"]
+    assert [report.cause(x) for x in rs if x["final_source"] == "template"] == ["rejected twice", "no time to retry", "timeout", "request error", "over budget", "rejected twice"]
     assert h["attempts with reasoning (thinking not off?)"] == "1"
-    assert h["JSON valid a1"] == "83% (5/6)"                               # timeout and request error excluded from the denominator
+    assert h["JSON valid a1"] == "86% (6/7)"                               # timeout and request error excluded from the denominator

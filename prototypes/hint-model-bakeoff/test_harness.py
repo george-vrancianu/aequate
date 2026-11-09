@@ -57,3 +57,16 @@ def test_valid_reply_after_the_budget_is_template():
 def test_warmup_is_not_a_measured_item():
     import bakeoff as b
     assert all(b.WARMUP_ITEM["steps"] != i["steps"] for i in ITEMS)
+
+
+def test_request_error_does_not_retry(monkeypatch):      # finding 5
+    import argparse, bakeoff
+    calls = []
+    def fake(client, base, model, extra, msgs, timeout, key):
+        calls.append(msgs)
+        return {"request": {}, "http_status": 400, "error": "HTTPError 400", "content": None, "reasoning_chars": 0,
+                "finish_reason": None, "prompt_tokens": None, "completion_tokens": None, "latency_s": 0.01}
+    monkeypatch.setattr(bakeoff, "call", fake)
+    a = argparse.Namespace(budget=20.0, min_retry=5.0, base_url="x", model="m", extra={}, api_key="", label="t")
+    r = bakeoff.run_hint(None, a, bakeoff.ITEMS[0], 1, "en")
+    assert len(calls) == 1 and len(r["attempts"]) == 1 and r["final_source"] == "template"

@@ -5,7 +5,7 @@ PROTOTYPE (throwaway, issue #31): do not build on this code. Answer = RESULTS.md
 Question: which local model should be the default hint phraser? Runs every model through the same contract the product will use
 (ADR 0005 / #48): OpenAI-compatible `/v1/chat/completions`, one English system prompt (`PROMPT_VERSION` v1) with output language
 from the locale, the rung's CAS facts as JSON (never the next step or the answer), JSON `{hint, math[]}` via `response_format`,
-temperature 0, thinking off, 20 s budget over both attempts, deterministic leak check (`LEAK_CHECK_VERSION` v1), one retry if at
+temperature 0, thinking off, 20 s budget over both attempts, deterministic leak check (`LEAK_CHECK_VERSION` v3), one retry if at
 least 5 s are left, template fallback. Rungs 1-3 only: rung 4 is the CAS's next step shown as math and never comes from the LLM (ADR 0001).
 
 Design notes live in the ticket; the step set has 13 items (see `steps_bakeoff.py`), sources cited per item.
@@ -59,7 +59,15 @@ curl -L -o /tmp/aq-31-llama/models/Qwen3.5-4B-Q4_K_M.gguf https://huggingface.co
   does not work through the parsing.py pipeline (ValueError). Count it in the human review.
 - The gate-miss audit also covers answer values written as words, "x is N" and "the solutions are". Number words that the payload uses
   itself or that count a noun ("the two equations") are skipped.
-- The frac item is `x/2+x/3=10` (answer 12) so that naming the common denominator 6 in rung 3 is not a leak.
+- The frac item is `x/2+x/3=10` (answer 12) so that naming the common denominator 6 in rung 3 is not a leak. Its rung-3 operation is
+  "add the two fractions over the common denominator 6", so carrying it out gives the hidden `5x/6=10`. A hint that only writes
+  `3x/6+2x/6=10` is a partial step that the gate does not flag (SymPy evaluates it to the current step): a rung-adherence issue for the human rating, not a gate leak.
+- Formulas written without `$` are checked too: besides `x = ...` relations, maximal runs of formula characters in the prose that contain
+  one of the item's variable letters and an operator (`Expand to get x^2 - 2x - 3 = 0.`, `It simplifies to x + 1.`) are parsed; a run that does not parse is skipped silently.
+  `x²` is read as `x^2`, `\boxed{..}`, `\text{..}` and `\mathrm{..}` are unwrapped, and `x \in \{a, b\}` is read as `x=a \lor x=b`.
+- Hidden `extraneous` field (log: -1, sqrt: 0): the extraneous roots of the one-way items are guarded like answer values in the
+  "var op value" rule (not in the gate-miss audit). Never sent to the model.
+- A request error (HTTP 4xx/5xx, connection error) ends the hint on the template with no retry, like a timeout.
 - Rung 1 payload for the one-way items puts the "check for extra solutions" note in goal_status (as design.md says).
 - The 20 s budget is enforced via the httpx timeout = remaining budget; that is a per-read timeout, so an attempt can end a little
   after 20 s. A valid reply that arrives after the budget counts as template (cause "over budget" in the report).
@@ -68,7 +76,7 @@ curl -L -o /tmp/aq-31-llama/models/Qwen3.5-4B-Q4_K_M.gguf https://huggingface.co
 ## Report metrics (`report.py`)
 
 leak a1 = leaking / valid attempt-1 replies (timeouts, request errors and invalid JSON are counted next to it). leak a2 = of the hints
-whose attempt 1 leaked and whose attempt 2 ran, the share where attempt 2 leaked again; residual = of the hints whose attempt 1 leaked,
+whose attempt 1 leaked and whose attempt 2 returned a valid reply, the share where attempt 2 leaked again (attempt-2 timeouts / request errors / invalid replies are listed beside it); residual = of the hints whose attempt 1 leaked,
 the share that ended on the template. Fallback causes (timeout, request error, no time to retry, over budget, rejected twice) add up to
 the template count. Request errors are not JSON-validity failures. "attempts with reasoning" must be 0 (thinking really off). p95 over
 fewer than 30 hints is the maximum, so it is shown as max; read p95 on the per-language and overall rows (n = 39 / 78).

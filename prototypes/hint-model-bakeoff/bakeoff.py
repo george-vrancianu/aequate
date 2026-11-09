@@ -111,7 +111,7 @@ def run_hint(client, a, item, rung, locale):
         if rec["valid"] and not rec["leak"]["leak"]:
             final = f"llm{n}"
             break
-        if rec["error"] == "timeout":
+        if rec["error"]:                  # no reply to rewrite: a timeout or a request error (the retry is for a leak or invalid JSON only)
             break
         reason = ("; ".join(rec["leak"]["reasons"]) if rec["valid"] else
                   "the reply was not valid JSON of the form {\"hint\": string, \"math\": [strings]}")
