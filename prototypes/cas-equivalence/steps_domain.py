@@ -98,4 +98,13 @@ add("D63", "root of sin, times cos/cos", r"\sqrt{\sin(x)}", r"\sqrt{\sin(x)}\cdo
     excluded={"x": lambda p: cos(p["x"]).is_zero is True and sin(p["x"]).is_nonnegative is True}, region="cos x=0 and sin x>=0")
 add("D64", "log with a base", r"\log_2(x)", r"\frac{\ln(x)}{\ln(2)}", "same", "Change of base; both need x>0. Honest probe: S7b does not support log with a base (expected UNDECIDED).")
 add("D65", "log cos squared, abs", r"\ln(\cos(x)^2)", r"2\ln(|\cos(x)|)", "same", "ln(cos^2 x)=2 ln|cos x|; both need cos x!=0. Honest probe: the constraints are different trig inequalities (cos^2 x>0 vs |cos x|>0), opaque to the prototype.")
+# --- POST-REVIEW tier (D66-D71): added AFTER the round-1 review, taken from the reviewer's failing probes (odd roots inside
+# constraints, decimal exponents). They failed on the version reviewed (bb8505c) and drove fixes B1/B2; they are regression cases, not
+# an independent sample. Labels use the stated real-root convention: x^(p/q), q odd, is (real cube root)^p, defined on all R.
+add("D66", "log of x^(2/3)", r"\ln(x^{\frac{2}{3}})", r"\frac{2}{3}\ln(x)", "changed", "Equal for x>0. Before: x^(2/3)=(cbrt x)^2>0 for every x!=0, so x<0 is defined before; after needs x>0. Excluded (-oo,0). (Reviewer probe: first version said SAME.)", excluded={"x": D(Interval.open(-oo, 0))})
+add("D67", "1 over cube root", r"\frac{1}{\sqrt[3]{x}}", r"x^{-\frac{1}{3}}", "same", "Both are 1/(real cbrt x): defined exactly for x!=0. (Reviewer probe: first version flagged x=-1 as added.)")
+add("D68", "sum of cubes, cube root", r"\frac{1}{x^{\frac{1}{3}}+1}", r"\frac{x^{\frac{2}{3}}-x^{\frac{1}{3}}+1}{x+1}", "same", "With a=cbrt x: (a+1)(a^2-a+1)=a^3+1=x+1, so equal wherever defined; before needs a!=-1 i.e. x!=-1, after needs x!=-1. (Reviewer probe: first version flagged x=-2.)")
+add("D69", "square of root of cube root", r"\sqrt{x^{\frac{1}{3}}+3}^2", r"x^{\frac{1}{3}}+3", "changed", "Equal where the left is defined. Before needs cbrt x+3>=0 i.e. x>=-27; after is defined on all R, so (-oo,-27) is added. (Reviewer probe: first version named (-oo,-27) U (-27,oo) with witness -27.)", added={"x": D(Interval.open(-oo, -27))})
+add("D70", "decimal exponent 0,5", r"x^{0,5}", r"\sqrt{x}", "same", "x^0.5 is x^(1/2): needs x>=0 on both sides. (Reviewer probe: Float exponent was treated as irrational, base>0, added x=0.)")
+add("D71", "decimal exponent 2.0", r"x^{2.0}", r"x^2", "same", "x^2.0 is x^2, defined on all R on both sides. (Reviewer probe: Float exponent was treated as irrational, added (-oo,0].)")
 STEPS = st

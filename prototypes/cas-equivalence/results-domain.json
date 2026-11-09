@@ -37,7 +37,7 @@
     "num": "14 common points, max rel diff 6.6e-142",
     "num_ok": true
    },
-   "ms": 25.06487793289125,
+   "ms": 26.92587999626994,
    "cls": "TP"
   },
   {
@@ -77,7 +77,7 @@
     "num": "13 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 31.412685057148337,
+   "ms": 30.41113098151982,
    "cls": "TP"
   },
   {
@@ -117,7 +117,7 @@
     "num": "14 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 12.574410997331142,
+   "ms": 12.949748896062374,
    "cls": "TP"
   },
   {
@@ -157,7 +157,7 @@
     "num": "14 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 14.099423075094819,
+   "ms": 15.6195058953017,
    "cls": "TP"
   },
   {
@@ -194,7 +194,7 @@
     "num": "14 common points, max rel diff 6.6e-142",
     "num_ok": true
    },
-   "ms": 27.32910495251417,
+   "ms": 29.18932493776083,
    "cls": "TN"
   },
   {
@@ -231,7 +231,7 @@
     "num": "13 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 33.031396102160215,
+   "ms": 31.796975061297417,
    "cls": "TN"
   },
   {
@@ -271,7 +271,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 41.84786998666823,
+   "ms": 48.87264408171177,
    "cls": "TP"
   },
   {
@@ -308,7 +308,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 44.90168206393719,
+   "ms": 51.02492496371269,
    "cls": "TN"
   },
   {
@@ -348,7 +348,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 43.1042208801955,
+   "ms": 55.60821294784546,
    "cls": "TP"
   },
   {
@@ -385,7 +385,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 52.85117099992931,
+   "ms": 55.99013320170343,
    "cls": "TN"
   },
   {
@@ -425,7 +425,7 @@
     "num": "11 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 113.40566794387996,
+   "ms": 119.88459690473974,
    "cls": "TP"
   },
   {
@@ -465,7 +465,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 32.46559179387987,
+   "ms": 35.008774138987064,
    "cls": "TP"
   },
   {
@@ -505,7 +505,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 19.778763875365257,
+   "ms": 24.92909599095583,
    "cls": "TP"
   },
   {
@@ -542,7 +542,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 16.631450969725847,
+   "ms": 17.612992087379098,
    "cls": "TN"
   },
   {
@@ -582,7 +582,7 @@
     "num": "6 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 29.886310221627355,
+   "ms": 33.1448579672724,
    "cls": "TP"
   },
   {
@@ -622,7 +622,7 @@
     "num": "6 common points, max rel diff 5.8e-70",
     "num_ok": true
    },
-   "ms": 58.06930596008897,
+   "ms": 62.083889031782746,
    "cls": "TP"
   },
   {
@@ -662,7 +662,7 @@
     "num": "6 common points, max rel diff 5.8e-70",
     "num_ok": true
    },
-   "ms": 58.33762185648084,
+   "ms": 61.076048063114285,
    "cls": "TP"
   },
   {
@@ -702,7 +702,7 @@
     "num": "4 common points, max rel diff 7.1e-74",
     "num_ok": true
    },
-   "ms": 58.750461088493466,
+   "ms": 64.8468229919672,
    "cls": "TP"
   },
   {
@@ -742,7 +742,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 37.262397119775414,
+   "ms": 44.08581601455808,
    "cls": "TP"
   },
   {
@@ -782,7 +782,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 36.19256312958896,
+   "ms": 41.88694804906845,
    "cls": "TP"
   },
   {
@@ -819,7 +819,7 @@
     "num": "14 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 44.18298904784024,
+   "ms": 50.2655019517988,
    "cls": "TN"
   },
   {
@@ -859,7 +859,7 @@
     "num": "5 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 56.9938060361892,
+   "ms": 66.47798605263233,
    "cls": "TP"
   },
   {
@@ -899,7 +899,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 18.638737965375185,
+   "ms": 18.793880008161068,
    "cls": "TP"
   },
   {
@@ -936,7 +936,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 18.178283935412765,
+   "ms": 19.956362899392843,
    "cls": "TN"
   },
   {
@@ -976,7 +976,7 @@
     "num": "7 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 28.309704968705773,
+   "ms": 28.69760594330728,
    "cls": "TP"
   },
   {
@@ -1016,7 +1016,7 @@
     "num": "6 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 45.30376894399524,
+   "ms": 46.93802795372903,
    "cls": "TP"
   },
   {
@@ -1056,7 +1056,7 @@
     "num": "6 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 63.30548506230116,
+   "ms": 61.3111169077456,
    "cls": "TP"
   },
   {
@@ -1093,7 +1093,7 @@
     "num": "6 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 62.455310951918364,
+   "ms": 62.955303117632866,
    "cls": "TN"
   },
   {
@@ -1133,7 +1133,7 @@
     "num": "4 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 52.93269292451441,
+   "ms": 60.75246795080602,
    "cls": "TP"
   },
   {
@@ -1170,7 +1170,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 19.51052201911807,
+   "ms": 22.011966910213232,
    "cls": "TN"
   },
   {
@@ -1207,7 +1207,7 @@
     "num": "15 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 17.06484705209732,
+   "ms": 19.592586904764175,
    "cls": "TN"
   },
   {
@@ -1244,7 +1244,7 @@
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 23.564090952277184,
+   "ms": 29.90581700578332,
    "cls": "TN"
   },
   {
@@ -1284,7 +1284,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 17.37889996729791,
+   "ms": 20.91633901000023,
    "cls": "TP"
   },
   {
@@ -1321,7 +1321,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 41.272082133218646,
+   "ms": 49.14905899204314,
    "cls": "TN"
   },
   {
@@ -1358,7 +1358,7 @@
     "num": "6 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 86.76050999201834,
+   "ms": 101.35481087490916,
    "cls": "TN"
   },
   {
@@ -1398,7 +1398,7 @@
     "num": "4 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 55.027290945872664,
+   "ms": 75.9868121240288,
    "cls": "TP"
   },
   {
@@ -1435,7 +1435,7 @@
     "num": "5 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 35.34813388250768,
+   "ms": 37.06782381050289,
    "cls": "TN"
   },
   {
@@ -1475,7 +1475,7 @@
     "num": "5 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 33.816555980592966,
+   "ms": 37.812194088473916,
    "cls": "TP"
   },
   {
@@ -1489,7 +1489,7 @@
     "why": "Equal where x!=y; before undefined on the line x=y.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x735f7a4fb100>"
+     "x": "<function <lambda> at 0x7994d84ff4c0>"
     },
     "region": "x=y"
    },
@@ -1507,15 +1507,15 @@
     "added": "",
     "wit_excl": null,
     "wit_add": "(x=-3, y=-3)",
-    "detail": "only-before constraints (the 'only if' assumptions): -x + y != 0; only-after: -; witness added (x=-3, y=-3)",
-    "cons": "before-only: -x + y != 0; after-only: -",
+    "detail": "only-before constraints (the 'only if' assumptions): x - y != 0; only-after: -; witness added (x=-3, y=-3)",
+    "cons": "before-only: x - y != 0; after-only: -",
     "opaque_differs": true,
     "nvars": 2,
     "named_ok": true,
     "num": "110 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 68.08964302763343,
+   "ms": 64.38997201621532,
    "cls": "TP"
   },
   {
@@ -1552,7 +1552,7 @@
     "num": "100 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 80.15761314891279,
+   "ms": 78.35623319260776,
    "cls": "TN"
   },
   {
@@ -1566,7 +1566,7 @@
     "why": "Equal for y!=0; before undefined on y=0.",
     "excluded": null,
     "added": {
-     "y": "<function <lambda> at 0x735f7a4fb1a0>"
+     "y": "<function <lambda> at 0x7994d84ff560>"
     },
     "region": "y=0"
    },
@@ -1592,7 +1592,7 @@
     "num": "110 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 28.056225972250104,
+   "ms": 30.404757941141725,
    "cls": "TP"
   },
   {
@@ -1606,7 +1606,7 @@
     "why": "Equal to 1 where x+y!=0; before undefined on x+y=0.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x735f7a4fb380>"
+     "x": "<function <lambda> at 0x7994d84ff740>"
     },
     "region": "x+y=0"
    },
@@ -1624,15 +1624,15 @@
     "added": "",
     "wit_excl": null,
     "wit_add": "(x=-3, y=3)",
-    "detail": "only-before constraints (the 'only if' assumptions): -x - y != 0; only-after: -; witness added (x=-3, y=3)",
-    "cons": "before-only: -x - y != 0; after-only: -",
+    "detail": "only-before constraints (the 'only if' assumptions): x + y != 0; only-after: -; witness added (x=-3, y=3)",
+    "cons": "before-only: x + y != 0; after-only: -",
     "opaque_differs": true,
     "nvars": 2,
     "named_ok": true,
     "num": "112 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 38.5946009773761,
+   "ms": 39.970210986211896,
    "cls": "TP"
   },
   {
@@ -1669,7 +1669,7 @@
     "num": "110 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 83.87709897942841,
+   "ms": 72.29793211445212,
    "cls": "TN"
   },
   {
@@ -1683,7 +1683,7 @@
     "why": "Equal for x,y>=0. Before needs x>=0 and y>=0; after needs xy>=0, which also allows x<=0,y<=0; those points are added.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x735f7a4fb2e0>"
+     "x": "<function <lambda> at 0x7994d84ff6a0>"
     },
     "region": "xy>=0 and not (x>=0 and y>=0), e.g. both negative"
    },
@@ -1701,15 +1701,15 @@
     "added": "",
     "wit_excl": null,
     "wit_add": "(x=0, y=-1)",
-    "detail": "only-before constraints (the 'only if' assumptions): -; only-after: -x*y <= 0; witness added (x=0, y=-1)",
-    "cons": "before-only: -; after-only: -x*y <= 0",
+    "detail": "only-before constraints (the 'only if' assumptions): x >= 0, y >= 0; only-after: x*y >= 0; witness added (x=0, y=-1)",
+    "cons": "before-only: x >= 0, y >= 0; after-only: x*y >= 0",
     "opaque_differs": true,
     "nvars": 2,
     "named_ok": true,
     "num": "49 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 61.511510983109474,
+   "ms": 63.27532394789159,
    "cls": "TP"
   },
   {
@@ -1722,7 +1722,7 @@
     "expected": "changed",
     "why": "Reverse of D44: those points are defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x735f7a4fb420>"
+     "x": "<function <lambda> at 0x7994d84ff7e0>"
     },
     "added": null,
     "region": "xy>=0 and not (x>=0 and y>=0)"
@@ -1741,15 +1741,15 @@
     "added": "",
     "wit_excl": "(x=0, y=-1)",
     "wit_add": null,
-    "detail": "only-before constraints (the 'only if' assumptions): -x*y <= 0; only-after: -; witness excluded (x=0, y=-1)",
-    "cons": "before-only: -x*y <= 0; after-only: -",
+    "detail": "only-before constraints (the 'only if' assumptions): x*y >= 0; only-after: x >= 0, y >= 0; witness excluded (x=0, y=-1)",
+    "cons": "before-only: x*y >= 0; after-only: x >= 0, y >= 0",
     "opaque_differs": true,
     "nvars": 2,
     "named_ok": true,
     "num": "49 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 63.18204291164875,
+   "ms": 60.94584194943309,
    "cls": "TP"
   },
   {
@@ -1762,7 +1762,7 @@
     "expected": "changed",
     "why": "Equal for x>=0,y>0. Before needs x/y>=0 (y!=0); after needs x>=0 and y>0, so x/y>=0 with both <=0 (y<0) is defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x735f7a4fb560>"
+     "x": "<function <lambda> at 0x7994d84ff920>"
     },
     "added": null,
     "region": "x/y>=0, y!=0, not (x>=0 and y>0), e.g. both negative"
@@ -1781,15 +1781,15 @@
     "added": "",
     "wit_excl": "(x=0, y=-1)",
     "wit_add": null,
-    "detail": "only-before constraints (the 'only if' assumptions): -x*y <= 0; only-after: -; witness excluded (x=0, y=-1)",
-    "cons": "before-only: -x*y <= 0; after-only: -",
+    "detail": "only-before constraints (the 'only if' assumptions): x*y >= 0; only-after: x >= 0, y >= 0; witness excluded (x=0, y=-1)",
+    "cons": "before-only: x*y >= 0; after-only: x >= 0, y >= 0",
     "opaque_differs": true,
     "nvars": 2,
     "named_ok": true,
     "num": "42 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 85.13483894057572,
+   "ms": 84.95708787813783,
    "cls": "TP"
   },
   {
@@ -1826,7 +1826,7 @@
     "num": "49 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 49.48678216896951,
+   "ms": 60.58149505406618,
    "cls": "TN"
   },
   {
@@ -1839,7 +1839,7 @@
     "expected": "changed",
     "why": "Equal for x,y>0. Before needs xy>0 (same signs); after needs both >0, so both negative is defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x735f7a4fb600>"
+     "x": "<function <lambda> at 0x7994d84ff9c0>"
     },
     "added": null,
     "region": "x<0 and y<0"
@@ -1858,15 +1858,15 @@
     "added": "",
     "wit_excl": "(x=-1, y=-1)",
     "wit_add": null,
-    "detail": "only-before constraints (the 'only if' assumptions): -x*y < 0; only-after: -; witness excluded (x=-1, y=-1)",
-    "cons": "before-only: -x*y < 0; after-only: -",
+    "detail": "only-before constraints (the 'only if' assumptions): x*y > 0; only-after: x > 0, y > 0; witness excluded (x=-1, y=-1)",
+    "cons": "before-only: x*y > 0; after-only: x > 0, y > 0",
     "opaque_differs": true,
     "nvars": 2,
     "named_ok": true,
     "num": "36 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 62.68977909348905,
+   "ms": 61.274894047528505,
    "cls": "TP"
   },
   {
@@ -1879,7 +1879,7 @@
     "expected": "changed",
     "why": "Equal for x,y>0. Before needs x/y>0; both negative is defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x735f7a4fb6a0>"
+     "x": "<function <lambda> at 0x7994d84ffa60>"
     },
     "added": null,
     "region": "x<0 and y<0"
@@ -1898,15 +1898,15 @@
     "added": "",
     "wit_excl": "(x=-1, y=-1)",
     "wit_add": null,
-    "detail": "only-before constraints (the 'only if' assumptions): -x*y < 0; only-after: -; witness excluded (x=-1, y=-1)",
-    "cons": "before-only: -x*y < 0; after-only: -",
+    "detail": "only-before constraints (the 'only if' assumptions): x*y > 0, y != 0; only-after: x > 0, y > 0; witness excluded (x=-1, y=-1)",
+    "cons": "before-only: x*y > 0, y != 0; after-only: x > 0, y > 0",
     "opaque_differs": true,
     "nvars": 2,
     "named_ok": true,
     "num": "36 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 70.49285597167909,
+   "ms": 77.35196896828711,
    "cls": "TP"
   },
   {
@@ -1920,7 +1920,7 @@
     "why": "Equal for x>y; before needs x-y>0, after x-y>=0, so x=y is added.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x735f7a4fb740>"
+     "x": "<function <lambda> at 0x7994d84ffb00>"
     },
     "region": "x=y"
    },
@@ -1938,15 +1938,15 @@
     "added": "",
     "wit_excl": null,
     "wit_add": "(x=-3, y=-3)",
-    "detail": "only-before constraints (the 'only if' assumptions): -x + y != 0; only-after: -; witness added (x=-3, y=-3)",
-    "cons": "before-only: -x + y != 0; after-only: -",
+    "detail": "only-before constraints (the 'only if' assumptions): x - y != 0; only-after: -; witness added (x=-3, y=-3)",
+    "cons": "before-only: x - y != 0; after-only: -",
     "opaque_differs": true,
     "nvars": 2,
     "named_ok": true,
     "num": "55 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 61.450494918972254,
+   "ms": 68.60826001502573,
    "cls": "TP"
   },
   {
@@ -1960,7 +1960,7 @@
     "why": "Equal where sin x>=0; before undefined where sin x<0.",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x735f7a4fb7e0>"
+     "x": "<function <lambda> at 0x7994d84ffba0>"
     },
     "region": "sin x<0"
    },
@@ -1978,15 +1978,15 @@
     "added": "",
     "wit_excl": null,
     "wit_add": "(x=-3)",
-    "detail": "only-before constraints (the 'only if' assumptions): -sin(x) <= 0; only-after: -; witness added (x=-3)",
-    "cons": "before-only: -sin(x) <= 0; after-only: -",
+    "detail": "only-before constraints (the 'only if' assumptions): sin(x) >= 0; only-after: -; witness added (x=-3)",
+    "cons": "before-only: sin(x) >= 0; after-only: -",
     "opaque_differs": true,
     "nvars": 1,
     "named_ok": true,
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 19.591925898566842,
+   "ms": 19.420682918280363,
    "cls": "TP"
   },
   {
@@ -2023,7 +2023,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 19.74784000776708,
+   "ms": 22.538885939866304,
    "cls": "TN"
   },
   {
@@ -2036,7 +2036,7 @@
     "expected": "changed",
     "why": "ln(2 sin x cos x)-ln(2 cos x)=ln sin x wherever both defined. Before needs sin x>0; after needs sin x cos x>0 and cos x>0, i.e. sin x>0 and cos x>0, so sin x>0 with cos x<=0 is defined before, not after.",
     "excluded": {
-     "x": "<function <lambda> at 0x735f7a4fb880>"
+     "x": "<function <lambda> at 0x7994d84ffc40>"
     },
     "added": null,
     "region": "sin x>0 and cos x<=0"
@@ -2055,15 +2055,15 @@
     "added": "",
     "wit_excl": "(x=2)",
     "wit_add": null,
-    "detail": "only-before constraints (the 'only if' assumptions): -sin(x) < 0; only-after: -2*cos(x) < 0, -2*sin(x)*cos(x) < 0; witness excluded (x=2)",
-    "cons": "before-only: -sin(x) < 0; after-only: -2*cos(x) < 0, -2*sin(x)*cos(x) < 0",
+    "detail": "only-before constraints (the 'only if' assumptions): sin(x) > 0; only-after: 2*cos(x) > 0, 2*sin(x)*cos(x) > 0; witness excluded (x=2)",
+    "cons": "before-only: sin(x) > 0; after-only: 2*cos(x) > 0, 2*sin(x)*cos(x) > 0",
     "opaque_differs": true,
     "nvars": 1,
     "named_ok": true,
     "num": "3 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 25.668711867183447,
+   "ms": 60.30999287031591,
    "cls": "TP"
   },
   {
@@ -2094,13 +2094,13 @@
     "wit_excl": null,
     "wit_add": null,
     "detail": "",
-    "cons": "before-only: -sin(x)*cos(x) < 0; after-only: -sin(2*x)/2 < 0",
+    "cons": "before-only: sin(x)*cos(x) > 0; after-only: sin(2*x)/2 > 0",
     "opaque_differs": true,
     "nvars": 1,
     "num": "5 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 31.0934882145375,
+   "ms": 31.311083119362593,
    "cls": "undecided"
   },
   {
@@ -2140,7 +2140,7 @@
     "num": "14 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 18.275171983987093,
+   "ms": 20.15918609686196,
    "cls": "TP"
   },
   {
@@ -2180,7 +2180,7 @@
     "num": "4 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 70.14905801042914,
+   "ms": 98.34437584504485,
    "cls": "TP"
   },
   {
@@ -2217,7 +2217,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 56.0665070079267,
+   "ms": 56.1300260014832,
    "cls": "TN"
   },
   {
@@ -2257,7 +2257,7 @@
     "num": "9 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 41.63749096915126,
+   "ms": 40.21506896242499,
    "cls": "TP"
   },
   {
@@ -2294,7 +2294,7 @@
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 61.00149801932275,
+   "ms": 63.658772967755795,
    "cls": "TN"
   },
   {
@@ -2308,7 +2308,7 @@
     "why": "Equal where y,z!=0; before undefined on y=0 or z=0, after only on z=0, so y=0 (z!=0) is added.",
     "excluded": null,
     "added": {
-     "y": "<function <lambda> at 0x735f7a4fb920>"
+     "y": "<function <lambda> at 0x7994d84ffce0>"
     },
     "region": "y=0 (z!=0)"
    },
@@ -2334,7 +2334,7 @@
     "num": "150 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 62.500416999682784,
+   "ms": 66.21818710118532,
    "cls": "TP"
   },
   {
@@ -2348,7 +2348,7 @@
     "why": "Equal to 1 where x-y!=10; before undefined on the plane x-y=10 (no grid point lies on it: built to defeat the pointwise check).",
     "excluded": null,
     "added": {
-     "x": "<function <lambda> at 0x735f7a4fba60>"
+     "x": "<function <lambda> at 0x7994d84ffe20>"
     },
     "region": "x-y=10"
    },
@@ -2367,13 +2367,13 @@
     "wit_excl": null,
     "wit_add": null,
     "detail": "",
-    "cons": "before-only: -x + y + 10 != 0; after-only: -",
+    "cons": "before-only: x - y - 10 != 0; after-only: -",
     "opaque_differs": true,
     "nvars": 2,
     "num": "121 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 47.52720892429352,
+   "ms": 44.09625707194209,
    "cls": "undecided"
   },
   {
@@ -2413,7 +2413,7 @@
     "num": "14 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 14.893150888383389,
+   "ms": 14.838256873190403,
    "cls": "TP"
   },
   {
@@ -2426,7 +2426,7 @@
     "expected": "changed",
     "why": "Equal where both defined. Before needs sin x>=0; after also needs cos x!=0, so points with sin x>=0 and cos x=0 (x=pi/2+2k*pi, NOT 3pi/2+2k*pi) are defined before, not after. (Found by a stress probe: an earlier version named the superset pi/2+k*pi.)",
     "excluded": {
-     "x": "<function <lambda> at 0x735f7a4fbb00>"
+     "x": "<function <lambda> at 0x7994d84ffec0>"
     },
     "added": null,
     "region": "cos x=0 and sin x>=0"
@@ -2445,15 +2445,15 @@
     "added": "",
     "wit_excl": "(x=pi/2)",
     "wit_add": null,
-    "detail": "only-before constraints (the 'only if' assumptions): -; only-after: -; witness excluded (x=pi/2)",
-    "cons": "before-only: -; after-only: -",
+    "detail": "only-before constraints (the 'only if' assumptions): -; only-after: cos(x) != 0; witness excluded (x=pi/2)",
+    "cons": "before-only: -; after-only: cos(x) != 0",
     "opaque_differs": true,
     "nvars": 1,
     "named_ok": true,
     "num": "8 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 38.2743370719254,
+   "ms": 45.034812996163964,
    "cls": "TP"
   },
   {
@@ -2490,7 +2490,7 @@
     "num": "numeric check error Undecided",
     "num_ok": null
    },
-   "ms": 3.912881948053837,
+   "ms": 4.89980005659163,
    "cls": "undecided"
   },
   {
@@ -2521,14 +2521,242 @@
     "wit_excl": null,
     "wit_add": null,
     "detail": "",
-    "cons": "before-only: -cos(x)**2 < 0; after-only: -Abs(cos(x)) < 0",
+    "cons": "before-only: cos(x)**2 > 0; after-only: Abs(cos(x)) > 0",
     "opaque_differs": true,
     "nvars": 1,
     "num": "12 common points, max rel diff 0.0e+00",
     "num_ok": true
    },
-   "ms": 26.064559118822217,
+   "ms": 25.929745053872466,
    "cls": "undecided"
+  },
+  {
+   "step": {
+    "id": "D66",
+    "topic": "log of x^(2/3)",
+    "before": "\\ln(x^{\\frac{2}{3}})",
+    "after": "\\frac{2}{3}\\ln(x)",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal for x>0. Before: x^(2/3)=(cbrt x)^2>0 for every x!=0, so x<0 is defined before; after needs x>0. Excluded (-oo,0). (Reviewer probe: first version said SAME.)",
+    "excluded": {
+     "x": "Interval.open(-oo, 0)"
+    },
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "log(x**(2/3), E)",
+    "(2/3)*log(x, E)"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 16,
+    "excluded": "x in Interval.open(-oo, 0)",
+    "added": "",
+    "wit_excl": "(x=-1)",
+    "wit_add": null,
+    "detail": "excluded (defined before, not after): x in Interval.open(-oo, 0); witness excluded (x=-1)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "8 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 64.3486250191927,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D67",
+    "topic": "1 over cube root",
+    "before": "\\frac{1}{\\sqrt[3]{x}}",
+    "after": "x^{-\\frac{1}{3}}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "Both are 1/(real cbrt x): defined exactly for x!=0. (Reviewer probe: first version flagged x=-1 as added.)",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "1/(x**(1/3))",
+    "x**(-1/3)"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 15 tried",
+    "tried": 15,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "14 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 40.75497202575207,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D68",
+    "topic": "sum of cubes, cube root",
+    "before": "\\frac{1}{x^{\\frac{1}{3}}+1}",
+    "after": "\\frac{x^{\\frac{2}{3}}-x^{\\frac{1}{3}}+1}{x+1}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "With a=cbrt x: (a+1)(a^2-a+1)=a^3+1=x+1, so equal wherever defined; before needs a!=-1 i.e. x!=-1, after needs x!=-1. (Reviewer probe: first version flagged x=-2.)",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "1/(x**(1/3) + 1)",
+    "((x**(2/3) - x**(1/3)) + 1)/(x + 1)"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 16 tried",
+    "tried": 16,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "14 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 61.18155806325376,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D69",
+    "topic": "square of root of cube root",
+    "before": "\\sqrt{x^{\\frac{1}{3}}+3}^2",
+    "after": "x^{\\frac{1}{3}}+3",
+    "kind": "expr",
+    "expected": "changed",
+    "why": "Equal where the left is defined. Before needs cbrt x+3>=0 i.e. x>=-27; after is defined on all R, so (-oo,-27) is added. (Reviewer probe: first version named (-oo,-27) U (-27,oo) with witness -27.)",
+    "excluded": null,
+    "added": {
+     "x": "Interval.open(-oo, -27)"
+    },
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "(sqrt(x**(1/3) + 3))**2",
+    "x**(1/3) + 3"
+   ],
+   "res": {
+    "verdict": "CHANGED",
+    "sym": "DIFF",
+    "why": "symbolic and pointwise agree",
+    "tried": 22,
+    "excluded": "",
+    "added": "x in Interval.open(-oo, -27)",
+    "wit_excl": null,
+    "wit_add": "(x=-28)",
+    "detail": "added (defined after, not before): x in Interval.open(-oo, -27); witness added (x=-28)",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "named_ok": true,
+    "num": "15 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 77.21076300367713,
+   "cls": "TP"
+  },
+  {
+   "step": {
+    "id": "D70",
+    "topic": "decimal exponent 0,5",
+    "before": "x^{0,5}",
+    "after": "\\sqrt{x}",
+    "kind": "expr",
+    "expected": "same",
+    "why": "x^0.5 is x^(1/2): needs x>=0 on both sides. (Reviewer probe: Float exponent was treated as irrational, base>0, added x=0.)",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "x**0.5",
+    "sqrt(x)"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 16 tried",
+    "tried": 16,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "9 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 20.713622914627194,
+   "cls": "TN"
+  },
+  {
+   "step": {
+    "id": "D71",
+    "topic": "decimal exponent 2.0",
+    "before": "x^{2.0}",
+    "after": "x^2",
+    "kind": "expr",
+    "expected": "same",
+    "why": "x^2.0 is x^2, defined on all R on both sides. (Reviewer probe: Float exponent was treated as irrational, added (-oo,0].)",
+    "excluded": null,
+    "added": null,
+    "region": ""
+   },
+   "parse": "ok",
+   "raw": [
+    "x**2.0",
+    "x**2"
+   ],
+   "res": {
+    "verdict": "SAME",
+    "sym": "SAME",
+    "why": "same constraints/sets; no differing point among 0 tried",
+    "tried": 0,
+    "excluded": "",
+    "added": "",
+    "wit_excl": null,
+    "wit_add": null,
+    "detail": "",
+    "cons": "-",
+    "opaque_differs": false,
+    "nvars": 1,
+    "num": "15 common points, max rel diff 0.0e+00",
+    "num_ok": true
+   },
+   "ms": 10.878224857151508,
+   "cls": "TN"
   }
  ],
  "orig": [
@@ -2546,13 +2774,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 6.148912012577057,
+     "ms": 6.163529120385647,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 5.366469966247678,
+     "ms": 4.8749682027846575,
      "score": "ok"
     }
    }
@@ -2571,13 +2799,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
-     "ms": 4.730145912617445,
+     "ms": 4.111967980861664,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.08577+0j vs 7.86264+0j",
-     "ms": 4.392076982185245,
+     "ms": 3.618106013163924,
      "score": "ok"
     }
    }
@@ -2596,13 +2824,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
-     "ms": 4.627670859917998,
+     "ms": 4.54841204918921,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 12.1953+0j vs -8.47001+0j",
-     "ms": 4.349447088316083,
+     "ms": 3.9056690875440836,
      "score": "ok"
     }
    }
@@ -2621,13 +2849,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 6.944302935153246,
+     "ms": 7.039676886051893,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 5.575669929385185,
+     "ms": 6.370570044964552,
      "score": "ok"
     }
    }
@@ -2646,13 +2874,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 6.209425861015916,
+     "ms": 7.7602670062333345,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 5.182297900319099,
+     "ms": 6.313221994787455,
      "score": "ok"
     }
    }
@@ -2671,13 +2899,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 7.9541378654539585,
+     "ms": 6.2380400486290455,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 6.775252986699343,
+     "ms": 5.3981810342520475,
      "score": "ok"
     }
    }
@@ -2696,13 +2924,13 @@
     "S7": {
      "verdict": "EQ_DOM",
      "detail": "equal at samples; excluded points before: {1}; after: EmptySet",
-     "ms": 17.343424959108233,
+     "ms": 18.189430003985763,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ_DOM",
      "detail": "added (defined after, not before): x in {1}; witness added (x=1)",
-     "ms": 17.192989820614457,
+     "ms": 18.4497709851712,
      "score": "ok"
     }
    }
@@ -2721,13 +2949,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 7.461749017238617,
+     "ms": 7.746801944449544,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 6.335137877613306,
+     "ms": 6.372203817591071,
      "score": "ok"
     }
    }
@@ -2746,13 +2974,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 7.336521986871958,
+     "ms": 7.68058211542666,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 6.8481010384857655,
+     "ms": 6.928733084350824,
      "score": "ok"
     }
    }
@@ -2771,13 +2999,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
-     "ms": 8.63893493078649,
+     "ms": 10.110476985573769,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 2.88844+0j vs -1.0696+0j",
-     "ms": 7.933890214189887,
+     "ms": 8.73933988623321,
      "score": "ok"
     }
    }
@@ -2796,13 +3024,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
-     "ms": 9.373064152896404,
+     "ms": 8.447478991001844,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 0.641549+0j vs -3.7137+0j",
-     "ms": 8.302910951897502,
+     "ms": 8.416139986366034,
      "score": "ok"
     }
    }
@@ -2821,13 +3049,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 7.621574914082885,
+     "ms": 8.941206149756908,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 6.655176868662238,
+     "ms": 7.811433868482709,
      "score": "ok"
     }
    }
@@ -2847,13 +3075,13 @@
     "S7": {
      "verdict": "UND",
      "detail": "domain tracking implemented for one variable, got [x, y]",
-     "ms": 7.200316060334444,
+     "ms": 8.06891405954957,
      "score": "und"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 7.314089918509126,
+     "ms": 9.56179085187614,
      "score": "ok"
     }
    }
@@ -2872,13 +3100,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
-     "ms": 11.540143983438611,
+     "ms": 11.593495029956102,
      "score": "partial"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. -0.336087+0j vs -2.45269+0j",
-     "ms": 11.259875958785415,
+     "ms": 11.307004140689969,
      "score": "partial"
     }
    }
@@ -2897,13 +3125,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
-     "ms": 8.261538110673428,
+     "ms": 8.963542990386486,
      "score": "partial"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.44422+0j vs 3.23756+0j",
-     "ms": 7.994794985279441,
+     "ms": 8.772662142291665,
      "score": "partial"
     }
    }
@@ -2922,13 +3150,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
-     "ms": 8.115290896967053,
+     "ms": 9.454648941755295,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 1 of 1 points tried, e.g. 1.52999+0j vs 0.190379+0j",
-     "ms": 7.872939808294177,
+     "ms": 9.58631793037057,
      "score": "ok"
     }
    }
@@ -2947,13 +3175,13 @@
     "S7": {
      "verdict": "EQ_DOM",
      "detail": "equal at samples; excluded points before: {1}; after: EmptySet",
-     "ms": 19.710069987922907,
+     "ms": 20.15155297704041,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ_DOM",
      "detail": "added (defined after, not before): x in {1}; witness added (x=1)",
-     "ms": 18.41029804199934,
+     "ms": 21.087598986923695,
      "score": "ok"
     }
    }
@@ -2972,13 +3200,13 @@
     "S7": {
      "verdict": "EQ",
      "detail": "equal at samples; same natural domain Reals",
-     "ms": 5.861033918336034,
+     "ms": 5.763525143265724,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ",
      "detail": "equal at samples; same constraints/sets; no differing point among 0 tried",
-     "ms": 5.124410148710012,
+     "ms": 4.941302817314863,
      "score": "ok"
     }
    }
@@ -2997,13 +3225,13 @@
     "S7": {
      "verdict": "EQ_DOM",
      "detail": "equal at samples; excluded points before: Union(ImageSet(Lambda(n_, 2*pi*n_ + pi/2), Integers), ImageSet(Lambda(n_, 2*pi*n_ + 3*pi/2), Integers)); after: EmptySet",
-     "ms": 62.42157705128193,
+     "ms": 63.873657025396824,
      "score": "ok"
     },
     "S7b": {
      "verdict": "EQ_DOM",
      "detail": "added (defined after, not before): x in {pi/2 + pi*k}; witness added (x=pi/2)",
-     "ms": 33.77145994454622,
+     "ms": 35.88769305497408,
      "score": "ok"
     }
    }
@@ -3022,13 +3250,13 @@
     "S7": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
-     "ms": 4.687323933467269,
+     "ms": 4.7711217775940895,
      "score": "ok"
     },
     "S7b": {
      "verdict": "NEQ",
      "detail": "numeric(real): differs at 3 of 3 points tried, e.g. 0.794284+0j vs -0.794284+0j",
-     "ms": 3.927030134946108,
+     "ms": 4.352969117462635,
      "score": "ok"
     }
    }

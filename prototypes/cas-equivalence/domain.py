@@ -4,7 +4,8 @@ Real-number convention (stated, not neutral):
   * Everything is over the reals. x**(p/q) in lowest terms: q even -> needs base >= 0 (> 0 if p < 0);
     q odd -> the REAL root, defined for every real base (base != 0 if p < 0). This is the school convention
     ("cube root of -8 is -2"), NOT SymPy's principal-branch value. x**0 needs base != 0 (0**0 undefined).
-    x**r with irrational constant r needs base > 0. x**y with a symbolic exponent y, or any unlisted function: UNDECIDED.
+    x**r with irrational constant r needs base > 0. A Float exponent is its decimal value as a Rational (x^{0,5} = x^(1/2)).
+    Implementation of the odd-root convention: collect() rewrites b**(p/q), q odd, to (sign(b)*Abs(b)**(1/q))**p, i.e. the real root, before normalise / solveset / pointwise evaluation. x**y with a symbolic exponent y, or any unlisted function: UNDECIDED.
   * log is the natural log, argument > 0. arcsin/arccos argument in [-1, 1]. tan/sec need cos != 0, cot/csc need sin != 0.
 
 Representation: a CONJUNCTION OF ATOMIC CONSTRAINTS (expr != 0, expr >= 0, expr > 0) collected from the UNEVALUATED parse,
@@ -120,7 +121,7 @@ class Dset:
     def __init__(self, S_=S.EmptySet, per=None, within=None, minus_per=None):
         self.S, self.per, self.within, self.minus_per = S_, p_min(per), within, minus_per
     def empty(self): return self.S == S.EmptySet and self.per is None
-    def __eq__(self, o): return isinstance(o, Dset) and (self.S, self.per, self.within) == (o.S, o.per, o.within)
+    def __eq__(self, o): return isinstance(o, Dset) and (self.S, self.per, self.within, self.minus_per) == (o.S, o.per, o.within, o.minus_per)
     def __hash__(self): return hash((self.S, self.per))
     def contains(self, v):
         if self.S.contains(v) is S.true: return True
@@ -152,15 +153,32 @@ def _const_check(e, rel):
     if rel == "ge": return v.is_nonnegative
     return v.is_positive
 
+def _rat_exp(ex):
+    """A Float exponent means its decimal value (0.5 = 1/2, 2.0 = 2), not an irrational: exact Rational of the printed decimal."""
+    return Rational(str(ex)) if ex.is_Float else ex
+
+def realify(e):
+    """Rewrite b**(p/q), q odd > 1 (and Float exponents, as their decimal Rational) to the REAL root form (sign(b)*Abs(b)**(1/q))**p, so that
+    normalise / solveset / pointwise evaluation all follow the stated convention instead of SymPy's principal branch."""
+    def f(n):
+        ex = _rat_exp(_ev(n.exp))
+        if ex.is_Rational and ex.q > 1 and ex.q % 2 == 1:
+            return (sympy.sign(n.base) * sympy.Abs(n.base) ** Rational(1, int(ex.q))) ** int(ex.p)   # = real_root, without the Piecewise SymPy adds for non-real symbols
+        return sympy.Pow(n.base, ex) if ex != n.exp and ex.is_Rational else n
+    return e.replace(lambda n: isinstance(n, sympy.Pow), f)
+
 def collect(expr):
     """Atomic constraints (expr, rel) required for expr to be defined over R, children before parents."""
+    return [(realify(e), r) for e, r in _collect(expr)]
+
+def _collect(expr):
     out = []
     for n in sympy.postorder_traversal(expr):
         if not isinstance(n, ALLOWED):
             raise Undecided(f"unsupported node {type(n).__name__}")
         if isinstance(n, sympy.Pow):
             base, ex = n.args
-            exv = _ev(ex)
+            exv = _rat_exp(_ev(ex))
             if exv.free_symbols:
                 if base.is_number and base.is_positive: continue
                 raise Undecided("symbolic exponent")
@@ -190,9 +208,13 @@ _FLIP = {"ge": "le", "gt": "lt"}
 
 def _canon_key(e, rel):
     """Readable key ("x - y != 0") for an opaque atom; equal for e and for the sign-flipped relation of -e."""
-    e = sympy.factor(expand(e)); f = sympy.factor(expand(-e))
-    if rel == "ne": return min(f"{e} != 0", f"{f} != 0")
-    return min(f"{e} {_SYM[rel]}", f"{f} {_SYM[_FLIP[rel]]}")
+    e = sympy.factor(expand(e))
+    try: lead = expand(e).as_ordered_terms()[0].as_coeff_Mul()[0]
+    except Exception: lead = 1
+    swapped = lead.is_negative is True        # show the form with a positive leading coefficient (also makes the key canonical)
+    if swapped: e = sympy.factor(expand(-e))
+    if rel == "ne": return f"{e} != 0"
+    return f"{e} {_SYM[_FLIP[rel]] if swapped else _SYM[rel]}"
 
 def normalise(raw):
     """-> list of (expr, rel) atoms (evaluated, factored where possible); constants are checked and dropped."""
@@ -366,6 +388,7 @@ def domain_verdict(parts_a, parts_b):
         evA = [(_ev(e), r) for e, r in rawA if _ev(e).free_symbols]
         evB = [(_ev(e), r) for e, r in rawB if _ev(e).free_symbols]
         da, db = build(atA), build(atB)
+        kA, kB = {_canon_key(e, r) for e, r in atA}, {_canon_key(e, r) for e, r in atB}
         vars_ = set(da[2]) | set(db[2])
         sym, excl, added, opdiff = compare_symbolic(da, db)
         wab, wba, tried = witness_search(evA, evB, vars_, _specials(da, db))
@@ -374,12 +397,16 @@ def domain_verdict(parts_a, parts_b):
     res.update(sym=sym, excluded=excl, added=added, wit_excl=wab, wit_add=wba, tried=tried, opaque_differs=opdiff)
     if opdiff:   # opaque constraints involved: per-variable sets are NOT the exact difference: hint only, never the answer
         res.update(excluded={}, added={}, hint_excl=excl, hint_add=added,
-                   cons_only_before=sorted(da[1] - db[1]), cons_only_after=sorted(db[1] - da[1]))
-    if wab is not None or wba is not None:
+                   cons_only_before=sorted(kA - kB), cons_only_after=sorted(kB - kA))
+    if sym == "SAME" and (wab is not None or wba is not None):
+        # the symbolic comparison and the refuter disagree: evidence of a defect in one of them, never a verdict
+        res["verdict"], res["why"] = "UNDECIDED", f"symbolic SAME contradicted by witness {fmt_pt(wab or wba)} (defect signal, logged)"
+        res["conflict"] = True
+    elif wab is not None or wba is not None:
         res["verdict"] = "CHANGED"
         res["why"] = ("pointwise witness only (opaque constraints involved; symbolic sets are a superset hint)" if opdiff and sym != "SAME" else
                       "symbolic and pointwise agree" if sym == "DIFF" else
-                      "pointwise witness only (symbolic: %s)" % ("contradicted by a point!" if sym == "SAME" else "could not name the set"))
+                      "pointwise witness only (symbolic: could not name the set)")
     elif sym == "SAME":
         res["verdict"], res["why"] = "SAME", f"same constraints/sets; no differing point among {tried} tried"
     elif sym == "DIFF":
@@ -392,7 +419,8 @@ def fmt_pt(pt):
     return None if pt is None else "(" + ", ".join(f"{k}={v}" for k, v in sorted(pt.items(), key=lambda kv: str(kv[0]))) + ")"
 
 def fmt_sets(d):
-    return "; ".join(f"{v} in {s}" for v, s in sorted(d.items(), key=lambda kv: str(kv[0])))
+    items = sorted(d.items(), key=lambda kv: str(kv[0]))
+    return (" OR " if len(items) > 1 else "").join(f"{v} in {s}" for v, s in items)
 
 def s7b(a, b, step):
     """Harness-compatible strategy: numeric real check first (as S7), then S7b domain tracking on the unevaluated parse."""
