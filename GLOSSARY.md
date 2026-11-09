@@ -18,6 +18,10 @@ _Avoid_: Region, lasso, crop
 The math read from a selection, which the student confirms or corrects before it counts.
 _Avoid_: Recognition result, OCR output, reading
 
+**Recognizer**:
+What reads a selection's ink and proposes transcriptions. An instance uses one, chosen by the admin.
+_Avoid_: OCR, model, backend, engine
+
 **Step**:
 One confirmed line of math in a worked solution.
 _Avoid_: Line (that word means ink), equation, entry
