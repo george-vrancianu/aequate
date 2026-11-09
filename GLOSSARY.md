@@ -23,12 +23,20 @@ One confirmed line of math in a worked solution.
 _Avoid_: Line (that word means ink), equation, entry
 
 **Worked solution**:
-The ordered list of steps and level changes on one board. Confirmed transcriptions are appended to its end. Steps can be edited or deleted but not reordered.
+The ordered list of steps, level changes and goal changes on one board. Confirmed transcriptions are appended to its end. Steps can be edited or deleted but not reordered.
 _Avoid_: Transcript, history, log
 
 **Goal**:
-What a worked solution is trying to reach, such as solve for x, simplify, factor, or evaluate. It is inferred from the first step and can be changed by the student (or the tutor, in v2).
+What a worked solution is trying to reach: solve for a variable, simplify, factor, expand or evaluate. It is either inferred from the first step or chosen by the student (or the tutor, in v2), and it may be unset.
 _Avoid_: Task, problem type, objective
+
+**Goal reached**:
+The state of a worked solution whose latest step has the goal's finished form, with no wrong step between it and the first step. It is always computed and shown only when check visible is on.
+_Avoid_: Done, solved, complete, finished
+
+**Goal change**:
+A record in a worked solution, between steps, that the goal changed, whether by the student, the tutor (v2) or by re-inference. It is not a step.
+_Avoid_: Goal switch, retarget
 
 ### Assistance
 
