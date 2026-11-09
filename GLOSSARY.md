@@ -48,6 +48,10 @@ _Avoid_: Math engine, solver, checker, AI
 The CAS verdict on whether a step follows from the step before it.
 _Avoid_: Resolve, validate, grade
 
+**Verdict**:
+The outcome of a check: equivalent, conditional (equal except where the step quietly excluded values), one-way (the step gained solutions), not equivalent, or unknown. Only not equivalent counts as wrong.
+_Avoid_: Result, grade, tick, correct/incorrect
+
 **Solve**:
 The CAS computing the final answer from the latest step.
 _Avoid_: Resolve, autoresolve, auto-solve
